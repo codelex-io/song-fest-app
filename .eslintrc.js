@@ -16,6 +16,7 @@ module.exports = {
     }
   },
   rules: {
-    "@typescript-eslint/no-use-before-define": "off"
+    "react/prop-types": "off",
+    "@typescript-eslint/no-use-before-define": "off",
   }
 };
