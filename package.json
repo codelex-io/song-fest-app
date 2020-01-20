@@ -7,12 +7,12 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint:format": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "lint:check": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
+    "lint:format": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\" --quiet --fix",
+    "lint:check": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\"",
     "build:ci": "npm run lint:check"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "@types/node": "^13.1.8",
     "react": "16.9.0",
     "react-native": "0.61.5"
   },

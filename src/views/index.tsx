@@ -1,3 +1,3 @@
-import EventListView from './EventListView';
+import NewsListView from './NewsListView';
 
-export { EventListView };
+export { NewsListView };
