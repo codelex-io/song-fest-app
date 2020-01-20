@@ -8,6 +8,7 @@
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "dependencies": {
+    "@types/node": "^13.1.8",
     "react": "16.8.6",
     "react-native": "0.60.5"
   },
