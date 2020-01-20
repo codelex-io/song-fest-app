@@ -1,3 +1,4 @@
 import NewsListView from './NewsListView';
+import FavoriteListView from './FavoriteListView'
 
-export { NewsListView };
+export { NewsListView, FavoriteListView };
