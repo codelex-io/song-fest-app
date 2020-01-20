@@ -6,7 +6,7 @@ interface IconProps {
 }
 
 const Icon: React.FC<IconProps> = ({ size }) => (
-    <View style={{ height: size, width: size, backgroundColor: 'black' }}></View>
+    <View style={{ height: size, width: size, backgroundColor: 'black', borderRadius: size }}></View>
 );
 
 export default Icon;
