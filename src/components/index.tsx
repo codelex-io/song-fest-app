@@ -1,5 +1,5 @@
 import { Header } from './Header';
 import { FilterButtons } from './FilterButtons';
-import { NewsCard } from './NewsCard';
+import Icon from './Icon';
 
-export { Header, FilterButtons, NewsCard };
+export { Header, FilterButtons, Icon };
