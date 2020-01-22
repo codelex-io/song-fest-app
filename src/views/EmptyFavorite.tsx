@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Icon } from '../../../song-fest-app/src/components';
+import { Icon } from '../components';
 
 export class EmptyFavorite extends React.Component {
     render() {
