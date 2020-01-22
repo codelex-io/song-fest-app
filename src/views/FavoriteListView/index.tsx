@@ -1,18 +1,17 @@
 import React from 'react';
 import { FavouriteGroup } from './types';
 import { FlatList, View } from 'react-native';
-import { Card } from './Card'
+import { Card } from './Card';
 
 interface FavouriteGroupProps {
     groups: FavouriteGroup[];
 }
 
-
 export default class FavoriteListView extends React.Component<FavouriteGroupProps> {
     render() {
         const { groups } = this.props;
         return (
-            <FlatList<FavouriteGroup >
+            <FlatList<FavouriteGroup>
                 data={groups}
                 renderItem={({ item }): React.ReactElement => (
                     <View>

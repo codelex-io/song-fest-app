@@ -4,6 +4,6 @@ export interface FavoriteItem {
 }
 
 export interface FavouriteGroup {
-    title: string
-    items: FavoriteItem[]
+    title: string;
+    items: FavoriteItem[];
 }

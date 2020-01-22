@@ -13,8 +13,8 @@ export class Card extends React.Component<CardProps> {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}> {group.title}</Text>
-                {group.items.map(item =>
-                    (<View key={item.id} style={styles.itemContainer}>
+                {group.items.map(item => (
+                    <View key={item.id} style={styles.itemContainer}>
                         <TouchableOpacity style={styles.favoriteIcon}>
                             <Icon size={24} />
                         </TouchableOpacity>
@@ -22,7 +22,8 @@ export class Card extends React.Component<CardProps> {
                         <TouchableOpacity style={styles.rightIcon}>
                             <Icon size={24} />
                         </TouchableOpacity>
-                    </View>))}
+                    </View>
+                ))}
             </View>
         );
     }
@@ -42,7 +43,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 16,
         marginRight: 100,
-
     },
     favoriteIcon: {
         paddingRight: 14,
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     },
     rightIcon: {
         alignItems: 'flex-end',
-
     },
     title: {
         color: '#4D4D4D',
@@ -65,6 +64,4 @@ const styles = StyleSheet.create({
         marginRight: 56,
         width: 252,
     },
-
-
 });
