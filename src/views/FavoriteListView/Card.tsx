@@ -33,34 +33,37 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 8,
         flexDirection: 'column',
-        paddingHorizontal: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
     },
     itemContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingTop: 16,
+        marginRight: 100,
 
     },
     favoriteIcon: {
-        paddingLeft: 2,
+        paddingRight: 14,
+        alignItems: 'flex-start',
     },
     rightIcon: {
-        paddingRight: 8,
+        alignItems: 'flex-end',
+
     },
     title: {
         color: '#4D4D4D',
         fontSize: 14,
-        paddingLeft: 16,
         paddingTop: 24,
         paddingBottom: 12,
-        marginLeft: 14,
-        marginRight: 24.59,
     },
     itemText: {
         color: '#1A1A1A',
         fontSize: 16,
-        paddingTop: 16,
         textAlign: 'left',
-        marginRight: 14,
+        marginRight: 56,
+        width: 252,
     },
 
 

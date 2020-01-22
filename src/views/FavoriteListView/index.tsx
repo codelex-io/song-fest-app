@@ -19,7 +19,6 @@ export default class FavoriteListView extends React.Component<FavouriteGroupProp
                         <Card group={item} />
                     </View>
                 )}
-            //  ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
             />
         );
     }

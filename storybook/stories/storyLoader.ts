@@ -4,3 +4,4 @@ import './components/NewsCard.stories';
 import './views/EventListView.stories';
 import './views/NewsListView.stories';
 import './views/FavoriteListView.stories';
+import './views/EmptyFavorite.stories';
