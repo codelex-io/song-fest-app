@@ -6,3 +6,4 @@ import './views/NewsListView.stories';
 import './views/FavoriteListView.stories';
 import './views/EmptyFavorite.stories';
 import './views/MoreView.stories';
+import './views/FilterView.stories';
