@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         opacity: 0.15,
     },
     text: {
-        fontFamily: 'DINPro',
+        fontFamily: 'DINPro-Bold',
         fontSize: 20,
     },
 });
