@@ -1,5 +1,5 @@
 import './components/Header.stories';
-import './components/GreenFilter.stories';
+import './components/FilterButtons.stories';
 import './components/NewsCard.stories';
 import './views/EventListView.stories';
 import './views/NewsListView.stories';
@@ -7,3 +7,4 @@ import './views/FavoriteListView.stories';
 import './views/EmptyFavorite.stories';
 import './views/MoreView.stories';
 import './views/FilterView.stories';
+import './views/EventFilterView.stories';

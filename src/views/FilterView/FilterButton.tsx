@@ -2,23 +2,23 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
 interface FilterButtonProps {
-    buttons: {
+    button: {
         title: string;
         active: boolean;
-    }[];
+    };
 }
 
 export class FilterButton extends React.Component<FilterButtonProps> {
     render() {
-        const { buttons } = this.props;
+        const { button } = this.props;
         return (
             <View style={styles.container}>
                 <View
-                    style={[styles.containerLeft, buttons[0].active ? styles.containerActive : styles.containeInactive]}
-                >
-                    <Text style={[styles.text, buttons[0].active ? styles.textActive : false]}>{buttons[0].title}</Text>
+                    style={[button.active ? styles.containerActive : styles.containeInactive]}>
+                    <Text style={[styles.text, button.active ? styles.textActive : false]}>{button.title}</Text>
                 </View>
             </View>
+
         );
     }
 }
@@ -28,37 +28,30 @@ const styles = StyleSheet.create({
         height: 44,
         flexDirection: 'row',
         justifyContent: 'center',
+        marginBottom: 12,
+        marginRight: 12,
     },
     containerActive: {
-        backgroundColor: '#00A258',
+        backgroundColor: '#F15A31',
     },
     containeInactive: {
-        backgroundColor: '#00A258',
-        opacity: 0.15,
-    },
-    containerLeft: {
-        flex: 1,
-        borderTopLeftRadius: 8,
-        borderBottomLeftRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    containerRight: {
-        flex: 1,
-        borderTopRightRadius: 8,
-        borderBottomRightRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: '#E6E6E6',
     },
     text: {
-        fontFamily: 'DINPro',
+        fontFamily: 'DINPro-Bold',
         fontSize: 14,
-        fontWeight: 'bold',
-        color: '#000000',
+        color: '#1A1A1A',
         textAlign: 'center',
         letterSpacing: 1.15,
+        paddingVertical: 13,
+        paddingHorizontal: 16,
     },
     textActive: {
-        color: '#000000',
+        fontFamily: 'DINPro-Bold',
+        color: '#FFFFFF',
+        fontSize: 14,
+        paddingVertical: 13,
+        paddingHorizontal: 16,
+        textAlign: 'center',
     },
 });

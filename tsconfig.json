@@ -17,5 +17,5 @@
         "noUnusedLocals": true,
         "rootDirs": ["src", "stories"]
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx"]
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/styles/colors.js", "src/styles/typography.js"]
 }

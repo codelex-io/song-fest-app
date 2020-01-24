@@ -103,5 +103,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 8,
         fontSize: 14,
+        fontFamily: 'DINPro-Regular',
     },
 });
