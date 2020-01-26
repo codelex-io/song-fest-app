@@ -1,8 +1,3 @@
-export const findColorByIndex = (index: number): string => {
-    const colors = ['#00A258', '#F15A31', '#086BB5'];
-    return colors[index % colors.length];
-};
-
 export const yellow = '#FFCB05';
 export const green = '#00A258';
 export const orange = '#F15A31';
@@ -15,3 +10,8 @@ export const darkGrey1A = '#1A1A1A';
 export const mediumGrey4D = '#4D4D4D';
 export const lightGrey3A = '#A3A3A3';
 export const extrLighgrey6E = '#E6E6E6';
+
+export const findColorByIndex = (index: number): string => {
+    const colors = [green, orange, blue, purple];
+    return colors[index % colors.length];
+};
