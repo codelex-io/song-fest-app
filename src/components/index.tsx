@@ -1,6 +1,5 @@
 import { Header } from './Header';
 import { FilterButtons } from './FilterButtons';
-import Icon from './Icon';
-import { ListItemSeparator } from './ListItemSeparator';
+import Icon, { IconType } from './Icon';
 
-export { Header, FilterButtons, Icon, ListItemSeparator };
+export { Header, FilterButtons, Icon, IconType };
