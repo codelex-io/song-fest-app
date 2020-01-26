@@ -16,7 +16,9 @@ export class SectorField extends React.Component<SectorFieldProps> {
         const { sector } = this.props;
         return (
             <View style={styles.container}>
-                <View style={styles.icon}>{sector.active ? <ActiveIcon size={24} /> : <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />}</View>
+                <View style={styles.icon}>
+                    {sector.active ? <ActiveIcon size={24} /> : <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />}
+                </View>
                 <Text style={styles.text}>{sector.title}</Text>
             </View>
         );

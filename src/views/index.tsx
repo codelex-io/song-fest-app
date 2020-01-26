@@ -7,5 +7,3 @@ import EventFilterView from './EventFilterView';
 import EventListView from './EventListView';
 
 export { NewsListView, FavoriteListView, EmptyFavorite, MoreView, FilterView, EventFilterView, EventListView };
-
-

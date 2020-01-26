@@ -4,7 +4,6 @@ import { FavouriteGroup } from './types';
 import { colors } from '../../styles';
 import { Icon, IconType } from '@components';
 
-
 interface CardProps {
     group: FavouriteGroup;
 }

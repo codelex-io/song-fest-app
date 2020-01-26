@@ -5,4 +5,3 @@ import ActiveIcon from './ActiveIcon';
 import FilterButtonIcon from './FilterButtonIcon';
 
 export { Header, FilterButtons, Icon, IconType, ActiveIcon, FilterButtonIcon };
-
