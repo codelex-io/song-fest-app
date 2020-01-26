@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Icon } from '../components';
+import { Icon, IconType } from '@components';
 
 export class EmptyFavorite extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Icon size={36} />
+                <Icon size={36} type={IconType.Heart} />
                 <Text style={styles.title}>Šeit varēsi atrast savus favorītus</Text>
                 <Text style={styles.title2}>
                     Favorītiem var pievienot pasākumus, jaunumus un video, ko vēlies ātri atrast

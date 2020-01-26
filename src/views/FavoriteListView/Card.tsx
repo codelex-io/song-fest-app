@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { FavouriteGroup } from './types';
-import { Icon } from '../../components';
 import { colors } from '../../styles';
+import { Icon, IconType } from '@components';
+
 
 interface CardProps {
     group: FavouriteGroup;
@@ -17,11 +18,11 @@ export class Card extends React.Component<CardProps> {
                 {group.items.map(item => (
                     <View key={item.id} style={styles.itemContainer}>
                         <TouchableOpacity style={styles.favoriteIcon}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </TouchableOpacity>
                         <Text style={styles.itemText}>{item.title}</Text>
                         <TouchableOpacity style={styles.rightIcon}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </TouchableOpacity>
                     </View>
                 ))}
