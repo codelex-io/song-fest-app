@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon } from '../components';
+import { Icon, IconType } from '@components';
 
 export class MoreView extends React.Component {
     render() {
@@ -9,19 +9,19 @@ export class MoreView extends React.Component {
                 <View style={styles.rowContainer}>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Sponsoru piedāvājums</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Svarīgi {'\n'} zināt</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Biežākie jautājumi</Text>
                     </TouchableOpacity>
@@ -29,19 +29,19 @@ export class MoreView extends React.Component {
                 <View style={styles.rowContainer}>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Transports pasākumā</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Svētku info centrs</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Akcija {'\n'} Zaļā pēda</Text>
                     </TouchableOpacity>
@@ -49,19 +49,19 @@ export class MoreView extends React.Component {
                 <View style={styles.rowContainer}>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Svētku noteikumi</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Informācija par kontaktiem</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.container2}>
                         <View style={styles.containerBox}>
-                            <Icon size={24} />
+                            <Icon size={24} type={IconType.Heart} />
                         </View>
                         <Text style={styles.text}> Lietotāja iestatījumi</Text>
                     </TouchableOpacity>
