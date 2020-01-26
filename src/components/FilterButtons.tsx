@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     },
     containeInactive: {
         backgroundColor: 'rgba(0, 162, 88,0.15)',
-
     },
     containerLeft: {
         flex: 1,

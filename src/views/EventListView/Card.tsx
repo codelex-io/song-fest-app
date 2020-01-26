@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Event } from './types';
 import { Label } from './Label';
 import { Icon } from '../../components';
+import { colors } from '../../styles';
 
 interface CardProps {
     event: Event;
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 18,
         marginBottom: 14,
-        color: '#4D4D4D',
+        color: colors.mediumGrey4D,
     },
     bottom: {
         flexDirection: 'row',

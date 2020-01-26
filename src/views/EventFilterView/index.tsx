@@ -1,5 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, TouchableOpacity, Text, Modal, TouchableHighlight, ScrollView } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+    Text,
+    Modal,
+    TouchableHighlight,
+    ScrollView,
+} from 'react-native';
 import { Card } from './Card';
 import { Event } from '../EventListView/types';
 import { colors, fontFamily } from '../../styles';
@@ -8,12 +17,9 @@ import { TimeFilterButton } from './TimeFilterButton';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
 
-
-
 interface EventFilterViewProps {
     events: Event[];
 }
-
 
 export default class EventListView extends React.Component<EventFilterViewProps> {
     state = {
@@ -30,17 +36,16 @@ export default class EventListView extends React.Component<EventFilterViewProps>
             <View style={styles.hugeContainer}>
                 <Header title={'Pasākumi'} />
                 <View style={styles.searchContainer}>
-                    <Modal
-                        animationType="slide" transparent={false} visible={this.state.modalVisible} >
-                        <View style={styles.container}>
-
+                    <Modal animationType="slide" transparent={false} visible={this.state.modalVisible}>
+                        <View style={styles.modalContainer}>
                             <ScrollView>
                                 <View style={styles.header}>
                                     <View style={styles.iconLeft}>
                                         <Icon size={24} />
                                     </View>
-                                    <FilterButtonIcon />
-
+                                    <View style={styles.filterButtonUpper}>
+                                        <FilterButtonIcon />
+                                    </View>
                                 </View>
                                 <View style={styles.title}>
                                     <Text> Datums</Text>
@@ -83,20 +88,29 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                                     <SectorField sector={{ title: 'Instrumentālā mūzika', active: false }} />
                                     <SectorField sector={{ title: 'Folklora', active: false }} />
                                     <SectorField sector={{ title: 'Teātra māksla', active: false }} />
-                                    <SectorField sector={{ title: 'Vizuālā un vizuāli plastiskā māksla', active: false }} />
+                                    <SectorField
+                                        sector={{ title: 'Vizuālā un vizuāli plastiskā māksla', active: false }}
+                                    />
                                     <SectorField sector={{ title: 'Vokālā mūzika', active: false }} />
                                     <SectorField sector={{ title: 'Kokles', active: false }} />
-                                    <SectorField sector={{ title: 'Profesionālās izglītības iestādes', active: false }} />
+                                    <SectorField
+                                        sector={{ title: 'Profesionālās izglītības iestādes', active: false }}
+                                    />
                                     <SectorField sector={{ title: 'Speciālās izglītības iestādes', active: false }} />
                                     <SectorField sector={{ title: 'Vērmanes dārzs', active: false }} />
                                 </View>
                                 <View style={styles.bottomButtons}>
-                                    <TouchableHighlight style={styles.cancelButton}
+                                    <TouchableHighlight
+                                        style={styles.cancelButton}
                                         onPress={() => {
                                             this.setModalVisible(!this.state.modalVisible);
-                                        }}>
+                                        }}
+                                    >
                                         <Text style={styles.buttonText}>ATCELT</Text>
                                     </TouchableHighlight>
+                                    <TouchableOpacity style={styles.filterButton}>
+                                        <Text style={styles.buttonText}>FILTRĒT</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </ScrollView>
                         </View>
@@ -117,24 +131,26 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                 <FlatList<Event>
                     data={events}
                     renderItem={({ item }): React.ReactElement => (
-                        <View style={{ paddingHorizontal: 16, paddingBottom: 16, }}>
+                        <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
                             <Card event={item} />
                         </View>
                     )}
                 />
-                <View style={styles.fixedFilter}>
-                    <TouchableHighlight
-                        onPress={() => {
-                            this.setModalVisible(true);
-                        }}  >
-                        <FilterButtonIcon />
-                    </TouchableHighlight>
+                <View>
+                    <View style={styles.fixedFilter}>
+                        <TouchableHighlight
+                            onPress={() => {
+                                this.setModalVisible(true);
+                            }}
+                        >
+                            <FilterButtonIcon />
+                        </TouchableHighlight>
+                    </View>
                 </View>
-            </View >
+            </View>
         );
     }
-};
-
+}
 
 const styles = StyleSheet.create({
     hugeContainer: {
@@ -144,11 +160,10 @@ const styles = StyleSheet.create({
     fixedFilter: {
         position: 'absolute',
         bottom: 0,
-        width: '100%',
+        width: '25%',
         marginBottom: 16,
-        alignItems: 'center',
-        justifyContent: 'center',
-
+        alignSelf: 'center',
+        backgroundColor: colors.yellow,
     },
     searchContainer: {
         alignItems: 'stretch',
@@ -166,6 +181,9 @@ const styles = StyleSheet.create({
         color: colors.white,
         textAlign: 'center',
         textTransform: 'uppercase',
+        fontFamily: fontFamily.bold,
+        fontSize: 14,
+        lineHeight: 18,
     },
     iconContainer: {
         paddingRight: 11.25,
@@ -175,10 +193,8 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         marginTop: 8,
         marginLeft: 8,
-
     },
-
-    container: {
+    modalContainer: {
         flex: 1,
         flexDirection: 'column',
         borderTopLeftRadius: 8,
@@ -186,8 +202,8 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
     },
     header: {
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
     },
     container2: {
         flexDirection: 'row',
@@ -196,13 +212,18 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
     },
     iconLeft: {
-        paddingLeft: 24,
-        paddingTop: 22,
+        flex: 1,
+        justifyContent: 'center',
+        marginLeft: 24,
+    },
+    filterButtonUpper: {
+        flex: 2,
+        alignSelf: 'flex-start',
     },
     cancelButton: {
         width: 81,
         height: 44,
-        backgroundColor: colors.grey,
+        backgroundColor: colors.extrLighgrey6E,
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 12,
@@ -218,13 +239,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         padding: 16,
-        borderTopColor: colors.grey,
+        borderTopColor: colors.extrLighgrey6E,
         borderTopWidth: 1,
         alignItems: 'stretch',
     },
     buttonText: {
-        color: colors.darkGrey,
+        color: colors.darkGrey1A,
         fontFamily: fontFamily.bold,
     },
-
-})
+});

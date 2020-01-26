@@ -5,83 +5,79 @@ import { SectorField } from './SectorField';
 import { Icon } from '../../components';
 import { colors } from '../../styles/colors';
 import { FilterButtonIcon } from '../../components';
-import Modal from "react-native-modal";
-
-
+import { fontFamily } from '../../styles';
 
 export default class FilterView extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Modal >
-                    <ScrollView>
-                        <View style={styles.header}>
-                            <View style={styles.iconLeft}>
-                                <Icon size={24} />
-                            </View>
-
+                <ScrollView>
+                    <View style={styles.header}>
+                        <View style={styles.iconLeft}>
+                            <Icon size={24} />
+                        </View>
+                        <View style={styles.filterButtonUpper}>
                             <FilterButtonIcon />
+                        </View>
+                    </View>
+                    <View style={styles.title}>
+                        <Text> Datums</Text>
+                    </View>
+                    <View style={styles.container2}>
+                        <FilterButton button={{ title: 'ŠODIEN', active: true }} />
+                        <FilterButton button={{ title: 'RĪTDIEN', active: false }} />
+                        <FilterButton button={{ title: 'CITS', active: false }} />
+                    </View>
+                    <View style={styles.title}>
+                        <Text> Ieeja</Text>
+                    </View>
+                    <View style={styles.container2}>
+                        <FilterButton button={{ title: 'BEZMAKSAS', active: true }} />
+                        <FilterButton button={{ title: 'MAKSAS', active: false }} />
+                    </View>
+                    <View style={styles.title}>
+                        <Text> Programma</Text>
+                    </View>
+                    <View style={styles.container2}>
+                        <FilterButton button={{ title: 'OFICIĀLĀ SVĒTKU', active: true }} />
+                        <FilterButton button={{ title: 'CITI PASĀKUMI', active: false }} />
+                        <FilterButton button={{ title: 'IESKAŅAS PASĀKUMI', active: false }} />
+                    </View>
+                    <View style={styles.title}>
+                        <Text> Saturs vecākiem</Text>
+                    </View>
+                    <View style={styles.container2}>
+                        <FilterButton button={{ title: 'RĀDĪT', active: false }} />
+                        <FilterButton button={{ title: 'NERĀDĪT', active: true }} />
+                    </View>
+                    <View style={styles.title}>
+                        <Text> Nozare</Text>
+                    </View>
+                    <View>
+                        <SectorField sector={{ title: 'RĀDĪT VISAS NOZARES', active: true }} />
+                        <SectorField sector={{ title: 'koris', active: false }} />
+                        <SectorField sector={{ title: 'Tautas dejas', active: false }} />
+                        <SectorField sector={{ title: 'Mūsdienu dejas', active: false }} />
+                        <SectorField sector={{ title: 'Instrumentālā mūzika', active: false }} />
+                        <SectorField sector={{ title: 'Folklora', active: false }} />
+                        <SectorField sector={{ title: 'Teātra māksla', active: false }} />
+                        <SectorField sector={{ title: 'Vizuālā un vizuāli plastiskā māksla', active: false }} />
+                        <SectorField sector={{ title: 'Vokālā mūzika', active: false }} />
+                        <SectorField sector={{ title: 'Kokles', active: false }} />
+                        <SectorField sector={{ title: 'Profesionālās izglītības iestādes', active: false }} />
+                        <SectorField sector={{ title: 'Speciālās izglītības iestādes', active: false }} />
+                        <SectorField sector={{ title: 'Vērmanes dārzs', active: false }} />
+                    </View>
 
-
-                        </View>
-                        <View style={styles.title}>
-                            <Text> Datums</Text>
-                        </View>
-                        <View style={styles.container2}>
-                            <FilterButton button={{ title: 'ŠODIEN', active: true }} />
-                            <FilterButton button={{ title: 'RĪTDIEN', active: false }} />
-                            <FilterButton button={{ title: 'CITS', active: false }} />
-                        </View>
-                        <View style={styles.title}>
-                            <Text> Ieeja</Text>
-                        </View>
-                        <View style={styles.container2}>
-                            <FilterButton button={{ title: 'BEZMAKSAS', active: true }} />
-                            <FilterButton button={{ title: 'MAKSAS', active: false }} />
-                        </View>
-                        <View style={styles.title}>
-                            <Text> Programma</Text>
-                        </View>
-                        <View style={styles.container2}>
-                            <FilterButton button={{ title: 'OFICIĀLĀ SVĒTKU', active: true }} />
-                            <FilterButton button={{ title: 'CITI PASĀKUMI', active: false }} />
-                            <FilterButton button={{ title: 'IESKAŅAS PASĀKUMI', active: false }} />
-                        </View>
-                        <View style={styles.title}>
-                            <Text> Saturs vecākiem</Text>
-                        </View>
-                        <View style={styles.container2}>
-                            <FilterButton button={{ title: 'RĀDĪT', active: false }} />
-                            <FilterButton button={{ title: 'NERĀDĪT', active: true }} />
-                        </View>
-                        <View style={styles.title}>
-                            <Text> Nozare</Text>
-                        </View>
-                        <View>
-
-                            <SectorField sector={{ title: 'RĀDĪT VISAS NOZARES', active: true }} />
-                            <SectorField sector={{ title: 'koris', active: false }} />
-                            <SectorField sector={{ title: 'Tautas dejas', active: false }} />
-                            <SectorField sector={{ title: 'Mūsdienu dejas', active: false }} />
-                            <SectorField sector={{ title: 'Instrumentālā mūzika', active: false }} />
-                            <SectorField sector={{ title: 'Folklora', active: false }} />
-                            <SectorField sector={{ title: 'Teātra māksla', active: false }} />
-                            <SectorField sector={{ title: 'Vizuālā un vizuāli plastiskā māksla', active: false }} />
-                            <SectorField sector={{ title: 'Vokālā mūzika', active: false }} />
-                            <SectorField sector={{ title: 'Kokles', active: false }} />
-                            <SectorField sector={{ title: 'Profesionālās izglītības iestādes', active: false }} />
-                            <SectorField sector={{ title: 'Speciālās izglītības iestādes', active: false }} />
-                            <SectorField sector={{ title: 'Vērmanes dārzs', active: false }} />
-                        </View>
-
-                        <View style={styles.bottomButtons}>
-                            <TouchableOpacity style={styles.cancelButton}><Text style={styles.buttonText}>ATCELT</Text></TouchableOpacity>
-                            <TouchableOpacity style={styles.filterButton}><Text style={styles.buttonText}>FILTRĒT</Text></TouchableOpacity>
-                        </View>
-                    </ScrollView>
-
-                </Modal>
-
+                    <View style={styles.bottomButtons}>
+                        <TouchableOpacity style={styles.cancelButton}>
+                            <Text style={styles.buttonText}>ATCELT</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.filterButton}>
+                            <Text style={styles.buttonText}>FILTRĒT</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </View>
         );
     }
@@ -96,63 +92,50 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
     },
     header: {
+        flex: 1,
         flexDirection: 'row',
+    },
+    iconLeft: {
+        flex: 1,
         justifyContent: 'center',
+        marginLeft: 24,
+    },
+    filterButtonUpper: {
+        flex: 2,
+        alignSelf: 'flex-start',
     },
     container2: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     title: {
         paddingBottom: 16,
     },
-    iconLeft: {
-        paddingLeft: 24,
-        paddingTop: 22,
-    },
-    iconFilter: {
-        paddingLeft: 14,
-        paddingRight: 12,
-    },
-    iconFilterText: {
-        flexDirection: 'row',
-        paddingVertical: 13,
-        alignItems: 'center',
-        backgroundColor: 'yellow',
-    },
-    filterText: {
-        fontSize: 14,
-        fontFamily: 'DINPro-Bold',
-        width: 46,
-        height: 18,
-    },
     cancelButton: {
         width: 81,
         height: 44,
-        backgroundColor: colors.grey,
+        backgroundColor: colors.extrLighgrey6E,
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 12,
     },
     filterButton: {
-        width: 87,
+        width: 81,
         height: 44,
-        backgroundColor: colors.yellow,
-        justifyContent: 'center',
+        paddingVertical: 13,
         alignItems: 'center',
+        backgroundColor: colors.yellow,
     },
     bottomButtons: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         padding: 16,
-        borderTopColor: colors.grey,
+        borderTopColor: colors.extrLighgrey6E,
         borderTopWidth: 1,
         alignItems: 'stretch',
     },
     buttonText: {
-        color: colors.darkGrey,
-        fontFamily: 'DINPro-Bold',
+        color: colors.darkGrey1A,
+        fontFamily: fontFamily.bold,
     },
-
-
-
 });

@@ -7,7 +7,7 @@ export class SquareBox extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.container2} >
+                <TouchableOpacity style={styles.container2}>
                     <View style={styles.iconContainer}>
                         <Icon size={24} />
                     </View>
@@ -35,9 +35,8 @@ const styles = StyleSheet.create({
         height: 44,
         width: 44,
         display: 'flex',
-        backgroundColor: colors.grey,
+        backgroundColor: colors.extrLighgrey6E,
         justifyContent: 'center',
         alignItems: 'center',
     },
-
 });

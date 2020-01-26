@@ -3,8 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from '../../components';
 import { colors, fontFamily } from '../../styles';
 
-
-
 interface LabelProps {
     title: string;
 }

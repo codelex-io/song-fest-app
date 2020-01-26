@@ -14,14 +14,12 @@ export class TimeFilterButton extends React.Component<FilterButtonProps> {
         const { button } = this.props;
         return (
             <View style={styles.container}>
-                <View
-                    style={[button.active ? styles.containerActive : styles.containeInactive]}>
+                <View style={[button.active ? styles.containerActive : styles.containeInactive]}>
                     <View>
                         <Text style={[button.active ? styles.textActive : styles.textInactive]}>{button.title}</Text>
                     </View>
                 </View>
             </View>
-
         );
     }
 }
@@ -30,7 +28,6 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         paddingHorizontal: 8,
-
     },
     containerActive: {
         height: 40,

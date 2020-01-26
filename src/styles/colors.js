@@ -7,7 +7,8 @@ export const colors = {
     purple: '#964082',
     lightBlue: '#0AB1CC',
     white: '#FFFFFF',
-    darkGrey: '#1A1A1A',
-
-    grey: '#E6E6E6',
+    darkGrey1A: '#1A1A1A',
+    mediumGrey4D: '#4D4D4D',
+    lightGrey3A: '#A3A3A3',
+    extrLighgrey6E: '#E6E6E6',
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { FavouriteGroup } from './types';
 import { Icon } from '../../components';
+import { colors } from '../../styles';
 
 interface CardProps {
     group: FavouriteGroup;
@@ -52,13 +53,13 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     title: {
-        color: '#4D4D4D',
+        color: colors.mediumGrey4D,
         fontSize: 14,
         paddingTop: 24,
         paddingBottom: 12,
     },
     itemText: {
-        color: '#1A1A1A',
+        color: colors.darkGrey1A,
         fontSize: 16,
         textAlign: 'left',
         marginRight: 56,

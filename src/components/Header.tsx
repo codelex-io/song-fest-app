@@ -4,9 +4,8 @@ import { ActiveIcon } from '.';
 import { fontFamily } from '../styles';
 
 interface HeaderProps {
-    title: string
+    title: string;
 }
-
 
 export class Header extends React.Component<HeaderProps> {
     render() {
@@ -46,6 +45,5 @@ const styles = StyleSheet.create({
         fontFamily: fontFamily.bold,
         fontSize: 20,
         textTransform: 'uppercase',
-
     },
 });

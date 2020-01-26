@@ -23,4 +23,3 @@ const events = [
 ];
 
 storiesOf('EventFilterView', module).add('list', () => <EventFilterView events={events} />);
-

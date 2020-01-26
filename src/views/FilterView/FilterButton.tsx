@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { colors, fontFamily } from '../../styles';
 
 interface FilterButtonProps {
     button: {
@@ -13,12 +14,10 @@ export class FilterButton extends React.Component<FilterButtonProps> {
         const { button } = this.props;
         return (
             <View style={styles.container}>
-                <View
-                    style={[button.active ? styles.containerActive : styles.containeInactive]}>
+                <View style={[button.active ? styles.containerActive : styles.containeInactive]}>
                     <Text style={[styles.text, button.active ? styles.textActive : false]}>{button.title}</Text>
                 </View>
             </View>
-
         );
     }
 }
@@ -32,23 +31,23 @@ const styles = StyleSheet.create({
         marginRight: 12,
     },
     containerActive: {
-        backgroundColor: '#F15A31',
+        backgroundColor: colors.orange,
     },
     containeInactive: {
-        backgroundColor: '#E6E6E6',
+        backgroundColor: colors.extrLighgrey6E,
     },
     text: {
-        fontFamily: 'DINPro-Bold',
+        fontFamily: fontFamily.bold,
         fontSize: 14,
-        color: '#1A1A1A',
+        color: colors.darkGrey1A,
         textAlign: 'center',
         letterSpacing: 1.15,
         paddingVertical: 13,
         paddingHorizontal: 16,
     },
     textActive: {
-        fontFamily: 'DINPro-Bold',
-        color: '#FFFFFF',
+        fontFamily: fontFamily.bold,
+        color: colors.white,
         fontSize: 14,
         paddingVertical: 13,
         paddingHorizontal: 16,

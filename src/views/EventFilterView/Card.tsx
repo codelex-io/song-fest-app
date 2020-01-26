@@ -5,7 +5,6 @@ import { Label } from './Label';
 import { colors, fontFamily } from '../../styles';
 import { SquareBox } from './SquareBox';
 
-
 interface CardProps {
     event: Event;
 }
@@ -30,7 +29,6 @@ export const Card: React.FC<CardProps> = ({ event }) => (
                     <View style={styles.squareBoxContainer}>
                         <SquareBox />
                     </View>
-
                 </View>
             </View>
         </View>
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
         width: '90%',
         color: colors.white,
         fontFamily: fontFamily.normal,
-
     },
     location: {
         fontSize: 14,
@@ -86,10 +83,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingBottom: 5,
         paddingTop: 19,
-
     },
     squareBoxContainer: {
         flexDirection: 'row',
     },
-
 });
