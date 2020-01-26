@@ -74,4 +74,4 @@ const events = [
     },
 ];
 
-storiesOf('Events', module).add('list', () => <EventListView events={events} />);
+storiesOf('EventListView', module).add('list', () => <EventListView events={events} />);

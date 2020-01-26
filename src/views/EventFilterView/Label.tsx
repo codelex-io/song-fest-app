@@ -1,16 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon, IconType } from '@components';
-import { typography } from '@styles';
+import { colors, typography } from '../../styles';
 
 interface LabelProps {
     title: string;
-    iconType: IconType;
 }
 
-export const Label: React.FC<LabelProps> = ({ title, iconType }) => (
+export const Label: React.FC<LabelProps> = ({ title }) => (
     <View style={styles.container}>
-        <Icon size={20} type={iconType} fill="#FFFFFF" />
+        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
         <Text style={styles.title}>{title}</Text>
     </View>
 );
@@ -20,14 +19,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingRight: 25,
         alignItems: 'center',
-        paddingBottom: 12,
+        paddingBottom: 14,
     },
     title: {
-        fontFamily: typography.normal,
         paddingLeft: 10,
         fontWeight: '500',
         fontSize: 14,
         lineHeight: 18,
-        color: '#FFFFFF',
+        color: colors.white,
+        fontFamily: typography.normal,
     },
 });
