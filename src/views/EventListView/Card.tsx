@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconType } from '@components';
 import { Label } from './Label';
+import { colors } from '../../styles';
 import { Buttons } from './Buttons';
 import { Event } from './types';
 
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 18,
         marginBottom: 14,
-        color: '#FFFFFF',
+        color: colors.white,
     },
     labels: {
         flexDirection: 'column',

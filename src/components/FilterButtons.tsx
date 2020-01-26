@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { colors } from '../styles';
+import { typography } from '../styles';
 
 interface FilterButtonsProps {
     buttons: {
@@ -38,11 +40,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     containerActive: {
-        backgroundColor: '#00A258',
+        backgroundColor: colors.green,
     },
     containeInactive: {
-        backgroundColor: '#00A258',
-        opacity: 0.15,
+        backgroundColor: 'rgba(0, 162, 88,0.15)',
     },
     containerLeft: {
         flex: 1,
@@ -59,14 +60,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        fontFamily: 'DINPro',
+        fontFamily: typography.bold,
         fontSize: 14,
-        fontWeight: 'bold',
-        color: '#000000',
+        color: colors.green,
         textAlign: 'center',
         letterSpacing: 1.15,
     },
     textActive: {
-        color: '#000000',
+        color: colors.white,
     },
 });

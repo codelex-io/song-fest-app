@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { NewsItem } from './types';
+import { colors } from '../../styles';
 
 interface CardProps {
     item: NewsItem;
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderBottomRightRadius: 8,
         borderBottomLeftRadius: 8,
-        backgroundColor: '#086BB5',
+        backgroundColor: colors.blue,
         flexDirection: 'column',
         padding: 16,
     },
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderBottomRightRadius: 8,
         borderBottomLeftRadius: 8,
-        backgroundColor: '#086BB5',
+        backgroundColor: colors.blue,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         paddingTop: 16,
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     shareIconContainer: {
         height: 44,
         width: 44,
-        backgroundColor: '#F15A31',
+        backgroundColor: colors.orange,
         borderRadius: 8,
         opacity: 0.15,
         marginRight: 16,
@@ -77,18 +78,18 @@ const styles = StyleSheet.create({
     favoriteIconContainer: {
         height: 44,
         width: 44,
-        backgroundColor: '#F15A31',
+        backgroundColor: colors.orange,
         borderRadius: 8,
         opacity: 0.15,
     },
     dateText: {
-        color: '#FFFFFF',
+        color: colors.white,
         fontWeight: '500',
         fontSize: 14,
         marginBottom: 8,
     },
     titleText: {
-        color: '#FFFFFF',
+        color: colors.white,
         fontWeight: '500',
         fontSize: 16,
     },
