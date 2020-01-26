@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ActiveIcon } from '.';
-import { fontFamily } from '../styles';
+import { typography } from '../styles';
 
 interface HeaderProps {
     title: string;
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(241,90,49,0.1)',
     },
     text: {
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
         fontSize: 20,
         textTransform: 'uppercase',
     },

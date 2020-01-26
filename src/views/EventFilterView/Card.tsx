@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { Event } from '../EventListView/types';
 import { Label } from './Label';
-import { colors, fontFamily } from '../../styles';
+import { colors, typography } from '../../styles';
 import { SquareBox } from './SquareBox';
 
 interface CardProps {
@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         width: '90%',
         color: colors.white,
-        fontFamily: fontFamily.normal,
+        fontFamily: typography.normal,
     },
     location: {
         fontSize: 14,
         lineHeight: 18,
         color: colors.white,
-        fontFamily: fontFamily.normal,
+        fontFamily: typography.normal,
     },
     bottom: {
         flexDirection: 'column',

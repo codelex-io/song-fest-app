@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors, fontFamily } from '../styles';
+import { colors, typography } from '../styles';
 import { Icon, IconType } from '@components';
 
 export class MoreView extends React.Component {
@@ -104,6 +104,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 8,
         fontSize: 14,
-        fontFamily: fontFamily.normal,
+        fontFamily: typography.normal,
     },
 });

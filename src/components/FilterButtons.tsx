@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { colors } from '../styles/colors';
-import { fontFamily } from '../styles/typography';
+import { colors } from '../styles';
+import { typography } from '../styles';
 
 interface FilterButtonsProps {
     buttons: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
         fontSize: 14,
         color: colors.green,
         textAlign: 'center',

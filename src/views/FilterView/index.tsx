@@ -2,10 +2,9 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { FilterButton } from './FilterButton';
 import { SectorField } from './SectorField';
-import { Icon } from '../../components';
-import { colors } from '../../styles/colors';
+import { Icon, IconType } from '@components';
+import { colors, typography } from '../../styles';
 import { FilterButtonIcon } from '../../components';
-import { fontFamily } from '../../styles';
 
 export default class FilterView extends React.Component {
     render() {
@@ -14,7 +13,7 @@ export default class FilterView extends React.Component {
                 <ScrollView>
                     <View style={styles.header}>
                         <View style={styles.iconLeft}>
-                            <Icon size={24} />
+                            <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
                         </View>
                         <View style={styles.filterButtonUpper}>
                             <FilterButtonIcon />
@@ -136,6 +135,6 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: colors.darkGrey1A,
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
     },
 });

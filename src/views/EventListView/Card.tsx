@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconType } from '@components';
 import { Label } from './Label';
-import { Icon } from '../../components';
 import { colors } from '../../styles';
 import { Buttons } from './Buttons';
 import { Event } from './types';
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
         lineHeight: 18,
         marginBottom: 14,
         color: colors.mediumGrey4D,
-       // color: '#FFFFFF',
+        // color: '#FFFFFF',
     },
     labels: {
         flexDirection: 'column',

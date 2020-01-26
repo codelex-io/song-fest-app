@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon } from '../../components';
+import { Icon, IconType } from '@components';
 import { colors } from '../../styles';
 
 export class SquareBox extends React.Component {
@@ -9,13 +9,13 @@ export class SquareBox extends React.Component {
             <View style={styles.container}>
                 <TouchableOpacity style={styles.container2}>
                     <View style={styles.iconContainer}>
-                        <Icon size={24} />
+                        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.container2}>
                     <View style={styles.iconContainer}>
-                        <Icon size={24} />
+                        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
                     </View>
                 </TouchableOpacity>
             </View>

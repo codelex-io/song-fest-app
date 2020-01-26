@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { colors, fontFamily } from '../../styles';
+import { colors, typography } from '../../styles';
 
 interface FilterButtonProps {
     button: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.extrLighgrey6E,
     },
     text: {
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
         fontSize: 14,
         color: colors.darkGrey1A,
         textAlign: 'center',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     textActive: {
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
         color: colors.white,
         fontSize: 14,
         paddingVertical: 13,

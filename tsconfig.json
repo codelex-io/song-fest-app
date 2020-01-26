@@ -3,9 +3,7 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "target": "es5",
-        "lib": [
-            "es2017"
-        ],
+        "lib": ["es2017"],
         "module": "es2015",
         "allowJs": true,
         "skipLibCheck": true,
@@ -17,23 +15,13 @@
         "noEmit": true,
         "jsx": "react-native",
         "noUnusedLocals": true,
-        "rootDirs": [
-            "src",
-            "stories"
-        ],
+        "rootDirs": ["src", "stories"],
         "baseUrl": "./src",
         "paths": {
-            "@styles": [
-                "./styles"
-            ],
-            "@components": [
-                "./components"
-            ],
-            "@views": [
-                "./views"
-            ]
-        },
+            "@styles": ["./styles"],
+            "@components": ["./components"],
+            "@views": ["./views"]
+        }
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "src/styles/colors.js", "src/styles/typography.js"]
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
-

@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 import { Card } from './Card';
 import { Event } from '../EventListView/types';
-import { colors, fontFamily } from '../../styles';
-import { Icon, FilterButtonIcon, Header } from '../../components';
+import { colors, typography } from '../../styles';
+import { Icon, IconType, FilterButtonIcon, Header } from '@components';
 import { TimeFilterButton } from './TimeFilterButton';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
@@ -41,7 +41,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                             <ScrollView>
                                 <View style={styles.header}>
                                     <View style={styles.iconLeft}>
-                                        <Icon size={24} />
+                                        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
                                     </View>
                                     <View style={styles.filterButtonUpper}>
                                         <FilterButtonIcon />
@@ -117,7 +117,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                     </Modal>
                     <TouchableOpacity style={styles.searchContainerBlue}>
                         <View style={styles.iconContainer}>
-                            <Icon size={24} />
+                            <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
                         </View>
                         <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc. </Text>
                     </TouchableOpacity>
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         color: colors.white,
         textAlign: 'center',
         textTransform: 'uppercase',
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
         fontSize: 14,
         lineHeight: 18,
     },
@@ -245,6 +245,6 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: colors.darkGrey1A,
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
     },
 });

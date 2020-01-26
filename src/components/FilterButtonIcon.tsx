@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Icon from './Icon';
-import { fontFamily } from '../styles/typography';
+import { Icon, IconType } from '@components';
+import { typography } from '../styles';
 
 export default class FilterButtonIcon extends React.Component {
     render() {
         return (
             <View style={styles.iconFilterText}>
                 <View style={styles.iconFilter}>
-                    <Icon size={24} />
+                    <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
                 </View>
                 <Text style={styles.filterText}>FILTRS</Text>
             </View>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     filterText: {
         fontSize: 14,
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
         marginRight: 16,
     },
 });

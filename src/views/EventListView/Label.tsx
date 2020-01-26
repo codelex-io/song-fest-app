@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         paddingBottom: 12,
     },
     title: {
-        fontFamily: typography.fontFamily,
+        fontFamily: typography.normal,
         paddingLeft: 10,
         fontWeight: '500',
         fontSize: 14,

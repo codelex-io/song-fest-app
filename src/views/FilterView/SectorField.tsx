@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Icon } from '../../components';
+import { Icon, IconType } from '@components';
 import { ActiveIcon } from '../../components';
-import { colors, fontFamily } from '../../styles';
+import { colors, typography } from '../../styles';
 
 interface SectorFieldProps {
     sector: {
@@ -16,7 +16,7 @@ export class SectorField extends React.Component<SectorFieldProps> {
         const { sector } = this.props;
         return (
             <View style={styles.container}>
-                <View style={styles.icon}>{sector.active ? <ActiveIcon size={24} /> : <Icon size={24} />}</View>
+                <View style={styles.icon}>{sector.active ? <ActiveIcon size={24} /> : <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />}</View>
                 <Text style={styles.text}>{sector.title}</Text>
             </View>
         );
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         paddingLeft: 2,
     },
     text: {
-        fontFamily: fontFamily.bold,
+        fontFamily: typography.bold,
         fontSize: 14,
         color: colors.darkGrey1A,
         textAlign: 'center',
