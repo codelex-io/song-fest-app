@@ -72,8 +72,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 18,
         marginBottom: 14,
-        color: colors.mediumGrey4D,
-        // color: '#FFFFFF',
+        color: colors.white,
     },
     labels: {
         flexDirection: 'column',
