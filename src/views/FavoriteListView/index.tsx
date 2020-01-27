@@ -13,6 +13,7 @@ export default class FavoriteListView extends React.Component<FavouriteGroupProp
         return (
             <FlatList<FavouriteGroup>
                 data={groups}
+                keyExtractor={item => item.title}
                 renderItem={({ item }): React.ReactElement => (
                     <View>
                         <Card group={item} />
