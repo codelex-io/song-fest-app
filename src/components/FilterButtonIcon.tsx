@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Icon, IconType } from '@components';
-import { typography } from '../styles';
+import { typography, colors } from '@styles';
 
 export default class FilterButtonIcon extends React.Component {
     render() {
         return (
             <View style={styles.iconFilterText}>
                 <View style={styles.iconFilter}>
-                    <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
+                    <Icon size={20} type={IconType.Heart} fill={colors.white} />
                 </View>
                 <Text style={styles.filterText}>FILTRS</Text>
             </View>

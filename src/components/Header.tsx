@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { ActiveIcon } from '.';
-import { typography } from '../styles';
+import { typography } from '@styles';
+import ActiveIcon from './ActiveIcon';
 
 interface HeaderProps {
     title: string;
