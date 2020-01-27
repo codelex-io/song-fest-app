@@ -9,6 +9,10 @@ export enum IconType {
     Heart = 'heart',
     Navigate = 'navigate',
     Share = 'share',
+    Map = 'map',
+    More = 'more',
+    News = 'news',
+    Video = 'video',
 }
 
 interface IconProps {
