@@ -7,6 +7,7 @@ import EventFilterView from './EventFilterView';
 import EventListView from './EventListView';
 import ParticipantCategoryView from './ParticipantCategoryView';
 import AllIcons from './AllIcons';
+import UserSettings from './UserSettings';
 
 export {
     NewsListView,
@@ -18,4 +19,5 @@ export {
     EventListView,
     ParticipantCategoryView,
     AllIcons,
+    UserSettings,
 };

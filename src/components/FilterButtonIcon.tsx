@@ -8,7 +8,7 @@ export default class FilterButtonIcon extends React.Component {
         return (
             <View style={styles.iconFilterText}>
                 <View style={styles.iconFilter}>
-                    <Icon size={20} type={IconType.Heart} fill={colors.white} />
+                    <Icon size={20} type={IconType.Filter} fill={colors.darkGrey1A} />
                 </View>
                 <Text style={styles.filterText}>FILTRS</Text>
             </View>

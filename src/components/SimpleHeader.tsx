@@ -7,43 +7,39 @@ interface HeaderProps {
     title: string;
 }
 
-export class Header extends React.Component<HeaderProps> {
+export default class SimpleHeader extends React.Component<HeaderProps> {
     render() {
         const { title } = this.props;
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>{title}</Text>
-                <TouchableOpacity style={styles.containerBox}>
-                    <Icon size={24} type={IconType.HeartFilled} fill={colors.white} />
+            <View style={styles.header}>
+                <TouchableOpacity style={styles.iconBox}>
+                    <Icon size={24} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                 </TouchableOpacity>
+                <View>
+                    <Text style={styles.text}>{title}</Text>
+                </View>
             </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
-    container: {
-        height: 56,
-        paddingHorizontal: 16,
+    header: {
         textAlign: 'left',
-        letterSpacing: 0.15,
-        fontSize: 20,
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
     },
-    containerBox: {
+    iconBox: {
         height: 44,
         width: 44,
         display: 'flex',
         flexDirection: 'row',
+        backgroundColor: colors.white,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.orange,
+        marginRight: 16,
     },
     text: {
-        fontFamily: typography.bold,
         fontSize: 20,
-        textTransform: 'uppercase',
+        fontFamily: typography.bold,
     },
 });

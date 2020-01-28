@@ -3,25 +3,27 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors } from '../../styles';
 
-export class SquareBox extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.container2}>
-                    <View style={styles.iconContainer}>
-                        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.container2}>
-                    <View style={styles.iconContainer}>
-                        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
-                    </View>
-                </TouchableOpacity>
+export const SquareBox: React.FC = () => (
+    <View style={styles.container}>
+        <TouchableOpacity style={styles.container2}>
+            <View style={styles.iconContainer}>
+                <Icon size={20} type={IconType.Share} fill={colors.blue} />
             </View>
-        );
-    }
-}
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.container2}>
+            <View style={styles.iconContainer}>
+                <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.container2}>
+            <View style={styles.iconContainer}>
+                <Icon size={20} type={IconType.Navigation} fill={colors.green} />
+            </View>
+        </TouchableOpacity>
+    </View>
+);
 
 const styles = StyleSheet.create({
     container: {

@@ -5,11 +5,12 @@ import { colors, typography } from '../../styles';
 
 interface LabelProps {
     title: string;
+    icon: IconType;
 }
 
-export const Label: React.FC<LabelProps> = ({ title }) => (
+export const Label: React.FC<LabelProps> = ({ title, icon }) => (
     <View style={styles.container}>
-        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
+        <Icon size={20} type={icon} fill="#FFFFFF" />
         <Text style={styles.title}>{title}</Text>
     </View>
 );
@@ -23,7 +24,6 @@ const styles = StyleSheet.create({
     },
     title: {
         paddingLeft: 10,
-        fontWeight: '500',
         fontSize: 14,
         lineHeight: 18,
         color: colors.white,
