@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { NewsItem } from './types';
 import { colors } from '../../styles';
+import { IconType, Icon } from '@components';
 
 interface CardProps {
     item: NewsItem;
@@ -20,10 +21,14 @@ export class Card extends React.Component<CardProps> {
                     <Text style={styles.titleText}> {item.title}</Text>
                     <View style={styles.icontContainer}>
                         <View style={styles.shareIconContainer}>
-                            <TouchableOpacity></TouchableOpacity>
+                            <TouchableOpacity>
+                                <Icon size={24} type={IconType.Share} fill={colors.blue} />
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.favoriteIconContainer}>
-                            <TouchableOpacity></TouchableOpacity>
+                            <TouchableOpacity>
+                                <Icon size={24} type={IconType.Heart} fill={colors.orange} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -35,33 +40,24 @@ export class Card extends React.Component<CardProps> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderRadius: 8,
         flexDirection: 'column',
         paddingHorizontal: 16,
     },
     pictureContainer: {
         flex: 1,
         backgroundColor: 'grey',
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 8,
     },
     picture: {
         height: 180,
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 8,
     },
     lowerContainer: {
         flex: 1,
-        borderBottomRightRadius: 8,
-        borderBottomLeftRadius: 8,
         backgroundColor: colors.blue,
         flexDirection: 'column',
         padding: 16,
     },
     icontContainer: {
         flex: 1,
-        borderBottomRightRadius: 8,
-        borderBottomLeftRadius: 8,
         backgroundColor: colors.blue,
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -70,17 +66,17 @@ const styles = StyleSheet.create({
     shareIconContainer: {
         height: 44,
         width: 44,
-        backgroundColor: colors.orange,
-        borderRadius: 8,
-        opacity: 0.15,
+        backgroundColor: colors.white,
         marginRight: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     favoriteIconContainer: {
         height: 44,
         width: 44,
-        backgroundColor: colors.orange,
-        borderRadius: 8,
-        opacity: 0.15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.white,
     },
     dateText: {
         color: colors.white,

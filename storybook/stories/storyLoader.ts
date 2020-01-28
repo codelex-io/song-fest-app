@@ -9,3 +9,5 @@ import './views/FilterView.stories';
 import './views/EventFilterView.stories';
 import './views/AllIcons.stories';
 import './views/ParticipantCategoryView.stories';
+import './views/UserSettings.stories';
+import './components/SimpleHeader.stories';
