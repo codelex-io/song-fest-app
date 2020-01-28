@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
+import { colors } from '@styles';
 
 interface Props {
     onShare: () => void;
@@ -18,7 +19,7 @@ export const Buttons: React.FC<Props> = ({ onShare, onFavourite, onNavigate }) =
     <View style={styles.container}>
         <SingleButton onPress={onShare} iconType={IconType.Share} />
         <SingleButton onPress={onFavourite} iconType={IconType.Heart} />
-        <SingleButton onPress={onNavigate} iconType={IconType.Navigate} />
+        <SingleButton onPress={onNavigate} iconType={IconType.Navigation} />
     </View>
 );
 
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     button: {
         height: 40,
         width: 40,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.white,
         marginRight: 16,
         justifyContent: 'center',
         alignItems: 'center',

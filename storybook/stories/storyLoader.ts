@@ -7,3 +7,5 @@ import './views/EmptyFavorite.stories';
 import './views/MoreView.stories';
 import './views/FilterView.stories';
 import './views/EventFilterView.stories';
+import './views/AllIcons.stories';
+import './views/ParticipantCategoryView.stories';
