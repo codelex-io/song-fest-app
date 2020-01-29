@@ -9,3 +9,4 @@ import './views/FilterView.stories';
 import './views/EventFilterView.stories';
 import './views/AllIcons.stories';
 import './views/ParticipantCategoryView.stories';
+import './views/Markdown.stories';
