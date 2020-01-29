@@ -1,8 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Icon, IconType } from '@components';
-import { ActiveIcon } from '../../components';
 import { colors, typography } from '../../styles';
+import { IconType, Icon } from '@components';
 
 interface SectorFieldProps {
     sector: {
@@ -17,7 +16,10 @@ export class SectorField extends React.Component<SectorFieldProps> {
         return (
             <View style={styles.container}>
                 <View style={styles.icon}>
-                    {sector.active ? <ActiveIcon size={24} /> : <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />}
+                    {sector.active ? (
+                        <Icon size={24} type={IconType.RadioBoxMarked} fill={colors.darkGrey1A} />) : (
+                            <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
+                        )}
                 </View>
                 <Text style={styles.text}>{sector.title}</Text>
             </View>

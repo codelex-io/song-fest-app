@@ -13,7 +13,7 @@ export default class FilterView extends React.Component {
                 <ScrollView>
                     <View style={styles.header}>
                         <View style={styles.iconLeft}>
-                            <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
+                            <Icon size={20} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                         </View>
                         <View style={styles.filterButtonUpper}>
                             <FilterButtonIcon />

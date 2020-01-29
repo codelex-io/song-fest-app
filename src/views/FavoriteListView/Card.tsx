@@ -21,7 +21,7 @@ export class Card extends React.Component<CardProps> {
                         </TouchableOpacity>
                         <Text style={styles.itemText}>{item.title}</Text>
                         <TouchableOpacity style={styles.rightIcon}>
-                            <Icon size={24} type={IconType.Heart} />
+                            <Icon size={24} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
                         </TouchableOpacity>
                     </View>
                 ))}
