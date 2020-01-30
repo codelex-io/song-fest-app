@@ -16,7 +16,7 @@ export default class SimpleHeader extends React.Component<HeaderProps> {
                     <Icon size={24} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                 </TouchableOpacity>
                 <View style={styles.textContainer}>
-                   <Text style={styles.text}>{title}</Text>
+                    <Text style={styles.text}>{title}</Text>
                 </View>
             </View>
         );

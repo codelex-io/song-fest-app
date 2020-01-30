@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors, typography } from '../../styles';
-import { IconType, Icon } from '@components';
 
 interface SectorFieldProps {
     sector: {
