@@ -15,7 +15,7 @@ export default class SimpleHeader extends React.Component<HeaderProps> {
                 <TouchableOpacity style={styles.iconBox}>
                     <Icon size={24} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                 </TouchableOpacity>
-                <View>
+                <View style={styles.textContainer}>
                     <Text style={styles.text}>{title}</Text>
                 </View>
             </View>
@@ -24,9 +24,11 @@ export default class SimpleHeader extends React.Component<HeaderProps> {
 }
 const styles = StyleSheet.create({
     header: {
+        flex: 1,
+        height: 56,
         textAlign: 'left',
         flexDirection: 'row',
-        alignItems: 'center',
+        alignContent: 'center',
     },
     iconBox: {
         height: 44,
@@ -37,9 +39,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 16,
+        marginTop: 6,
     },
     text: {
         fontSize: 20,
         fontFamily: typography.bold,
+    },
+    textContainer: {
+        padding: 15,
     },
 });

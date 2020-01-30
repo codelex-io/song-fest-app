@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { NewsItem } from './types';
 import { colors } from '../../styles';
-import { IconType, Icon } from '@components';
+import { IconButtons } from './IconButtons';
 
 interface CardProps {
     item: NewsItem;
@@ -19,17 +19,8 @@ export class Card extends React.Component<CardProps> {
                 <View style={styles.lowerContainer}>
                     <Text style={styles.dateText}> {item.date}</Text>
                     <Text style={styles.titleText}> {item.title}</Text>
-                    <View style={styles.icontContainer}>
-                        <View style={styles.shareIconContainer}>
-                            <TouchableOpacity>
-                                <Icon size={24} type={IconType.Share} fill={colors.blue} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.favoriteIconContainer}>
-                            <TouchableOpacity>
-                                <Icon size={24} type={IconType.Heart} fill={colors.orange} />
-                            </TouchableOpacity>
-                        </View>
+                    <View style={styles.row}>
+                        <IconButtons onShare={() => null} onFavourite={() => null} />
                     </View>
                 </View>
             </View>
@@ -66,7 +57,8 @@ const styles = StyleSheet.create({
     shareIconContainer: {
         height: 44,
         width: 44,
-        backgroundColor: colors.white,
+        backgroundColor: colors.orange,
+        opacity: 0.15,
         marginRight: 16,
         justifyContent: 'center',
         alignItems: 'center',
@@ -74,9 +66,8 @@ const styles = StyleSheet.create({
     favoriteIconContainer: {
         height: 44,
         width: 44,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.white,
+        backgroundColor: colors.orange,
+        opacity: 0.15,
     },
     dateText: {
         color: colors.white,
@@ -88,5 +79,8 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: '500',
         fontSize: 16,
+    },
+    row: {
+        flexDirection: 'row',
     },
 });

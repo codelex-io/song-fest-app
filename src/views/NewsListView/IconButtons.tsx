@@ -6,7 +6,6 @@ import { colors } from '@styles';
 interface Props {
     onShare: () => void;
     onFavourite: () => void;
-    onNavigate: () => void;
 }
 
 const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: string }> = ({
@@ -19,17 +18,17 @@ const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: st
     </TouchableOpacity>
 );
 
-export const Buttons: React.FC<Props> = ({ onShare, onFavourite, onNavigate }) => (
+export const IconButtons: React.FC<Props> = ({ onShare, onFavourite }) => (
     <View style={styles.container}>
         <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.blue} />
         <SingleButton onPress={onFavourite} iconType={IconType.Heart} fill={colors.orange} />
-        <SingleButton onPress={onNavigate} iconType={IconType.Navigation} fill={colors.green} />
     </View>
 );
 
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        paddingTop: 16,
     },
     button: {
         height: 40,

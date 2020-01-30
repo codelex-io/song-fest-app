@@ -14,7 +14,7 @@ export class Header extends React.Component<HeaderProps> {
             <View style={styles.container}>
                 <Text style={styles.text}>{title}</Text>
                 <TouchableOpacity style={styles.containerBox}>
-                    <Icon size={24} type={IconType.HeartFilled} fill={colors.white} />
+                    <Icon size={33} type={IconType.HeartFilled} fill={colors.orange} />
                 </TouchableOpacity>
             </View>
         );
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.orange,
     },
     text: {
         fontFamily: typography.bold,

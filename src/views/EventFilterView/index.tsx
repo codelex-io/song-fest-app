@@ -41,7 +41,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                             <ScrollView>
                                 <View style={styles.header}>
                                     <View style={styles.iconLeft}>
-                                        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
+                                        <Icon size={20} type={IconType.ChevronLeft} fill="#FFFFFF" />
                                     </View>
                                     <View style={styles.filterButtonUpper}>
                                         <FilterButtonIcon />

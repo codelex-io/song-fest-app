@@ -8,11 +8,15 @@ export default class UserSettings extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <SimpleHeader title={'Lietotāja iestatījumi'} />
-                <Text style={styles.title}>Lietotāja veids</Text>
-                <Card active={true} title={'Dalībnieks'} />
-                <Card active={false} title={'DALĪBNIEKA VECĀKS'} />
-                <Card active={false} title={'Apmeklētājam'} />
+                <View style={styles.header}>
+                    <SimpleHeader title={'Lietotāja iestatījumi'} />
+                </View>
+                <View style={styles.content}>
+                    <Text style={styles.title}>Lietotāja veids</Text>
+                    <Card active={true} title={'Dalībnieks'} />
+                    <Card active={false} title={'DALĪBNIEKA VECĀKS'} />
+                    <Card active={false} title={'Apmeklētājam'} />
+                </View>
             </View>
         );
     }
@@ -36,17 +40,7 @@ const styles = StyleSheet.create({
         paddingTop: 24,
         paddingBottom: 12,
     },
-    iconBox: {
-        height: 44,
-        width: 44,
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: colors.white,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 16,
-    },
-    text: {
-        fontSize: 20,
+    content: {
+        flex: 1,
     },
 });
