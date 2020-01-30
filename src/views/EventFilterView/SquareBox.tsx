@@ -10,7 +10,6 @@ export const SquareBox: React.FC = () => (
                 <Icon size={20} type={IconType.Share} fill={colors.blue} />
             </View>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.container2}>
             <View style={styles.iconContainer}>
                 <Icon size={20} type={IconType.Heart} fill={colors.orange} />

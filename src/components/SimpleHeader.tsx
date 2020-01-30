@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { typography, colors } from '../styles';
+import { typography, colors } from '@styles';
 import Icon, { IconType } from './Icon';
 
 interface HeaderProps {
