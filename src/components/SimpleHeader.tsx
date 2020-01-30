@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { typography, colors } from '../styles';
+import { typography, colors } from '@styles';
 import Icon, { IconType } from './Icon';
 
 interface HeaderProps {
@@ -16,7 +16,7 @@ export default class SimpleHeader extends React.Component<HeaderProps> {
                     <Icon size={24} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                 </TouchableOpacity>
                 <View style={styles.textContainer}>
-                    <Text style={styles.text}>{title}</Text>
+                   <Text style={styles.text}>{title}</Text>
                 </View>
             </View>
         );

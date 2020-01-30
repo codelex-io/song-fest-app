@@ -117,7 +117,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                     </Modal>
                     <TouchableOpacity style={styles.searchContainerBlue}>
                         <View style={styles.iconContainer}>
-                            <Icon size={20} type={IconType.Search} fill="#FFFFFF" />
+                            <Icon size={20} type={IconType.Search} fill={colors.white} />
                         </View>
                         <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc. </Text>
                     </TouchableOpacity>
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 16,
         marginTop: 8,
-        marginLeft: 8,
+        marginLeft: 16,
     },
     modalContainer: {
         flex: 1,

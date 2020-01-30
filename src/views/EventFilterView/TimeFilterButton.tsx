@@ -27,7 +27,7 @@ export class TimeFilterButton extends React.Component<FilterButtonProps> {
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        paddingHorizontal: 8,
+        paddingRight: 8,
     },
     containerActive: {
         height: 40,

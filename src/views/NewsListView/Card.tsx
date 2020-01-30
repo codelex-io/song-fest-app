@@ -4,6 +4,7 @@ import { NewsItem } from './types';
 import { colors } from '../../styles';
 import { IconButtons } from './IconButtons';
 
+
 interface CardProps {
     item: NewsItem;
 }
@@ -57,9 +58,12 @@ const styles = StyleSheet.create({
     shareIconContainer: {
         height: 44,
         width: 44,
+
         backgroundColor: colors.orange,
         opacity: 0.15,
         marginRight: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     favoriteIconContainer: {
         height: 44,

@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     },
     title: {
         paddingLeft: 10,
-        fontWeight: '500',
         fontSize: 14,
         lineHeight: 18,
         color: colors.white,
