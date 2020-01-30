@@ -11,4 +11,4 @@ import './views/AllIcons.stories';
 import './views/ParticipantCategoryView.stories';
 import './views/UserSettings.stories';
 import './components/SimpleHeader.stories';
-import './views/Markdown.stories';
+import './views/MarkdownEvent.stories';

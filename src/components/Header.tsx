@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { typography } from '@styles';
-import ActiveIcon from './ActiveIcon';
+import { typography, colors } from '@styles';
+import Icon, { IconType } from './Icon';
 
 interface HeaderProps {
     title: string;
@@ -14,7 +14,7 @@ export class Header extends React.Component<HeaderProps> {
             <View style={styles.container}>
                 <Text style={styles.text}>{title}</Text>
                 <TouchableOpacity style={styles.containerBox}>
-                    <ActiveIcon size={24} />
+                    <Icon size={33} type={IconType.HeartFilled} fill={colors.orange} />
                 </TouchableOpacity>
             </View>
         );
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(241,90,49,0.1)',
     },
     text: {
         fontFamily: typography.bold,

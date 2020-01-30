@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { NewsItem } from './types';
 import { colors } from '../../styles';
+import { IconButtons } from './IconButtons';
 
 interface CardProps {
     item: NewsItem;
@@ -18,13 +19,8 @@ export class Card extends React.Component<CardProps> {
                 <View style={styles.lowerContainer}>
                     <Text style={styles.dateText}> {item.date}</Text>
                     <Text style={styles.titleText}> {item.title}</Text>
-                    <View style={styles.icontContainer}>
-                        <View style={styles.shareIconContainer}>
-                            <TouchableOpacity></TouchableOpacity>
-                        </View>
-                        <View style={styles.favoriteIconContainer}>
-                            <TouchableOpacity></TouchableOpacity>
-                        </View>
+                    <View style={styles.row}>
+                        <IconButtons onShare={() => null} onFavourite={() => null} />
                     </View>
                 </View>
             </View>
@@ -35,33 +31,24 @@ export class Card extends React.Component<CardProps> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderRadius: 8,
         flexDirection: 'column',
         paddingHorizontal: 16,
     },
     pictureContainer: {
         flex: 1,
         backgroundColor: 'grey',
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 8,
     },
     picture: {
         height: 180,
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 8,
     },
     lowerContainer: {
         flex: 1,
-        borderBottomRightRadius: 8,
-        borderBottomLeftRadius: 8,
         backgroundColor: colors.blue,
         flexDirection: 'column',
         padding: 16,
     },
     icontContainer: {
         flex: 1,
-        borderBottomRightRadius: 8,
-        borderBottomLeftRadius: 8,
         backgroundColor: colors.blue,
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -71,7 +58,6 @@ const styles = StyleSheet.create({
         height: 44,
         width: 44,
         backgroundColor: colors.orange,
-        borderRadius: 8,
         opacity: 0.15,
         marginRight: 16,
     },
@@ -79,7 +65,6 @@ const styles = StyleSheet.create({
         height: 44,
         width: 44,
         backgroundColor: colors.orange,
-        borderRadius: 8,
         opacity: 0.15,
     },
     dateText: {
@@ -92,5 +77,8 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: '500',
         fontSize: 16,
+    },
+    row: {
+        flexDirection: 'row',
     },
 });

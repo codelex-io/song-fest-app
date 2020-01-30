@@ -5,7 +5,7 @@ import { colors, typography } from '../../styles';
 
 interface LabelProps {
     title: string;
-    icon: IconType
+    icon: IconType;
 }
 
 export const Label: React.FC<LabelProps> = ({ title, icon }) => (

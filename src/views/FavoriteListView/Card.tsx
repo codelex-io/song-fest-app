@@ -17,7 +17,7 @@ export class Card extends React.Component<CardProps> {
                 {group.items.map(item => (
                     <View key={item.id} style={styles.itemContainer}>
                         <TouchableOpacity style={styles.favoriteIcon}>
-                            <Icon size={24} type={IconType.Heart} />
+                            <Icon size={24} type={IconType.Heart} fill={colors.orange} />
                         </TouchableOpacity>
                         <Text style={styles.itemText}>{item.title}</Text>
                         <TouchableOpacity style={styles.rightIcon}>

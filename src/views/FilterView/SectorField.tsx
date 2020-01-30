@@ -17,9 +17,10 @@ export class SectorField extends React.Component<SectorFieldProps> {
             <View style={styles.container}>
                 <View style={styles.icon}>
                     {sector.active ? (
-                        <Icon size={24} type={IconType.RadioBoxMarked} fill={colors.darkGrey1A} />) : (
-                            <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
-                        )}
+                        <Icon size={24} type={IconType.RadioBoxMarked} fill={colors.darkGrey1A} />
+                    ) : (
+                        <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
+                    )}
                 </View>
                 <Text style={styles.text}>{sector.title}</Text>
             </View>

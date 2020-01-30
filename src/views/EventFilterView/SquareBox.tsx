@@ -13,7 +13,7 @@ export const SquareBox: React.FC = () => (
 
         <TouchableOpacity style={styles.container2}>
             <View style={styles.iconContainer}>
-                <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
+                <Icon size={20} type={IconType.Heart} fill={colors.orange} />
             </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.container2}>

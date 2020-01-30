@@ -7,9 +7,8 @@ import EventFilterView from './EventFilterView';
 import EventListView from './EventListView';
 import ParticipantCategoryView from './ParticipantCategoryView';
 import AllIcons from './AllIcons';
-import MarkdownEvent from './Markdown';
+import MarkdownEvent from './MarkdownEvent';
 import UserSettings from './UserSettings';
-import MarkdownEvent from './MarkdownEvent'
 
 export {
     NewsListView,
@@ -21,6 +20,6 @@ export {
     EventListView,
     ParticipantCategoryView,
     AllIcons,
-    MarkdownEvent
-    MarkdownEvent
+    MarkdownEvent,
+    UserSettings,
 };

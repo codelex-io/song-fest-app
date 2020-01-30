@@ -1,13 +1,15 @@
 import React from 'react';
 import Markdown from 'react-native-markdown-display';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { SimpleHeader, IconType } from '@components';
 import { typography, colors } from '@styles';
 import { Label } from './Label';
 import BackButton from './BackButton';
+import { Data } from './types';
+import { IconButtons } from './IconButtons';
 
 interface MarkdownEvenProps {
-    data: Data[];
+    data: Data;
 }
 
 export default class MarkdownEvent extends React.Component<MarkdownEvenProps> {
@@ -19,27 +21,31 @@ export default class MarkdownEvent extends React.Component<MarkdownEvenProps> {
                     <SimpleHeader title={' '} />
                 </View>
                 <ScrollView>
-                    <View>
-                        <Text style={styles.title}> {title}</Text>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} source={{ uri: data.imageUrl }} resizeMode="cover" />
                     </View>
                     <View>
-                        <Text style={styles.place}> {location}</Text>
+                        <Text style={styles.title}>{data.title}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.place}> {data.location}</Text>
                     </View>
                     <View style={styles.timeDateContainer}>
-                        <Label iconType={IconType.Calendar} title={date} />
-                        <Label iconType={IconType.Clock} title={time} />
+                        <Label iconType={IconType.Calendar} title={data.date} />
+                        <Label iconType={IconType.Clock} title={data.time} />
                     </View>
-
-                    <View>
-                        <Markdown>{content}</Markdown>
+                    <View style={styles.row}>
+                        <IconButtons onShare={() => null} onFavourite={() => null} onNavigate={() => null} />
+                    </View>
+                    <View style={styles.markdownContainer}>
+                        <Markdown style={markdownstyles}>{data.content}</Markdown>
                     </View>
                     <BackButton />
                 </ScrollView>
-            </View >
+            </View>
         );
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -64,7 +70,23 @@ const styles = StyleSheet.create({
     place: {
         color: colors.mediumGrey4D,
     },
-    timeDate: {
+    timeDate: {},
+    imageContainer: {
+        height: 180,
+    },
+    image: {
+        width: '100%',
+        height: 180,
+    },
+    markdownContainer: {},
+    row: {
+        flexDirection: 'row',
+    },
+});
 
+const markdownstyles = StyleSheet.create({
+    text: {
+        fontFamily: typography.normal,
+        fontSize: 16,
     },
 });

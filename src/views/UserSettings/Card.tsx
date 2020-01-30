@@ -14,8 +14,8 @@ export const Card: React.FC<CardProps> = ({ title, active }) => (
             {active ? (
                 <Icon size={24} type={IconType.RadioBoxMarked} fill={colors.darkGrey1A} />
             ) : (
-                    <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
-                )}
+                <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
+            )}
         </View>
         <Text style={styles.text}>{title}</Text>
     </View>

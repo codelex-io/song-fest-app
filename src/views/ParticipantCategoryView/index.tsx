@@ -4,7 +4,6 @@ import { IconType, SimpleHeader } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
 
-
 export default class ParticipantCategoryView extends React.Component {
     render() {
         return (
