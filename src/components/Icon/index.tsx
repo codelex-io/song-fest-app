@@ -4,15 +4,6 @@ import { Svg } from 'react-native-svg';
 import { findIcon } from './assets';
 
 export enum IconType {
-    Account = 'Account',
-    Alert = 'Alert',
-    AppsBox = 'AppsBox',
-    Artist = 'Artist',
-    AttachMoney = 'AttachMoney',
-    Balloon = 'Balloon',
-    Bullhorn = 'Bullhorn',
-    Bus = 'Bus',
-    CalendarAlert = 'CalendarAlert',
     CalendarClock = 'CalendarClock',
     Calendar = 'Calendar',
     Camcorder = 'Camcorder',
@@ -77,6 +68,15 @@ export enum IconType {
     Video = 'Video',
     Whatshot = 'Whatshot',
     Yoga = 'Yoga',
+    Alert = 'Alert',
+    Bus = 'Bus',
+    Account = 'Account',
+    AppsBox = 'AppsBox',
+    Artist = 'Artist',
+    AttachMoney = 'AttachMoney',
+    Balloon = 'Balloon',
+    Bullhorn = 'Bullhorn',
+    CalendarAlert = 'CalendarAlert',
 }
 
 interface IconProps {
