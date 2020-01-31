@@ -12,8 +12,7 @@ import {
 import { Card } from './Card';
 import { Event } from '../EventListView/types';
 import { colors, typography } from '../../styles';
-import { Icon, IconType, FilterButtonIcon, Header } from '@components';
-import { TimeFilterButton } from './TimeFilterButton';
+import { Icon, IconType, FilterButtonIcon, Header, LongSearch, TimeFilterButton } from '@components';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
 
@@ -41,7 +40,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                             <ScrollView>
                                 <View style={styles.header}>
                                     <View style={styles.iconLeft}>
-                                        <Icon size={20} type={IconType.ChevronLeft} fill="#FFFFFF" />
+                                        <Icon size={20} type={IconType.ChevronLeft} fill={colors.white} />
                                     </View>
                                     <View style={styles.filterButtonUpper}>
                                         <FilterButtonIcon />
@@ -115,12 +114,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                             </ScrollView>
                         </View>
                     </Modal>
-                    <TouchableOpacity style={styles.searchContainerBlue}>
-                        <View style={styles.iconContainer}>
-                            <Icon size={20} type={IconType.Search} fill={colors.white} />
-                        </View>
-                        <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc. </Text>
-                    </TouchableOpacity>
+                    <LongSearch backgroundColor={colors.blue} />
                 </View>
                 <View style={styles.searchContainerButton}>
                     <TimeFilterButton button={{ title: 'Šodien', active: true }} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
-import { colors } from '../../styles';
+import { colors } from '@styles';
 
 export const SquareBox: React.FC = () => (
     <View style={styles.container}>

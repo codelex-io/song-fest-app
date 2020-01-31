@@ -9,6 +9,7 @@ import ParticipantCategoryView from './ParticipantCategoryView';
 import AllIcons from './AllIcons';
 import MarkdownEvent from './MarkdownEvent';
 import UserSettings from './UserSettings';
+import { VideoView } from './VideoView';
 
 export {
     NewsListView,
@@ -22,4 +23,5 @@ export {
     AllIcons,
     MarkdownEvent,
     UserSettings,
+    VideoView,
 };
