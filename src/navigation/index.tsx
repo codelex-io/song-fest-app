@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import SplashScreen from 'react-native-splash-screen';
+
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { News } from './News';
@@ -27,4 +30,14 @@ const TabNavigator = createBottomTabNavigator(
     },
 );
 
-export default createAppContainer(TabNavigator);
+const AppNavigator = createAppContainer(TabNavigator);
+
+const App = () => {
+    useEffect(() => {
+        SplashScreen.hide();
+    }, []);
+
+    return <AppNavigator />;
+};
+
+export default App;
