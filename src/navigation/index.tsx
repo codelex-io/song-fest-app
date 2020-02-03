@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import SplashScreen from 'react-native-splash-screen';
+import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { News } from './News';
@@ -8,6 +7,25 @@ import { Map } from './Map';
 import { Video } from './Video';
 import { More } from './More';
 import { TabBarIcon } from '@components';
+import { UserSettings } from './UserSettings';
+import { createStackNavigator } from 'react-navigation-stack';
+
+const StackNavigator = createStackNavigator(
+    {
+        More: {
+            screen: More,
+        },
+        Settings: {
+            screen: UserSettings,
+            navigationOptions: () => ({
+                title: 'Lietotāja iestatījumi',
+            }),
+        },
+    },
+    {
+        initialRouteName: 'More',
+    },
+);
 
 const TabNavigator = createBottomTabNavigator(
     {
@@ -15,7 +33,7 @@ const TabNavigator = createBottomTabNavigator(
         Events: Events,
         Map: Map,
         Video: Video,
-        More: More,
+        More: StackNavigator,
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({
@@ -28,14 +46,4 @@ const TabNavigator = createBottomTabNavigator(
     },
 );
 
-const AppNavigator = createAppContainer(TabNavigator);
-
-const App = () => {
-    useEffect(() => {
-        SplashScreen.hide();
-    }, []);
-
-    return <AppNavigator />;
-};
-
-export default App;
+export default createAppContainer(TabNavigator);

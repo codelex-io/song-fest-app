@@ -1,4 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import MoreView from '../views/MoreView/index';
+import NavigationAware from './NavigationAware';
 
-export const More: React.FC = () => <Text>More</Text>;
+export const More: React.FC<NavigationAware> = ({ navigation }) => <MoreView navigation={navigation}></MoreView>;
