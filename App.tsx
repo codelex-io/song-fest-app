@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
+import SplashScreen from 'react-native-splash-screen';
 import Navigation from './src/navigation';
 
 const client = new ApolloClient({
@@ -8,6 +9,10 @@ const client = new ApolloClient({
 });
 
 const App: React.FC = () => {
+    useEffect(() => {
+        SplashScreen.hide();
+    }, []);
+
     return (
         <ApolloProvider client={client}>
             <Navigation />
