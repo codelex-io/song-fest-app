@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react';
-import ApolloClient from 'apollo-boost';
+import React, { useEffect, useState } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import SplashScreen from 'react-native-splash-screen';
+import { getClient, initApollo } from './src/api';
 import Navigation from './src/navigation';
 
-const client = new ApolloClient({
-    uri: 'https://api-euwest.graphcms.com/v1/ck66f9j5b0tvp01fl2vtp08sh/master',
-});
+const bootstrap = async () => Promise.all([initApollo()]);
 
 const App: React.FC = () => {
+    const [isLoaded, setLoaded] = useState<boolean>(false);
     useEffect(() => {
-        SplashScreen.hide();
+        bootstrap().then(() => {
+            SplashScreen.hide();
+            setLoaded(true);
+        });
     }, []);
-
+    if (!isLoaded) {
+        return <></>;
+    }
     return (
-        <ApolloProvider client={client}>
+        <ApolloProvider client={getClient()}>
             <Navigation />
         </ApolloProvider>
     );
