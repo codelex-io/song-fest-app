@@ -2,15 +2,11 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { Card } from './Card';
-import { SimpleHeader } from '@components';
 
 export default class UserSettings extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <SimpleHeader title={'Lietotāja iestatījumi'} />
-                </View>
                 <View style={styles.content}>
                     <Text style={styles.title}>Lietotāja veids</Text>
                     <Card active={true} title={'Dalībnieks'} />

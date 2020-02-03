@@ -7,10 +7,11 @@ interface CardProps {
     title: string;
     icon: IconType;
     backgroundColor: string;
+    onOpen: any
 }
 
-export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor }) => (
-    <TouchableOpacity style={styles.container}>
+export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => (
+    <TouchableOpacity style={styles.container} onPress={onOpen}>
         <View style={[styles.containerBox, { backgroundColor }]}>
             <Icon size={24} type={icon} fill={colors.white} />
         </View>
