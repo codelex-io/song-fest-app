@@ -20,6 +20,7 @@ module.exports = {
                     '@styles': './src/styles',
                     '@components': './src/components',
                     '@views': './src/views',
+                    '@utils': './src/utils',
                 },
             },
         ],
