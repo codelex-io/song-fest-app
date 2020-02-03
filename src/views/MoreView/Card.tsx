@@ -7,7 +7,7 @@ interface CardProps {
     title: string;
     icon: IconType;
     backgroundColor: string;
-    onOpen: any
+    onOpen: any;
 }
 
 export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => (

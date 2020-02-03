@@ -1,5 +1,5 @@
 import React from 'react';
-import NewsListView from '../views/NewsListView/index'
+import NewsListView from '../views/NewsListView/index';
 
 const items = [
     {

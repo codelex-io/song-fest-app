@@ -7,25 +7,25 @@ import { Map } from './Map';
 import { Video } from './Video';
 import { More } from './More';
 import { TabBarIcon } from '@components';
-import { UserSettings } from './UserSettings'
+import { UserSettings } from './UserSettings';
 import { createStackNavigator } from 'react-navigation-stack';
 
-
-
-const StackNavigator = createStackNavigator({
-    More: {
-        screen: More,
+const StackNavigator = createStackNavigator(
+    {
+        More: {
+            screen: More,
+        },
+        Settings: {
+            screen: UserSettings,
+            navigationOptions: () => ({
+                title: 'Lietotāja iestatījumi',
+            }),
+        },
     },
-    Settings: {
-        screen: UserSettings,
-        navigationOptions: () => ({
-            title: 'Lietotāja iestatījumi'
-        })
-    }
-
-}, {
-    initialRouteName: 'More'
-})
+    {
+        initialRouteName: 'More',
+    },
+);
 
 const TabNavigator = createBottomTabNavigator(
     {
