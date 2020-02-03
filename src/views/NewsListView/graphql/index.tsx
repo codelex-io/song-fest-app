@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import NewsListView from '../index';
+import NewsListView from '../component/index';
 import { FETCH_NEWS_ITEMS } from './queries';
-import { Data } from './graphql-types';
+import { Data } from './types';
 
 const NewsListViewGraphQLWrapper: React.FC = () => {
     const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);

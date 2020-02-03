@@ -1,4 +1,4 @@
-import NewsListView from './NewsListView';
+import NewsListView from './NewsListView/component';
 import FavoriteListView from './FavoriteListView';
 import { EmptyFavorite } from './EmptyFavorite';
 import MoreView from './MoreView';

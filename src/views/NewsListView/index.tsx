@@ -1,26 +1,17 @@
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { default as NewsListViewComponent } from './component/index';
+import { FETCH_NEWS_ITEMS } from './graphql/queries';
+import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
-import { FlatList, View } from 'react-native';
-import { Card } from './Card';
 
-interface NewsListProps {
-    loading: boolean;
-    items: NewsItem[];
-}
+const toItem = (item: GraphQLNewsItem): NewsItem => {
+    return { ...item, isFavourite: false };
+};
 
-export default class NewsListView extends React.Component<NewsListProps> {
-    render() {
-        const { items } = this.props;
-        return (
-            <FlatList<NewsItem>
-                data={items}
-                renderItem={({ item }): React.ReactElement => (
-                    <View>
-                        <Card item={item} />
-                    </View>
-                )}
-                ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
-            />
-        );
-    }
-}
+const NewsListView: React.FC = () => {
+    const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
+    return <NewsListViewComponent loading={loading} items={loading || !data ? [] : data.items.map(toItem)} />;
+};
+
+export default NewsListView;
