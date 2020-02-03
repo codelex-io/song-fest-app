@@ -11,7 +11,7 @@ import MarkdownEvent from './MarkdownEvent';
 import UserSettings from './UserSettings';
 import { VideoView } from './VideoView';
 
-export default {
+export {
     NewsListView,
     FavoriteListView,
     EmptyFavorite,
