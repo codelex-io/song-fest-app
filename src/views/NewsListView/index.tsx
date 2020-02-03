@@ -4,8 +4,10 @@ import { FlatList, View } from 'react-native';
 import { Card } from './Card';
 
 interface NewsListProps {
+    loading: boolean;
     items: NewsItem[];
 }
+
 export default class NewsListView extends React.Component<NewsListProps> {
     render() {
         const { items } = this.props;
