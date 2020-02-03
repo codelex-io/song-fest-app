@@ -1,6 +1,7 @@
 import React from 'react';
 import { NewsItem } from '../types';
 import { FlatList, View } from 'react-native';
+import { colors } from '@styles';
 import { Card } from './Card';
 
 interface NewsListProps {
@@ -14,9 +15,9 @@ export default class NewsListView extends React.Component<NewsListProps> {
         return (
             <FlatList<NewsItem>
                 data={items}
-                renderItem={({ item }): React.ReactElement => (
+                renderItem={({ item, index }): React.ReactElement => (
                     <View>
-                        <Card item={item} />
+                        <Card item={item} backgroundColor={colors.findColorByIndex(index)} />
                     </View>
                 )}
                 ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
