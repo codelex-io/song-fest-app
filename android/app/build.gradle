@@ -151,10 +151,10 @@ android {
         }
         if (project.hasProperty('RELEASE_STORE_FILE')) {
             release {
-                storeFile project.hasProperty('RELEASE_STORE_FILE') ? file(RELEASE_STORE_FILE) : file('./debug.keystore')
-                storePassword project.findProperty('RELEASE_KEY_PASSWORD') ?: ''
-                keyAlias project.findProperty('RELEASE_KEY_ALIAS') ?: ''
-                keyPassword project.findProperty('RELEASE_KEY_PASSWORD') ?: ''
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_KEY_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
             }
         }
     }
