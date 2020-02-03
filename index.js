@@ -1,10 +1,13 @@
 import { AppRegistry } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import App from './App';
 import { name as appName } from './app.json';
 import storybook from './storybook';
-import navigation from './src/navigation/index.tsx'
 
-const IS_STORYBOOK = true;
-const IS_NAVIGATION = true;
+const IS_STORYBOOK = false;
 
-AppRegistry.registerComponent(appName, () => (IS_STORYBOOK ? navigation : App));
+if (IS_STORYBOOK) {
+    SplashScreen.hide();
+}
+
+AppRegistry.registerComponent(appName, () => (IS_STORYBOOK ? storybook : App));

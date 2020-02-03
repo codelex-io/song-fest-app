@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
-import { NewsItem } from './types';
-import { colors } from '../../styles';
+import { NewsItem } from '../types';
+import { colors } from '@styles';
 import { IconButtons } from './IconButtons';
 
 interface CardProps {
@@ -14,7 +14,7 @@ export class Card extends React.Component<CardProps> {
         return (
             <View style={styles.container}>
                 <View style={styles.pictureContainer}>
-                    <Image style={styles.picture} source={{ uri: item.imageURL }} resizeMode="cover" />
+                    <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
                 </View>
                 <View style={styles.lowerContainer}>
                     <Text style={styles.dateText}> {item.date}</Text>
