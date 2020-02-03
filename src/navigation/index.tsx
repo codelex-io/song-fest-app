@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-
 import SplashScreen from 'react-native-splash-screen';
-
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { News } from './News';
