@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         paddingHorizontal: 16,
+        height: '100%',
+        width: '100%',
     },
     pictureContainer: {
         flex: 1,
