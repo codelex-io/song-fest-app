@@ -12,9 +12,11 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ item, backgroundColor }) => (
     <View style={styles.container}>
-        <View style={styles.pictureContainer}>
-            <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
-        </View>
+        {item.image?.url && (
+            <View style={styles.pictureContainer}>
+                <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
+            </View>
+        )}
         <View style={[styles.lowerContainer, { backgroundColor }]}>
             <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
             <Text style={styles.titleText}> {item.title}</Text>

@@ -6,6 +6,7 @@ import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
 
 const toItem = (item: GraphQLNewsItem): NewsItem => {
+    console.log(item);
     return { ...item, isFavourite: false };
 };
 

@@ -2,28 +2,28 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconType } from '@components';
 import { Label } from './Label';
-import { colors } from '../../styles';
+import { colors } from '../../../styles';
 import { Buttons } from './Buttons';
-import { Event } from './types';
+import { EventItem } from '../types';
 
 interface CardProps {
-    event: Event;
+    event: EventItem;
     backgroundColor: string;
     onPress: () => void;
 }
 
 export const Card: React.FC<CardProps> = ({ event, backgroundColor, onPress }) => (
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.8}>
-        {event.imageUrl && (
+        {event.image?.url && (
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{ uri: event.imageUrl }} resizeMode="cover" />
+                <Image style={styles.image} source={{ uri: event.image.url }} resizeMode="cover" />
             </View>
         )}
         <View style={[styles.bottomContainer, { backgroundColor }]}>
             <View style={styles.row}>
                 <View style={styles.content}>
                     <Text style={styles.title}>{event.title}</Text>
-                    <Text style={styles.location}>{event.location}</Text>
+                    <Text style={styles.location}>{event.locationTitle}</Text>
                     <View style={styles.labels}>
                         <Label title={event.date} iconType={IconType.Calendar} />
                         <Label title={event.time} iconType={IconType.Clock} />
