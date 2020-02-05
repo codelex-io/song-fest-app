@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:w": "jest --watch",
     "lint:format": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\" --quiet --fix",
     "lint:check": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\"",
     "build:ci": "npm run lint:check"

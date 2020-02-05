@@ -4,24 +4,26 @@ import { FlatList, View } from 'react-native';
 import { colors } from '@styles';
 import { Card } from './Card';
 
-interface NewsListProps {
+interface Props {
     loading: boolean;
     items: NewsItem[];
+    onFavourite: (item: NewsItem) => void;
 }
 
-export default class NewsListView extends React.Component<NewsListProps> {
-    render() {
-        const { items } = this.props;
-        return (
-            <FlatList<NewsItem>
-                data={items}
-                renderItem={({ item, index }): React.ReactElement => (
-                    <View>
-                        <Card item={item} backgroundColor={colors.findColorByIndex(index)} />
-                    </View>
-                )}
-                ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
-            />
-        );
-    }
-}
+const NewsListView: React.FC<Props> = ({ loading, items, onFavourite }) => (
+    <FlatList<NewsItem>
+        data={items}
+        renderItem={({ item, index }): React.ReactElement => (
+            <View>
+                <Card
+                    item={item}
+                    backgroundColor={colors.findColorByIndex(index)}
+                    onFavourite={() => onFavourite(item)}
+                />
+            </View>
+        )}
+        ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
+    />
+);
+
+export default NewsListView;
