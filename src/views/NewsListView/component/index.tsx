@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NewsItem } from '../types';
 import { FlatList, View } from 'react-native';
 import { colors } from '@styles';
 import { Card } from './Card';
-import { Header } from '@components';
-import { LocalizationContext } from '../../../localization/LocalizationContext';
 
 interface Props {
     loading: boolean;
