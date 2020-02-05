@@ -1,37 +1,35 @@
 import React from 'react';
 import { NewsItem } from '../types';
 import { FlatList, View, TouchableOpacity } from 'react-native';
+import { colors } from '@styles';
 import { Card } from './Card';
 import NavigationAware from '../../../navigation/NavigationAware';
 
-interface NewsListProps extends NavigationAware {
+interface Props extends NavigationAware {
     loading: boolean;
     items: NewsItem[];
+    onFavourite: (item: NewsItem) => void;
 }
 
-export default class NewsListView extends React.Component<NewsListProps> {
-    render() {
-        const { items } = this.props;
-        const navigationHandler = (newsItem: NewsItem) => {
-            this.props.navigation.navigate('SingleNewsItem', { newsItem: newsItem });
-        };
-        return (
-            <FlatList<NewsItem>
-                data={items}
-                renderItem={({ item }): React.ReactElement => (
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigationHandler(item);
-                        }}
-                        activeOpacity={0.8}
-                    >
-                        <View>
-                            <Card item={item} />
-                        </View>
-                    </TouchableOpacity>
-                )}
-                ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
-            />
-        );
-    }
-}
+const NewsListView: React.FC<Props> = ({ loading, items, onFavourite, navigation }) => (
+    <FlatList<NewsItem>
+        data={items}
+        renderItem={({ item, index }): React.ReactElement => (
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('SingleNewsItem', { newsItem: item.id });
+                }}
+                activeOpacity={0.8}
+            >
+                <Card
+                    item={item}
+                    backgroundColor={colors.findColorByIndex(index)}
+                    onFavourite={() => onFavourite(item)}
+                />
+            </TouchableOpacity>
+        )}
+        ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
+    />
+);
+
+export default NewsListView;

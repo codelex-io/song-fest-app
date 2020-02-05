@@ -7,15 +7,18 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:w": "jest --watch",
     "lint:format": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\" --quiet --fix",
     "lint:check": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\"",
     "build:ci": "npm run lint:check"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
+    "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/masked-view": "^0.1.6",
     "@types/node": "^13.5.0",
     "apollo-boost": "^0.4.7",
+    "apollo-cache-persist": "^0.1.1",
     "graphql": "^14.6.0",
     "react": "16.9.0",
     "react-native": "0.61.5",

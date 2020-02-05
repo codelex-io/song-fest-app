@@ -1,32 +1,30 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
-import { NewsItem } from '../types';
 import { colors } from '@styles';
+import { dateTimeUtils } from '@utils';
+import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
 
 interface CardProps {
     item: NewsItem;
+    backgroundColor: string;
+    onFavourite: () => void;
 }
 
-export class Card extends React.Component<CardProps> {
-    render() {
-        const { item } = this.props;
-        return (
-            <View style={styles.container}>
-                <View style={styles.pictureContainer}>
-                    <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
-                </View>
-                <View style={styles.lowerContainer}>
-                    <Text style={styles.dateText}> {item.date}</Text>
-                    <Text style={styles.titleText}> {item.title}</Text>
-                    <View style={styles.row}>
-                        <IconButtons onShare={() => null} onFavourite={() => null} />
-                    </View>
-                </View>
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }) => (
+    <View style={styles.container}>
+        <View style={styles.pictureContainer}>
+            <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
+        </View>
+        <View style={[styles.lowerContainer, { backgroundColor }]}>
+            <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
+            <Text style={styles.titleText}> {item.title}</Text>
+            <View style={styles.row}>
+                <IconButtons onShare={() => null} isFavourite={item.isFavourite} onFavourite={onFavourite} />
             </View>
-        );
-    }
-}
+        </View>
+    </View>
+);
 
 const styles = StyleSheet.create({
     container: {
