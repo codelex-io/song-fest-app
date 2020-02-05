@@ -8,9 +8,10 @@ import { IconButtons } from './IconButtons';
 interface CardProps {
     item: NewsItem;
     backgroundColor: string;
+    onFavourite: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor }) => (
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }) => (
     <View style={styles.container}>
         {item.image?.url && (
             <View style={styles.pictureContainer}>
@@ -21,7 +22,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor }) => (
             <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
             <Text style={styles.titleText}> {item.title}</Text>
             <View style={styles.row}>
-                <IconButtons onShare={() => null} onFavourite={() => null} />
+                <IconButtons onShare={() => null} isFavourite={item.isFavourite} onFavourite={onFavourite} />
             </View>
         </View>
     </View>

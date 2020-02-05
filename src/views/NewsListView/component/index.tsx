@@ -6,27 +6,26 @@ import { Card } from './Card';
 import { Header } from '@components';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
 
-interface NewsListProps {
+interface Props {
     loading: boolean;
     items: NewsItem[];
+    onFavourite: (item: NewsItem) => void;
 }
 
-const NewsListView: React.FC<NewsListProps> = ({ items }) => {
-    const { translations } = useContext(LocalizationContext);
-    return (
-        <View>
-            <Header title={translations.NEWS} />
-            <FlatList<NewsItem>
-                data={items}
-                renderItem={({ item, index }): React.ReactElement => (
-                    <View>
-                        <Card item={item} backgroundColor={colors.findColorByIndex(index)} />
-                    </View>
-                )}
-                ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
-            />
-        </View>
-    );
-};
+const NewsListView: React.FC<Props> = ({ loading, items, onFavourite }) => (
+    <FlatList<NewsItem>
+        data={items}
+        renderItem={({ item, index }): React.ReactElement => (
+            <View>
+                <Card
+                    item={item}
+                    backgroundColor={colors.findColorByIndex(index)}
+                    onFavourite={() => onFavourite(item)}
+                />
+            </View>
+        )}
+        ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
+    />
+);
 
 export default NewsListView;
