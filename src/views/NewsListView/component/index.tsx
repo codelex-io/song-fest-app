@@ -10,12 +10,12 @@ interface Props {
     onFavourite: (item: NewsItem) => void;
 }
 
-const NewsListView: React.FC<Props> = ({ items }) => (
+const NewsListView: React.FC<Props> = ({ items, onFavourite }) => (
     <FlatList<NewsItem>
         data={items}
         renderItem={({ item, index }): React.ReactElement => (
             <View>
-                <Card item={item} backgroundColor={colors.findColorByIndex(index)} />
+                <Card
                     item={item}
                     backgroundColor={colors.findColorByIndex(index)}
                     onFavourite={() => onFavourite(item)}

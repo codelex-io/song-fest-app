@@ -7,7 +7,6 @@ import { NewsItem } from './types';
 import { useFavourites, FavouritesContextProvider } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 
-
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
