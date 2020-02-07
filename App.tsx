@@ -5,7 +5,7 @@ import { getClient, initApollo } from './src/api';
 import { initFavourites } from './src/domain/favourites';
 import Navigation from './src/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { LocalizationProvider } from './src/localization/LocalizationContext';
+import { LocalizationContextProvider } from './src/localization/LocalizationContext';
 
 const bootstrap = async () => Promise.all([initApollo(), initFavourites()]);
 
@@ -21,13 +21,13 @@ const App: React.FC = () => {
         return <></>;
     }
     return (
-        <LocalizationProvider>
+        <LocalizationContextProvider>
             <SafeAreaProvider>
                 <ApolloProvider client={getClient()}>
                     <Navigation />
                 </ApolloProvider>
             </SafeAreaProvider>
-        </LocalizationProvider>
+        </LocalizationContextProvider>
     );
 };
 

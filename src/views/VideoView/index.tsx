@@ -14,7 +14,7 @@ export const VideoView: React.FC<VideoViewProps> = ({ items }) => {
     const { translations } = useContext(LocalizationContext);
     return (
         <View style={styles.container}>
-            <Header title={translations.VIDEO} />
+            <Header title={translations.getString('VIDEO')} />
             <LongSearch backgroundColor={colors.orange} />
             <View style={styles.searchContainerButton}>
                 <TimeFilterButton button={{ title: 'tiešsaitē', active: false }} />

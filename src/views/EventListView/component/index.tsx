@@ -1,34 +1,31 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FlatList, View } from 'react-native';
 import { colors } from '@styles';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { Header } from '@components';
-import { LocalizationContext } from '../../../localization/LocalizationContext';
 
 const Separator = () => <View style={{ padding: 8 }} />;
 
-interface EventListViewProps {
+interface Props {
     loading: boolean;
-    events: EventItem[];
+    items: EventItem[];
+    onFavourite: (item: EventItem) => void;
 }
 
-const EventListView: React.FC<EventListViewProps> = ({ events }) => {
-    const { translations } = useContext(LocalizationContext);
-    return (
-        <View>
-            <Header title={translations.EVENTS} />
-            <FlatList<EventItem>
-                data={events}
-                renderItem={({ item, index }): React.ReactElement => (
-                    <View style={{ paddingHorizontal: 16 }}>
-                        <Card event={item} backgroundColor={colors.findColorByIndex(index)} onPress={() => null} />
-                    </View>
-                )}
-                ItemSeparatorComponent={() => <Separator />}
-            />
-        </View>
-    );
-};
+const EventListView: React.FC<Props> = ({ items, onFavourite }) => (
+    <FlatList<EventItem>
+        data={items}
+        renderItem={({ item, index }): React.ReactElement => (
+            <View style={{ paddingHorizontal: 16 }}>
+                <Card
+                    item={item}
+                    backgroundColor={colors.findColorByIndex(index)}
+                    onFavourite={() => onFavourite(item)}
+                />
+            </View>
+        )}
+        ItemSeparatorComponent={() => <Separator />}
+    />
+);
 
 export default EventListView;

@@ -13,7 +13,7 @@ export default class MoreView extends React.Component<NavigationAware> {
 
         return (
             <View style={styles.container}>
-                <Header title={'vairāk'} />
+                <Header title={'Vairāk'} />
                 <View style={styles.rowContainer}>
                     <Card
                         title={'Sponsoru piedāvājums'}

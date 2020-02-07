@@ -1,17 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { default as EventListViewComponent } from './component/index';
 import { FETCH_EVENT_ITEMS } from './graphql/queries';
-import { DataEvent, EventItem as GraphQLEventItem } from './graphql/types';
+import { Data, EventItem as GraphQLEventItem } from './graphql/types';
 import { EventItem } from './types';
+import { Favourite } from '@domain/favourites/types';
+import { View } from 'react-native';
+import { Header } from '@components';
+import { useFavourites, FavouritesContextProvider } from '@domain/favourites';
+import { LocalizationContext } from '../../localization/LocalizationContext';
 
-const toItem = (event: GraphQLEventItem): EventItem => {
-    return { ...event };
+const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
+    return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }) };
 };
 
 const EventListView: React.FC = () => {
-    const { loading, data } = useQuery<DataEvent>(FETCH_EVENT_ITEMS);
-    return <EventListViewComponent loading={loading} events={loading || !data ? [] : data.events.map(toItem)} />;
+    const { loading, data } = useQuery<Data>(FETCH_EVENT_ITEMS);
+    const { toggleFavourite, isFavourite } = useFavourites();
+    const { translations, appLanguage } = useContext(LocalizationContext);
+    translations.setLanguage(appLanguage);
+    return (
+        <View>
+            <Header title={translations.getString('EVENTS')} />
+            <EventListViewComponent
+                loading={loading}
+                items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
+            />
+        </View>
+    );
 };
 
-export default EventListView;
+export default () => (
+    <FavouritesContextProvider>
+        <EventListView />
+    </FavouritesContextProvider>
+);

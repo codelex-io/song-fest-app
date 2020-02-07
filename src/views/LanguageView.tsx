@@ -4,14 +4,15 @@ import { LocalizationContext } from '../localization/LocalizationContext';
 
 export const LanguageView: React.FC = () => {
     const { translations, appLanguage, setAppLanguage } = useContext(LocalizationContext);
-
     const handleSetLanguage = async (language: string) => {
         setAppLanguage(language);
     };
 
     return (
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
-            <Text style={{ marginTop: 20, fontSize: 20, textAlign: 'center' }}>{translations.LANGUAGE_SETTINGS}</Text>
+            <Text style={{ marginTop: 20, fontSize: 20, textAlign: 'center' }}>
+                {translations.getString('LANGUAGE_SETTINGS')}
+            </Text>
 
             {translations.getAvailableLanguages().map((item: string) => (
                 <View key={item}>

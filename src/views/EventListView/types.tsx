@@ -7,4 +7,5 @@ export interface EventItem {
         url: string;
     };
     locationTitle: string;
+    isFavourite: boolean;
 }

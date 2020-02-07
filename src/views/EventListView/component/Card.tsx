@@ -3,35 +3,40 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconType } from '@components';
 import { Label } from './Label';
 import { colors } from '../../../styles';
-import { Buttons } from './Buttons';
+import { IconButtons } from './IconButtons';
 import { EventItem } from '../types';
 
 interface CardProps {
-    event: EventItem;
+    item: EventItem;
     backgroundColor: string;
-    onPress: () => void;
+    onFavourite: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ event, backgroundColor, onPress }) => (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.8}>
-        {event.image?.url && (
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }) => (
+    <TouchableOpacity style={styles.container}>
+        {item.image?.url && (
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{ uri: event.image.url }} resizeMode="cover" />
+                <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
             </View>
         )}
         <View style={[styles.bottomContainer, { backgroundColor }]}>
             <View style={styles.row}>
                 <View style={styles.content}>
-                    <Text style={styles.title}>{event.title}</Text>
-                    <Text style={styles.location}>{event.locationTitle}</Text>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.location}>{item.locationTitle}</Text>
                     <View style={styles.labels}>
-                        <Label title={event.date} iconType={IconType.Calendar} />
-                        <Label title={event.time} iconType={IconType.Clock} />
+                        <Label title={item.date} iconType={IconType.Calendar} />
+                        <Label title={item.time} iconType={IconType.Clock} />
                     </View>
                 </View>
             </View>
             <View style={styles.row}>
-                <Buttons onShare={() => null} onFavourite={() => null} onNavigate={() => null} />
+                <IconButtons
+                    onShare={() => null}
+                    isFavourite={item.isFavourite}
+                    onFavourite={onFavourite}
+                    onNavigate={() => null}
+                />
             </View>
         </View>
     </TouchableOpacity>

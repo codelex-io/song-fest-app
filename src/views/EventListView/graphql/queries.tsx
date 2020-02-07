@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 export const FETCH_EVENT_ITEMS = gql`
     query {
-        events: eventsItems {
+        items: eventsItems {
             id
             title
             date
