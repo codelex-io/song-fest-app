@@ -9,6 +9,7 @@ import { More } from './More';
 import { TabBarIcon } from '@components';
 import { UserSettings } from './UserSettings';
 import { createStackNavigator } from 'react-navigation-stack';
+import { LanguageView } from '@views';
 
 const StackNavigator = createStackNavigator(
     {
@@ -19,6 +20,12 @@ const StackNavigator = createStackNavigator(
             screen: UserSettings,
             navigationOptions: () => ({
                 title: 'Lietotāja iestatījumi',
+            }),
+        },
+        Language: {
+            screen: LanguageView,
+            navigationOptions: () => ({
+                title: 'Valoda',
             }),
         },
     },

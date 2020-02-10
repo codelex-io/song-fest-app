@@ -4,8 +4,11 @@ import SplashScreen from 'react-native-splash-screen';
 import { getClient, initApollo } from './src/api';
 import { initFavourites } from './src/domain/favourites';
 import Navigation from './src/navigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { LocalizationContextProvider } from './src/localization/LocalizationContext';
+import { initLanguage } from './src/localization';
 
-const bootstrap = async () => Promise.all([initApollo(), initFavourites()]);
+const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage()]);
 
 const App: React.FC = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
@@ -19,9 +22,13 @@ const App: React.FC = () => {
         return <></>;
     }
     return (
-        <ApolloProvider client={getClient()}>
-            <Navigation />
-        </ApolloProvider>
+        <LocalizationContextProvider>
+            <SafeAreaProvider>
+                <ApolloProvider client={getClient()}>
+                    <Navigation />
+                </ApolloProvider>
+            </SafeAreaProvider>
+        </LocalizationContextProvider>
     );
 };
 

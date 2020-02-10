@@ -9,18 +9,21 @@ interface CardProps {
     item: NewsItem;
     backgroundColor: string;
     onFavourite: () => void;
+    onShare: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }) => (
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onShare }) => (
     <View style={styles.container}>
-        <View style={styles.pictureContainer}>
-            <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
-        </View>
+        {item.image?.url && (
+            <View style={styles.pictureContainer}>
+                <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
+            </View>
+        )}
         <View style={[styles.lowerContainer, { backgroundColor }]}>
             <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
             <Text style={styles.titleText}> {item.title}</Text>
             <View style={styles.row}>
-                <IconButtons onShare={() => null} isFavourite={item.isFavourite} onFavourite={onFavourite} />
+                <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
             </View>
         </View>
     </View>

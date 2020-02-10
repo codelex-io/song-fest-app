@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { IconType } from '@components';
+import { IconType, Header } from '@components';
 import { Card } from './Card';
 import { colors } from '@styles';
 import NavigationAware from '../../navigation/NavigationAware';
@@ -13,6 +13,7 @@ export default class MoreView extends React.Component<NavigationAware> {
 
         return (
             <View style={styles.container}>
+                <Header title={'Vairāk'} />
                 <View style={styles.rowContainer}>
                     <Card
                         title={'Sponsoru piedāvājums'}
@@ -79,6 +80,12 @@ export default class MoreView extends React.Component<NavigationAware> {
                         icon={IconType.Parent}
                         backgroundColor={colors.green}
                         onOpen={() => openHandler('')}
+                    />
+                    <Card
+                        title={'Valoda'}
+                        icon={IconType.Settings}
+                        backgroundColor={colors.blue}
+                        onOpen={() => openHandler('Language')}
                     />
                 </View>
             </View>
