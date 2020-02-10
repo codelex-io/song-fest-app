@@ -13,4 +13,4 @@ import './views/UserSettings.stories';
 import './components/SimpleHeader.stories';
 import './views/MarkdownEvent.stories';
 import './views/VideoView.stories';
-import './views/MapView.stories';
+import './views/EventMapView.stories';
