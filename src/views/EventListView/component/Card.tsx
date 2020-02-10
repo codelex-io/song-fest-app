@@ -10,9 +10,10 @@ interface CardProps {
     item: EventItem;
     backgroundColor: string;
     onFavourite: () => void;
+    onNavigate: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }) => (
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate }) => (
     <TouchableOpacity style={styles.container}>
         {item.image?.url && (
             <View style={styles.imageContainer}>
@@ -35,7 +36,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }
                     onShare={() => null}
                     isFavourite={item.isFavourite}
                     onFavourite={onFavourite}
-                    onNavigate={() => null}
+                    onNavigate={onNavigate}
                 />
             </View>
         </View>

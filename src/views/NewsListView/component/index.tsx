@@ -8,9 +8,10 @@ interface Props {
     loading: boolean;
     items: NewsItem[];
     onFavourite: (item: NewsItem) => void;
+    onShare: (item: NewsItem) => void;
 }
 
-const NewsListView: React.FC<Props> = ({ items, onFavourite }) => (
+const NewsListView: React.FC<Props> = ({ items, onFavourite, onShare }) => (
     <FlatList<NewsItem>
         data={items}
         renderItem={({ item, index }): React.ReactElement => (
@@ -19,6 +20,7 @@ const NewsListView: React.FC<Props> = ({ items, onFavourite }) => (
                     item={item}
                     backgroundColor={colors.findColorByIndex(index)}
                     onFavourite={() => onFavourite(item)}
+                    onShare={() => onShare(item)}
                 />
             </View>
         )}

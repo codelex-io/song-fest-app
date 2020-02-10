@@ -9,6 +9,8 @@ export const FETCH_NEWS_ITEMS = gql`
             image {
                 url
             }
+            content
+            link
         }
     }
 `;

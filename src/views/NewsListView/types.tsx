@@ -6,4 +6,5 @@ export interface NewsItem {
         url: string;
     };
     isFavourite: boolean;
+    link: string;
 }

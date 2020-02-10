@@ -9,9 +9,10 @@ interface CardProps {
     item: NewsItem;
     backgroundColor: string;
     onFavourite: () => void;
+    onShare: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }) => (
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onShare }) => (
     <View style={styles.container}>
         {item.image?.url && (
             <View style={styles.pictureContainer}>
@@ -22,7 +23,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }
             <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
             <Text style={styles.titleText}> {item.title}</Text>
             <View style={styles.row}>
-                <IconButtons onShare={() => null} isFavourite={item.isFavourite} onFavourite={onFavourite} />
+                <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
             </View>
         </View>
     </View>

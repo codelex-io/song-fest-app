@@ -10,9 +10,10 @@ interface Props {
     loading: boolean;
     items: EventItem[];
     onFavourite: (item: EventItem) => void;
+    onNavigate: (item: EventItem) => void;
 }
 
-const EventListView: React.FC<Props> = ({ items, onFavourite }) => (
+const EventListView: React.FC<Props> = ({ items, onFavourite, onNavigate }) => (
     <FlatList<EventItem>
         data={items}
         renderItem={({ item, index }): React.ReactElement => (
@@ -21,6 +22,7 @@ const EventListView: React.FC<Props> = ({ items, onFavourite }) => (
                     item={item}
                     backgroundColor={colors.findColorByIndex(index)}
                     onFavourite={() => onFavourite(item)}
+                    onNavigate={() => onNavigate(item)}
                 />
             </View>
         )}

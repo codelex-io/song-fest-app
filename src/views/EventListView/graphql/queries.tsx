@@ -11,6 +11,10 @@ export const FETCH_EVENT_ITEMS = gql`
                 url
             }
             locationTitle
+            location {
+                latitude
+                longitude
+            }
         }
     }
 `;

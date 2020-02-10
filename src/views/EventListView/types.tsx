@@ -8,4 +8,8 @@ export interface EventItem {
     };
     locationTitle: string;
     isFavourite: boolean;
+    location: {
+        latitude: number;
+        longitude: number;
+    };
 }

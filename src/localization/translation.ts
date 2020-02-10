@@ -1,5 +1,4 @@
 import LocalizedStrings from 'react-native-localization';
-export const DEFAULT_LANGUAGE = 'lv';
 
 const translations = {
     lv: {
