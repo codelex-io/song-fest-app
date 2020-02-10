@@ -9,7 +9,7 @@ import { View } from 'react-native';
 import { Header } from '@components';
 import { useFavourites, FavouritesContextProvider } from '@domain/favourites';
 import { LocalizationContext } from '../../localization/LocalizationContext';
-import openMap from 'react-native-open-maps';
+import { openMap } from '@domain/maps';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }) };
@@ -27,9 +27,7 @@ const EventListView: React.FC = () => {
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
-                onNavigate={item =>
-                    openMap({ latitude: item.location.latitude, longitude: item.location.longitude, zoom: 20 })
-                }
+                onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
             />
         </View>
     );

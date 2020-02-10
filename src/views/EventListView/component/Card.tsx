@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconType } from '@components';
 import { Label } from './Label';
-import { colors } from '../../../styles';
+import { colors, typography } from '@styles';
 import { IconButtons } from './IconButtons';
 import { EventItem } from '../types';
 
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     bottomContainer: {
-        backgroundColor: '#F15A31',
+        backgroundColor: colors.orange,
         padding: 16,
         flexDirection: 'column',
     },
@@ -66,15 +66,15 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     title: {
-        color: '#FFFFFF',
-        fontFamily: 'DINPro',
+        color: colors.white,
+        fontFamily: typography.normal,
         fontWeight: '500',
         fontSize: 16,
         lineHeight: 21,
         marginBottom: 12,
     },
     location: {
-        fontFamily: 'DINPro',
+        fontFamily: typography.normal,
         fontSize: 14,
         lineHeight: 18,
         marginBottom: 14,

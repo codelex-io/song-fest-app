@@ -9,7 +9,7 @@ import { Favourite } from '@domain/favourites/types';
 import { View } from 'react-native';
 import { Header } from '@components';
 import { LocalizationContext } from '../../localization/LocalizationContext';
-import Share from 'react-native-share';
+import { open } from '@domain/share';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
@@ -27,18 +27,7 @@ const NewsListView: React.FC = () => {
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
-                onShare={item =>
-                    Share.open({
-                        title: 'Share',
-                        url: item.link,
-                    })
-                        .then(res => {
-                            console.log(res);
-                        })
-                        .catch(err => {
-                            err && console.log(err);
-                        })
-                }
+                onShare={item => open(item.link)}
             />
         </View>
     );
