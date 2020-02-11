@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Header } from '../../components/Header';
 import { Icon, IconType } from '@components';
-import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 import { MyLocation } from './MyLocation';
 import { FilterButton } from './FilterButton';
 import { ArrowButton } from './ArrowButton';
@@ -89,12 +88,13 @@ export const ClickedEventMarker = () => {
 };
 
 interface MarkerProps {
-    latitude: number;
     longitude: number;
+    latitude: number;
 }
 
 export const EventMarker: React.FC<MarkerProps> = props => {
-    const [clicked, setClick] = useState(false);
+    const [clicked, setClicked] = useState(false);
+    console.log(clicked);
     return (
         <Marker
             coordinate={{
@@ -102,13 +102,10 @@ export const EventMarker: React.FC<MarkerProps> = props => {
                 longitude: props.longitude,
             }}
             onPress={() => {
-                setClick(true);
-            }}
-            onCalloutPress={() => {
-                setClick(false);
+                setClicked(true);
             }}
         >
-            <View style={clicked ? styles.clickedMarker : styles.clearMarker}>
+            <View style={clicked === true ? styles.clickedMarker : styles.clearMarker}>
                 <View
                     style={{
                         backgroundColor: '#F15A31',
@@ -231,7 +228,7 @@ export const EventScroll = () => {
 };
 
 export const EventMapView = () => {
-    const [state, setState] = useState({ visible: true });
+    const [state, setState] = useState({ visible: false });
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -369,7 +366,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
-        borderColor: 'transparent',
+        borderColor: 'blue',
         borderStyle: 'solid',
         borderWidth: 5,
     },
