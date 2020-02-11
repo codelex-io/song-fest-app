@@ -1,27 +1,27 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Event } from '../EventListView/types';
+import { EventItem } from '../EventListView/types';
 import { Label } from './Label';
 import { colors, typography } from '../../styles';
 import { SquareBox } from './SquareBox';
 import { IconType } from '@components';
 
 interface CardProps {
-    event: Event;
+    event: EventItem;
 }
 
 export const Card: React.FC<CardProps> = ({ event }) => (
     <View style={styles.container}>
         <View style={styles.column}>
-            {event.imageUrl && (
+            {event.image && (
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={{ uri: event.imageUrl }} resizeMode="cover" />
+                    <Image style={styles.image} source={{ uri: event.image.url }} resizeMode="cover" />
                 </View>
             )}
             <View style={styles.row}>
                 <View style={styles.content}>
                     <Text style={styles.title}>{event.title}</Text>
-                    <Text style={styles.location}>{event.location}</Text>
+                    <Text style={styles.location}>{event.locationTitle}</Text>
                     <View style={styles.bottom}>
                         <Label title={event.date} icon={IconType.Calendar} />
                         <Label title={event.time} icon={IconType.Clock} />

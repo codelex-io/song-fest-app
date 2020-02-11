@@ -1,43 +1,41 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
-import { NewsListView } from '../../../src/views';
+import NewsListView from '../../../src/views/NewsListView/component';
 
 const items = [
     {
         id: '1',
-        imageURL: 'https://via.placeholder.com/360x184?text=Placeholder',
+        image: { url: 'https://via.placeholder.com/360x184?text=Placeholder' },
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
-        date: '25.10.2019',
+        date: '2020-01-23T00:00:00.000Z',
         isFavourite: true,
     },
     {
         id: '2',
-        imageURL: 'https://via.placeholder.com/360x184?text=Placeholder',
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
-        date: '25.10.2019',
-        isFavourite: true,
+        date: '2020-01-23T00:00:00.000Z',
+        isFavourite: false,
     },
     {
         id: '3',
-        imageURL: 'https://via.placeholder.com/360x184?text=Placeholder',
+        image: { url: 'https://via.placeholder.com/360x184?text=Placeholder' },
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
-        date: '25.10.2019',
+        date: '2020-01-23T00:00:00.000Z',
         isFavourite: true,
     },
     {
         id: '4',
-        imageURL: 'https://via.placeholder.com/360x184?text=Placeholder',
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
-        date: '25.10.2019',
-        isFavourite: true,
+        date: '2020-01-23T00:00:00.000Z',
+        isFavourite: false,
     },
     {
         id: '5',
-        imageURL: 'https://via.placeholder.com/360x184?text=Placeholder',
+        image: { url: 'https://via.placeholder.com/360x184?text=Placeholder' },
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
-        date: '25.10.2019',
+        date: '2020-01-23T00:00:00.000Z',
         isFavourite: true,
     },
 ];
 
-storiesOf('NewsListView', module).add('list', () => <NewsListView items={items} />);
+storiesOf('NewsListView', module).add('list', () => <NewsListView loading={false} items={items} />);

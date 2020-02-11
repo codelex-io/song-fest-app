@@ -1,8 +1,15 @@
-export interface Event {
+export interface EventItem {
     id: string;
     title: string;
-    location: string;
     date: string;
     time: string;
-    imageUrl?: string;
+    image?: {
+        url: string;
+    };
+    locationTitle: string;
+    isFavourite: boolean;
+    location: {
+        latitude: number;
+        longitude: number;
+    };
 }

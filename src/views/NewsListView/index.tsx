@@ -1,24 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { default as NewsListViewComponent } from './component/index';
+import { FETCH_NEWS_ITEMS } from './graphql/queries';
+import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
-import { FlatList, View } from 'react-native';
-import { Card } from './Card';
+import { useFavourites, FavouritesContextProvider } from '@domain/favourites';
+import { Favourite } from '@domain/favourites/types';
+import { View } from 'react-native';
+import { Header } from '@components';
+import { LocalizationContext } from '../../localization/LocalizationContext';
+import { open } from '@domain/share';
 
-interface NewsListProps {
-    items: NewsItem[];
-}
-export default class NewsListView extends React.Component<NewsListProps> {
-    render() {
-        const { items } = this.props;
-        return (
-            <FlatList<NewsItem>
-                data={items}
-                renderItem={({ item }): React.ReactElement => (
-                    <View>
-                        <Card item={item} />
-                    </View>
-                )}
-                ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
+const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
+    return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
+};
+
+const NewsListView: React.FC = () => {
+    const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
+    const { toggleFavourite, isFavourite } = useFavourites();
+    const { translations, appLanguage } = useContext(LocalizationContext);
+    translations.setLanguage(appLanguage);
+    return (
+        <View>
+            <Header title={translations.getString('NEWS')} />
+            <NewsListViewComponent
+                loading={loading}
+                items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
+                onShare={item => open(item.link)}
             />
-        );
-    }
-}
+        </View>
+    );
+};
+
+export default () => (
+    <FavouritesContextProvider>
+        <NewsListView />
+    </FavouritesContextProvider>
+);

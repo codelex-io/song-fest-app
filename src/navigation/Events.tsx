@@ -1,4 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
+import EventListView from '../views/EventListView/index';
 
-export const Events: React.FC = () => <Text>Events</Text>;
+export const Events: React.FC = () => <EventListView></EventListView>;

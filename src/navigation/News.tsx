@@ -1,4 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
+import NewsListView from '../views/NewsListView';
 
-export const News: React.FC = () => <Text>News</Text>;
+export const News: React.FC = () => <NewsListView />;

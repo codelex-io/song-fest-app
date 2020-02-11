@@ -10,14 +10,14 @@ import {
     ScrollView,
 } from 'react-native';
 import { Card } from './Card';
-import { Event } from '../EventListView/types';
+import { EventItem } from '../EventListView/types';
 import { colors, typography } from '../../styles';
 import { Icon, IconType, FilterButtonIcon, Header, LongSearch, TimeFilterButton } from '@components';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
 
 interface EventFilterViewProps {
-    events: Event[];
+    events: EventItem[];
 }
 
 export default class EventListView extends React.Component<EventFilterViewProps> {
@@ -122,7 +122,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                     <TimeFilterButton button={{ title: 'ŠONEDĒĻ', active: false }} />
                     <TimeFilterButton button={{ title: 'CITS', active: false }} />
                 </View>
-                <FlatList<Event>
+                <FlatList<EventItem>
                     data={events}
                     renderItem={({ item }): React.ReactElement => (
                         <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
