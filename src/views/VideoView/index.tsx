@@ -1,20 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet, FlatList, TouchableHighlight } from 'react-native';
 import { colors } from '@styles';
-import { Header, LongSearch, TimeFilterButton, FilterButtonIcon } from '@components';
+import { LongSearch, TimeFilterButton, FilterButtonIcon } from '@components';
 import { VideoData } from './types';
 import { Card } from './Card';
-import { LocalizationContext } from './../../localization/LocalizationContext';
 
 interface VideoViewProps {
     items: VideoData[];
 }
 
 export const VideoView: React.FC<VideoViewProps> = ({ items }) => {
-    const { translations } = useContext(LocalizationContext);
     return (
         <View style={styles.container}>
-            <Header title={translations.getString('VIDEO')} />
             <LongSearch backgroundColor={colors.orange} />
             <View style={styles.searchContainerButton}>
                 <TimeFilterButton button={{ title: 'tiešsaitē', active: false }} />

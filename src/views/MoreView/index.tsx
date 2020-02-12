@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { IconType, Header } from '@components';
+import { IconType } from '@components';
 import { Card } from './Card';
 import { colors } from '@styles';
 import NavigationAware from '../../navigation/NavigationAware';
@@ -13,7 +13,6 @@ export default class MoreView extends React.Component<NavigationAware> {
 
         return (
             <View style={styles.container}>
-                <Header title={'Vairāk'} />
                 <View style={styles.rowContainer}>
                     <Card
                         title={'Sponsoru piedāvājums'}
@@ -98,6 +97,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         padding: 16,
+        backgroundColor: colors.white,
     },
     rowContainer: {
         flexDirection: 'row',

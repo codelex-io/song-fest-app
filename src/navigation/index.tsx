@@ -6,41 +6,65 @@ import { Events } from './Events';
 import { Map } from './Map';
 import { Video } from './Video';
 import { More } from './More';
-import { TabBarIcon } from '@components';
+import { Favorite } from './Favorite';
+import { TabBarIcon, Header } from '@components';
 import { UserSettings } from './UserSettings';
 import { createStackNavigator } from 'react-navigation-stack';
 import { LanguageView } from '@views';
 
-const StackNavigator = createStackNavigator(
-    {
-        More: {
-            screen: More,
-        },
-        Settings: {
-            screen: UserSettings,
-            navigationOptions: () => ({
-                title: 'Lietotāja iestatījumi',
-            }),
-        },
-        Language: {
-            screen: LanguageView,
-            navigationOptions: () => ({
-                title: 'Valoda',
-            }),
-        },
+const StackNavigatorMore = createStackNavigator({
+    More: {
+        screen: More,
+        navigationOptions: () => ({
+            headerShown: false,
+        }),
     },
-    {
-        initialRouteName: 'More',
+    Settings: {
+        screen: UserSettings,
+        navigationOptions: () => ({
+            title: 'Lietotāja iestatījumi',
+        }),
     },
-);
+    Language: {
+        screen: LanguageView,
+        navigationOptions: () => ({
+            title: 'Valoda',
+        }),
+    },
+});
 
 const TabNavigator = createBottomTabNavigator(
     {
-        News: News,
-        Events: Events,
-        Map: Map,
-        Video: Video,
-        More: StackNavigator,
+        News: {
+            screen: News,
+            navigationOptions: {
+                title: 'News',
+            },
+        },
+        Events: {
+            screen: Events,
+            navigationOptions: {
+                title: 'Events',
+            },
+        },
+        Map: {
+            screen: Map,
+            navigationOptions: {
+                title: 'Map',
+            },
+        },
+        Video: {
+            screen: Video,
+            navigationOptions: {
+                title: 'Video',
+            },
+        },
+        More: {
+            screen: StackNavigatorMore,
+            navigationOptions: {
+                title: 'More',
+            },
+        },
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({
@@ -53,4 +77,21 @@ const TabNavigator = createBottomTabNavigator(
     },
 );
 
-export default createAppContainer(TabNavigator);
+const StackScreen = createStackNavigator({
+    Home: {
+        screen: TabNavigator,
+        navigationOptions: {
+            header: ({ navigation, scene }) => (
+                <Header
+                    title={scene.route.routes[scene.route.index].routeName}
+                    onPress={() => navigation.navigate('Favorite')}
+                />
+            ),
+        },
+    },
+    Favorite: {
+        screen: Favorite,
+    },
+});
+
+export default createAppContainer(StackScreen);

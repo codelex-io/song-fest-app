@@ -12,7 +12,7 @@ import {
 import { Card } from './Card';
 import { EventItem } from '../EventListView/types';
 import { colors, typography } from '../../styles';
-import { Icon, IconType, FilterButtonIcon, Header, LongSearch, TimeFilterButton } from '@components';
+import { Icon, IconType, FilterButtonIcon, LongSearch, TimeFilterButton } from '@components';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
 
@@ -33,7 +33,6 @@ export default class EventListView extends React.Component<EventFilterViewProps>
         const { events } = this.props;
         return (
             <View style={styles.hugeContainer}>
-                <Header title={'Pasākumi'} />
                 <View style={styles.searchContainer}>
                     <Modal animationType="slide" transparent={false} visible={this.state.modalVisible}>
                         <View style={styles.modalContainer}>
