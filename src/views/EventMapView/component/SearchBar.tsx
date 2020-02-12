@@ -11,7 +11,7 @@ export const SearchBar = () => {
             <View style={styles.iconContainer}>
                 <Icon size={25} type={IconType.Search} fill={'white'} />
             </View>
-            <TextInput style={styles.input} placeholderTextColor="white" placeholder="MEKLESANA" />
+            <TextInput style={styles.input} placeholderTextColor="white" placeholder="MEKLĒŠANA" />
         </View>
     );
 };

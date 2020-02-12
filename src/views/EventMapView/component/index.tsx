@@ -57,7 +57,6 @@ const EventMapView: React.FC<Props> = ({ events, onSelectEvent }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        fontFamily: 'DINPro',
         position: 'absolute',
         width: width,
         height: '100%',
