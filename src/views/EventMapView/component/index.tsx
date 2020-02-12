@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
-import { Header } from '../../../components/Header';
 import { MyLocation } from './MyLocation';
 import { FilterButton } from './FilterButton';
 import { ArrowButton } from './ArrowButton';
@@ -22,9 +21,6 @@ const EventMapView: React.FC<Props> = ({ events, onSelectEvent }) => {
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Header title="Karte" />
-            </View>
             <SearchBar />
             <MapView
                 initialRegion={{
@@ -64,10 +60,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         fontFamily: 'DINPro',
-    },
-    header: {
-        width: width,
-        height: 56,
     },
     map: {
         alignSelf: 'stretch',
