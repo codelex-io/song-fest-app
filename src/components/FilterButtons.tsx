@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         height: 44,
         flexDirection: 'row',
         justifyContent: 'center',
+        marginBottom: 16,
     },
     containerActive: {
         backgroundColor: colors.green,
@@ -47,15 +48,11 @@ const styles = StyleSheet.create({
     },
     containerLeft: {
         flex: 1,
-        borderTopLeftRadius: 8,
-        borderBottomLeftRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
     },
     containerRight: {
         flex: 1,
-        borderTopRightRadius: 8,
-        borderBottomRightRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
     },

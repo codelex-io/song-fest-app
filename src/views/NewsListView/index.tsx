@@ -8,6 +8,7 @@ import { useFavourites, FavouritesContextProvider } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { View } from 'react-native';
 import { open } from '@domain/share';
+import { FilterButtons } from '@components';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
@@ -17,7 +18,13 @@ const NewsListView: React.FC = () => {
     const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
     return (
-        <View>
+        <View style={{ paddingHorizontal: 16 }}>
+            <FilterButtons
+                buttons={[
+                    { title: 'AKTUĀLI', active: true },
+                    { title: 'VISI', active: false },
+                ]}
+            />
             <NewsListViewComponent
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
