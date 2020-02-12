@@ -3,14 +3,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { News } from './News';
 import { Events } from './Events';
-import { Map } from './Map';
 import { Video } from './Video';
 import { More } from './More';
 import { Favorite } from './Favorite';
 import { TabBarIcon, Header } from '@components';
 import { UserSettings } from './UserSettings';
 import { createStackNavigator } from 'react-navigation-stack';
-import { LanguageView } from '@views';
+import { LanguageView, EventMapView } from '@views';
 
 const StackNavigatorMore = createStackNavigator({
     More: {
@@ -48,7 +47,7 @@ const TabNavigator = createBottomTabNavigator(
             },
         },
         Map: {
-            screen: Map,
+            screen: EventMapView,
             navigationOptions: {
                 title: 'Map',
             },
