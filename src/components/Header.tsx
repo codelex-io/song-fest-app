@@ -5,21 +5,19 @@ import Icon, { IconType } from './Icon';
 
 interface HeaderProps {
     title: string;
+    onPress: () => void;
 }
 
-export class Header extends React.Component<HeaderProps> {
-    render() {
-        const { title } = this.props;
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>{title}</Text>
-                <TouchableOpacity style={styles.containerBox}>
-                    <Icon size={33} type={IconType.HeartFilled} fill={colors.orange} />
-                </TouchableOpacity>
-            </View>
-        );
-    }
-}
+export const Header: React.FC<HeaderProps> = ({ title, onPress }) => {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.text}>{title}</Text>
+            <TouchableOpacity style={styles.containerBox} onPress={onPress}>
+                <Icon size={33} type={IconType.HeartFilled} fill={colors.orange} />
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -31,6 +29,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        backgroundColor: colors.white,
     },
     containerBox: {
         height: 44,
