@@ -10,7 +10,6 @@ import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 interface Props {
     events: EventItem[];
@@ -31,8 +30,8 @@ const EventMapView: React.FC<Props> = ({ events, onSelectEvent }) => {
                 }}
                 showsUserLocation={true}
                 style={styles.map}
-                showsMyLocationButton={true}
             >
+                
                 {events.map(item => (
                     <EventMarker
                         key={item.id}
@@ -60,11 +59,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         fontFamily: 'DINPro',
+        position: "absolute",
+        width: width,
+        height: "100%"
     },
     map: {
         alignSelf: 'stretch',
         width: width,
-        height: height - 120,
+        flex: 1,
     },
     eventsContainer: {
         position: 'absolute',
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom: 16,
     },
 });
 

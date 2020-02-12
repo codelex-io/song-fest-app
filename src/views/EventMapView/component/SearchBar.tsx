@@ -35,15 +35,14 @@ export const SearchBar = () => {
 const styles = StyleSheet.create({
     container: {
         width: width - 32,
-        backgroundColor: 'green',
+        backgroundColor: '#00A258',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         flexDirection: 'row',
-        paddingRight: 40,
         alignSelf: 'center',
         zIndex: 99,
-        position: 'absolute',
-        top: 73,
+        marginVertical: 16,
+        position: 'absolute'
     },
 });
