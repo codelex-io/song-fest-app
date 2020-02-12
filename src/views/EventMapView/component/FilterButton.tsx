@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Icon, IconType } from '@components';
+import { typography } from '@styles';
 
 export const FilterButton: React.FC = () => (
     <View style={styles.button}>
@@ -22,5 +23,6 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         marginLeft: 3,
+        fontFamily: typography.bold,
     },
 });

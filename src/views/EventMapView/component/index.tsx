@@ -31,7 +31,6 @@ const EventMapView: React.FC<Props> = ({ events, onSelectEvent }) => {
                 showsUserLocation={true}
                 style={styles.map}
             >
-                
                 {events.map(item => (
                     <EventMarker
                         key={item.id}
@@ -59,9 +58,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         fontFamily: 'DINPro',
-        position: "absolute",
+        position: 'absolute',
         width: width,
-        height: "100%"
+        height: '100%',
     },
     map: {
         alignSelf: 'stretch',

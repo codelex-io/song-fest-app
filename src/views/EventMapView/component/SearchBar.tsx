@@ -1,33 +1,17 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Dimensions } from 'react-native';
 import { Icon, IconType } from '@components';
+import { colors, typography } from '@styles';
 
 const width = Dimensions.get('window').width;
 
 export const SearchBar = () => {
     return (
         <View style={styles.container}>
-            <View
-                style={{
-                    alignSelf: 'center',
-                    marginRight: 10,
-                    marginLeft: 10,
-                }}
-            >
-                <Icon size={35} type={IconType.Search} fill={'white'} />
+            <View style={styles.iconContainer}>
+                <Icon size={25} type={IconType.Search} fill={'white'} />
             </View>
-            <TextInput
-                style={{
-                    height: 60,
-                    width: 300,
-                    fontSize: 18,
-                    alignSelf: 'flex-end',
-                    color: 'white',
-                    marginRight: 20,
-                }}
-                placeholderTextColor="white"
-                placeholder="MEKLESANA"
-            />
+            <TextInput style={styles.input} placeholderTextColor="white" placeholder="MEKLESANA" />
         </View>
     );
 };
@@ -35,14 +19,24 @@ export const SearchBar = () => {
 const styles = StyleSheet.create({
     container: {
         width: width - 32,
-        backgroundColor: '#00A258',
+        backgroundColor: colors.green,
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'center',
         zIndex: 99,
         marginVertical: 16,
-        position: 'absolute'
+        position: 'absolute',
+        paddingHorizontal: 15,
+    },
+    input: {
+        width: '85%',
+        fontSize: 16,
+        color: 'white',
+        fontFamily: typography.bold,
+    },
+    iconContainer: {
+        alignSelf: 'center',
+        marginRight: 11,
     },
 });

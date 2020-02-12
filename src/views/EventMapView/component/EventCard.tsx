@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Icon, IconType } from '@components';
 import { EventCardButtons } from './EventCardButtons';
 import { LatLng } from 'react-native-maps';
+import { typography, colors } from '@styles';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     eventTitle: {
         fontSize: 20,
         color: 'white',
-        fontWeight: 'bold',
+        fontFamily: typography.normal,
     },
     eventLocation: {
         fontSize: 16,
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     event: {
-        backgroundColor: '#086BB5',
+        backgroundColor: colors.blue,
         height: height - 440,
         width: width - 50,
         zIndex: 9,
