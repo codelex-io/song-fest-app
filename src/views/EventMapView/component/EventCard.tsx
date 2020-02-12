@@ -37,16 +37,7 @@ export const EventCard: React.FC<EventDescriptionProps> = props => {
                     <Text style={styles.eventLabelText}>{`${props.timeStart} - ${props.timeEnd}`}</Text>
                 </View>
             </View>
-            <Text
-                style={{
-                    textAlign: 'right',
-                    color: 'white',
-                    fontSize: 14,
-                    position: 'absolute',
-                    bottom: 16,
-                    right: 16,
-                }}
-            >{`${props.currentItem}/${props.totalItems}`}</Text>
+            <Text style={styles.pageCount}>{`${props.currentItem}/${props.totalItems}`}</Text>
             <EventCardButtons />
         </View>
     );
@@ -61,11 +52,13 @@ const styles = StyleSheet.create({
     eventLocation: {
         fontSize: 16,
         color: 'white',
+        fontFamily: typography.normal,
     },
     eventLabelText: {
         fontSize: 16,
         color: 'white',
         marginLeft: 10,
+        fontFamily: typography.normal,
     },
     eventiconLabel: {
         display: 'flex',
@@ -84,5 +77,14 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         display: 'flex',
         justifyContent: 'space-between',
+    },
+    pageCount: {
+        textAlign: 'right',
+        color: 'white',
+        fontSize: 14,
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        fontFamily: typography.normal,
     },
 });
