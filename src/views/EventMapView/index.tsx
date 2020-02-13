@@ -16,16 +16,18 @@ const EventMapView: React.FC = () => {
     const { loading, data } = useQuery<Data>(FETCH_EVENT_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
     const [selectedItemId, setSelectedItemId] = useState<string | undefined>(undefined);
+    const isSelected = (item: GraphQLEventItem) => {
+        return selectedItemId !== undefined && selectedItemId === item.id;
+    };
+    const items: EventItem[] = [];
+    if (!loading && data) {
+        const mapped = data.items.map(it => toItem(it, isFavourite, isSelected(it)));
+        items.push(...mapped);
+    }
     return (
         <EventMapViewComponent
             loading={loading}
-            items={
-                loading || !data
-                    ? []
-                    : data.items.map(it =>
-                          toItem(it, isFavourite, selectedItemId !== undefined && selectedItemId === it.id),
-                      )
-            }
+            items={items}
             onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
             onSelectEvent={item => setSelectedItemId(item.id)}
