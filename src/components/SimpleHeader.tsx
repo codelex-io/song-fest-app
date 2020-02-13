@@ -5,30 +5,30 @@ import Icon, { IconType } from './Icon';
 
 interface HeaderProps {
     title: string;
+    onPress: () => void;
 }
 
-export default class SimpleHeader extends React.Component<HeaderProps> {
-    render() {
-        const { title } = this.props;
-        return (
-            <View style={styles.header}>
-                <TouchableOpacity style={styles.iconBox}>
-                    <Icon size={24} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
-                </TouchableOpacity>
-                <View style={styles.textContainer}>
-                    <Text style={styles.text}>{title}</Text>
-                </View>
-            </View>
-        );
-    }
-}
+export const SimpleHeader: React.FC<HeaderProps> = ({ title, onPress }) => {
+    return (
+        <View style={styles.header}>
+            <TouchableOpacity style={styles.iconBox} onPress={onPress}>
+                <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
+            </TouchableOpacity>
+            <Text style={styles.text}>{title}</Text>
+        </View>
+    );
+};
+
 const styles = StyleSheet.create({
     header: {
-        flex: 1,
         height: 56,
+        paddingHorizontal: 6,
         textAlign: 'left',
+        letterSpacing: 0.15,
+        fontSize: 20,
         flexDirection: 'row',
-        alignContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.white,
     },
     iconBox: {
         height: 44,
@@ -43,7 +43,10 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 20,
-        fontFamily: typography.bold,
+        fontFamily: typography.normal,
+        textTransform: 'uppercase',
+        lineHeight: 26,
+        fontWeight: '700',
     },
     textContainer: {
         padding: 15,

@@ -8,6 +8,7 @@ import { EventItem } from '../types';
 import { EventScroll } from './EventScroll';
 import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
+import { typography } from '@styles';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -72,7 +73,7 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        fontFamily: 'DINPro',
+        fontFamily: typography.normal,
     },
     map: {
         alignSelf: 'stretch',

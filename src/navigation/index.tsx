@@ -5,8 +5,8 @@ import { News } from './News';
 import { Events } from './Events';
 import { Video } from './Video';
 import { More } from './More';
-import { Favorite } from './Favorite';
-import { TabBarIcon, Header } from '@components';
+import { Favourites } from './Favourites';
+import { TabBarIcon, Header, SimpleHeader } from '@components';
 import { UserSettings } from './UserSettings';
 import { createStackNavigator } from 'react-navigation-stack';
 import { LanguageView, EventMapView } from '@views';
@@ -83,13 +83,16 @@ const StackScreen = createStackNavigator({
             header: ({ navigation, scene }) => (
                 <Header
                     title={scene.route.routes[scene.route.index].routeName}
-                    onPress={() => navigation.navigate('Favorite')}
+                    onPress={() => navigation.navigate('Favourite')}
                 />
             ),
         },
     },
-    Favorite: {
-        screen: Favorite,
+    Favourite: {
+        screen: Favourites,
+        navigationOptions: {
+            header: ({ navigation }) => <SimpleHeader title={'mani favorīti'} onPress={() => navigation.goBack()} />,
+        },
     },
 });
 

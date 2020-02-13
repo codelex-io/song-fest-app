@@ -6,8 +6,9 @@ import { Data, EventItem as GraphQLEventItem } from './graphql/types';
 import { EventItem } from './types';
 import { Favourite } from '@domain/favourites/types';
 import { View } from 'react-native';
-import { useFavourites, FavouritesContextProvider } from '@domain/favourites';
+import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
+import { colors } from '@styles';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }) };
@@ -17,7 +18,7 @@ const EventListView: React.FC = () => {
     const { loading, data } = useQuery<Data>(FETCH_EVENT_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
     return (
-        <View>
+        <View style={{ backgroundColor: colors.white }}>
             <EventListViewComponent
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
@@ -28,8 +29,4 @@ const EventListView: React.FC = () => {
     );
 };
 
-export default () => (
-    <FavouritesContextProvider>
-        <EventListView />
-    </FavouritesContextProvider>
-);
+export default EventListView;
