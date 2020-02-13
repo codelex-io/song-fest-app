@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon, IconType } from '@components';
-import { typography } from '@styles';
+import { typography, colors } from '@styles';
 
 interface LabelProps {
     title: string;
@@ -10,7 +10,7 @@ interface LabelProps {
 
 export const Label: React.FC<LabelProps> = ({ title, iconType }) => (
     <View style={styles.container}>
-        <Icon size={20} type={iconType} fill="#FFFFFF" />
+        <Icon size={20} type={iconType} fill={colors.white} />
         <Text style={styles.title}>{title}</Text>
     </View>
 );
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 14,
         lineHeight: 18,
-        color: '#FFFFFF',
+        color: colors.white,
     },
 });

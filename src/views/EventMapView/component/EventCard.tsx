@@ -1,52 +1,54 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Icon, IconType } from '@components';
-import { EventCardButtons } from './EventCardButtons';
-import { LatLng } from 'react-native-maps';
+import { EventItem } from '../types';
+import { IconButtons } from './IconButtons';
+import { dateTimeUtils } from '@utils';
+import { colors } from '@styles';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 interface EventDescriptionProps {
-    id?: number;
-    title: string;
-    type?: string;
-    location: string;
-    eventType?: string;
-    date: string;
-    timeStart: string;
-    timeEnd: string;
-    coordinates: LatLng;
-    currentItem?: number;
-    totalItems?: number;
+    item: EventItem;
+    onFavourite: () => void;
+    onNavigate: () => void;
+    itemIndex: number;
+    totalItems: number;
+    backgroundColor: string;
 }
 
-export const EventCard: React.FC<EventDescriptionProps> = props => {
+export const EventCard: React.FC<EventDescriptionProps> = ({
+    item,
+    onNavigate,
+    backgroundColor,
+    onFavourite,
+    itemIndex,
+    totalItems,
+}) => {
     return (
-        <View style={styles.event}>
-            <Text style={styles.eventTitle}>{props.title}</Text>
-            <Text style={styles.eventLocation}>{props.location}</Text>
+        <View style={[styles.event, { backgroundColor }]}>
+            <Text style={styles.eventTitle}>{item.title}</Text>
+            <Text style={styles.eventLocation}>{item.locationTitle}</Text>
             <View>
                 <View style={styles.eventiconLabel}>
                     <Icon size={25} type={IconType.Calendar} fill="white" />
-                    <Text style={styles.eventLabelText}>{props.date}</Text>
+                    <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
                 </View>
                 <View style={styles.eventiconLabel}>
                     <Icon size={25} type={IconType.Clock} fill="white" />
-                    <Text style={styles.eventLabelText}>{`${props.timeStart} - ${props.timeEnd}`}</Text>
+                    <Text style={styles.eventLabelText}>{item.time}</Text>
                 </View>
             </View>
-            <Text
-                style={{
-                    textAlign: 'right',
-                    color: 'white',
-                    fontSize: 14,
-                    position: 'absolute',
-                    bottom: 16,
-                    right: 16,
-                }}
-            >{`${props.currentItem}/${props.totalItems}`}</Text>
-            <EventCardButtons />
+            <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
+            <View style={styles.row}>
+                <IconButtons
+                    onShare={() => null}
+                    isFavourite={item.isFavourite}
+                    onFavourite={onFavourite}
+                    onNavigate={onNavigate}
+                />
+            </View>
         </View>
     );
 };
@@ -54,16 +56,19 @@ export const EventCard: React.FC<EventDescriptionProps> = props => {
 const styles = StyleSheet.create({
     eventTitle: {
         fontSize: 20,
-        color: 'white',
+        color: colors.white,
         fontWeight: 'bold',
+    },
+    row: {
+        flexDirection: 'row',
     },
     eventLocation: {
         fontSize: 16,
-        color: 'white',
+        color: colors.white,
     },
     eventLabelText: {
         fontSize: 16,
-        color: 'white',
+        color: colors.white,
         marginLeft: 10,
     },
     eventiconLabel: {
@@ -83,5 +88,13 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         display: 'flex',
         justifyContent: 'space-between',
+    },
+    items: {
+        textAlign: 'right',
+        color: 'white',
+        fontSize: 14,
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
     },
 });

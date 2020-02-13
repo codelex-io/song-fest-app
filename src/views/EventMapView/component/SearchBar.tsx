@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Dimensions } from 'react-native';
 import { Icon, IconType } from '@components';
+import { colors } from '@styles';
 
 const width = Dimensions.get('window').width;
 
@@ -35,15 +36,13 @@ export const SearchBar = () => {
 const styles = StyleSheet.create({
     container: {
         width: width - 32,
-        backgroundColor: 'green',
+        backgroundColor: colors.green,
         display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
         flexDirection: 'row',
         paddingRight: 40,
         alignSelf: 'center',
         zIndex: 99,
         position: 'absolute',
-        top: 73,
+        top: 0,
     },
 });

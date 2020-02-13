@@ -1,3 +1,7 @@
+export interface Data {
+    items: EventItem[];
+}
+
 export interface EventItem {
     id: string;
     title: string;
@@ -10,8 +14,4 @@ export interface EventItem {
         latitude: number;
         longitude: number;
     };
-    currentItem?: number;
-    totalItems?: number;
-    isSelected: boolean;
-    isFavourite: boolean;
 }
