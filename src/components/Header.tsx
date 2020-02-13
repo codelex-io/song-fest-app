@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ title, onPress }) => {
         <View style={styles.container}>
             <Text style={styles.text}>{title}</Text>
             <TouchableOpacity style={styles.containerBox} onPress={onPress}>
-                <Icon size={33} type={IconType.HeartFilled} fill={colors.orange} />
+                <Icon size={28} type={IconType.HeartFilled} fill={colors.white} />
             </TouchableOpacity>
         </View>
     );
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     containerBox: {
-        height: 44,
-        width: 44,
+        height: 40,
+        width: 40,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.white,
+        backgroundColor: colors.orange,
     },
     text: {
         fontFamily: typography.bold,

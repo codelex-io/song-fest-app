@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem } from './graphql/types';
 import { Favourite } from '@domain/favourites/types';
-import { useFavourites, FavouritesContextProvider } from '@domain/favourites';
+import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean, isSelected: boolean): EventItem => {
@@ -35,8 +35,4 @@ const EventMapView: React.FC = () => {
     );
 };
 
-export default () => (
-    <FavouritesContextProvider>
-        <EventMapView />
-    </FavouritesContextProvider>
-);
+export default EventMapView;

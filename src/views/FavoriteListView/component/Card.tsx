@@ -8,22 +8,24 @@ interface CardProps {
     group: GroupOfFavourites;
 }
 
-export const Card: React.FC<CardProps> = ({ group }) => (
-    <View style={styles.container}>
-        <Text style={styles.title}> {group.key}</Text>
-        {group.items.map(item => (
-            <View key={item.id} style={styles.itemContainer}>
-                <TouchableOpacity style={styles.favoriteIcon}>
-                    <Icon size={24} type={IconType.HeartFilled} fill={colors.orange} />
-                </TouchableOpacity>
-                <Text style={styles.itemText}>{item.title}</Text>
-                <TouchableOpacity style={styles.rightIcon}>
-                    <Icon size={24} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
-                </TouchableOpacity>
-            </View>
-        ))}
-    </View>
-);
+export const Card: React.FC<CardProps> = ({ group }) => {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}> {group.key}</Text>
+            {group.items.map(item => (
+                <View key={item.id} style={styles.itemContainer}>
+                    <TouchableOpacity style={styles.favoriteIcon}>
+                        <Icon size={24} type={IconType.HeartFilled} fill={colors.orange} />
+                    </TouchableOpacity>
+                    <Text style={styles.itemText}>{item.title}</Text>
+                    <TouchableOpacity style={styles.rightIcon}>
+                        <Icon size={24} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
+                    </TouchableOpacity>
+                </View>
+            ))}
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingLeft: 16,
         paddingRight: 16,
+        backgroundColor: colors.white,
     },
     itemContainer: {
         flexDirection: 'row',
@@ -52,6 +55,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         paddingTop: 24,
         paddingBottom: 12,
+        lineHeight: 18,
+        fontWeight: '700',
     },
     itemText: {
         color: colors.darkGrey1A,
@@ -59,5 +64,6 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         marginRight: 56,
         width: 252,
+        lineHeight: 21,
     },
 });

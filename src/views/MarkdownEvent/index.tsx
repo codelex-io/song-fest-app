@@ -10,42 +10,39 @@ import { IconButtons } from './IconButtons';
 
 interface MarkdownEvenProps {
     data: Data;
+    onPress: () => void;
 }
-
-export default class MarkdownEvent extends React.Component<MarkdownEvenProps> {
-    render() {
-        const { data } = this.props;
-        return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <SimpleHeader title={' '} />
-                </View>
-                <ScrollView>
-                    <View style={styles.imageContainer}>
-                        <Image style={styles.image} source={{ uri: data.imageUrl }} resizeMode="cover" />
-                    </View>
-                    <View>
-                        <Text style={styles.title}>{data.title}</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.place}> {data.location}</Text>
-                    </View>
-                    <View style={styles.timeDateContainer}>
-                        <Label iconType={IconType.Calendar} title={data.date} />
-                        <Label iconType={IconType.Clock} title={data.time} />
-                    </View>
-                    <View style={styles.row}>
-                        <IconButtons onShare={() => null} onFavourite={() => null} onNavigate={() => null} />
-                    </View>
-                    <View style={styles.markdownContainer}>
-                        <Markdown style={markdownstyles}>{data.content}</Markdown>
-                    </View>
-                    <BackButton />
-                </ScrollView>
+export const MarkdownEvent: React.FC<MarkdownEvenProps> = ({ data, onPress }) => {
+    return (
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <SimpleHeader title={' example'} onPress={onPress} />
             </View>
-        );
-    }
-}
+            <ScrollView>
+                <View style={styles.imageContainer}>
+                    <Image style={styles.image} source={{ uri: data.imageUrl }} resizeMode="cover" />
+                </View>
+                <View>
+                    <Text style={styles.title}>{data.title}</Text>
+                </View>
+                <View>
+                    <Text style={styles.place}> {data.location}</Text>
+                </View>
+                <View style={styles.timeDateContainer}>
+                    <Label iconType={IconType.Calendar} title={data.date} />
+                    <Label iconType={IconType.Clock} title={data.time} />
+                </View>
+                <View style={styles.row}>
+                    <IconButtons onShare={() => null} onFavourite={() => null} onNavigate={() => null} />
+                </View>
+                <View style={styles.markdownContainer}>
+                    <Markdown style={markdownstyles}>{data.content}</Markdown>
+                </View>
+                <BackButton />
+            </ScrollView>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
