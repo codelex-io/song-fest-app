@@ -1,18 +1,26 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors } from '@styles';
 import { dateTimeUtils } from '@utils';
 import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
+import NavigationAware from '../../../navigation/NavigationAware';
 
-interface CardProps {
+interface CardProps extends NavigationAware {
     item: NewsItem;
+    newsItemId: string;
     backgroundColor: string;
     onFavourite: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }) => (
-    <View style={styles.container}>
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, navigation, newsItemId }) => (
+    <TouchableOpacity
+        style={styles.container}
+        onPress={() => {
+            navigation.navigate('SingleNewsItem', { newsItemId: newsItemId });
+        }}
+        activeOpacity={0.8}
+    >
         <View style={styles.pictureContainer}>
             <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
         </View>
@@ -23,7 +31,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite }
                 <IconButtons onShare={() => null} isFavourite={item.isFavourite} onFavourite={onFavourite} />
             </View>
         </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({

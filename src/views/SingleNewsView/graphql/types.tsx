@@ -1,3 +1,7 @@
+export interface Data {
+    newsItems: NewsItem[];
+}
+
 export interface NewsItem {
     id: string;
     title: string;
@@ -5,5 +9,6 @@ export interface NewsItem {
     image?: {
         url: string;
     };
-    isFavourite: boolean;
+
+    content: string;
 }

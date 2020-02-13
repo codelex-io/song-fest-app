@@ -9,5 +9,4 @@ export interface NewsItem {
     image?: {
         url: string;
     };
-    content: string;
 }

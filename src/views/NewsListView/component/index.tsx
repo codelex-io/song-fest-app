@@ -15,16 +15,13 @@ const NewsListView: React.FC<Props> = ({ loading, items, onFavourite, navigation
     <FlatList<NewsItem>
         data={items}
         renderItem={({ item, index }): React.ReactElement => (
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('SingleNewsItem', { newsItem: item.id });
-                }}
-                activeOpacity={0.8}
-            >
+            <TouchableOpacity>
                 <Card
                     item={item}
                     backgroundColor={colors.findColorByIndex(index)}
                     onFavourite={() => onFavourite(item)}
+                    newsItemId={item.id}
+                    navigation={navigation}
                 />
             </TouchableOpacity>
         )}
