@@ -21,10 +21,9 @@ export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: 'column',
-        width: 99,
         height: 88,
+        justifyContent: 'space-between',
     },
     containerBox: {
         height: 44,

@@ -51,6 +51,5 @@ const styles = StyleSheet.create({
     searchContainerButton: {
         flexDirection: 'row',
         marginBottom: 16,
-        marginTop: 8,
     },
 });

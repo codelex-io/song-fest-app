@@ -102,5 +102,6 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         marginBottom: 24,
+        justifyContent: 'space-between',
     },
 });
