@@ -15,7 +15,7 @@ const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: st
     fill,
 }) => (
     <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={0.8}>
-        <Icon size={20} type={iconType} fill={fill} />
+        <Icon size={26} type={iconType} fill={fill} />
     </TouchableOpacity>
 );
 

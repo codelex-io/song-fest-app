@@ -64,11 +64,11 @@ const StackScreen = createStackNavigator({
                 },
                 Map: {
                     screen: createStackNavigator({
-                        EventMapView: {
+                        Map: {
                             screen: EventMapView,
                             navigationOptions: {
                                 header: ({ navigation }) => (
-                                    <Header title={'EventMapView'} onPress={() => navigation.navigate('Favourite')} />
+                                    <Header title={'Map'} onPress={() => navigation.navigate('Favourite')} />
                                 ),
                             },
                         },
