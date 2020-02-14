@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 16,
         marginTop: 8,
-        marginLeft: 16,
     },
     fixedFilter: {
         position: 'absolute',
