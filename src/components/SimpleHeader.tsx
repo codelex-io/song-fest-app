@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         fontFamily: typography.normal,
-        textTransform: 'uppercase',
         lineHeight: 26,
-        fontWeight: '700',
+        fontWeight: '500',
+        color: colors.darkGrey1A,
     },
     textContainer: {
         padding: 15,
