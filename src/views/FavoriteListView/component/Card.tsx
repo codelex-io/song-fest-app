@@ -56,9 +56,6 @@ const styles = StyleSheet.create({
     itemText: {
         color: colors.darkGrey1A,
         fontSize: 16,
-        //   textAlign: 'left',
-        //   marginRight: 25,
-        //width: 252,
         lineHeight: 21,
     },
 });
