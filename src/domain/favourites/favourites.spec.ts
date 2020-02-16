@@ -1,4 +1,12 @@
-import { addFavourite, getFavourites, removeFavourite, clear, isFavourite, toggleFavourite } from './index';
+import {
+    addFavourite,
+    getFavourites,
+    removeFavourite,
+    clear,
+    isFavourite,
+    toggleFavourite,
+    hasAnyItems,
+} from './index';
 
 jest.mock('./storage', () => ({
     fetchFavourites: async () => [],
@@ -92,5 +100,22 @@ describe('Favourites', () => {
         toggleFavourite({ id: '123', group: 'NEWS', title });
 
         expect(isFavourite({ id: '123', group: 'NEWS', title })).toBeFalsy();
+    });
+
+    it('should check if any present', () => {
+        expect(hasAnyItems()).toBeFalsy();
+
+        toggleFavourite({ id: '123', group: 'NEWS', title });
+        toggleFavourite({ id: '456', group: 'NEWS', title });
+
+        expect(hasAnyItems()).toBeTruthy();
+
+        toggleFavourite({ id: '123', group: 'NEWS', title });
+
+        expect(hasAnyItems()).toBeTruthy();
+
+        toggleFavourite({ id: '456', group: 'NEWS', title });
+
+        expect(hasAnyItems()).toBeFalsy();
     });
 });

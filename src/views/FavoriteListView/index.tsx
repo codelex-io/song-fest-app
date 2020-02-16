@@ -4,11 +4,11 @@ import { default as FavoriteListViewComponent } from './component';
 import { EmptyFavorite } from './component/EmptyFavorite';
 
 const FavoriteListView: React.FC = () => {
-    const { favourites } = useFavourites();
-    if (favourites[0].items.length === 0 && favourites[1].items.length === 0) {
-        return <EmptyFavorite />;
+    const { favourites, hasAnyItems } = useFavourites();
+    if (hasAnyItems()) {
+        return <FavoriteListViewComponent favourites={favourites} />;
     }
-    return <FavoriteListViewComponent favourites={favourites} />;
+    return <EmptyFavorite />;
 };
 
 export default FavoriteListView;
