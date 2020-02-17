@@ -1,11 +1,18 @@
+export interface Data {
+    item: NewsItem;
+}
+
 export interface NewsItem {
     id: string;
     title: string;
     date: string;
-    content: string;
     image?: {
         url: string;
     };
-    isFavourite: boolean;
+    content: string;
     link: string;
+}
+
+export interface Variables {
+    id: string;
 }

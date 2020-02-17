@@ -7,7 +7,7 @@ import EventFilterView from './EventFilterView';
 import EventListView from './EventListView/component';
 import { ParticipantCategoryView } from './ParticipantCategoryView';
 import AllIcons from './AllIcons';
-import { MarkdownEvent } from './MarkdownEvent';
+import { MarkdownEvent } from './MarkdownEvent/component';
 import UserSettings from './UserSettings';
 import { VideoView } from './VideoView';
 import { LanguageView } from './LanguageView';
