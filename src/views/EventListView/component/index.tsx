@@ -16,7 +16,7 @@ interface Props {
 
 const EventListView: React.FC<Props> = ({ items, onFavourite, onNavigate }) => {
     return (
-        <View style={styles.container}>
+        <View>
             <LongSearch backgroundColor={colors.blue} />
             <View style={styles.searchContainerButton}>
                 <TimeFilterButton button={{ title: 'ŠODIEN', active: false }} />
@@ -27,7 +27,7 @@ const EventListView: React.FC<Props> = ({ items, onFavourite, onNavigate }) => {
             <FlatList<EventItem>
                 data={items}
                 renderItem={({ item, index }): React.ReactElement => (
-                    <View>
+                    <View style={{ paddingHorizontal: 16 }}>
                         <Card
                             item={item}
                             backgroundColor={colors.findColorByIndex(index)}
@@ -45,11 +45,9 @@ const EventListView: React.FC<Props> = ({ items, onFavourite, onNavigate }) => {
 export default EventListView;
 
 const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 16,
-    },
     searchContainerButton: {
         flexDirection: 'row',
-        marginBottom: 16,
+        flexWrap: 'wrap',
+        paddingHorizontal: 16,
     },
 });

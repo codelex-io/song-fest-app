@@ -8,26 +8,13 @@ const width = Dimensions.get('window').width;
 export const SearchBar = () => {
     return (
         <View style={styles.container}>
-            <View
-                style={{
-                    alignSelf: 'center',
-                    marginRight: 10,
-                    marginLeft: 10,
-                }}
-            >
+            <View style={styles.iconContainer}>
                 <Icon size={35} type={IconType.Search} fill={'white'} />
             </View>
             <TextInput
-                style={{
-                    height: 60,
-                    width: 300,
-                    fontSize: 18,
-                    alignSelf: 'flex-end',
-                    color: 'white',
-                    marginRight: 20,
-                }}
+                style={styles.text}
                 placeholderTextColor="white"
-                placeholder="MEKLESANA"
+                placeholder="Meklēt pēc nosaukuma, vietas uc."
             />
         </View>
     );
@@ -43,6 +30,20 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         zIndex: 99,
         position: 'absolute',
-        top: 0,
+        top: 8,
+    },
+    iconContainer: {
+        alignSelf: 'center',
+        marginRight: 10,
+        marginLeft: 10,
+    },
+    text: {
+        height: 60,
+        width: 300,
+        fontSize: 18,
+        alignSelf: 'flex-end',
+        color: 'white',
+        marginRight: 20,
+        textTransform: 'uppercase',
     },
 });

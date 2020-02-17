@@ -36,7 +36,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                 <View style={styles.searchContainer}>
                     <Modal animationType="slide" transparent={false} visible={this.state.modalVisible}>
                         <View style={styles.modalContainer}>
-                            <ScrollView>
+                            <ScrollView style={{ paddingHorizontal: 16 }}>
                                 <View style={styles.header}>
                                     <View style={styles.iconLeft}>
                                         <Icon size={20} type={IconType.ChevronLeft} fill={colors.white} />
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         alignItems: 'stretch',
-        paddingHorizontal: 16,
     },
     searchContainerBlue: {
         backgroundColor: colors.blue,

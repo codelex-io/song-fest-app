@@ -1,38 +1,52 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors } from '@styles';
 import { dateTimeUtils } from '@utils';
 import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
+import NavigationAware from '../../../navigation/NavigationAware';
 
-interface CardProps {
+interface CardProps extends NavigationAware {
     item: NewsItem;
+    newsItemId: string;
     backgroundColor: string;
     onFavourite: () => void;
     onShare: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onShare }) => (
-    <View style={styles.container}>
-        {item.image?.url && (
-            <View style={styles.pictureContainer}>
-                <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
+const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onShare, navigation, newsItemId }) => {
+    return (
+        <TouchableOpacity
+            onPress={() => {
+                navigation.navigate('SingleNews', { newsItemId: newsItemId });
+            }}
+            activeOpacity={0.5}
+        >
+            <View style={styles.container}>
+                {item.image?.url && (
+                    <View style={styles.pictureContainer}>
+                        <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
+                    </View>
+                )}
+                <View style={[styles.lowerContainer, { backgroundColor }]}>
+                    <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
+                    <Text style={styles.titleText}> {item.title}</Text>
+                    <View style={styles.row}>
+                        <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
+                    </View>
+                </View>
             </View>
-        )}
-        <View style={[styles.lowerContainer, { backgroundColor }]}>
-            <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
-            <Text style={styles.titleText}> {item.title}</Text>
-            <View style={styles.row}>
-                <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
-            </View>
-        </View>
-    </View>
-);
+        </TouchableOpacity>
+    );
+};
+
+export default Card;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
+        paddingBottom: 16,
     },
     pictureContainer: {
         flex: 1,

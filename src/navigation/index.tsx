@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { News } from './News';
+import { SingleNews } from './SingleNews';
 import { Events } from './Events';
 import { Video } from './Video';
 import { More } from './More';
@@ -45,6 +46,14 @@ const StackScreen = createStackNavigator({
                             navigationOptions: {
                                 header: ({ navigation }) => (
                                     <Header title={'News'} onPress={() => navigation.navigate('Favourite')} />
+                                ),
+                            },
+                        },
+                        SingleNews: {
+                            screen: SingleNews,
+                            navigationOptions: {
+                                header: ({ navigation }) => (
+                                    <SimpleHeader title={' '} onPress={() => navigation.goBack()} />
                                 ),
                             },
                         },

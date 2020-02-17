@@ -3,12 +3,13 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@styles';
 import { Icon, IconType } from '@components';
 import { GroupOfFavourites } from '@domain/favourites/types';
+import NavigationAware from '../../../navigation/NavigationAware';
 
-interface CardProps {
+interface CardProps extends NavigationAware {
     group: GroupOfFavourites;
 }
 
-export const Card: React.FC<CardProps> = ({ group }) => {
+export const Card: React.FC<CardProps> = ({ group, navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {group.key}</Text>
@@ -17,9 +18,18 @@ export const Card: React.FC<CardProps> = ({ group }) => {
                     <TouchableOpacity style={styles.favoriteIcon}>
                         <Icon size={26} type={IconType.HeartFilled} fill={colors.orange} />
                     </TouchableOpacity>
-                    <Text style={styles.itemText}>{item.title}</Text>
-                    <TouchableOpacity style={styles.rightIcon}>
-                        <Icon size={26} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
+
+                    <TouchableOpacity
+                        style={{ flex: 1, flexDirection: 'row' }}
+                        activeOpacity={0.5}
+                        onPress={() => {
+                            navigation.navigate('SingleNews', { newsItemId: item.id });
+                        }}
+                    >
+                        <Text style={styles.itemText}>{item.title}</Text>
+                        <View style={{ alignSelf: 'center' }}>
+                            <Icon size={26} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
+                        </View>
                     </TouchableOpacity>
                 </View>
             ))}
@@ -38,13 +48,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 16,
-        marginRight: 62,
+        marginRight: 24,
     },
     favoriteIcon: {
         paddingRight: 14,
         alignItems: 'flex-start',
     },
-    rightIcon: {},
     title: {
         color: colors.mediumGrey4D,
         fontSize: 14,

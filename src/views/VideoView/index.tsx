@@ -21,7 +21,7 @@ export const VideoView: React.FC<VideoViewProps> = ({ items }) => {
             <FlatList<VideoData>
                 data={items}
                 renderItem={({ item }): React.ReactElement => (
-                    <View>
+                    <View style={{ paddingHorizontal: 16 }}>
                         <Card item={item} />
                     </View>
                 )}
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        paddingHorizontal: 16,
         justifyContent: 'flex-start',
     },
     searchContainerButton: {
@@ -49,6 +48,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         marginTop: 8,
         flexWrap: 'wrap',
+        paddingHorizontal: 16,
     },
     fixedFilter: {
         position: 'absolute',
