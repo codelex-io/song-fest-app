@@ -33,6 +33,9 @@ export const removeFavourite = (fav: Favourite) => {
     }
     const index = group.items.findIndex(it => it.id === fav.id);
     group.items.splice(index, 1);
+    if (group.items.length === 0) {
+        groups.splice(groups.indexOf(group), 1);
+    }
     storeFavourites(groups).catch(errors.onError);
 };
 
@@ -53,5 +56,12 @@ export const toggleFavourite = (fav: Favourite) => {
 };
 
 export const clear = () => (groups = []);
+
+export const hasAnyItems = () => {
+    if (groups.length === 0) {
+        return false;
+    }
+    return true;
+};
 
 export { useFavourites, FavouritesContextProvider };

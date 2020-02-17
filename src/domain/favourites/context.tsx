@@ -1,17 +1,19 @@
 import React, { useContext, createContext, useState } from 'react';
 import { GroupOfFavourites, Favourite } from './types';
-import { toggleFavourite, getFavourites, isFavourite } from './index';
+import { toggleFavourite, getFavourites, isFavourite, hasAnyItems } from './index';
 
 type ContextType = {
     toggleFavourite: (fav: Favourite) => void;
     isFavourite: (fav: Favourite) => boolean;
     favourites: GroupOfFavourites[];
+    hasAnyItems: () => boolean;
 };
 
 export const FavouritesContext = createContext<ContextType>({
     toggleFavourite: () => null,
     isFavourite: () => false,
     favourites: [],
+    hasAnyItems: () => false,
 });
 export const useFavourites = () => useContext<ContextType>(FavouritesContext);
 
@@ -26,6 +28,7 @@ export const FavouritesContextProvider: React.FC = ({ children }) => {
                 },
                 isFavourite,
                 favourites,
+                hasAnyItems,
             }}
         >
             {children}
