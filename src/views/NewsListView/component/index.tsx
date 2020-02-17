@@ -17,7 +17,7 @@ const NewsListView: React.FC<Props> = ({ items, onFavourite, onShare, navigation
         <FlatList<NewsItem>
             data={items}
             renderItem={({ item, index }): React.ReactElement => (
-                <View>
+                <View style={{ paddingHorizontal: 16 }}>
                     <Card
                         item={item}
                         newsItemId={item.id}
@@ -28,9 +28,8 @@ const NewsListView: React.FC<Props> = ({ items, onFavourite, onShare, navigation
                     />
                 </View>
             )}
-            ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
         />
-    )
+    );
 };
 
 export default NewsListView;

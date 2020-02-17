@@ -16,9 +16,12 @@ interface CardProps extends NavigationAware {
 
 const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onShare, navigation, newsItemId }) => {
     return (
-        <TouchableOpacity onPress={() => {
-            navigation.navigate('SingleNews', { newsItemId: newsItemId });
-        }}>
+        <TouchableOpacity
+            onPress={() => {
+                navigation.navigate('SingleNews', { newsItemId: newsItemId });
+            }}
+            activeOpacity={0.5}
+        >
             <View style={styles.container}>
                 {item.image?.url && (
                     <View style={styles.pictureContainer}>
@@ -34,7 +37,7 @@ const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onShare
                 </View>
             </View>
         </TouchableOpacity>
-    )
+    );
 };
 
 export default Card;
@@ -43,6 +46,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
+        paddingBottom: 16,
     },
     pictureContainer: {
         flex: 1,

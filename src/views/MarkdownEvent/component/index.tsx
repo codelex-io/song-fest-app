@@ -16,34 +16,46 @@ interface Props {
     onShare: (item: NewsItem) => void;
 }
 
-export const MarkdownEvent: React.FC<Props> = ({ item, onFavourite, onShare }) => {
-    return (
-        <View style={styles.container}>
-            <ScrollView>
-                <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={{ uri: item.image?.url }} resizeMode="cover" />
-                </View>
-                <View>
-                    <Text style={styles.title}>{item.title}</Text>
-                </View>
-                <View style={styles.timeDateContainer}>
-                    <Label iconType={IconType.Calendar} title={dateTimeUtils.formatDate(item.date)} />
-                </View>
-                <View style={styles.row}>
-                    <IconButtons onShare={() => onShare(item)} onFavourite={() => onFavourite(item)} onNavigate={() => null} />
-                </View>
-                {<View style={styles.markdownContainer}>
-                    <Markdown style={markdownstyles}>{item.content}</Markdown>
-                </View>}
-                <BackButton />
-            </ScrollView>
-        </View>
-    );
-};
+export default class MarkdownEvent extends React.Component<Props> {
+    scroll = React.createRef<ScrollView>();
+    scrollTo = () => {
+        this.scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
+    };
+    render() {
+        const { item, onFavourite, onShare } = this.props;
+        return (
+            <View style={styles.container}>
+                <ScrollView ref={this.scroll} style={{ paddingHorizontal: 16 }}>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} source={{ uri: item.image?.url }} resizeMode="cover" />
+                    </View>
+                    <View>
+                        <Text style={styles.title}>{item.title}</Text>
+                    </View>
+                    <View style={styles.timeDateContainer}>
+                        <Label iconType={IconType.Calendar} title={dateTimeUtils.formatDate(item.date)} />
+                    </View>
+                    <View style={styles.row}>
+                        <IconButtons
+                            onShare={() => onShare(item)}
+                            onFavourite={() => onFavourite(item)}
+                            onNavigate={() => null}
+                        />
+                    </View>
+                    {
+                        <View style={styles.markdownContainer}>
+                            <Markdown style={markdownstyles}>{item.content}</Markdown>
+                        </View>
+                    }
+                    <BackButton onPress={this.scrollTo} />
+                </ScrollView>
+            </View>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 16,
         flex: 1,
         height: 56,
         justifyContent: 'flex-start',

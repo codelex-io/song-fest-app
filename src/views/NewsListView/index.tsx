@@ -16,14 +16,11 @@ const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean)
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
-
-
-
 export const NewsListViewIndex: React.FC<NavigationAware> = ({ navigation }) => {
     const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
     return (
-        <View style={{ paddingHorizontal: 16, backgroundColor: colors.white }}>
+        <View style={{ backgroundColor: colors.white }}>
             <FilterButtons
                 buttons={[
                     { title: 'AKTUĀLI', active: true },
@@ -40,4 +37,3 @@ export const NewsListViewIndex: React.FC<NavigationAware> = ({ navigation }) => 
         </View>
     );
 };
-

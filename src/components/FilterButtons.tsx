@@ -42,10 +42,12 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     containerActive: {
-        backgroundColor: colors.green,
+        backgroundColor: colors.blue,
     },
     containeInactive: {
-        backgroundColor: 'rgba(0, 162, 88,0.15)',
+        backgroundColor: colors.white,
+        borderWidth: 1,
+        borderColor: colors.blue,
     },
     containerLeft: {
         flex: 1,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: typography.bold,
         fontSize: 14,
-        color: colors.green,
+        color: colors.blue,
         textAlign: 'center',
         letterSpacing: 1.15,
     },

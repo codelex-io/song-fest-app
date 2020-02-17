@@ -53,10 +53,10 @@ const StackScreen = createStackNavigator({
                             screen: SingleNews,
                             navigationOptions: {
                                 header: ({ navigation }) => (
-                                    <SimpleHeader title={'Ziņa'} onPress={() => navigation.goBack()} />
+                                    <SimpleHeader title={' '} onPress={() => navigation.goBack()} />
                                 ),
                             },
-                        }
+                        },
                     }),
                 },
                 Events: {

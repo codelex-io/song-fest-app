@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     },
     eventsContainer: {
         position: 'absolute',
-        bottom: 5,
+        bottom: 20,
         width: width,
     },
     buttonsContainer: {

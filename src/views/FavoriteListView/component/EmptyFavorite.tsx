@@ -27,8 +27,7 @@ const styles = StyleSheet.create({
     title: {
         paddingTop: 29.3,
         fontSize: 20,
-        paddingLeft: 32,
-        paddingRight: 33,
+        textAlign: 'center',
         lineHeight: 26,
     },
     title2: {
