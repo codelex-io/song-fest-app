@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Marker, LatLng } from 'react-native-maps';
 import { Icon, IconType } from '@components';
+import { colors } from '@styles';
 
 interface Props {
     isSelected: boolean;
@@ -15,7 +16,7 @@ export const EventMarker: React.FC<Props> = ({ isSelected, onPress, coordinates 
             <View style={isSelected ? styles.clickedMarker : styles.clearMarker}>
                 <View
                     style={{
-                        backgroundColor: '#F15A31',
+                        backgroundColor: colors.orange,
                         width: 44,
                         height: 44,
                         borderRadius: 44 / 2,
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
-        borderColor: '#F15A31',
+        borderColor: colors.orange,
         borderStyle: 'solid',
         borderWidth: 5,
     },
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
-        borderColor: 'blue',
+        borderColor: colors.blue,
         borderStyle: 'solid',
         borderWidth: 5,
     },
