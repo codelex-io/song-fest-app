@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Easing } from 'react-native';
 import MapView from 'react-native-maps';
 import { MyLocation } from './MyLocation';
 import { FilterButton } from './FilterButton';
@@ -11,6 +11,7 @@ import { EventMarker } from './EventMarker';
 import { typography } from '@styles';
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 interface Props {
     loading: boolean;
@@ -21,7 +22,22 @@ interface Props {
 }
 
 const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
+    const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
+
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
+    const startAnimation = () => {
+        Animated.timing(animation, {
+            toValue: isScrollOpen ? 0 : height - 435,
+            duration: 500,
+        }).start();
+    };
+    const transformStyle = {
+        transform: [
+            {
+                translateY: animation,
+            },
+        ],
+    };
     return (
         <View style={styles.container}>
             <SearchBar />
@@ -45,24 +61,29 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 ))}
             </MapView>
             <View style={styles.eventsContainer}>
-                <View style={styles.buttonsContainer}>
-                    <TouchableOpacity>
-                        <MyLocation />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <FilterButton />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setScrollOpen(!isScrollOpen)}>
-                        <ArrowButton />
-                    </TouchableOpacity>
-                </View>
-                {isScrollOpen && (
+                <Animated.View style={transformStyle}>
+                    <View style={styles.buttonsContainer}>
+                        <TouchableOpacity>
+                            <MyLocation />
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <FilterButton />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setScrollOpen(!isScrollOpen);
+                                startAnimation();
+                            }}
+                        >
+                            <ArrowButton open={isScrollOpen} />
+                        </TouchableOpacity>
+                    </View>
                     <EventScroll
                         items={items}
                         onFavourite={item => onFavourite(item)}
                         onNavigate={item => onNavigate(item)}
                     />
-                )}
+                </Animated.View>
             </View>
         </View>
     );
@@ -83,7 +104,7 @@ const styles = StyleSheet.create({
     },
     eventsContainer: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 0,
         width: width,
     },
     buttonsContainer: {
