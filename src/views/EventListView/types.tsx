@@ -1,4 +1,4 @@
-import { Moment } from "moment";
+import { Moment } from 'moment';
 
 export interface EventItem {
     id: string;
@@ -15,4 +15,3 @@ export interface EventItem {
         longitude: number;
     };
 }
-

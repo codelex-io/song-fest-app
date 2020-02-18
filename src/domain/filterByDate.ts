@@ -1,9 +1,8 @@
 import { Moment } from 'moment';
-import { EventItem } from './types';
-import { TimeSelector } from '@domain';
+import { TimeSelector, DateAware } from './';
 
-const filterEvents = (today: Moment, items: EventItem[], selector: TimeSelector): EventItem[] => {
-    var weekNow = today.week();
+const filterEvents = <T extends DateAware>(today: Moment, items: T[], selector: TimeSelector): T[] => {
+    const currentWeek = today.week();
 
     return items.filter(it => {
         if (selector === 'today') {
@@ -13,7 +12,7 @@ const filterEvents = (today: Moment, items: EventItem[], selector: TimeSelector)
             return it.date.isSame(today.clone().add(1, 'days'));
         }
         if (selector === 'this-week') {
-            return it.date.week();
+            return it.date.week() === currentWeek;
         }
         return true;
     });

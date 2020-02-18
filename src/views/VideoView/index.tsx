@@ -14,9 +14,9 @@ export const VideoView: React.FC<VideoViewProps> = ({ items }) => {
         <View style={styles.container}>
             <LongSearch backgroundColor={colors.orange} />
             <View style={styles.searchContainerButton}>
-                <TimeFilterButton button={{ title: 'tiešsaitē', active: false }} />
-                <TimeFilterButton button={{ title: 'pēdējie', active: false }} />
-                <TimeFilterButton button={{ title: 'populārakie', active: true }} />
+                <TimeFilterButton title="tiešsaitē" active={true} onPress={() => null} />
+                <TimeFilterButton title="pēdējie" active={false} onPress={() => null} />
+                <TimeFilterButton title="populārakie" active={false} onPress={() => null} />
             </View>
             <FlatList<VideoData>
                 data={items}

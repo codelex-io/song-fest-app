@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { colors } from '@styles';
-import { TimeSelector } from '@domain'
+import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
 import { LongSearch, TimeFilterButton } from '@components';
@@ -17,25 +17,22 @@ interface Props {
     onPress: (key: TimeSelector) => void;
 }
 
-const EventListView: React.FC<Props> = ({
-    loading,
-    items,
-    onFavourite,
-    onNavigate,
-    activeKey,
-    onPress
-}) => {
+const EventListView: React.FC<Props> = ({ loading, items, onFavourite, onNavigate, activeKey, onPress }) => {
     if (loading) {
-        return <ActivityIndicator />
+        return <ActivityIndicator />;
     }
     return (
         <View>
             <LongSearch backgroundColor={colors.blue} />
             <View style={styles.searchContainerButton}>
-                <TimeFilterButton title='šodien' active={activeKey === 'today'} onPress={() => onPress('today')} />
-                <TimeFilterButton title='rīt' active={activeKey === 'tomorrow'} onPress={() => onPress('tomorrow')} />
-                <TimeFilterButton title='šonedēļ' active={activeKey === 'this-week'} onPress={() => onPress('this-week')} />
-                <TimeFilterButton title='cits' active={activeKey === 'all'} onPress={() => onPress('all')} />
+                <TimeFilterButton title="šodien" active={activeKey === 'today'} onPress={() => onPress('today')} />
+                <TimeFilterButton title="rīt" active={activeKey === 'tomorrow'} onPress={() => onPress('tomorrow')} />
+                <TimeFilterButton
+                    title="šonedēļ"
+                    active={activeKey === 'this-week'}
+                    onPress={() => onPress('this-week')}
+                />
+                <TimeFilterButton title="cits" active={activeKey === 'all'} onPress={() => onPress('all')} />
             </View>
             <FlatList<EventItem>
                 data={items}
@@ -53,7 +50,7 @@ const EventListView: React.FC<Props> = ({
             />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     searchContainerButton: {
@@ -63,4 +60,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EventListView
+export default EventListView;
