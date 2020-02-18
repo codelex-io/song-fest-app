@@ -30,6 +30,7 @@ build/
 local.properties
 *.iml
 gen/
+*.android.bundle
 
 # Visual Studio Code
 #
