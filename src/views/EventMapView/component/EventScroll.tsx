@@ -36,7 +36,7 @@ export const EventScroll: React.FC<Props> = ({ items, onFavourite, onNavigate })
 const styles = StyleSheet.create({
     container: {
         zIndex: 8,
-        paddingVertical: 12,
+        paddingBottom: 12,
         paddingLeft: 16,
     },
 });

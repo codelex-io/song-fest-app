@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Icon, IconType } from '@components';
+import { typography, colors } from '@styles';
 
 export const FilterButton: React.FC = () => (
     <View style={styles.button}>
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     button: {
         width: 106,
         height: 44,
-        backgroundColor: '#FFCB05',
+        backgroundColor: colors.yellow,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
@@ -22,5 +23,6 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         marginLeft: 3,
+        fontFamily: typography.bold,
     },
 });
