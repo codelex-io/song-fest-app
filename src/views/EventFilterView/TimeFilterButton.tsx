@@ -47,11 +47,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: colors.purple,
         textTransform: 'uppercase',
+        lineHeight: 18,
     },
     textActive: {
         fontFamily: typography.bold,
         color: colors.white,
         textAlign: 'center',
         textTransform: 'uppercase',
+        lineHeight: 18,
     },
 });

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import SplashScreen from 'react-native-splash-screen';
 import { getClient, initApollo } from './src/api';
-import { initFavourites } from './src/domain/favourites';
+import { initFavourites, FavouritesContextProvider } from './src/domain/favourites';
 import Navigation from './src/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LocalizationContextProvider } from './src/localization/LocalizationContext';
@@ -25,7 +25,9 @@ const App: React.FC = () => {
         <LocalizationContextProvider>
             <SafeAreaProvider>
                 <ApolloProvider client={getClient()}>
-                    <Navigation />
+                    <FavouritesContextProvider>
+                        <Navigation />
+                    </FavouritesContextProvider>
                 </ApolloProvider>
             </SafeAreaProvider>
         </LocalizationContextProvider>

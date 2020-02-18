@@ -18,11 +18,13 @@ export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor }) => (
 
 const styles = StyleSheet.create({
     searchContainer: {
-        height: 40,
+        height: 44,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 8,
+        marginBottom: 16,
+        marginHorizontal: 16,
     },
     iconContainer: {
         paddingRight: 11.25,

@@ -2,11 +2,12 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import { News } from './News';
+import { SingleNews } from './SingleNews';
 import { Events } from './Events';
 import { Video } from './Video';
 import { More } from './More';
-import { Favorite } from './Favorite';
-import { TabBarIcon, Header } from '@components';
+import { Favourites } from './Favourites';
+import { TabBarIcon, Header, SimpleHeader } from '@components';
 import { UserSettings } from './UserSettings';
 import { createStackNavigator } from 'react-navigation-stack';
 import { LanguageView, EventMapView } from '@views';
@@ -14,15 +15,17 @@ import { LanguageView, EventMapView } from '@views';
 const StackNavigatorMore = createStackNavigator({
     More: {
         screen: More,
-        navigationOptions: () => ({
-            headerShown: false,
-        }),
+        navigationOptions: {
+            header: ({ navigation }) => <Header title={'More'} onPress={() => navigation.navigate('Favourite')} />,
+        },
     },
     Settings: {
         screen: UserSettings,
-        navigationOptions: () => ({
-            title: 'Lietotāja iestatījumi',
-        }),
+        navigationOptions: {
+            header: ({ navigation }) => (
+                <SimpleHeader title={'Lietotāja iestatījumi'} onPress={() => navigation.goBack()} />
+            ),
+        },
     },
     Language: {
         screen: LanguageView,
@@ -32,64 +35,89 @@ const StackNavigatorMore = createStackNavigator({
     },
 });
 
-const TabNavigator = createBottomTabNavigator(
-    {
-        News: {
-            screen: News,
-            navigationOptions: {
-                title: 'News',
-            },
-        },
-        Events: {
-            screen: Events,
-            navigationOptions: {
-                title: 'Events',
-            },
-        },
-        Map: {
-            screen: EventMapView,
-            navigationOptions: {
-                title: 'Map',
-            },
-        },
-        Video: {
-            screen: Video,
-            navigationOptions: {
-                title: 'Video',
-            },
-        },
-        More: {
-            screen: StackNavigatorMore,
-            navigationOptions: {
-                title: 'More',
-            },
-        },
-    },
-    {
-        defaultNavigationOptions: ({ navigation }) => ({
-            tabBarIcon: ({ focused }) => {
-                const { routeName } = navigation.state;
-                return <TabBarIcon route={routeName} focused={focused} />;
-            },
-            tabBarLabel: () => false,
-        }),
-    },
-);
-
 const StackScreen = createStackNavigator({
     Home: {
-        screen: TabNavigator,
-        navigationOptions: {
-            header: ({ navigation, scene }) => (
-                <Header
-                    title={scene.route.routes[scene.route.index].routeName}
-                    onPress={() => navigation.navigate('Favorite')}
-                />
-            ),
-        },
+        screen: createBottomTabNavigator(
+            {
+                News: {
+                    screen: createStackNavigator({
+                        News: {
+                            screen: News,
+                            navigationOptions: {
+                                header: ({ navigation }) => (
+                                    <Header title={'News'} onPress={() => navigation.navigate('Favourite')} />
+                                ),
+                            },
+                        },
+                        SingleNews: {
+                            screen: SingleNews,
+                            navigationOptions: {
+                                header: ({ navigation }) => (
+                                    <SimpleHeader title={' '} onPress={() => navigation.goBack()} />
+                                ),
+                            },
+                        },
+                    }),
+                },
+                Events: {
+                    screen: createStackNavigator({
+                        Events: {
+                            screen: Events,
+                            navigationOptions: {
+                                header: ({ navigation }) => (
+                                    <Header title={'Events'} onPress={() => navigation.navigate('Favourite')} />
+                                ),
+                            },
+                        },
+                    }),
+                },
+                Map: {
+                    screen: createStackNavigator({
+                        Map: {
+                            screen: EventMapView,
+                            navigationOptions: {
+                                header: ({ navigation }) => (
+                                    <Header title={'Map'} onPress={() => navigation.navigate('Favourite')} />
+                                ),
+                            },
+                        },
+                    }),
+                },
+                Video: {
+                    screen: createStackNavigator({
+                        Video: {
+                            screen: Video,
+                            navigationOptions: {
+                                header: ({ navigation }) => (
+                                    <Header title={'Video'} onPress={() => navigation.navigate('Favourite')} />
+                                ),
+                            },
+                        },
+                    }),
+                },
+                More: {
+                    screen: StackNavigatorMore,
+                },
+            },
+            {
+                defaultNavigationOptions: ({ navigation }) => ({
+                    tabBarIcon: ({ focused }) => {
+                        const { routeName } = navigation.state;
+                        return <TabBarIcon route={routeName} focused={focused} />;
+                    },
+                    tabBarLabel: () => false,
+                }),
+            },
+        ),
+        navigationOptions: () => ({
+            headerShown: false,
+        }),
     },
-    Favorite: {
-        screen: Favorite,
+    Favourite: {
+        screen: Favourites,
+        navigationOptions: {
+            header: ({ navigation }) => <SimpleHeader title={'MANI FAVORĪTI'} onPress={() => navigation.goBack()} />,
+        },
     },
 });
 

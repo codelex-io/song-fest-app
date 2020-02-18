@@ -1,16 +1,19 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
 
-export default class BackButton extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.filterText}>Atpakaļ uz augšu</Text>
-            </View>
-        );
-    }
+interface Props {
+    onPress: () => void;
 }
+
+const BackButton: React.FC<Props> = ({ onPress }) => {
+    return (
+        <TouchableOpacity style={styles.container} onPress={onPress}>
+            <Text style={styles.filterText}>Atpakaļ uz augšu</Text>
+        </TouchableOpacity>
+    );
+};
+export default BackButton;
 
 const styles = StyleSheet.create({
     container: {

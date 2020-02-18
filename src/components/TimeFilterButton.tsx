@@ -28,16 +28,19 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         paddingRight: 8,
+        marginBottom: 16,
     },
     containerActive: {
         height: 40,
-        backgroundColor: colors.purple,
+        backgroundColor: colors.green,
         justifyContent: 'center',
         paddingHorizontal: 12,
     },
     containeInactive: {
         height: 40,
-        backgroundColor: 'rgba(150,64,130,0.1)',
+        backgroundColor: colors.white,
+        borderWidth: 1,
+        borderColor: colors.green,
         justifyContent: 'center',
         paddingHorizontal: 12,
     },
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
         fontFamily: typography.bold,
         fontSize: 14,
         textAlign: 'center',
-        color: colors.purple,
+        color: colors.green,
         textTransform: 'uppercase',
     },
     textActive: {

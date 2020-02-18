@@ -5,6 +5,7 @@ import { Label } from './Label';
 import { colors, typography } from '@styles';
 import { IconButtons } from './IconButtons';
 import { EventItem } from '../types';
+import { dateTimeUtils } from '@utils';
 
 interface CardProps {
     item: EventItem;
@@ -26,7 +27,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, 
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.location}>{item.locationTitle}</Text>
                     <View style={styles.labels}>
-                        <Label title={item.date} iconType={IconType.Calendar} />
+                        <Label title={dateTimeUtils.formatDate(item.date)} iconType={IconType.Calendar} />
                         <Label title={item.time} iconType={IconType.Clock} />
                     </View>
                 </View>

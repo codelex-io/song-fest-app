@@ -1,4 +1,7 @@
 import React from 'react';
-import NewsListView from '../views/NewsListView';
+import { NewsListViewIndex } from '../views/NewsListView';
+import NavigationAware from './NavigationAware';
 
-export const News: React.FC = () => <NewsListView />;
+export const News: React.FC<NavigationAware> = ({ navigation }) => (
+    <NewsListViewIndex navigation={navigation}></NewsListViewIndex>
+);

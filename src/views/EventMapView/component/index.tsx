@@ -8,15 +8,19 @@ import { EventItem } from '../types';
 import { EventScroll } from './EventScroll';
 import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
+import { typography } from '@styles';
 
 const width = Dimensions.get('window').width;
 
 interface Props {
-    events: EventItem[];
+    loading: boolean;
+    items: EventItem[];
     onSelectEvent: (event: EventItem) => void;
+    onFavourite: (item: EventItem) => void;
+    onNavigate: (item: EventItem) => void;
 }
 
-const EventMapView: React.FC<Props> = ({ events, onSelectEvent }) => {
+const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
     return (
         <View style={styles.container}>
@@ -31,24 +35,34 @@ const EventMapView: React.FC<Props> = ({ events, onSelectEvent }) => {
                 showsUserLocation={true}
                 style={styles.map}
             >
-                {events.map(item => (
+                {items.map(item => (
                     <EventMarker
                         key={item.id}
                         onPress={() => onSelectEvent(item)}
                         isSelected={item.isSelected}
-                        coordinates={item.coordinates}
+                        coordinates={item.location}
                     />
                 ))}
             </MapView>
             <View style={styles.eventsContainer}>
                 <View style={styles.buttonsContainer}>
-                    <MyLocation />
-                    <FilterButton />
+                    <TouchableOpacity>
+                        <MyLocation />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <FilterButton />
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => setScrollOpen(!isScrollOpen)}>
                         <ArrowButton />
                     </TouchableOpacity>
                 </View>
-                {isScrollOpen && <EventScroll events={events} />}
+                {isScrollOpen && (
+                    <EventScroll
+                        items={items}
+                        onFavourite={item => onFavourite(item)}
+                        onNavigate={item => onNavigate(item)}
+                    />
+                )}
             </View>
         </View>
     );
@@ -60,6 +74,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: width,
         height: '100%',
+        fontFamily: typography.normal,
     },
     map: {
         alignSelf: 'stretch',
@@ -68,7 +83,7 @@ const styles = StyleSheet.create({
     },
     eventsContainer: {
         position: 'absolute',
-        bottom: 5,
+        bottom: 20,
         width: width,
     },
     buttonsContainer: {
