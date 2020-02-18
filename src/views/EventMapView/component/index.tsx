@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
 import MapView from 'react-native-maps';
 import { MyLocation } from './MyLocation';
 import { FilterButton } from './FilterButton';
@@ -22,7 +22,22 @@ interface Props {
 }
 
 const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
+    const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
+
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
+    const startAnimation = () => {
+        Animated.timing(animation, {
+            toValue: isScrollOpen ? 0 : height - 435,
+            duration: 500,
+        }).start();
+    };
+    const transformStyle = {
+        transform: [
+            {
+                translateY: animation,
+            },
+        ],
+    };
     return (
         <View style={styles.container}>
             <SearchBar />
@@ -35,7 +50,6 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 }}
                 showsUserLocation={true}
                 style={styles.map}
-                showsMyLocationButton={true}
             >
                 {items.map(item => (
                     <EventMarker
@@ -47,24 +61,29 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 ))}
             </MapView>
             <View style={styles.eventsContainer}>
-                <View style={styles.buttonsContainer}>
-                    <TouchableOpacity>
-                        <MyLocation />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <FilterButton />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setScrollOpen(!isScrollOpen)}>
-                        <ArrowButton />
-                    </TouchableOpacity>
-                </View>
-                {isScrollOpen && (
+                <Animated.View style={transformStyle}>
+                    <View style={styles.buttonsContainer}>
+                        <TouchableOpacity>
+                            <MyLocation />
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <FilterButton />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setScrollOpen(!isScrollOpen);
+                                startAnimation();
+                            }}
+                        >
+                            <ArrowButton open={isScrollOpen} />
+                        </TouchableOpacity>
+                    </View>
                     <EventScroll
                         items={items}
                         onFavourite={item => onFavourite(item)}
                         onNavigate={item => onNavigate(item)}
                     />
-                )}
+                </Animated.View>
             </View>
         </View>
     );
@@ -73,22 +92,26 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        position: 'absolute',
+        width: width,
+        height: '100%',
         fontFamily: typography.normal,
     },
     map: {
         alignSelf: 'stretch',
         width: width,
-        height: height - 120,
+        flex: 1,
     },
     eventsContainer: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 0,
         width: width,
     },
     buttonsContainer: {
         paddingHorizontal: 16,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom: 16,
     },
 });
 

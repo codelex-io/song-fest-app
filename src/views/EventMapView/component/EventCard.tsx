@@ -4,7 +4,7 @@ import { Icon, IconType } from '@components';
 import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
 import { dateTimeUtils } from '@utils';
-import { colors } from '@styles';
+import { colors, typography } from '@styles';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: colors.white,
         marginLeft: 10,
+        fontFamily: typography.normal,
     },
     eventiconLabel: {
         display: 'flex',
@@ -79,12 +80,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     event: {
-        backgroundColor: '#086BB5',
+        backgroundColor: colors.blue,
         height: height - 440,
         width: width - 50,
         zIndex: 9,
         marginRight: 16,
-        paddingHorizontal: 30,
+        paddingHorizontal: 24,
         paddingVertical: 16,
         display: 'flex',
         justifyContent: 'space-between',

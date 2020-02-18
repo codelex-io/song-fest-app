@@ -14,15 +14,7 @@ export const EventMarker: React.FC<Props> = ({ isSelected, onPress, coordinates 
     return (
         <Marker coordinate={coordinates} onPress={onPress}>
             <View style={isSelected ? styles.clickedMarker : styles.clearMarker}>
-                <View
-                    style={{
-                        backgroundColor: colors.orange,
-                        width: 44,
-                        height: 44,
-                        borderRadius: 44 / 2,
-                        justifyContent: 'center',
-                    }}
-                >
+                <View style={styles.mainMarker}>
                     <View
                         style={{
                             alignSelf: 'center',
@@ -57,8 +49,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
-        borderColor: colors.blue,
+        borderColor: 'transparent',
         borderStyle: 'solid',
         borderWidth: 5,
+    },
+    mainMarker: {
+        backgroundColor: colors.orange,
+        width: 44,
+        height: 44,
+        borderRadius: 44 / 2,
+        justifyContent: 'center',
     },
 });
