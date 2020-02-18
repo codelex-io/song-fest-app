@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Animated, Easing } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';

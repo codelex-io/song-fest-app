@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Easing } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
 import MapView from 'react-native-maps';
 import { MyLocation } from './MyLocation';
 import { FilterButton } from './FilterButton';
