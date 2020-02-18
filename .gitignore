@@ -31,6 +31,8 @@ local.properties
 *.iml
 gen/
 *.android.bundle
+.project
+.classpath
 
 # Visual Studio Code
 #
