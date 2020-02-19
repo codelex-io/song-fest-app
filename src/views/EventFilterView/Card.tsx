@@ -23,7 +23,7 @@ export const Card: React.FC<CardProps> = ({ event }) => (
                     <Text style={styles.title}>{event.title}</Text>
                     <Text style={styles.location}>{event.locationTitle}</Text>
                     <View style={styles.bottom}>
-                        <Label title={event.date} icon={IconType.Calendar} />
+                        <Label title={'???'} icon={IconType.Calendar} />
                         <Label title={event.time} icon={IconType.Clock} />
                     </View>
 

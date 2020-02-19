@@ -27,7 +27,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, 
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.location}>{item.locationTitle}</Text>
                     <View style={styles.labels}>
-                        <Label title={dateTimeUtils.formatDate(item.date)} iconType={IconType.Calendar} />
+                        <Label title={dateTimeUtils.formatDateMoment(item.date)} iconType={IconType.Calendar} />
                         <Label title={item.time} iconType={IconType.Clock} />
                     </View>
                 </View>

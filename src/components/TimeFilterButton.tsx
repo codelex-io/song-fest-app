@@ -1,25 +1,24 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, typography } from '@styles';
 
 interface FilterButtonProps {
-    button: {
-        title: string;
-        active: boolean;
-    };
+    title: string;
+    active: boolean;
+    onPress: () => void;
 }
 
 export class TimeFilterButton extends React.Component<FilterButtonProps> {
     render() {
-        const { button } = this.props;
+        const { title, active, onPress } = this.props;
         return (
-            <View style={styles.container}>
-                <View style={[button.active ? styles.containerActive : styles.containeInactive]}>
+            <TouchableOpacity style={styles.container} onPress={onPress}>
+                <View style={[active ? styles.containerActive : styles.containeInactive]}>
                     <View>
-                        <Text style={[button.active ? styles.textActive : styles.textInactive]}>{button.title}</Text>
+                        <Text style={[active ? styles.textActive : styles.textInactive]}>{title}</Text>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }
