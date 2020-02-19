@@ -5,7 +5,7 @@ import MoreView from './MoreView';
 import FilterView from './FilterView';
 import EventFilterView from './EventFilterView';
 import EventListView from './EventListView/component';
-import { ParticipantCategoryView } from './ParticipantCategoryView';
+import { UserCategoryView } from './UserCategoryView';
 import AllIcons from './AllIcons';
 import MarkdownEvent from './MarkdownEvent';
 import UserSettings from './UserSettings';
@@ -21,7 +21,7 @@ export {
     FilterView,
     EventFilterView,
     EventListView,
-    ParticipantCategoryView,
+    UserCategoryView,
     AllIcons,
     MarkdownEvent,
     UserSettings,

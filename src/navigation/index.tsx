@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { News } from './News';
 import { SingleNews } from './SingleNews';
 import { Events } from './Events';
@@ -11,6 +11,8 @@ import { TabBarIcon, Header, SimpleHeader } from '@components';
 import { UserSettings } from './UserSettings';
 import { createStackNavigator } from 'react-navigation-stack';
 import { LanguageView, EventMapView } from '@views';
+import { UserCategory } from './UserCategory';
+import { UserType } from '@domain/settings';
 
 const StackNavigatorMore = createStackNavigator({
     More: {
@@ -121,4 +123,17 @@ const StackScreen = createStackNavigator({
     },
 });
 
-export default createAppContainer(StackScreen);
+const createNavigationContainer = (userType: UserType) =>
+    createAppContainer(
+        createSwitchNavigator(
+            {
+                UserCategory: UserCategory,
+                App: StackScreen,
+            },
+            {
+                initialRouteName: userType !== null ? 'App' : 'UserCategory',
+            },
+        ),
+    );
+
+export default createNavigationContainer;

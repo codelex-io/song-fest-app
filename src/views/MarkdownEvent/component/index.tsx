@@ -33,7 +33,7 @@ export default class MarkdownEvent extends React.Component<Props> {
                         <Text style={styles.title}>{item.title}</Text>
                     </View>
                     <View style={styles.timeDateContainer}>
-                        <Label iconType={IconType.Calendar} title={dateTimeUtils.formatDate(item.date)} />
+                        <Label iconType={IconType.Calendar} title={dateTimeUtils.formatDateOpen(item.date)} />
                     </View>
                     <View style={styles.row}>
                         <IconButtons

@@ -5,9 +5,15 @@ import { EmptyFavorite } from './component/EmptyFavorite';
 import NavigationAware from '../../navigation/NavigationAware';
 
 const FavoriteListView: React.FC<NavigationAware> = ({ navigation }) => {
-    const { favourites, hasAnyItems } = useFavourites();
+    const { favourites, hasAnyItems, toggleFavourite } = useFavourites();
     if (hasAnyItems()) {
-        return <FavoriteListViewComponent navigation={navigation} favourites={favourites} />;
+        return (
+            <FavoriteListViewComponent
+                navigation={navigation}
+                favourites={favourites}
+                onFavourite={item => toggleFavourite(item)}
+            />
+        );
     }
     return <EmptyFavorite />;
 };

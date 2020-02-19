@@ -2,20 +2,21 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@styles';
 import { Icon, IconType } from '@components';
-import { GroupOfFavourites } from '@domain/favourites/types';
+import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
 import NavigationAware from '../../../navigation/NavigationAware';
 
 interface CardProps extends NavigationAware {
     group: GroupOfFavourites;
+    onFavourite: (item: Favourite) => void;
 }
 
-export const Card: React.FC<CardProps> = ({ group, navigation }) => {
+export const Card: React.FC<CardProps> = ({ group, navigation, onFavourite }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {group.key}</Text>
             {group.items.map(item => (
                 <View key={item.id} style={styles.itemContainer}>
-                    <TouchableOpacity style={styles.favoriteIcon}>
+                    <TouchableOpacity style={styles.favoriteIcon} onPress={() => onFavourite(item)}>
                         <Icon size={26} type={IconType.HeartFilled} fill={colors.orange} />
                     </TouchableOpacity>
 

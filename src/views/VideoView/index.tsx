@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        backgroundColor: colors.white,
     },
     searchContainerButton: {
         flexDirection: 'row',
