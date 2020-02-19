@@ -3,12 +3,13 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import SplashScreen from 'react-native-splash-screen';
 import { getClient, initApollo } from './src/api';
 import { initFavourites, FavouritesContextProvider } from './src/domain/favourites';
-import Navigation from './src/navigation';
+import createNavigationContainer from './src/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LocalizationContextProvider } from './src/localization/LocalizationContext';
 import { initLanguage } from './src/localization';
+import { initSettings, getUserType } from './src/domain/settings';
 
-const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage()]);
+const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
 
 const App: React.FC = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
@@ -21,6 +22,7 @@ const App: React.FC = () => {
     if (!isLoaded) {
         return <></>;
     }
+    const Navigation = createNavigationContainer(getUserType())
     return (
         <LocalizationContextProvider>
             <SafeAreaProvider>

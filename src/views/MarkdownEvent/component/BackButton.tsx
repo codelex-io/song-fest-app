@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         paddingVertical: 13,
-
         backgroundColor: colors.yellow,
+        marginBottom: 64,
     },
     filterText: {
         fontSize: 14,
         fontFamily: typography.bold,
-        marginRight: 16,
+        justifyContent: 'center',
     },
 });

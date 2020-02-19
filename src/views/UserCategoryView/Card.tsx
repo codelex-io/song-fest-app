@@ -7,10 +7,11 @@ interface CardProps {
     icon: IconType;
     title: string;
     backgroundColor: string;
+    onPress: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor }) => (
-    <TouchableOpacity style={[styles.columnContainer, { backgroundColor }]}>
+export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor, onPress }) => (
+    <TouchableOpacity style={[styles.columnContainer, { backgroundColor }]} onPress={onPress}>
         <View style={styles.containerBox}>
             <Icon size={24} type={icon} fill={backgroundColor} />
         </View>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 16,
         marginTop: 16,
-        backgroundColor: '#F15A31',
+        backgroundColor: colors.orange,
     },
     containerBox: {
         height: 44,

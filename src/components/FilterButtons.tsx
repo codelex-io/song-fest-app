@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 8,
         marginBottom: 16,
+        marginHorizontal: 16,
     },
     containerActive: {
         backgroundColor: colors.blue,
