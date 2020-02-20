@@ -16,7 +16,7 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
+  desc "deploys beta"
   lane :test do
     gradle(task: "test")
   end
@@ -26,25 +26,29 @@ platform :android do
   lane :version_update do
     path = '../app/build.gradle'
 	re = /versionCode\s+(\d+)/ 
+  revc = /versionName\s+"(\d+.\d+.\d+.\d+)"/
 
 	s = File.read(path)
 	versionCode = s[re, 1].to_i
+  versionName = s[revc,1].to_f
 	s[re, 1] = (versionCode + 1).to_s
+  s[revc,1] = (Time.new.strftime("%Y.%m.%d") + "." + (versionCode + 1).to_s)
 
-	f = File.new(path, 'w')
-	f.write(s)
-	f.close
+	 f = File.new(path, 'w')
+	 f.write(s)
+	 f.close
     # sh "your_script.sh"
     # You can also use other beta testing services here
   end
 
   desc "Submit a new Beta Build to google play"
   lane :beta do
+    version_update
     gradle(
 	task: 'assemble', 
 	build_type: 'Release', 
 	)
-    upload_to_play_store(track: 'beta')
+    #upload_to_play_store(track: 'beta')
 	slack(message: 'Successfully distributed a new beta build')
   
     # sh "your_script.sh"
