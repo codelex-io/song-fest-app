@@ -131,8 +131,8 @@ android {
         applicationId "com.songfestapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "2020.02.20.3"
+        versionCode 7
+        versionName "2020.02.20.7"
     }
     splits {
         abi {
