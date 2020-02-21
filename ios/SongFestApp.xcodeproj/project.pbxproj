@@ -17,14 +17,17 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* SongFestAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SongFestAppTests.m */; };
 		428E7C00A1DF1C1A2C1140EE /* libPods-SongFestAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E943675B55A190041D9BC6 /* libPods-SongFestAppTests.a */; };
+		50B9DA17EAEA4A31AA2830CE /* DINPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3FDAA3D21424577BD09B654 /* DINPro-Bold.ttf */; };
+		5953D1C75943489A8ABECE45 /* DINPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 200EBF0C44AB4C7F85DA2DB9 /* DINPro-Medium.ttf */; };
 		5D9570ED1A0B682B5FF5E421 /* libPods-SongFestApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 821EC82BD30472D6D387B788 /* libPods-SongFestApp-tvOSTests.a */; };
+		5EA56BEA23FF0E3300877F7A /* SongFestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA56BE923FF0E3300877F7A /* SongFestAppUITests.swift */; };
+		5EA56BF223FF0EC600877F7A /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA56BF123FF0EC600877F7A /* SnapshotHelper.swift */; };
+		5EA56BF423FF196500877F7A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA56BF323FF196500877F7A /* icon.png */; };
+		8562BD6712C349009BA0F297 /* DINPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69F30D76AF1C450D8B56573F /* DINPro-Black.ttf */; };
+		85DD735733444D09BE77C9D0 /* DINPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98649D0CBD064D879BD7F7E1 /* DINPro-Regular.ttf */; };
+		8B24B07A32C34997B4CBE618 /* DINPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F36BC9073154ECAB6635278 /* DINPro-Light.ttf */; };
 		A50903E452D634CE572F43CD /* libPods-SongFestApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8486CCD792395AAD80956F45 /* libPods-SongFestApp.a */; };
 		EFB606294F69E6FA304BD500 /* libPods-SongFestApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8370FC4C13D1AE1CC8852B /* libPods-SongFestApp-tvOS.a */; };
-		8562BD6712C349009BA0F297 /* DINPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69F30D76AF1C450D8B56573F /* DINPro-Black.ttf */; };
-		50B9DA17EAEA4A31AA2830CE /* DINPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3FDAA3D21424577BD09B654 /* DINPro-Bold.ttf */; };
-		8B24B07A32C34997B4CBE618 /* DINPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F36BC9073154ECAB6635278 /* DINPro-Light.ttf */; };
-		5953D1C75943489A8ABECE45 /* DINPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 200EBF0C44AB4C7F85DA2DB9 /* DINPro-Medium.ttf */; };
-		85DD735733444D09BE77C9D0 /* DINPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98649D0CBD064D879BD7F7E1 /* DINPro-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,13 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "SongFestApp-tvOS";
 		};
+		5EA56BEC23FF0E3300877F7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = SongFestApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -57,26 +67,31 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SongFestApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SongFestApp/main.m; sourceTree = "<group>"; };
 		150E6CAFA5EF11AE47ED825C /* Pods-SongFestAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestAppTests.release.xcconfig"; path = "Target Support Files/Pods-SongFestAppTests/Pods-SongFestAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		200EBF0C44AB4C7F85DA2DB9 /* DINPro-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Medium.ttf"; path = "../assets/fonts/DINPro/DINPro-Medium.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* SongFestApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SongFestApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SongFestApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SongFestApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34E943675B55A190041D9BC6 /* libPods-SongFestAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SongFestAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43307E7576B385875B79FCDF /* Pods-SongFestAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestAppTests.debug.xcconfig"; path = "Target Support Files/Pods-SongFestAppTests/Pods-SongFestAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5EA56BE723FF0E3300877F7A /* SongFestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SongFestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EA56BE923FF0E3300877F7A /* SongFestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFestAppUITests.swift; sourceTree = "<group>"; };
+		5EA56BEB23FF0E3300877F7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EA56BF123FF0EC600877F7A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		5EA56BF323FF196500877F7A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		664C331A95B54FA5B7AD4267 /* Pods-SongFestApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SongFestApp-tvOSTests/Pods-SongFestApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		69F30D76AF1C450D8B56573F /* DINPro-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Black.ttf"; path = "../assets/fonts/DINPro/DINPro-Black.ttf"; sourceTree = "<group>"; };
 		821EC82BD30472D6D387B788 /* libPods-SongFestApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SongFestApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8486CCD792395AAD80956F45 /* libPods-SongFestApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SongFestApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F36BC9073154ECAB6635278 /* DINPro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Light.ttf"; path = "../assets/fonts/DINPro/DINPro-Light.ttf"; sourceTree = "<group>"; };
 		914896C0CEFDAA592DADF952 /* Pods-SongFestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestApp.release.xcconfig"; path = "Target Support Files/Pods-SongFestApp/Pods-SongFestApp.release.xcconfig"; sourceTree = "<group>"; };
+		98649D0CBD064D879BD7F7E1 /* DINPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Regular.ttf"; path = "../assets/fonts/DINPro/DINPro-Regular.ttf"; sourceTree = "<group>"; };
 		9D8370FC4C13D1AE1CC8852B /* libPods-SongFestApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SongFestApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3FDAA3D21424577BD09B654 /* DINPro-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Bold.ttf"; path = "../assets/fonts/DINPro/DINPro-Bold.ttf"; sourceTree = "<group>"; };
 		A74FCF62A73172586BCD1E8C /* Pods-SongFestApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SongFestApp-tvOS/Pods-SongFestApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		B932E4CF7C7ADA47E0C72933 /* Pods-SongFestApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SongFestApp-tvOSTests/Pods-SongFestApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB1DF6C3AB03F9FA00E48CAE /* Pods-SongFestApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SongFestApp-tvOS/Pods-SongFestApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		FFF78D79653DD86D05E4A780 /* Pods-SongFestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestApp.debug.xcconfig"; path = "Target Support Files/Pods-SongFestApp/Pods-SongFestApp.debug.xcconfig"; sourceTree = "<group>"; };
-		69F30D76AF1C450D8B56573F /* DINPro-Black.ttf */ = {isa = PBXFileReference; name = "DINPro-Black.ttf"; path = "../assets/fonts/DINPro/DINPro-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A3FDAA3D21424577BD09B654 /* DINPro-Bold.ttf */ = {isa = PBXFileReference; name = "DINPro-Bold.ttf"; path = "../assets/fonts/DINPro/DINPro-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8F36BC9073154ECAB6635278 /* DINPro-Light.ttf */ = {isa = PBXFileReference; name = "DINPro-Light.ttf"; path = "../assets/fonts/DINPro/DINPro-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		200EBF0C44AB4C7F85DA2DB9 /* DINPro-Medium.ttf */ = {isa = PBXFileReference; name = "DINPro-Medium.ttf"; path = "../assets/fonts/DINPro/DINPro-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		98649D0CBD064D879BD7F7E1 /* DINPro-Regular.ttf */ = {isa = PBXFileReference; name = "DINPro-Regular.ttf"; path = "../assets/fonts/DINPro/DINPro-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +127,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5EA56BE423FF0E3300877F7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -140,6 +162,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				5EA56BF323FF196500877F7A /* icon.png */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -158,7 +181,6 @@
 				43307E7576B385875B79FCDF /* Pods-SongFestAppTests.debug.xcconfig */,
 				150E6CAFA5EF11AE47ED825C /* Pods-SongFestAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +197,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5EA56BE823FF0E3300877F7A /* SongFestAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5EA56BF123FF0EC600877F7A /* SnapshotHelper.swift */,
+				5EA56BE923FF0E3300877F7A /* SongFestAppUITests.swift */,
+				5EA56BEB23FF0E3300877F7A /* Info.plist */,
+			);
+			path = SongFestAppUITests;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +220,7 @@
 				13B07FAE1A68108700A75B9A /* SongFestApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SongFestAppTests */,
+				5EA56BE823FF0E3300877F7A /* SongFestAppUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				258E34A3BDFFFBF80D598187 /* Pods */,
@@ -205,12 +238,13 @@
 				00E356EE1AD99517003FC87E /* SongFestAppTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* SongFestApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* SongFestApp-tvOSTests.xctest */,
+				5EA56BE723FF0E3300877F7A /* SongFestAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 		8ED4145C82B44B06993EB9BA /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				69F30D76AF1C450D8B56573F /* DINPro-Black.ttf */,
 				A3FDAA3D21424577BD09B654 /* DINPro-Bold.ttf */,
@@ -220,7 +254,6 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -303,27 +336,60 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* SongFestApp-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		5EA56BE623FF0E3300877F7A /* SongFestAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EA56BEE23FF0E3300877F7A /* Build configuration list for PBXNativeTarget "SongFestAppUITests" */;
+			buildPhases = (
+				5EA56BE323FF0E3300877F7A /* Sources */,
+				5EA56BE423FF0E3300877F7A /* Frameworks */,
+				5EA56BE523FF0E3300877F7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5EA56BED23FF0E3300877F7A /* PBXTargetDependency */,
+			);
+			name = SongFestAppUITests;
+			productName = SongFestAppUITests;
+			productReference = 5EA56BE723FF0E3300877F7A /* SongFestAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = Q85LUJJHUP;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = Q85LUJJHUP;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q85LUJJHUP;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q85LUJJHUP;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+					5EA56BE623FF0E3300877F7A = {
+						CreatedOnToolsVersion = 11.3.1;
+						DevelopmentTeam = Q85LUJJHUP;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 				};
 			};
@@ -332,6 +398,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -344,6 +411,7 @@
 				00E356ED1AD99517003FC87E /* SongFestAppTests */,
 				2D02E47A1E0B4A5D006451C7 /* SongFestApp-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* SongFestApp-tvOSTests */,
+				5EA56BE623FF0E3300877F7A /* SongFestAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -364,6 +432,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8562BD6712C349009BA0F297 /* DINPro-Black.ttf in Resources */,
 				50B9DA17EAEA4A31AA2830CE /* DINPro-Bold.ttf in Resources */,
+				5EA56BF423FF196500877F7A /* icon.png in Resources */,
 				8B24B07A32C34997B4CBE618 /* DINPro-Light.ttf in Resources */,
 				5953D1C75943489A8ABECE45 /* DINPro-Medium.ttf in Resources */,
 				85DD735733444D09BE77C9D0 /* DINPro-Regular.ttf in Resources */,
@@ -379,6 +448,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EA56BE523FF0E3300877F7A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -579,6 +655,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5EA56BE323FF0E3300877F7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EA56BEA23FF0E3300877F7A /* SongFestAppUITests.swift in Sources */,
+				5EA56BF223FF0EC600877F7A /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -591,6 +676,11 @@
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* SongFestApp-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+		5EA56BED23FF0E3300877F7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* SongFestApp */;
+			targetProxy = 5EA56BEC23FF0E3300877F7A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -612,6 +702,8 @@
 			baseConfigurationReference = 43307E7576B385875B79FCDF /* Pods-SongFestAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -635,7 +727,9 @@
 			baseConfigurationReference = 150E6CAFA5EF11AE47ED825C /* Pods-SongFestAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				INFOPLIST_FILE = SongFestAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -655,8 +749,10 @@
 			baseConfigurationReference = FFF78D79653DD86D05E4A780 /* Pods-SongFestApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				INFOPLIST_FILE = SongFestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -664,7 +760,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = SongFestApp;
 				PRODUCT_NAME = SongFestApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -675,7 +771,9 @@
 			baseConfigurationReference = 914896C0CEFDAA592DADF952 /* Pods-SongFestApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				INFOPLIST_FILE = SongFestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -683,7 +781,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = SongFestApp;
 				PRODUCT_NAME = SongFestApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -699,7 +797,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "SongFestApp-tvOS/Info.plist";
@@ -727,8 +827,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "SongFestApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -754,7 +856,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "SongFestApp-tvOSTests/Info.plist";
@@ -781,8 +885,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "SongFestApp-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -796,6 +902,61 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SongFestApp-tvOS.app/SongFestApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		5EA56BEF23FF0E3300877F7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SongFestAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.codelex.song-fest-app.SongFestAppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SongFestApp;
+			};
+			name = Debug;
+		};
+		5EA56BF023FF0E3300877F7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Q85LUJJHUP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SongFestAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.codelex.song-fest-app.SongFestAppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SongFestApp;
 			};
 			name = Release;
 		};
@@ -933,6 +1094,15 @@
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
 				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5EA56BEE23FF0E3300877F7A /* Build configuration list for PBXNativeTarget "SongFestAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EA56BEF23FF0E3300877F7A /* Debug */,
+				5EA56BF023FF0E3300877F7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
