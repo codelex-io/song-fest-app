@@ -1,32 +1,52 @@
-import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import React, { useRef, useImperativeHandle, forwardRef, RefForwardingComponent, PropsWithChildren } from 'react';
+import { StyleSheet, ScrollView, Dimensions, ScrollViewProps } from 'react-native';
 import { EventCard } from './EventCard';
 import { EventItem } from '../types';
 import { colors } from '@styles';
 
-interface Props {
+const width = Dimensions.get('window').width;
+
+export interface ScrollViewHandle {
+    scrollTo(options: ScrollToOptions): void;
+}
+interface ScrollToOptions {
+    x?: number;
+    y?: number;
+    animated?: boolean;
+}
+interface Props extends ScrollViewProps {
     items: EventItem[];
     onFavourite: (item: EventItem) => void;
     onNavigate: (item: EventItem) => void;
 }
 
-export const EventScroll: React.FC<Props> = ({ items, onFavourite, onNavigate }) => {
+const EventScroll: RefForwardingComponent<ScrollViewHandle, PropsWithChildren<Props>> = (props, ref) => {
+    const scrollViewRef = useRef<ScrollView>(null);
+    useImperativeHandle(ref, () => ({
+        scrollTo: (options: ScrollToOptions) => {
+            scrollViewRef.current && scrollViewRef.current.scrollTo(options);
+        },
+    }));
     return (
         <ScrollView
             horizontal={true}
             scrollEventThrottle={16}
             scrollEnabled={true}
             contentContainerStyle={styles.container}
+            decelerationRate={0}
+            snapToInterval={width - 34}
+            snapToAlignment={'center'}
+            ref={scrollViewRef}
         >
-            {items.map((item, index) => (
+            {props.items.map((item, index) => (
                 <EventCard
                     key={item.id}
                     backgroundColor={colors.findColorByIndex(index)}
                     item={item}
                     itemIndex={index + 1}
-                    totalItems={items.length}
-                    onFavourite={() => onFavourite(item)}
-                    onNavigate={() => onNavigate(item)}
+                    totalItems={props.items.length}
+                    onFavourite={() => props.onFavourite(item)}
+                    onNavigate={() => props.onNavigate(item)}
                 />
             ))}
         </ScrollView>
@@ -40,3 +60,6 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
     },
 });
+
+const ForwardedRefScroll = forwardRef(EventScroll);
+export { ForwardedRefScroll as EventScroll };

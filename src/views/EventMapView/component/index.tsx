@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
 import MapView from 'react-native-maps';
 import { MyLocation } from './MyLocation';
 import { FilterButton } from './FilterButton';
 import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
-import { EventScroll } from './EventScroll';
+import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
 import { typography } from '@styles';
@@ -22,6 +22,7 @@ interface Props {
 }
 
 const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
+    const scrollViewRef = useRef<ScrollViewHandle>(null);
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
 
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
@@ -54,7 +55,16 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 {items.map(item => (
                     <EventMarker
                         key={item.id}
-                        onPress={() => onSelectEvent(item)}
+                        onPress={() => {
+                            onSelectEvent(item);
+                            if (scrollViewRef.current) {
+                                scrollViewRef.current.scrollTo({
+                                    x: width - 34,
+                                    y: 0,
+                                    animated: true,
+                                });
+                            }
+                        }}
                         isSelected={item.isSelected}
                         coordinates={item.location}
                     />
@@ -82,6 +92,7 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                         items={items}
                         onFavourite={item => onFavourite(item)}
                         onNavigate={item => onNavigate(item)}
+                        ref={scrollViewRef}
                     />
                 </Animated.View>
             </View>
