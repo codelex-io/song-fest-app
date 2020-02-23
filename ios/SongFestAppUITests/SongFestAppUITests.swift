@@ -28,6 +28,8 @@ class SongFestAppUITests: XCTestCase {
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
+        snapshot("01Screen")
+
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

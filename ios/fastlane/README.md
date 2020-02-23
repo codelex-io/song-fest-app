@@ -36,6 +36,11 @@ Create ipa
 fastlane ios upload
 ```
 Upload to App Store
+### ios do_everything
+```
+fastlane ios do_everything
+```
+Create app, take screenshots, build and upload to App Store
 
 ----
 
