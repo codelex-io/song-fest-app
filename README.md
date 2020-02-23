@@ -9,3 +9,9 @@
 `./gradlew assembleDebug`
 
 Locate *apk* at `android/app/build/outputs/debug` and install it on your device.
+
+## Build & Release iPhone App
+
+Build an application: `bundle exec fastlane build`
+
+Upload an *ipa* to *Test Flight*: `bundle exec fastlane pilot upload --ipa ./fastlane/builds/SongFestApp.ipa`
