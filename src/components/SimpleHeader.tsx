@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
+import { topHeader } from '@styles/Components';
 import Icon, { IconType } from './Icon';
 
 interface HeaderProps {
@@ -10,7 +11,7 @@ interface HeaderProps {
 
 export const SimpleHeader: React.FC<HeaderProps> = ({ title, onPress }) => {
     return (
-        <View style={styles.header}>
+        <View style={[styles.header, topHeader.container]}>
             <TouchableOpacity style={styles.iconBox} onPress={onPress}>
                 <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
             </TouchableOpacity>
