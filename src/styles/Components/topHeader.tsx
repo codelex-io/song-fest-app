@@ -1,13 +1,14 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, StatusBar } from 'react-native';
+
 
 export const topHeader = StyleSheet.create({
     container: {
         ...Platform.select({
             ios: {
-                marginTop: 48,
+                marginTop: StatusBar.currentHeight,
             },
             android: {
-                marginTop: 0,
+                marginTop: StatusBar.currentHeight,
             },
         }),
     },
