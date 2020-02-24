@@ -5,7 +5,7 @@ import { colors } from '@styles';
 
 export const EmptyFavorite: React.FC = () => {
     return (
-        <View style={[styles.container]}>
+        <View style={styles.container}>
             <Icon size={50} type={IconType.HeartFilled} fill={colors.orange} />
             <Text style={styles.title}>Šeit varēsi atrast savus favorītus</Text>
             <Text style={styles.title2}>
