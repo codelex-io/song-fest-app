@@ -12,7 +12,7 @@ interface Props extends NavigationAware {
 
 const FavoriteListView: React.FC<Props> = ({ favourites, navigation, onFavourite }) => {
     return (
-        <View style={[styles.container]}>
+        <View style={styles.container}>
             <FlatList<GroupOfFavourites>
                 data={favourites.filter(favourites => favourites.items.length !== 0)}
                 keyExtractor={item => item.key}
