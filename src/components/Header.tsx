@@ -13,23 +13,22 @@ export const Header: React.FC<HeaderProps> = ({ title, onPress }) => {
     return (
         <SafeAreaConsumer>
             {insets => (
-        <View style={{paddingTop:insets?.top}}>
-            <View style={styles.container}>
-            <Text style={styles.text}>{title}</Text>
-            <TouchableOpacity style={styles.containerBox} onPress={onPress}>
-                <Icon size={28} type={IconType.HeartFilled} fill={colors.white} />
-            </TouchableOpacity>
-            </View>
-        </View>
-        )
-        }
+                <View style={{ paddingTop: insets?.top }}>
+                    <View style={styles.container}>
+                        <Text style={styles.text}>{title}</Text>
+                        <TouchableOpacity style={styles.containerBox} onPress={onPress}>
+                            <Icon size={28} type={IconType.HeartFilled} fill={colors.white} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            )}
         </SafeAreaConsumer>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical:8,
+        paddingVertical: 8,
         paddingHorizontal: 16,
         letterSpacing: 0.15,
         fontSize: 20,

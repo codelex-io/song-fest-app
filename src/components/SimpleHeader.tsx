@@ -13,15 +13,14 @@ export const SimpleHeader: React.FC<HeaderProps> = ({ title, onPress }) => {
     return (
         <SafeAreaConsumer>
             {insets => (
-                <View style={{paddingTop:insets?.top}}>
-        <View style={styles.header}>
-            <TouchableOpacity style={styles.iconBox} onPress={onPress}>
-                <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
-            </TouchableOpacity>
-            <Text style={styles.text}>{title}</Text>
-        </View>
-
-</View>
+                <View style={{ paddingTop: insets?.top }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.iconBox} onPress={onPress}>
+                            <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
+                        </TouchableOpacity>
+                        <Text style={styles.text}>{title}</Text>
+                    </View>
+                </View>
             )}
         </SafeAreaConsumer>
     );
@@ -29,7 +28,7 @@ export const SimpleHeader: React.FC<HeaderProps> = ({ title, onPress }) => {
 
 const styles = StyleSheet.create({
     header: {
-        paddingVertical:8,
+        paddingVertical: 8,
         paddingHorizontal: 6,
         textAlign: 'left',
         letterSpacing: 0.15,
