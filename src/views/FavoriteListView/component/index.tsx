@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
 import { Card } from './Card';
 import { colors } from '@styles';
@@ -12,7 +12,7 @@ interface Props extends NavigationAware {
 
 const FavoriteListView: React.FC<Props> = ({ favourites, navigation, onFavourite }) => {
     return (
-        <View style={{ flex: 1, backgroundColor: colors.white }}>
+        <View style={styles.container}>
             <FlatList<GroupOfFavourites>
                 data={favourites.filter(favourites => favourites.items.length !== 0)}
                 keyExtractor={item => item.key}
@@ -27,3 +27,10 @@ const FavoriteListView: React.FC<Props> = ({ favourites, navigation, onFavourite
 };
 
 export default FavoriteListView;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: colors.white,
+    },
+});

@@ -16,16 +16,6 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios create_app
-```
-fastlane ios create_app
-```
-Create app on Apple Developer and App Store Connect sites
-### ios screenshot
-```
-fastlane ios screenshot
-```
-Take screenshots
 ### ios build
 ```
 fastlane ios build
