@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         height: 64,
         width: '100%',
         alignItems: 'center',
+        alignContent: 'center',
         justifyContent: 'center',
-        paddingBottom: 8,
     },
 });
