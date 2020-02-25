@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
-import { topHeader } from '@styles/Components';
 import Icon, { IconType } from './Icon';
+import { SafeAreaConsumer } from 'react-native-safe-area-context';
 
 interface HeaderProps {
     title: string;
@@ -11,18 +11,24 @@ interface HeaderProps {
 
 export const SimpleHeader: React.FC<HeaderProps> = ({ title, onPress }) => {
     return (
-        <View style={[styles.header, topHeader.container]}>
-            <TouchableOpacity style={styles.iconBox} onPress={onPress}>
-                <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
-            </TouchableOpacity>
-            <Text style={styles.text}>{title}</Text>
-        </View>
+        <SafeAreaConsumer>
+            {insets => (
+                <View style={{ paddingTop: insets?.top }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.iconBox} onPress={onPress}>
+                            <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
+                        </TouchableOpacity>
+                        <Text style={styles.text}>{title}</Text>
+                    </View>
+                </View>
+            )}
+        </SafeAreaConsumer>
     );
 };
 
 const styles = StyleSheet.create({
     header: {
-        height: 56,
+        paddingVertical: 8,
         paddingHorizontal: 6,
         textAlign: 'left',
         letterSpacing: 0.15,
