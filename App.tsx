@@ -8,8 +8,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LocalizationContextProvider } from './src/localization/LocalizationContext';
 import { initLanguage } from './src/localization';
 import { initSettings, getUserType } from './src/domain/settings';
+import { init } from './src/notifications';
 
-const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
+const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings(), init()]);
 
 const App: React.FC = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);

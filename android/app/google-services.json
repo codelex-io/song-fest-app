@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "73566660844",
+    "firebase_url": "https://song-fest-app.firebaseio.com",
+    "project_id": "song-fest-app",
+    "storage_bucket": "song-fest-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73566660844:android:69504cbd2ecdd4dc579dc9",
+        "android_client_info": {
+          "package_name": "com.songfestapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73566660844-5q8g5fp67a71n5desvfs9p8k9mna2usg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAumDLADyNeOqpH-Dyz5JGomE8pK6vbxuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73566660844-5q8g5fp67a71n5desvfs9p8k9mna2usg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
