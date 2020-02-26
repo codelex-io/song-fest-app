@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useState } from 'react';
+import React, { createContext } from 'react';
 import { UserType } from '.';
 
 type SettingsType = {

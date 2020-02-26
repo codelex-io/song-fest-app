@@ -60,20 +60,6 @@ const Navigation: React.FC<Props> = ({ userType }) => {
     const handleUserSet = (value: UserType) => {
         setUser(value);
     };
-<<<<<<< HEAD
-    return (
-        <>
-            {user === null ? (
-                <UserCategoryView onUserSet={handleUserSet} />
-            ) : (
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen name="App" options={{ headerShown: false }} component={AppStack} />
-                    </Stack.Navigator>
-                </NavigationContainer>
-            )}
-        </>
-=======
 
     if (user === null) {
         return <UserCategoryView onUserSet={handleUserSet} />;
@@ -85,7 +71,6 @@ const Navigation: React.FC<Props> = ({ userType }) => {
                 <Stack.Screen name="App" options={{ headerShown: false }} component={AppStack} />
             </Stack.Navigator>
         </NavigationContainer>
->>>>>>> 08b277ecde0b64ad5d288b70c0c68111d2b85138
     );
 };
 
