@@ -7,12 +7,15 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LocalizationContextProvider } from './src/localization/LocalizationContext';
 import { initLanguage } from './src/localization';
 import { initSettings, SettingsContextProvider } from './src/domain/settings';
+import { useStoryBook, StoryBookContextProvider } from './src/domain/storybook';
 import Navigation from './src/navigation';
+import Storybook from './storybook';
 
 const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
 
 const App: React.FC = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
+    const { isStoryBookActive } = useStoryBook();
     useEffect(() => {
         bootstrap().then(() => {
             SplashScreen.hide();
@@ -21,6 +24,10 @@ const App: React.FC = () => {
     }, []);
     if (!isLoaded) {
         return <></>;
+    }
+
+    if (isStoryBookActive) {
+        return <Storybook />;
     }
 
     return (
@@ -38,4 +45,8 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default () => (
+    <StoryBookContextProvider>
+        <App />
+    </StoryBookContextProvider>
+);
