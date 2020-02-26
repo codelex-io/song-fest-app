@@ -6,7 +6,7 @@ import { initFavourites, FavouritesContextProvider } from './src/domain/favourit
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LocalizationContextProvider } from './src/localization/LocalizationContext';
 import { initLanguage } from './src/localization';
-import { initSettings, getUserType } from './src/domain/settings';
+import { initSettings, SettingsContextProvider } from './src/domain/settings';
 import Navigation from './src/navigation';
 
 const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
@@ -28,7 +28,9 @@ const App: React.FC = () => {
             <SafeAreaProvider>
                 <ApolloProvider client={getClient()}>
                     <FavouritesContextProvider>
-                        <Navigation userType={getUserType()} />
+                        <SettingsContextProvider>
+                            <Navigation />
+                        </SettingsContextProvider>
                     </FavouritesContextProvider>
                 </ApolloProvider>
             </SafeAreaProvider>

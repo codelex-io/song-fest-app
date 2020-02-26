@@ -9,12 +9,14 @@ const items = [
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
         date: '2020-01-23T00:00:00.000Z',
         isFavourite: true,
+        link: 'https://codelex.io',
     },
     {
         id: '2',
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
         date: '2020-01-23T00:00:00.000Z',
         isFavourite: false,
+        link: 'https://codelex.io',
     },
     {
         id: '3',
@@ -22,12 +24,14 @@ const items = [
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
         date: '2020-01-23T00:00:00.000Z',
         isFavourite: true,
+        link: 'https://codelex.io',
     },
     {
         id: '4',
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
         date: '2020-01-23T00:00:00.000Z',
         isFavourite: false,
+        link: 'https://codelex.io',
     },
     {
         id: '5',
@@ -35,7 +39,10 @@ const items = [
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku vizuālā identitāte',
         date: '2020-01-23T00:00:00.000Z',
         isFavourite: true,
+        link: 'https://codelex.io',
     },
 ];
 
-storiesOf('NewsListView', module).add('list', () => <NewsListView loading={false} items={items} />);
+storiesOf('NewsListView', module).add('list', () => (
+    <NewsListView loading={false} items={items} onNavigate={() => null} onFavourite={() => null} onShare={() => null} />
+));

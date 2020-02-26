@@ -8,16 +8,23 @@ import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { open } from '@domain/share';
 import { ActivityIndicator } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, RouteProp } from '@react-navigation/native';
+
+type StackParamList = {
+    NewsList: { itemId: string };
+};
+
+type ViewRouteProp = RouteProp<StackParamList, 'NewsList'>;
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
 const SingleView: React.FC = () => {
-    const route: any = useRoute();
-    const id = route.params.itemId as string;
-    const { loading, data } = useQuery<Data, Variables>(FETCH_TARGET_NEWS_ITEM, { variables: { id } });
+    const {
+        params: { itemId },
+    } = useRoute<ViewRouteProp>();
+    const { loading, data } = useQuery<Data, Variables>(FETCH_TARGET_NEWS_ITEM, { variables: { id: itemId } });
     const { toggleFavourite, isFavourite } = useFavourites();
 
     if (loading || !data) {

@@ -6,10 +6,11 @@ import { colors } from '@styles';
 
 interface Props {
     favourites: GroupOfFavourites[];
+    onNavigate: (item: Favourite) => void;
     onFavourite: (item: Favourite) => void;
 }
 
-const FavoriteListView: React.FC<Props> = ({ favourites, onFavourite }) => {
+const FavoriteListView: React.FC<Props> = ({ favourites, onNavigate, onFavourite }) => {
     return (
         <View style={styles.container}>
             <FlatList<GroupOfFavourites>
@@ -17,7 +18,7 @@ const FavoriteListView: React.FC<Props> = ({ favourites, onFavourite }) => {
                 keyExtractor={item => item.key}
                 renderItem={({ item }): React.ReactElement => (
                     <View style={{ paddingHorizontal: 16 }}>
-                        <Card group={item} onFavourite={onFavourite} />
+                        <Card group={item} onNavigate={onNavigate} onFavourite={onFavourite} />
                     </View>
                 )}
             />

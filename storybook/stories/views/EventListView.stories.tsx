@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import _ from 'lodash';
-import { EventListComponent } from '../../../src/views/EventListView/component';
+import EventListComponent from '../../../src/views/EventListView/component';
 
 const events = [
     {

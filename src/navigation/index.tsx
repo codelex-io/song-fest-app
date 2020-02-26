@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { UserType } from '@domain/settings';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import { useSettings } from '@domain/settings';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NewsStack, EventsStack, MapStack, VideoStack, MoreStack } from './stacks';
-import { UserCategoryView, FavoriteListView, UserSettingsView } from '@views';
+import { UserCategoryView, FavoriteListView } from '@views';
 import { SimpleHeader, TabBarIcon } from '@components';
 
 const Stack = createStackNavigator();
@@ -30,39 +30,27 @@ const AppTabs = () => {
     );
 };
 
-const AppStack: React.FC = () => (
-    <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" options={{ headerShown: false }} component={AppTabs} />
-        <Stack.Screen
-            name="Favorites"
-            options={{
-                header: () => <SimpleHeader title={'MANI FAVORĪTI'} />,
-            }}
-            component={FavoriteListView}
-        />
-        <Stack.Screen
-            name="Settings"
-            options={{
-                header: () => <SimpleHeader title={'LIETOTĀJA IESTATĪJUMI'} />,
-            }}
-            component={UserSettingsView}
-        />
-    </Stack.Navigator>
-);
+const AppStack: React.FC = () => {
+    const navigation = useNavigation();
+    return (
+        <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" options={{ headerShown: false }} component={AppTabs} />
+            <Stack.Screen
+                name="Favorites"
+                options={{
+                    header: () => <SimpleHeader title={'MANI FAVORĪTI'} goBack={navigation.goBack} />,
+                }}
+                component={FavoriteListView}
+            />
+        </Stack.Navigator>
+    );
+};
 
-interface Props {
-    userType: UserType;
-}
+const Navigation: React.FC = () => {
+    const { userType, setUserType } = useSettings();
 
-const Navigation: React.FC<Props> = ({ userType }) => {
-    const [user, setUser] = useState(userType);
-
-    const handleUserSet = (value: UserType) => {
-        setUser(value);
-    };
-
-    if (user === null) {
-        return <UserCategoryView onUserSet={handleUserSet} />;
+    if (userType === null) {
+        return <UserCategoryView onSelect={setUserType} />;
     }
 
     return (

@@ -3,13 +3,13 @@ import { View, StyleSheet } from 'react-native';
 import { IconType } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
-import { storeUserType, UserType } from '@domain/settings';
+import { UserType } from '@domain/settings';
 
 interface Props {
-    onUserSet: (value: UserType) => void;
+    onSelect: (userType: UserType) => void;
 }
 
-export const UserCategoryView: React.FC<Props> = ({ onUserSet }) => {
+export const UserCategoryView: React.FC<Props> = ({ onSelect }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 2 }}>
@@ -17,25 +17,19 @@ export const UserCategoryView: React.FC<Props> = ({ onUserSet }) => {
                     icon={IconType.Yoga}
                     title={'Dalībniekam'}
                     backgroundColor={colors.orange}
-                    onPress={() => {
-                        storeUserType('participant'), onUserSet('participant');
-                    }}
+                    onPress={() => onSelect('participant')}
                 />
                 <Card
                     icon={IconType.Parent}
                     title={'Dalībnieka vecākam'}
                     backgroundColor={colors.green}
-                    onPress={() => {
-                        storeUserType('parent'), onUserSet('parent');
-                    }}
+                    onPress={() => onSelect('parent')}
                 />
                 <Card
                     icon={IconType.Eye}
                     title={'Apmeklētājam'}
                     backgroundColor={colors.blue}
-                    onPress={() => {
-                        storeUserType('visitor'), onUserSet('visitor');
-                    }}
+                    onPress={() => onSelect('visitor')}
                 />
             </View>
         </View>

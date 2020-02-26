@@ -7,11 +7,12 @@ import Card from './Card';
 interface Props {
     loading: boolean;
     items: NewsItem[];
+    onNavigate: (item: NewsItem) => void;
     onFavourite: (item: NewsItem) => void;
     onShare: (item: NewsItem) => void;
 }
 
-const NewsListView: React.FC<Props> = ({ items, onFavourite, onShare }) => {
+const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare }) => {
     return (
         <FlatList<NewsItem>
             data={items}
@@ -19,8 +20,8 @@ const NewsListView: React.FC<Props> = ({ items, onFavourite, onShare }) => {
                 <View style={{ paddingHorizontal: 16 }}>
                     <Card
                         item={item}
-                        itemId={item.id}
                         backgroundColor={colors.findColorByIndex(index)}
+                        onNavigate={() => onNavigate(item)}
                         onFavourite={() => onFavourite(item)}
                         onShare={() => onShare(item)}
                     />

@@ -3,15 +3,14 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@styles';
 import { Icon, IconType } from '@components';
 import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
-import { useNavigation } from '@react-navigation/native';
 
 interface CardProps {
     group: GroupOfFavourites;
+    onNavigate: (item: Favourite) => void;
     onFavourite: (item: Favourite) => void;
 }
 
-export const Card: React.FC<CardProps> = ({ group, onFavourite }) => {
-    const navigation = useNavigation();
+export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {group.key}</Text>
@@ -24,9 +23,7 @@ export const Card: React.FC<CardProps> = ({ group, onFavourite }) => {
                     <TouchableOpacity
                         style={{ flex: 1, flexDirection: 'row' }}
                         activeOpacity={0.5}
-                        onPress={() => {
-                            navigation.navigate('SingleNews', { itemId: item.id });
-                        }}
+                        onPress={() => onNavigate(item)}
                     >
                         <Text style={styles.itemText}>{item.title}</Text>
                         <View style={{ alignSelf: 'center' }}>

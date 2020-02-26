@@ -8,32 +8,34 @@ const events: EventItem[] = [
         id: '1',
         title: 'Svētku ieskandināšana',
         type: 'sing',
-        location: 'Viesturdārzs',
-        eventType: 'singing',
-        date: 'Pirmdiena, 6. jūlijs',
-        timeStart: '16:00',
-        timeEnd: '04:00',
-        coordinates: {
+        locationTitle: 'Rīga',
+        location: {
             latitude: 56.951637,
             longitude: 24.113347,
         },
+        eventType: 'singing',
+        date: 'Pirmdiena, 6. jūlijs',
+        time: '16:00',
         isSelected: false,
+        isFavourite: false,
     },
     {
         id: '2',
         title: 'Latvijas izglītības iestāžu skatuves runas konkurss Latgalē',
         type: 'sing',
-        location: 'Viesturdārzs',
-        eventType: 'singing',
-        date: 'Pirmdiena, 6. jūlijs',
-        timeStart: '19:30',
-        timeEnd: '20:30',
-        coordinates: {
+        locationTitle: 'Jūrmala',
+        location: {
             latitude: 56.951707,
             longitude: 24.110053,
         },
+        eventType: 'singing',
+        date: 'Pirmdiena, 6. jūlijs',
+        time: '19:30',
         isSelected: true,
+        isFavourite: true,
     },
 ];
 
-storiesOf('EventMapView', module).add('default', () => <EventMapView events={events} onSelectEvent={() => null} />);
+storiesOf('EventMapView', module).add('default', () => (
+    <EventMapView items={events} onSelectEvent={() => null} onFavourite={() => null} onNavigate={() => null} />
+));

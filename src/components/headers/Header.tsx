@@ -3,21 +3,20 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
 import Icon, { IconType } from '../Icon';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
 
 interface HeaderProps {
     title: string;
+    navigate: (route: string) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ title }) => {
-    const navigation = useNavigation();
+export const Header: React.FC<HeaderProps> = ({ title, navigate }) => {
     return (
         <SafeAreaConsumer>
             {insets => (
                 <View style={{ paddingTop: insets?.top }}>
                     <View style={styles.container}>
                         <Text style={styles.text}>{title}</Text>
-                        <TouchableOpacity style={styles.containerBox} onPress={() => navigation.navigate('Favorites')}>
+                        <TouchableOpacity style={styles.containerBox} onPress={() => navigate('Favorites')}>
                             <Icon size={40} type={IconType.HeartFilled} fill={colors.white} />
                         </TouchableOpacity>
                     </View>

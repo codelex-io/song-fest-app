@@ -3,29 +3,26 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
 import Icon, { IconType } from '../Icon';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
 
 interface HeaderProps {
     title: string;
+    goBack: () => void;
 }
 
-export const SimpleHeader: React.FC<HeaderProps> = ({ title }) => {
-    const navigation = useNavigation();
-    return (
-        <SafeAreaConsumer>
-            {insets => (
-                <View style={{ paddingTop: insets?.top }}>
-                    <View style={styles.header}>
-                        <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
-                            <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
-                        </TouchableOpacity>
-                        <Text style={styles.text}>{title}</Text>
-                    </View>
+export const SimpleHeader: React.FC<HeaderProps> = ({ title, goBack }) => (
+    <SafeAreaConsumer>
+        {insets => (
+            <View style={{ paddingTop: insets?.top }}>
+                <View style={styles.header}>
+                    <TouchableOpacity style={styles.iconBox} onPress={goBack}>
+                        <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
+                    </TouchableOpacity>
+                    <Text style={styles.text}>{title}</Text>
                 </View>
-            )}
-        </SafeAreaConsumer>
-    );
-};
+            </View>
+        )}
+    </SafeAreaConsumer>
+);
 
 const styles = StyleSheet.create({
     header: {
