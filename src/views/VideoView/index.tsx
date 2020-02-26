@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { colors } from '@styles';
-import { LongSearch, TimeFilterButton, FilterButtonIcon } from '@components';
+import { LongSearch, TimeFilterButton } from '@components';
 import { VideoData } from './types';
 import { Card } from './Card';
 
@@ -39,12 +39,6 @@ export const VideoView: React.FC = () => {
                 )}
                 ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
             />
-
-            <View style={styles.fixedFilter}>
-                <TouchableHighlight>
-                    <FilterButtonIcon />
-                </TouchableHighlight>
-            </View>
         </View>
     );
 };

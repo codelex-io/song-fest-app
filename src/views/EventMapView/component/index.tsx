@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
 import MapView from 'react-native-maps';
 import { MyLocation } from './MyLocation';
-import { FilterButton } from './FilterButton';
 import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
@@ -76,9 +75,7 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
                         <TouchableOpacity>
                             <MyLocation />
                         </TouchableOpacity>
-                        <TouchableOpacity>
-                            <FilterButton />
-                        </TouchableOpacity>
+
                         <TouchableOpacity
                             onPress={() => {
                                 setScrollOpen(!isScrollOpen);
