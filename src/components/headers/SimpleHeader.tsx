@@ -1,24 +1,25 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
-import Icon, { IconType } from './Icon';
+import Icon, { IconType } from '../Icon';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 interface HeaderProps {
     title: string;
-    onPress: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ title, onPress }) => {
+export const SimpleHeader: React.FC<HeaderProps> = ({ title }) => {
+    const navigation = useNavigation()
     return (
         <SafeAreaConsumer>
             {insets => (
                 <View style={{ paddingTop: insets?.top }}>
-                    <View style={styles.container}>
-                        <Text style={styles.text}>{title}</Text>
-                        <TouchableOpacity style={styles.containerBox} onPress={onPress}>
-                            <Icon size={40} type={IconType.HeartFilled} fill={colors.white} />
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
+                            <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                         </TouchableOpacity>
+                        <Text style={styles.text}>{title}</Text>
                     </View>
                 </View>
             )}
@@ -27,25 +28,35 @@ export const Header: React.FC<HeaderProps> = ({ title, onPress }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
+    header: {
         paddingVertical: 8,
-        paddingHorizontal: 16,
+        paddingHorizontal: 6,
+        textAlign: 'left',
         letterSpacing: 0.15,
         fontSize: 20,
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: colors.white,
     },
-    containerBox: {
+    iconBox: {
+        height: 44,
+        width: 44,
         display: 'flex',
         flexDirection: 'row',
+        backgroundColor: colors.white,
         justifyContent: 'center',
         alignItems: 'center',
+        marginRight: 16,
+        marginTop: 6,
     },
     text: {
-        fontFamily: typography.bold,
         fontSize: 20,
-        textTransform: 'uppercase',
+        fontFamily: typography.normal,
+        lineHeight: 26,
+        fontWeight: '500',
+        color: colors.darkGrey1A,
+    },
+    textContainer: {
+        padding: 15,
     },
 });

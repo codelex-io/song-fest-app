@@ -3,10 +3,13 @@ import { View, StyleSheet } from 'react-native';
 import { IconType } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
-import NavigationAware from '../../navigation/NavigationAware';
-import { storeUserType } from '@domain/settings';
+import { storeUserType, UserType } from '@domain/settings';
 
-export const UserCategoryView: React.FC<NavigationAware> = ({ navigation }) => {
+interface Props {
+    onUserSet: (value: UserType) => void
+}
+
+export const UserCategoryView: React.FC<Props> = ({ onUserSet }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 2 }}>
@@ -15,7 +18,7 @@ export const UserCategoryView: React.FC<NavigationAware> = ({ navigation }) => {
                     title={'Dalībniekam'}
                     backgroundColor={colors.orange}
                     onPress={() => {
-                        storeUserType('participant'), navigation.navigate('Home');
+                        storeUserType('participant'), onUserSet('participant');
                     }}
                 />
                 <Card
@@ -23,7 +26,7 @@ export const UserCategoryView: React.FC<NavigationAware> = ({ navigation }) => {
                     title={'Dalībnieka vecākam'}
                     backgroundColor={colors.green}
                     onPress={() => {
-                        storeUserType('parent'), navigation.navigate('Home');
+                        storeUserType('parent'), onUserSet('parent');
                     }}
                 />
                 <Card
@@ -31,7 +34,7 @@ export const UserCategoryView: React.FC<NavigationAware> = ({ navigation }) => {
                     title={'Apmeklētājam'}
                     backgroundColor={colors.blue}
                     onPress={() => {
-                        storeUserType('visitor'), navigation.navigate('Home');
+                        storeUserType('visitor'), onUserSet('visitor');
                     }}
                 />
             </View>

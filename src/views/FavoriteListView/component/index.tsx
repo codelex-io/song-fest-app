@@ -3,14 +3,13 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
 import { Card } from './Card';
 import { colors } from '@styles';
-import NavigationAware from '../../../navigation/NavigationAware';
 
-interface Props extends NavigationAware {
+interface Props {
     favourites: GroupOfFavourites[];
     onFavourite: (item: Favourite) => void;
 }
 
-const FavoriteListView: React.FC<Props> = ({ favourites, navigation, onFavourite }) => {
+const FavoriteListView: React.FC<Props> = ({ favourites, onFavourite }) => {
     return (
         <View style={styles.container}>
             <FlatList<GroupOfFavourites>
@@ -18,7 +17,7 @@ const FavoriteListView: React.FC<Props> = ({ favourites, navigation, onFavourite
                 keyExtractor={item => item.key}
                 renderItem={({ item }): React.ReactElement => (
                     <View style={{ paddingHorizontal: 16 }}>
-                        <Card group={item} navigation={navigation} onFavourite={onFavourite} />
+                        <Card group={item} onFavourite={onFavourite} />
                     </View>
                 )}
             />

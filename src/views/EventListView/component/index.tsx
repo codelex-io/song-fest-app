@@ -17,7 +17,7 @@ interface Props {
     onPress: (key: TimeSelector) => void;
 }
 
-const EventListView: React.FC<Props> = ({ loading, items, onFavourite, onNavigate, activeKey, onPress }) => {
+const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNavigate, activeKey, onPress }) => {
     if (loading) {
         return <ActivityIndicator />;
     }
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EventListView;
+export default EventListComponent;

@@ -4,28 +4,28 @@ import { EmptyFavorite } from './FavoriteListView/component/EmptyFavorite';
 import MoreView from './MoreView';
 import FilterView from './FilterView';
 import EventFilterView from './EventFilterView';
-import EventListView from './EventListView/component';
+import EventListView from './EventListView';
 import { UserCategoryView } from './UserCategoryView';
 import AllIcons from './AllIcons';
 import MarkdownEvent from './MarkdownEvent';
-import UserSettings from './UserSettings';
+import UserSettingsView from './UserSettings';
 import { VideoView } from './VideoView';
 import { LanguageView } from './LanguageView';
 import EventMapView from './EventMapView';
 
 export {
-    NewsListView,
     FavoriteListView,
+    NewsListView,
+    EventListView,
+    EventMapView,
     EmptyFavorite,
     MoreView,
     FilterView,
     EventFilterView,
-    EventListView,
     UserCategoryView,
     AllIcons,
     MarkdownEvent,
-    UserSettings,
+    UserSettingsView,
     VideoView,
     LanguageView,
-    EventMapView,
 };

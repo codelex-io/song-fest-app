@@ -21,7 +21,7 @@ interface Props {
     onNavigate: (item: EventItem) => void;
 }
 
-const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
+const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
     const scrollViewRef = useRef<ScrollViewHandle>(null);
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
 
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EventMapView;
+export default EventMapComponent;
