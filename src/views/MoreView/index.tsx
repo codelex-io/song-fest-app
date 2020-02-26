@@ -3,9 +3,8 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { IconType } from '@components';
 import { Card } from './Card';
 import { colors } from '@styles';
-import NavigationAware from '../../navigation/NavigationAware';
 
-export default class MoreView extends React.Component<NavigationAware> {
+export default class MoreView extends React.Component<any> {
     render() {
         const openHandler = (route: string) => {
             this.props.navigation.navigate(route);

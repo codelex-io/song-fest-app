@@ -6,16 +6,17 @@ import { EventMapView } from '@views';
 const Stack = createStackNavigator();
 
 const MapStack: React.FC = () => {
-   return (
-      <Stack.Navigator initialRouteName="Map">
-         <Stack.Screen
-            name="Map"
-            options={{
-               header: () => <Header title={'KARTE'} />,
-            }}
-            component={EventMapView} />
-      </Stack.Navigator>
-   )
-}
+    return (
+        <Stack.Navigator initialRouteName="Map">
+            <Stack.Screen
+                name="Map"
+                options={{
+                    header: () => <Header title={'KARTE'} />,
+                }}
+                component={EventMapView}
+            />
+        </Stack.Navigator>
+    );
+};
 
-export default MapStack
+export default MapStack;

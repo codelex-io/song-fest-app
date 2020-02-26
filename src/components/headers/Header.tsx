@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ title }) => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
     return (
         <SafeAreaConsumer>
             {insets => (

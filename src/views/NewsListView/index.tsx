@@ -16,7 +16,6 @@ const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean)
 };
 
 export const NewsListViewIndex: React.FC = () => {
-
     const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
     return (
