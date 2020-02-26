@@ -1,5 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
-import { UserSettings } from '../../../src/views';
+import { UserSettingsView } from '../../../src/views';
 
-storiesOf('UserSettings', module).add('list', () => <UserSettings />);
+storiesOf('UserSettings', module).add('list', () => <UserSettingsView />);

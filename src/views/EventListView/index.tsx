@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
-import { default as EventListViewComponent } from './component/index';
+import EventListComponent from './component/index';
 import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem } from './graphql/types';
 import { EventItem } from './types';
@@ -28,7 +28,7 @@ const EventListView: React.FC = () => {
     const now = moment();
     return (
         <View style={{ backgroundColor: colors.white }}>
-            <EventListViewComponent
+            <EventListComponent
                 loading={loading}
                 items={filterByDate(now, items, activeTime)}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}

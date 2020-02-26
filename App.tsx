@@ -3,11 +3,11 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import SplashScreen from 'react-native-splash-screen';
 import { getClient, initApollo } from './src/api';
 import { initFavourites, FavouritesContextProvider } from './src/domain/favourites';
-import createNavigationContainer from './src/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LocalizationContextProvider } from './src/localization/LocalizationContext';
 import { initLanguage } from './src/localization';
-import { initSettings, getUserType } from './src/domain/settings';
+import { initSettings, SettingsContextProvider } from './src/domain/settings';
+import Navigation from './src/navigation';
 
 const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
 
@@ -22,13 +22,15 @@ const App: React.FC = () => {
     if (!isLoaded) {
         return <></>;
     }
-    const Navigation = createNavigationContainer(getUserType())
+
     return (
         <LocalizationContextProvider>
             <SafeAreaProvider>
                 <ApolloProvider client={getClient()}>
                     <FavouritesContextProvider>
-                        <Navigation />
+                        <SettingsContextProvider>
+                            <Navigation />
+                        </SettingsContextProvider>
                     </FavouritesContextProvider>
                 </ApolloProvider>
             </SafeAreaProvider>

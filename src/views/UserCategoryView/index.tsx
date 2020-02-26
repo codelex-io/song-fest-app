@@ -3,10 +3,13 @@ import { View, StyleSheet } from 'react-native';
 import { IconType } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
-import NavigationAware from '../../navigation/NavigationAware';
-import { storeUserType } from '@domain/settings';
+import { UserType } from '@domain/settings';
 
-export const UserCategoryView: React.FC<NavigationAware> = ({ navigation }) => {
+interface Props {
+    onSelect: (userType: UserType) => void;
+}
+
+export const UserCategoryView: React.FC<Props> = ({ onSelect }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 2 }}>
@@ -14,25 +17,19 @@ export const UserCategoryView: React.FC<NavigationAware> = ({ navigation }) => {
                     icon={IconType.Yoga}
                     title={'Dalībniekam'}
                     backgroundColor={colors.orange}
-                    onPress={() => {
-                        storeUserType('participant'), navigation.navigate('Home');
-                    }}
+                    onPress={() => onSelect('participant')}
                 />
                 <Card
                     icon={IconType.Parent}
                     title={'Dalībnieka vecākam'}
                     backgroundColor={colors.green}
-                    onPress={() => {
-                        storeUserType('parent'), navigation.navigate('Home');
-                    }}
+                    onPress={() => onSelect('parent')}
                 />
                 <Card
                     icon={IconType.Eye}
                     title={'Apmeklētājam'}
                     backgroundColor={colors.blue}
-                    onPress={() => {
-                        storeUserType('visitor'), navigation.navigate('Home');
-                    }}
+                    onPress={() => onSelect('visitor')}
                 />
             </View>
         </View>
