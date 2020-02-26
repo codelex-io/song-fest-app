@@ -3,11 +3,16 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { IconType } from '@components';
 import { Card } from './Card';
 import { colors } from '@styles';
+<<<<<<< HEAD
 import { useNavigation } from '@react-navigation/native';
 
 export default class MoreView extends React.Component {
     navigation = useNavigation();
 
+=======
+
+export default class MoreView extends React.Component<any> {
+>>>>>>> 08b277ecde0b64ad5d288b70c0c68111d2b85138
     render() {
         const openHandler = (route: string) => {
             this.navigation.navigate(route);
