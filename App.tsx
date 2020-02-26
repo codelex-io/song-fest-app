@@ -3,7 +3,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import SplashScreen from 'react-native-splash-screen';
 import { getClient, initApollo } from './src/api';
 import { initFavourites, FavouritesContextProvider } from './src/domain/favourites';
-import createNavigationContainer from './src/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LocalizationContextProvider } from './src/localization/LocalizationContext';
 import { initLanguage } from './src/localization';
@@ -30,7 +29,6 @@ const App: React.FC = () => {
                 <ApolloProvider client={getClient()}>
                     <FavouritesContextProvider>
                         <Navigation userType={getUserType()} />
-                        {/* <Navigation userType={null} /> */}
                     </FavouritesContextProvider>
                 </ApolloProvider>
             </SafeAreaProvider>

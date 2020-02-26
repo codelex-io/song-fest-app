@@ -15,7 +15,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate }) => (
-    <TouchableOpacity style={styles.container} >
+    <TouchableOpacity style={styles.container}>
         {item.image?.url && (
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />

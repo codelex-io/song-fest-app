@@ -6,7 +6,7 @@ import { Card } from './Card';
 import { storeUserType, UserType } from '@domain/settings';
 
 interface Props {
-    onUserSet: (value: UserType) => void
+    onUserSet: (value: UserType) => void;
 }
 
 export const UserCategoryView: React.FC<Props> = ({ onUserSet }) => {

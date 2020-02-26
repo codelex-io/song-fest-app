@@ -6,16 +6,17 @@ import { Header } from '@components';
 const Stack = createStackNavigator();
 
 const VideoStack: React.FC = () => {
-   return (
-      <Stack.Navigator initialRouteName="Video">
-         <Stack.Screen
-            name="Video"
-            options={{
-               header: () => <Header title={'KARTE'} />,
-            }}
-            component={VideoView} />
-      </Stack.Navigator>
-   )
-}
+    return (
+        <Stack.Navigator initialRouteName="Video">
+            <Stack.Screen
+                name="Video"
+                options={{
+                    header: () => <Header title={'KARTE'} />,
+                }}
+                component={VideoView}
+            />
+        </Stack.Navigator>
+    );
+};
 
-export default VideoStack
+export default VideoStack;

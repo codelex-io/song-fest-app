@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 export const SimpleHeader: React.FC<HeaderProps> = ({ title }) => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
     return (
         <SafeAreaConsumer>
             {insets => (

@@ -20,9 +20,8 @@ const ITEMS = [
     },
 ];
 
-
 export const VideoView: React.FC = () => {
-    const items = ITEMS
+    const items = ITEMS;
     return (
         <View style={styles.container}>
             <LongSearch backgroundColor={colors.orange} />

@@ -8,22 +8,24 @@ import { Header, SimpleHeader } from '@components';
 const Stack = createStackNavigator();
 
 const NewsStack: React.FC = () => {
-   return (
-      <Stack.Navigator initialRouteName="News">
-         <Stack.Screen
-            name="News"
-            options={{
-               header: () => <Header title={'JAUNUMI'} />,
-            }}
-            component={NewsListViewIndex} />
-         <Stack.Screen
-            name="SingleNews"
-            options={{
-               header: () => <SimpleHeader title={''} />,
-            }}
-            component={MarkdownEvent} />
-      </Stack.Navigator>
-   )
-}
+    return (
+        <Stack.Navigator initialRouteName="News">
+            <Stack.Screen
+                name="News"
+                options={{
+                    header: () => <Header title={'JAUNUMI'} />,
+                }}
+                component={NewsListViewIndex}
+            />
+            <Stack.Screen
+                name="SingleNews"
+                options={{
+                    header: () => <SimpleHeader title={''} />,
+                }}
+                component={MarkdownEvent}
+            />
+        </Stack.Navigator>
+    );
+};
 
-export default NewsStack
+export default NewsStack;

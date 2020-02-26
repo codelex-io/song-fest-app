@@ -11,7 +11,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ group, onFavourite }) => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {group.key}</Text>

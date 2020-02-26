@@ -6,12 +6,7 @@ import { EmptyFavorite } from './component/EmptyFavorite';
 const FavoriteListView: React.FC = () => {
     const { favourites, hasAnyItems, toggleFavourite } = useFavourites();
     if (hasAnyItems()) {
-        return (
-            <FavoriteListViewComponent
-                favourites={favourites}
-                onFavourite={item => toggleFavourite(item)}
-            />
-        );
+        return <FavoriteListViewComponent favourites={favourites} onFavourite={item => toggleFavourite(item)} />;
     }
     return <EmptyFavorite />;
 };
