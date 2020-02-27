@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     },
     helperButton: {
         marginRight: 8,
-    }
+    },
 });
 
 export default EventMapComponent;
