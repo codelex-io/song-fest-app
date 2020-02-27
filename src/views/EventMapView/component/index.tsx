@@ -38,7 +38,7 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             },
         ],
     };
-    const eventCardPostion = (index: number) => {
+    const eventCardPosition = (index: number) => {
         return {
             x: index * (width - 34),
             y: 0,
@@ -66,7 +66,7 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
                             onSelectEvent(item);
                             setScrollOpen(true);
                             startAnimation();
-                            scrollViewRef.current && scrollViewRef.current.scrollTo(eventCardPostion(index));
+                            scrollViewRef.current && scrollViewRef.current.scrollTo(eventCardPosition(index));
                         }}
                         isSelected={item.isSelected}
                         coordinates={item.location}
