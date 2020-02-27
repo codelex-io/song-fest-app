@@ -72,17 +72,18 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             <View style={styles.eventsContainer}>
                 <Animated.View style={transformStyle}>
                     <View style={styles.buttonsContainer}>
-                        <TouchableOpacity>
-                            <MyLocation />
-                        </TouchableOpacity>
-
                         <TouchableOpacity
+                            style={styles.helperButton}
                             onPress={() => {
                                 setScrollOpen(!isScrollOpen);
                                 startAnimation();
                             }}
                         >
                             <ArrowButton open={isScrollOpen} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.helperButton}>
+                            <MyLocation />
                         </TouchableOpacity>
                     </View>
                     <EventScroll
@@ -118,8 +119,11 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         paddingHorizontal: 16,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         marginBottom: 16,
+    },
+    helperButton: {
+        marginRight: 8,
     },
 });
 
