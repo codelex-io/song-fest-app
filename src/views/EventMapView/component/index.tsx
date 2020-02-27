@@ -11,7 +11,6 @@ import { EventMarker } from './EventMarker';
 import { typography } from '@styles';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 interface Props {
     loading: boolean;
@@ -23,12 +22,13 @@ interface Props {
 
 const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
     const scrollViewRef = useRef<ScrollViewHandle>(null);
+    const mapViewRef = useRef<MapView>(null);
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
 
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
     const startAnimation = () => {
         Animated.timing(animation, {
-            toValue: isScrollOpen ? 0 : height - 435,
+            toValue: isScrollOpen ? 0 : 290,
             duration: 500,
         }).start();
     };
@@ -38,6 +38,13 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 translateY: animation,
             },
         ],
+    };
+    const eventCardPostion = (index: number) => {
+        return {
+            x: index * (width - 34),
+            y: 0,
+            animated: true,
+        };
     };
     return (
         <View style={styles.container}>
@@ -51,19 +58,16 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 }}
                 showsUserLocation={true}
                 style={styles.map}
+                ref={mapViewRef}
             >
-                {items.map(item => (
+                {items.map((item, index) => (
                     <EventMarker
                         key={item.id}
                         onPress={() => {
                             onSelectEvent(item);
-                            if (scrollViewRef.current) {
-                                scrollViewRef.current.scrollTo({
-                                    x: width - 34,
-                                    y: 0,
-                                    animated: true,
-                                });
-                            }
+                            setScrollOpen(true);
+                            startAnimation();
+                            scrollViewRef.current && scrollViewRef.current.scrollTo(eventCardPostion(index));
                         }}
                         isSelected={item.isSelected}
                         coordinates={item.location}

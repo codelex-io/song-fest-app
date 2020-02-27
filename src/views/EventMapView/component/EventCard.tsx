@@ -7,7 +7,6 @@ import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 interface EventDescriptionProps {
     item: EventItem;
@@ -81,8 +80,8 @@ const styles = StyleSheet.create({
     },
     event: {
         backgroundColor: colors.blue,
-        height: height - 440,
         width: width - 50,
+        height: 280,
         zIndex: 9,
         marginRight: 16,
         paddingHorizontal: 24,
