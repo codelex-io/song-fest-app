@@ -1,12 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
-import { MarkdownEvent } from '../../../src/views';
+import MarkdownEvent from '../../../src/views/MarkdownEvent/component';
 import _ from 'lodash';
 
-const data = {
+const item = {
     id: _.uniqueId(),
     title: 'Mūsdienu deju lieluzveduma modelēšanas koncerts „Augstāk par zemi” un finālkonkurss',
-    location: 'Rēzeknes novada Bērzgales pagasta Kultūras nams',
     date: '30.04.',
     time: '12.30 - 18.00',
     content: ` XII Latvijas Skolu jaunatnes dziesmu un deju svētku ieskaņas pasākums Krāslavā 
@@ -17,7 +16,11 @@ Mūsu ir daudz un mēs mācīsimies pazīt, saprast un izjust latvisko caur latv
 PIEDALĀS: PASTALIŅAS, RAITA, KRĀSLAVIŅA, ZIĶERI, RAKARI DRAISKUĻI, VARAVĪKSNĪTE, RITENĪTIS, JUMIS DZIRKSTĪTE, AUSTRIŅA, INDRIŅA, CITS HORIZONTS
 Ieeja pasākumā bez maksas.
 Rīko: Krāslavas Bērnu un jauniešu centrs sadarbībā ar izglītības iestādēm un Krāslavas kultūras namu.  `,
-    imageUrl: 'https://via.placeholder.com/360x184?text=Placeholder',
+    image: { url: 'https://via.placeholder.com/360x184?text=Placeholder' },
+    isFavourite: false,
+    link: 'https://codelex.io',
 };
 
-storiesOf('MarkdownEvent', module).add('list', () => <MarkdownEvent data={data} />);
+storiesOf('MarkdownEvent', module).add('list', () => (
+    <MarkdownEvent item={item} loading={false} onFavourite={() => null} onShare={() => null} />
+));

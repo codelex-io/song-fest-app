@@ -18,7 +18,7 @@ export const FavouritesContext = createContext<ContextType>({
 export const useFavourites = () => useContext<ContextType>(FavouritesContext);
 
 export const FavouritesContextProvider: React.FC = ({ children }) => {
-    const [favourites, setFavourites] = useState<GroupOfFavourites[]>([]);
+    const [favourites, setFavourites] = useState<GroupOfFavourites[]>([...getFavourites()]);
     return (
         <FavouritesContext.Provider
             value={{

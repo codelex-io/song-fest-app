@@ -4,24 +4,18 @@ import { colors } from '@styles';
 import { dateTimeUtils } from '@utils';
 import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
-import NavigationAware from '../../../navigation/NavigationAware';
 
-interface CardProps extends NavigationAware {
+interface CardProps {
     item: NewsItem;
-    newsItemId: string;
     backgroundColor: string;
+    onNavigate: () => void;
     onFavourite: () => void;
     onShare: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onShare, navigation, newsItemId }) => {
+const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavourite, onShare }) => {
     return (
-        <TouchableOpacity
-            onPress={() => {
-                navigation.navigate('SingleNews', { newsItemId: newsItemId });
-            }}
-            activeOpacity={0.5}
-        >
+        <TouchableOpacity onPress={onNavigate} activeOpacity={0.5}>
             <View style={styles.container}>
                 {item.image?.url && (
                     <View style={styles.pictureContainer}>

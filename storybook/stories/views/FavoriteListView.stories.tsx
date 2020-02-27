@@ -31,4 +31,6 @@ const favourites = [
     },
 ];
 
-storiesOf('FavoriteListView', module).add('list', () => <FavoriteListView favourites={favourites} />);
+storiesOf('FavoriteListView', module).add('list', () => (
+    <FavoriteListView favourites={favourites} onNavigate={() => null} onFavourite={() => null} />
+));

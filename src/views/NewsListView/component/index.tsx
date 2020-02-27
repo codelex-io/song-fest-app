@@ -3,16 +3,16 @@ import { NewsItem } from '../types';
 import { FlatList, View } from 'react-native';
 import { colors } from '@styles';
 import Card from './Card';
-import NavigationAware from '../../../navigation/NavigationAware';
 
-interface Props extends NavigationAware {
+interface Props {
     loading: boolean;
     items: NewsItem[];
+    onNavigate: (item: NewsItem) => void;
     onFavourite: (item: NewsItem) => void;
     onShare: (item: NewsItem) => void;
 }
 
-const NewsListView: React.FC<Props> = ({ items, onFavourite, onShare, navigation }) => {
+const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare }) => {
     return (
         <FlatList<NewsItem>
             data={items}
@@ -20,11 +20,10 @@ const NewsListView: React.FC<Props> = ({ items, onFavourite, onShare, navigation
                 <View style={{ paddingHorizontal: 16 }}>
                     <Card
                         item={item}
-                        newsItemId={item.id}
                         backgroundColor={colors.findColorByIndex(index)}
+                        onNavigate={() => onNavigate(item)}
                         onFavourite={() => onFavourite(item)}
                         onShare={() => onShare(item)}
-                        navigation={navigation}
                     />
                 </View>
             )}

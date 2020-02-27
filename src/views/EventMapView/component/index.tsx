@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
 import MapView from 'react-native-maps';
 import { MyLocation } from './MyLocation';
-import { FilterButton } from './FilterButton';
 import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
@@ -20,7 +19,7 @@ interface Props {
     onNavigate: (item: EventItem) => void;
 }
 
-const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
+const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
     const scrollViewRef = useRef<ScrollViewHandle>(null);
     const mapViewRef = useRef<MapView>(null);
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
@@ -77,19 +76,18 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
             <View style={styles.eventsContainer}>
                 <Animated.View style={transformStyle}>
                     <View style={styles.buttonsContainer}>
-                        <TouchableOpacity>
-                            <MyLocation />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <FilterButton />
-                        </TouchableOpacity>
                         <TouchableOpacity
+                            style={styles.helperButton}
                             onPress={() => {
                                 setScrollOpen(!isScrollOpen);
                                 startAnimation();
                             }}
                         >
                             <ArrowButton open={isScrollOpen} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.helperButton}>
+                            <MyLocation />
                         </TouchableOpacity>
                     </View>
                     <EventScroll
@@ -125,9 +123,12 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         paddingHorizontal: 16,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         marginBottom: 16,
+    },
+    helperButton: {
+        marginRight: 8,
     },
 });
 
-export default EventMapView;
+export default EventMapComponent;
