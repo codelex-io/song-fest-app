@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
                             <Text style={styles.text}>{title}</Text>
                         </TouchableWithoutFeedback>
                         <TouchableOpacity style={styles.containerBox} onPress={() => navigate('Favorites')}>
-                            <Icon size={40} type={IconType.HeartFilled} fill={colors.white} />
+                            <Icon type={IconType.HeartFilled} fill={colors.white} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -42,10 +42,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     containerBox: {
+        height: 40,
+        width: 40,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: colors.orange,
     },
     text: {
         fontFamily: typography.bold,

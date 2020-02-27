@@ -9,13 +9,16 @@ interface Props {
     onFavourite: () => void;
 }
 
-const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: string }> = ({
-    onPress,
-    iconType,
-    fill,
-}) => (
+interface ButtonProps {
+    height?: number;
+    width?: number;
+    onPress: () => void;
+    iconType: IconType;
+    fill?: string;
+}
+const SingleButton: React.FC<ButtonProps> = ({ onPress, iconType, fill, height, width }) => (
     <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={0.8}>
-        <Icon size={40} type={iconType} fill={fill} />
+        <Icon type={iconType} fill={fill} />
     </TouchableOpacity>
 );
 
@@ -42,5 +45,6 @@ const styles = StyleSheet.create({
         marginRight: 16,
         justifyContent: 'center',
         alignItems: 'center',
+        alignContent: 'center',
     },
 });
