@@ -6,7 +6,7 @@ import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem } from './graphql/types';
 import { EventItem } from './types';
 import { Favourite } from '@domain/favourites/types';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
@@ -26,7 +26,11 @@ const EventListView: React.FC = () => {
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
     const now = moment();
-    return (
+    return loading ? (
+        <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+            <ActivityIndicator size="large" color={colors.orange} />
+        </View>
+    ) : (
         <View style={{ backgroundColor: colors.white }}>
             <EventListComponent
                 loading={loading}

@@ -7,8 +7,9 @@ import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { open } from '@domain/share';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { useRoute, RouteProp } from '@react-navigation/native';
+import { colors } from '@styles';
 
 type StackParamList = {
     NewsList: { itemId: string };
@@ -28,7 +29,11 @@ const SingleView: React.FC = () => {
     const { toggleFavourite, isFavourite } = useFavourites();
 
     if (loading || !data) {
-        return <ActivityIndicator />;
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                <ActivityIndicator size="large" color={colors.orange} />
+            </View>
+        );
     }
 
     const item = toItem(data.item, isFavourite);

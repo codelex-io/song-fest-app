@@ -6,7 +6,7 @@ import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { open } from '@domain/share';
 import { FilterButtons } from '@components';
 import { colors } from '@styles';
@@ -20,7 +20,11 @@ export const NewsListViewIndex: React.FC = () => {
     const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
     const navigation = useNavigation();
-    return (
+    return loading ? (
+        <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+            <ActivityIndicator size="large" color={colors.orange} />
+        </View>
+    ) : (
         <View style={{ backgroundColor: colors.white }}>
             <FilterButtons
                 buttons={[
