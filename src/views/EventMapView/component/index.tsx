@@ -7,7 +7,7 @@ import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
-import { typography } from '@styles';
+import { typography, colors } from '@styles';
 
 const width = Dimensions.get('window').width;
 
@@ -127,7 +127,9 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     helperButton: {
+        backgroundColor: colors.yellow,
         marginRight: 8,
+        padding: 10,
     },
 });
 

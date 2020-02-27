@@ -12,8 +12,10 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => (
     <TouchableOpacity style={styles.container} onPress={onOpen}>
-        <View style={[styles.containerBox, { backgroundColor }]}>
-            <Icon size={24} type={icon} fill={colors.white} />
+        <View style={styles.containerBox}>
+            <View style={[styles.button, { backgroundColor }]}>
+                <Icon type={icon} fill={colors.white} />
+            </View>
         </View>
         <Text style={styles.text}> {title}</Text>
     </TouchableOpacity>
@@ -26,12 +28,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     containerBox: {
-        height: 44,
-        width: 44,
-        flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 27,
+    },
+    button: {
+        padding: 10,
     },
     text: {
         width: 99,

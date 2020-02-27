@@ -56,14 +56,14 @@ export const TabBarIcon: React.FC<Props> = ({ route, focused }) => {
     const backgroundColor = focused ? color : colors.white;
     return (
         <View style={[styles.container, { backgroundColor }]}>
-            <Icon size={24} type={icon} fill={fill} />
+            <Icon type={icon} fill={fill} />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: 64,
+        paddingVertical: 20,
         width: '100%',
         alignItems: 'center',
         alignContent: 'center',

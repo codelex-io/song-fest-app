@@ -15,20 +15,20 @@ const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: st
     fill,
 }) => (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-        <Icon size={20} type={iconType} fill={fill} />
+        <Icon type={iconType} fill={fill} />
     </TouchableOpacity>
 );
 
 export const IconButtons: React.FC<Props> = ({ onShare, onFavourite, onNavigate }) => (
     <View style={styles.container}>
-        <View style={styles.otherButtons}>
-            <SingleButton onPress={onNavigate} iconType={IconType.Navigation} fill={colors.darkGrey1A} />
+        <View style={[styles.otherButtons, { backgroundColor: colors.blue }]}>
+            <SingleButton onPress={onFavourite} iconType={IconType.Share} fill={colors.white} />
         </View>
-        <View style={styles.otherButtons}>
-            <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.darkGrey1A} />
-        </View>
-        <View style={styles.heartButton}>
+        <View style={[styles.otherButtons, { backgroundColor: colors.orange }]}>
             <SingleButton onPress={onFavourite} iconType={IconType.Heart} fill={colors.white} />
+        </View>
+        <View style={[styles.otherButtons, { backgroundColor: colors.green }]}>
+            <SingleButton onPress={onNavigate} iconType={IconType.Navigation} fill={colors.darkGrey1A} />
         </View>
     </View>
 );
@@ -38,19 +38,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     otherButtons: {
-        height: 40,
-        width: 40,
         marginRight: 16,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.yellow,
-    },
-    heartButton: {
-        height: 40,
-        width: 40,
-        marginRight: 16,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.orange,
+        padding: 10,
+        borderRadius: 2,
     },
 });
