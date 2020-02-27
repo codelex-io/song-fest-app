@@ -15,6 +15,6 @@ app_rating_config_path("./fastlane/metadata/app_store_rating_config.json")
 # 4
 ipa("./fastlane/builds/SongFestApp.ipa”)
 # 5
-submit_for_review(false)
+submit_for_review(true)
 # 6
 automatic_release(false)
