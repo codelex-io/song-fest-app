@@ -18,7 +18,7 @@ const MoreStack: React.FC = () => {
                 options={{
                     header: () => (
                         <Header
-                            title={'KARTE'}
+                            title={'VAIRĀK'}
                             navigate={navigation.navigate}
                             onLongPressTitle={() => {
                                 if (devPressCount < 2) {
