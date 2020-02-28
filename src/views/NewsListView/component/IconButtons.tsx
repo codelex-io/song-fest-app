@@ -10,13 +10,11 @@ interface Props {
 }
 
 interface ButtonProps {
-    height?: number;
-    width?: number;
     onPress: () => void;
     iconType: IconType;
     fill?: string;
 }
-const SingleButton: React.FC<ButtonProps> = ({ onPress, iconType, fill, height, width }) => (
+const SingleButton: React.FC<ButtonProps> = ({ onPress, iconType, fill }) => (
     <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={0.8}>
         <Icon type={iconType} fill={fill} />
     </TouchableOpacity>
