@@ -15,7 +15,7 @@ export const SimpleHeader: React.FC<HeaderProps> = ({ title, goBack }) => (
             <View style={{ paddingTop: insets?.top }}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.iconBox} onPress={goBack}>
-                        <Icon size={30} type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
+                        <Icon type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                     </TouchableOpacity>
                     <Text style={styles.text}>{title}</Text>
                 </View>
@@ -36,15 +36,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     iconBox: {
-        height: 44,
-        width: 44,
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: colors.white,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 16,
-        marginTop: 6,
+        padding: 10,
     },
     text: {
         fontSize: 20,
