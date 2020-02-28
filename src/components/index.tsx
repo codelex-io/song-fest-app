@@ -7,14 +7,4 @@ import { SimpleHeader } from './headers/SimpleHeader';
 import { LongSearch } from './LongSearch';
 import Loading from './Loading';
 
-export {
-    Header,
-    FilterButtons,
-    Icon,
-    IconType,
-    TabBarIcon,
-    FilterButtonIcon,
-    SimpleHeader,
-    LongSearch,
-    Loading,
-};
+export { Header, FilterButtons, Icon, IconType, TabBarIcon, FilterButtonIcon, SimpleHeader, LongSearch, Loading };

@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { typography } from '@styles';
+import { typography, colors } from '@styles';
 
 interface Props {
     title: string;
     active?: boolean;
     onPress: () => void;
-    primaryColor: string;
-    secondaryColor: string;
+    primaryColor?: string;
+    secondaryColor?: string;
     style?: { [key: string]: string | number };
 }
 
-const TextToggleBtn: React.FC<Props> = ({ title, active = false, onPress, primaryColor, secondaryColor, style }) => {
+const TextToggleBtn: React.FC<Props> = ({
+    title,
+    active = false,
+    onPress,
+    primaryColor = colors.white,
+    secondaryColor = colors.green,
+    style,
+}) => {
     const [isActive, setIsActive] = useState<boolean>(active);
     const handleToggle = () => {
         onPress();

@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { colors } from '@styles';
-import { LongSearch, TimeFilterButton, Loading } from '@components';
+import { LongSearch, Loading } from '@components';
+import { TextToggleBtn } from '@components/buttons';
 
 const LoadingView: React.FC = () => {
     return (
         <View style={{ flex: 1, backgroundColor: colors.white }}>
             <LongSearch backgroundColor={colors.blue} />
             <View style={styles.searchContainerButton}>
-                <TimeFilterButton title="šodien" active={false} onPress={() => null} />
-                <TimeFilterButton title="rīt" active={true} onPress={() => null} />
-                <TimeFilterButton title="šonedēļ" active={false} onPress={() => null} />
-                <TimeFilterButton title="cits" active={false} onPress={() => null} />
+                <TextToggleBtn title="šodien" active={false} onPress={() => null} />
+                <TextToggleBtn title="rīt" active={true} onPress={() => null} />
+                <TextToggleBtn title="šonedēļ" active={false} onPress={() => null} />
+                <TextToggleBtn title="cits" active={false} onPress={() => null} />
             </View>
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 <Loading />
