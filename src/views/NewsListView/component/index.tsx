@@ -1,6 +1,6 @@
 import React from 'react';
 import { NewsItem } from '../types';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { colors } from '@styles';
 import Card from './Card';
 
@@ -17,15 +17,13 @@ const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare
         <FlatList<NewsItem>
             data={items}
             renderItem={({ item, index }): React.ReactElement => (
-                <View style={{ paddingHorizontal: 16 }}>
-                    <Card
-                        item={item}
-                        backgroundColor={colors.findColorByIndex(index)}
-                        onNavigate={() => onNavigate(item)}
-                        onFavourite={() => onFavourite(item)}
-                        onShare={() => onShare(item)}
-                    />
-                </View>
+                <Card
+                    item={item}
+                    backgroundColor={colors.findColorByIndex(index)}
+                    onNavigate={() => onNavigate(item)}
+                    onFavourite={() => onFavourite(item)}
+                    onShare={() => onShare(item)}
+                />
             )}
         />
     );

@@ -15,18 +15,16 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavourite, onShare }) => {
     return (
-        <TouchableOpacity onPress={onNavigate} activeOpacity={0.5}>
-            <View style={styles.container}>
-                {item.image?.url && (
-                    <View style={styles.pictureContainer}>
-                        <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
-                    </View>
-                )}
-                <View style={[styles.lowerContainer, { backgroundColor }]}>
-                    <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
-                    <Text style={styles.titleText}> {item.title}</Text>
-                    <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
+        <TouchableOpacity style={styles.container} onPress={onNavigate} activeOpacity={0.5}>
+            {item.image?.url && (
+                <View style={styles.pictureContainer}>
+                    <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
                 </View>
+            )}
+            <View style={[styles.lowerContainer, { backgroundColor }]}>
+                <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
+                <Text style={styles.titleText}> {item.title}</Text>
+                <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
             </View>
         </TouchableOpacity>
     );
@@ -36,7 +34,8 @@ export default Card;
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 16,
+        marginVertical: 8,
+        marginHorizontal: 16,
     },
     pictureContainer: {
         backgroundColor: 'grey',

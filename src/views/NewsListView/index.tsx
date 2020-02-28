@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
 import { FETCH_NEWS_ITEMS, FETCH_NEWS_ALL_ITEMS } from './graphql/queries';
@@ -6,7 +6,7 @@ import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { open } from '@domain/share';
 import { FilterButtons, Loading } from '@components';
 import { colors } from '@styles';
@@ -22,6 +22,7 @@ export interface Variables {
 
 export const NewsListViewIndex: React.FC = () => {
     const [query, setQuery] = useState(FETCH_NEWS_ITEMS);
+    const [isFirstActive, setIsFirstActive] = useState(true);
 
     const { loading, data, refetch } = useQuery<Data, Variables>(query, {
         variables: { first: 10 },
@@ -30,12 +31,16 @@ export const NewsListViewIndex: React.FC = () => {
     const handleCurrentFilter = (isFirstActive: boolean) => {
         if (isFirstActive) {
             setQuery(FETCH_NEWS_ITEMS);
-            refetch();
+            setIsFirstActive(true);
         } else {
             setQuery(FETCH_NEWS_ALL_ITEMS);
-            refetch();
+            setIsFirstActive(false);
         }
     };
+
+    useEffect(() => {
+        refetch();
+    }, [isFirstActive]);
 
     const { toggleFavourite, isFavourite } = useFavourites();
     const navigation = useNavigation();
@@ -47,10 +52,14 @@ export const NewsListViewIndex: React.FC = () => {
             </View>
         );
     }
-
     return (
-        <View style={{ backgroundColor: colors.white }}>
-            <FilterButtons firstTitle="AKTUĀLI" secondTitle="VISI" currentActive={handleCurrentFilter} />
+        <View style={styles.container}>
+            <FilterButtons
+                firstTitle="AKTUĀLI"
+                secondTitle="VISI"
+                currentActive={isFirstActive}
+                triggerToggle={handleCurrentFilter}
+            />
             <NewsListViewComponent
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
@@ -61,3 +70,10 @@ export const NewsListViewIndex: React.FC = () => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colors.white,
+        flex: 1,
+    },
+});

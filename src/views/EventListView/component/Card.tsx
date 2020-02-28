@@ -41,6 +41,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginVertical: 8,
     },
     image: {
         width: '100%',

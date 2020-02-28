@@ -7,8 +7,6 @@ import { EventItem } from '../types';
 import { LongSearch, Loading } from '@components';
 import { TextToggleBtn } from '@components/buttons';
 
-const Separator = () => <View style={{ padding: 8 }} />;
-
 interface Props {
     loading: boolean;
     items: EventItem[];
@@ -23,7 +21,7 @@ const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNa
         return <Loading />;
     }
     return (
-        <View>
+        <View style={styles.viewContainer}>
             <LongSearch backgroundColor={colors.blue} />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
@@ -56,27 +54,32 @@ const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNa
                 />
             </View>
             <FlatList<EventItem>
+                style={styles.listContainer}
                 data={items}
                 renderItem={({ item, index }): React.ReactElement => (
-                    <View style={{ paddingHorizontal: 16 }}>
-                        <Card
-                            item={item}
-                            backgroundColor={colors.findColorByIndex(index)}
-                            onFavourite={() => onFavourite(item)}
-                            onNavigate={() => onNavigate(item)}
-                        />
-                    </View>
+                    <Card
+                        item={item}
+                        backgroundColor={colors.findColorByIndex(index)}
+                        onFavourite={() => onFavourite(item)}
+                        onNavigate={() => onNavigate(item)}
+                    />
                 )}
-                ItemSeparatorComponent={() => <Separator />}
             />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    viewContainer: {
+        flex: 1,
+    },
     searchContainerButton: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        paddingHorizontal: 16,
+    },
+    listContainer: {
+        flex: 1,
         paddingHorizontal: 16,
     },
 });

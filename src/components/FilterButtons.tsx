@@ -6,24 +6,30 @@ import { typography } from '../styles';
 interface FilterButtonsProps {
     firstTitle: string;
     secondTitle: string;
-    currentActive: (value: boolean) => void;
+    triggerToggle: (value: boolean) => void;
+    currentActive: boolean;
 }
 
-export const FilterButtons: React.FC<FilterButtonsProps> = ({ firstTitle, secondTitle, currentActive }) => {
-    const [isFirstActive, setIsFirstActive] = useState(true);
+export const FilterButtons: React.FC<FilterButtonsProps> = ({
+    firstTitle,
+    secondTitle,
+    currentActive,
+    triggerToggle,
+}) => {
+    const [isFirstActive, setIsFirstActive] = useState(currentActive);
 
     const handleToggle = (clickOn: string) => {
         if (clickOn === 'first' && isFirstActive) {
             return;
         } else if (clickOn === 'first' && !isFirstActive) {
             setIsFirstActive(true);
-            currentActive(true);
+            triggerToggle(true);
             return;
         } else if (clickOn === 'second' && !isFirstActive) {
             return;
         } else if (clickOn === 'second' && isFirstActive) {
             setIsFirstActive(false);
-            currentActive(false);
+            triggerToggle(false);
         }
     };
     return (
@@ -50,7 +56,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 8,
-        marginBottom: 16,
+        marginBottom: 8,
         marginHorizontal: 16,
     },
     containerActive: {
