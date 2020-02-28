@@ -25,9 +25,7 @@ const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavour
                 <View style={[styles.lowerContainer, { backgroundColor }]}>
                     <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
                     <Text style={styles.titleText}> {item.title}</Text>
-                    <View style={styles.row}>
-                        <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
-                    </View>
+                    <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -38,29 +36,16 @@ export default Card;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'column',
-        paddingBottom: 16,
+        marginBottom: 16,
     },
     pictureContainer: {
-        flex: 1,
         backgroundColor: 'grey',
     },
     picture: {
         height: 180,
     },
     lowerContainer: {
-        flex: 1,
-        backgroundColor: colors.blue,
-        flexDirection: 'column',
         padding: 16,
-    },
-    icontContainer: {
-        flex: 1,
-        backgroundColor: colors.blue,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        paddingTop: 16,
     },
     shareIconContainer: {
         height: 44,
@@ -70,12 +55,6 @@ const styles = StyleSheet.create({
         marginRight: 16,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    favoriteIconContainer: {
-        height: 44,
-        width: 44,
-        backgroundColor: colors.orange,
-        opacity: 0.15,
     },
     dateText: {
         color: colors.white,
@@ -87,8 +66,6 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: '500',
         fontSize: 16,
-    },
-    row: {
-        flexDirection: 'row',
+        marginBottom: 16,
     },
 });

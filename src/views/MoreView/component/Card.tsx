@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon, IconType } from '@components';
-import { colors, typography } from '@styles';
+import { Text, StyleSheet, TouchableOpacity, Dimensions, View } from 'react-native';
+import { IconType, Icon } from '@components';
+import { typography, colors } from '@styles';
 
 interface CardProps {
     title: string;
@@ -10,31 +10,29 @@ interface CardProps {
     onOpen: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => (
-    <TouchableOpacity style={styles.container} onPress={onOpen}>
-        <View style={styles.containerBox}>
-            <View style={[styles.button, { backgroundColor }]}>
+export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => {
+    const screenWidth = Math.floor(Dimensions.get('window').width);
+    const btnWidth = Math.floor((screenWidth - 64) / 3);
+    return (
+        <TouchableOpacity style={[styles.container, { width: btnWidth }]} onPress={onOpen}>
+            <View style={[styles.icon, { backgroundColor }]}>
                 <Icon type={icon} fill={colors.white} />
             </View>
-        </View>
-        <Text style={styles.text}> {title}</Text>
-    </TouchableOpacity>
-);
+            <Text style={styles.text}> {title}</Text>
+        </TouchableOpacity>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
-        height: 88,
-        justifyContent: 'space-between',
-    },
-    containerBox: {
+        marginHorizontal: 8,
         alignItems: 'center',
+        marginVertical: 12,
     },
-    button: {
+    icon: {
         padding: 10,
     },
     text: {
-        width: 99,
         textAlign: 'center',
         letterSpacing: 0.1,
         paddingTop: 8,

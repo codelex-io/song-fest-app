@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
-import { FETCH_NEWS_ITEMS } from './graphql/queries';
+import { FETCH_NEWS_ITEMS, FETCH_NEWS_ALL_ITEMS } from './graphql/queries';
 import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
@@ -16,18 +16,32 @@ const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean)
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
+export interface Variables {
+    first: number;
+}
+
 export const NewsListViewIndex: React.FC = () => {
-    const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
+    const [query, setQuery] = useState(FETCH_NEWS_ITEMS);
+
+    const { loading, data, refetch } = useQuery<Data, Variables>(query, {
+        variables: { first: 10 },
+    });
+
+    const handleCurrentFilter = (isFirstActive: boolean) => {
+        if (isFirstActive) {
+            setQuery(FETCH_NEWS_ITEMS);
+            refetch();
+        } else {
+            setQuery(FETCH_NEWS_ALL_ITEMS);
+            refetch();
+        }
+    };
+
     const { toggleFavourite, isFavourite } = useFavourites();
     const navigation = useNavigation();
     return (
         <View style={{ backgroundColor: colors.white }}>
-            <FilterButtons
-                buttons={[
-                    { title: 'AKTUĀLI', active: true },
-                    { title: 'VISI', active: false },
-                ]}
-            />
+            <FilterButtons firstTitle="AKTUĀLI" secondTitle="VISI" currentActive={handleCurrentFilter} />
             <NewsListViewComponent
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}

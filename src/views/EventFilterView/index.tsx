@@ -12,9 +12,10 @@ import {
 import { Card } from './Card';
 import { EventItem } from '../EventListView/types';
 import { colors, typography } from '../../styles';
-import { Icon, IconType, FilterButtonIcon, LongSearch, TimeFilterButton } from '@components';
+import { Icon, IconType, FilterButtonIcon, LongSearch } from '@components';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
+import { TextToggleBtn } from '@components/buttons';
 
 interface EventFilterViewProps {
     events: EventItem[];
@@ -116,10 +117,34 @@ export default class EventFilterView extends React.Component<EventFilterViewProp
                     <LongSearch backgroundColor={colors.blue} />
                 </View>
                 <View style={styles.searchContainerButton}>
-                    <TimeFilterButton title="Šodien" active={true} onPress={() => null} />
-                    <TimeFilterButton title="Rīt" active={false} onPress={() => null} />
-                    <TimeFilterButton title="Šonedēļ" active={false} onPress={() => null} />
-                    <TimeFilterButton title="Cits" active={false} onPress={() => null} />
+                    <TextToggleBtn
+                        title="Šodien"
+                        primaryColor={colors.white}
+                        secondaryColor={colors.green}
+                        active={true}
+                        onPress={() => null}
+                    />
+                    <TextToggleBtn
+                        title="Rīt"
+                        primaryColor={colors.white}
+                        secondaryColor={colors.green}
+                        active={true}
+                        onPress={() => null}
+                    />
+                    <TextToggleBtn
+                        title="Šonedēļ"
+                        primaryColor={colors.white}
+                        secondaryColor={colors.green}
+                        active={true}
+                        onPress={() => null}
+                    />
+                    <TextToggleBtn
+                        title="Cits"
+                        primaryColor={colors.white}
+                        secondaryColor={colors.green}
+                        active={true}
+                        onPress={() => null}
+                    />
                 </View>
                 <FlatList<EventItem>
                     data={events}

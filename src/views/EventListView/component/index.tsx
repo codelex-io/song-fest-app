@@ -1,10 +1,11 @@
 import React from 'react';
-import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { FlatList, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, TimeFilterButton } from '@components';
+import { LongSearch } from '@components';
+import { TextToggleBtn } from '@components/buttons';
 
 const Separator = () => <View style={{ padding: 8 }} />;
 
@@ -25,14 +26,34 @@ const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNa
         <View>
             <LongSearch backgroundColor={colors.blue} />
             <View style={styles.searchContainerButton}>
-                <TimeFilterButton title="šodien" active={activeKey === 'today'} onPress={() => onPress('today')} />
-                <TimeFilterButton title="rīt" active={activeKey === 'tomorrow'} onPress={() => onPress('tomorrow')} />
-                <TimeFilterButton
+                <TextToggleBtn
+                    title="šodien"
+                    active={activeKey === 'today'}
+                    onPress={() => onPress('today')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
+                <TextToggleBtn
+                    title="rīt"
+                    active={activeKey === 'tomorrow'}
+                    onPress={() => onPress('tomorrow')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
+                <TextToggleBtn
                     title="šonedēļ"
                     active={activeKey === 'this-week'}
                     onPress={() => onPress('this-week')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
                 />
-                <TimeFilterButton title="cits" active={activeKey === 'all'} onPress={() => onPress('all')} />
+                <TextToggleBtn
+                    title="cits"
+                    active={activeKey === 'all'}
+                    onPress={() => onPress('all')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
             </View>
             <FlatList<EventItem>
                 data={items}

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { colors } from '@styles';
-import { LongSearch, TimeFilterButton } from '@components';
+import { LongSearch } from '@components';
 import { VideoData } from './types';
 import { Card } from './Card';
+import { TextToggleBtn } from '@components/buttons';
 
 const ITEMS = [
     {
@@ -25,15 +26,35 @@ export const VideoView: React.FC = () => {
     return (
         <View style={styles.container}>
             <LongSearch backgroundColor={colors.orange} />
+
             <View style={styles.searchContainerButton}>
-                <TimeFilterButton title="tiešsaitē" active={true} onPress={() => null} />
-                <TimeFilterButton title="pēdējie" active={false} onPress={() => null} />
-                <TimeFilterButton title="populārakie" active={false} onPress={() => null} />
+                <TextToggleBtn
+                    title="tiešsaitē"
+                    onPress={() => null}
+                    primaryColor={colors.green}
+                    secondaryColor={colors.white}
+                    style={{ marginRight: 16 }}
+                />
+                <TextToggleBtn
+                    title="pēdējie"
+                    onPress={() => null}
+                    primaryColor={colors.green}
+                    secondaryColor={colors.white}
+                    style={{ marginRight: 16 }}
+                />
+                <TextToggleBtn
+                    title="populārakie"
+                    onPress={() => null}
+                    primaryColor={colors.green}
+                    secondaryColor={colors.white}
+                    style={{ marginRight: 16 }}
+                />
             </View>
+
             <FlatList<VideoData>
                 data={items}
                 renderItem={({ item }): React.ReactElement => (
-                    <View style={{ paddingHorizontal: 16 }}>
+                    <View style={{ marginHorizontal: 16 }}>
                         <Card item={item} />
                     </View>
                 )}
@@ -46,23 +67,12 @@ export const VideoView: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
         backgroundColor: colors.white,
     },
     searchContainerButton: {
         flexDirection: 'row',
         marginBottom: 16,
-        marginTop: 8,
         flexWrap: 'wrap',
-        paddingHorizontal: 16,
-    },
-    fixedFilter: {
-        position: 'absolute',
-        bottom: 0,
-        width: '25%',
-        marginBottom: 16,
-        alignSelf: 'center',
-        backgroundColor: colors.yellow,
+        marginHorizontal: 16,
     },
 });
