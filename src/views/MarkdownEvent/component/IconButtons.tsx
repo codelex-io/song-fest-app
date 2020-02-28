@@ -22,7 +22,7 @@ const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: st
 export const IconButtons: React.FC<Props> = ({ onShare, onFavourite, onNavigate }) => (
     <View style={styles.container}>
         <View style={[styles.otherButtons, { backgroundColor: colors.blue }]}>
-            <SingleButton onPress={onFavourite} iconType={IconType.Share} fill={colors.white} />
+            <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.white} />
         </View>
         <View style={[styles.otherButtons, { backgroundColor: colors.orange }]}>
             <SingleButton onPress={onFavourite} iconType={IconType.Heart} fill={colors.white} />

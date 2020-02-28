@@ -11,6 +11,7 @@ import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
+import { Loading } from '@components';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
     return {
@@ -26,6 +27,13 @@ const EventListView: React.FC = () => {
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
     const now = moment();
+    if (loading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                <Loading />
+            </View>
+        );
+    }
     return (
         <View style={{ backgroundColor: colors.white }}>
             <EventListComponent
