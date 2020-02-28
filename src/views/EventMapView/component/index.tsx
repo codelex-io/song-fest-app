@@ -2,16 +2,14 @@ import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
 import MapView from 'react-native-maps';
 import { MyLocation } from './MyLocation';
-import { FilterButton } from './FilterButton';
 import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
-import { typography } from '@styles';
+import { typography, colors } from '@styles';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 interface Props {
     loading: boolean;
@@ -21,14 +19,15 @@ interface Props {
     onNavigate: (item: EventItem) => void;
 }
 
-const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
+const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
     const scrollViewRef = useRef<ScrollViewHandle>(null);
+    const mapViewRef = useRef<MapView>(null);
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
 
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
     const startAnimation = () => {
         Animated.timing(animation, {
-            toValue: isScrollOpen ? 0 : height - 435,
+            toValue: isScrollOpen ? 0 : 290,
             duration: 500,
         }).start();
     };
@@ -38,6 +37,13 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 translateY: animation,
             },
         ],
+    };
+    const eventCardPosition = (index: number) => {
+        return {
+            x: index * (width - 34),
+            y: 0,
+            animated: true,
+        };
     };
     return (
         <View style={styles.container}>
@@ -51,19 +57,16 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
                 }}
                 showsUserLocation={true}
                 style={styles.map}
+                ref={mapViewRef}
             >
-                {items.map(item => (
+                {items.map((item, index) => (
                     <EventMarker
                         key={item.id}
                         onPress={() => {
                             onSelectEvent(item);
-                            if (scrollViewRef.current) {
-                                scrollViewRef.current.scrollTo({
-                                    x: width - 34,
-                                    y: 0,
-                                    animated: true,
-                                });
-                            }
+                            setScrollOpen(true);
+                            startAnimation();
+                            scrollViewRef.current && scrollViewRef.current.scrollTo(eventCardPosition(index));
                         }}
                         isSelected={item.isSelected}
                         coordinates={item.location}
@@ -73,19 +76,18 @@ const EventMapView: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNa
             <View style={styles.eventsContainer}>
                 <Animated.View style={transformStyle}>
                     <View style={styles.buttonsContainer}>
-                        <TouchableOpacity>
-                            <MyLocation />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <FilterButton />
-                        </TouchableOpacity>
                         <TouchableOpacity
+                            style={styles.helperButton}
                             onPress={() => {
                                 setScrollOpen(!isScrollOpen);
                                 startAnimation();
                             }}
                         >
                             <ArrowButton open={isScrollOpen} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.helperButton}>
+                            <MyLocation />
                         </TouchableOpacity>
                     </View>
                     <EventScroll
@@ -121,9 +123,14 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         paddingHorizontal: 16,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         marginBottom: 16,
+    },
+    helperButton: {
+        backgroundColor: colors.yellow,
+        marginRight: 8,
+        padding: 10,
     },
 });
 
-export default EventMapView;
+export default EventMapComponent;

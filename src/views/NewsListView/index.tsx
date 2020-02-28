@@ -8,19 +8,29 @@ import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { View } from 'react-native';
 import { open } from '@domain/share';
-import { FilterButtons } from '@components';
+import { FilterButtons, Loading } from '@components';
 import { colors } from '@styles';
-import NavigationAware from '../../navigation/NavigationAware';
+import { useNavigation } from '@react-navigation/native';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
-export const NewsListViewIndex: React.FC<NavigationAware> = ({ navigation }) => {
+export const NewsListViewIndex: React.FC = () => {
     const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
+    const navigation = useNavigation();
+
+    if (loading || !data) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                <Loading />
+            </View>
+        );
+    }
+
     return (
-        <View style={{ backgroundColor: colors.white }}>
+        <View style={{ backgroundColor: colors.white, paddingBottom: 60 }}>
             <FilterButtons
                 buttons={[
                     { title: 'AKTUĀLI', active: true },
@@ -28,9 +38,9 @@ export const NewsListViewIndex: React.FC<NavigationAware> = ({ navigation }) => 
                 ]}
             />
             <NewsListViewComponent
-                navigation={navigation}
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                onNavigate={item => navigation.navigate('SingleNews', { itemId: item.id })}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
                 onShare={item => open(item.link)}
             />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EventItem } from './types';
-import { default as EventMapViewComponent } from './component';
+import EventMapComponent from './component';
 import { useQuery } from '@apollo/react-hooks';
 import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem } from './graphql/types';
@@ -25,7 +25,7 @@ const EventMapView: React.FC = () => {
         items.push(...mapped);
     }
     return (
-        <EventMapViewComponent
+        <EventMapComponent
             loading={loading}
             items={items}
             onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}

@@ -20,7 +20,7 @@ interface EventFilterViewProps {
     events: EventItem[];
 }
 
-export default class EventListView extends React.Component<EventFilterViewProps> {
+export default class EventFilterView extends React.Component<EventFilterViewProps> {
     state = {
         modalVisible: false,
     };

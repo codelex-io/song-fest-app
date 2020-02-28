@@ -16,7 +16,7 @@ const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: st
     fill,
 }) => (
     <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={0.8}>
-        <Icon size={20} type={iconType} fill={fill} />
+        <Icon type={iconType} fill={fill} />
     </TouchableOpacity>
 );
 
@@ -25,7 +25,7 @@ export const IconButtons: React.FC<Props> = ({ onShare, isFavourite, onFavourite
         <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.blue} />
         <SingleButton
             onPress={onFavourite}
-            iconType={isFavourite ? IconType.HeartFilled : IconType.Heart}
+            iconType={isFavourite ? IconType.Heart : IconType.HeartFilled}
             fill={colors.orange}
         />
         <SingleButton onPress={onNavigate} iconType={IconType.Navigation} fill={colors.green} />
@@ -37,11 +37,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     button: {
-        height: 40,
-        width: 40,
+        padding: 8,
         backgroundColor: colors.white,
         marginRight: 16,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });

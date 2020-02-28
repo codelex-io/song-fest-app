@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
-import { default as EventListViewComponent } from './component/index';
+import EventListComponent from './component/index';
 import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem } from './graphql/types';
 import { EventItem } from './types';
@@ -11,6 +11,7 @@ import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
+import { Loading } from '@components';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
     return {
@@ -26,9 +27,16 @@ const EventListView: React.FC = () => {
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
     const now = moment();
+    if (loading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                <Loading />
+            </View>
+        );
+    }
     return (
         <View style={{ backgroundColor: colors.white }}>
-            <EventListViewComponent
+            <EventListComponent
                 loading={loading}
                 items={filterByDate(now, items, activeTime)}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}

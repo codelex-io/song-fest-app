@@ -2,8 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import _ from 'lodash';
 import { EventFilterView } from '../../../src/views';
+import { EventItem } from '../../../src/views/EventListView/types';
 
-const events = [
+const events: EventItem[] = [
     {
         id: _.uniqueId(),
         title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku ieskaņas pasākums Kuldīgas novadā',
