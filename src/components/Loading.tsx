@@ -5,7 +5,7 @@ import { colors } from '@styles';
 export default class Loading extends Component {
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center' }}>
+            <View>
                 <ActivityIndicator size="large" color={colors.orange} />
             </View>
         );

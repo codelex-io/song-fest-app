@@ -28,18 +28,24 @@ const EventListView: React.FC = () => {
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
     const now = moment();
     if (loading) {
-        return <Loading />
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                <Loading />
+            </View>
+        );
     }
-    return <View style={{ backgroundColor: colors.white }}>
-        <EventListComponent
-            loading={loading}
-            items={filterByDate(now, items, activeTime)}
-            onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
-            onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
-            activeKey={activeTime}
-            onPress={it => setActiveTime(it)}
-        />
-    </View>
+    return (
+        <View style={{ backgroundColor: colors.white }}>
+            <EventListComponent
+                loading={loading}
+                items={filterByDate(now, items, activeTime)}
+                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
+                onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
+                activeKey={activeTime}
+                onPress={it => setActiveTime(it)}
+            />
+        </View>
+    );
 };
 
 export default EventListView;

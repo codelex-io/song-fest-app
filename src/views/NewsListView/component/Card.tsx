@@ -23,8 +23,8 @@ const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavour
                     </View>
                 )}
                 <View style={[styles.lowerContainer, { backgroundColor }]}>
-                    <Text style={styles.dateText}> {dateTimeUtils.formatDate(item.date)}</Text>
-                    <Text style={styles.titleText}> {item.title}</Text>
+                    <Text style={styles.dateText}>{dateTimeUtils.formatDate(item.date)}</Text>
+                    <Text style={styles.titleText}>{item.title}</Text>
                     <View style={styles.row}>
                         <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
                     </View>

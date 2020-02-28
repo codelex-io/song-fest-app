@@ -12,7 +12,7 @@ export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor }) => (
         <View style={styles.iconContainer}>
             <Icon size={20} type={IconType.Search} fill={colors.white} />
         </View>
-        <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc. </Text>
+        <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc.</Text>
     </TouchableOpacity>
 );
 

@@ -9,6 +9,8 @@ import { Favourite } from '@domain/favourites/types';
 import { open } from '@domain/share';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { Loading } from '@components';
+import { View } from 'react-native';
+import { colors } from '@styles';
 
 type StackParamList = {
     NewsList: { itemId: string };
@@ -29,7 +31,9 @@ const SingleView: React.FC = () => {
 
     if (loading || !data) {
         return (
-            <Loading />
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                <Loading />
+            </View>
         );
     }
 

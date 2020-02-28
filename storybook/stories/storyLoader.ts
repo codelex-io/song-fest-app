@@ -15,4 +15,4 @@ import './views/MarkdownEvent.stories';
 import './views/VideoView.stories';
 import './views/VideoView.stories';
 import './views/EventMapView.stories';
-import './components/Loading.stories';
+import './views/LoadingView.stories';

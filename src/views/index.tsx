@@ -12,6 +12,7 @@ import UserSettingsView from './UserSettings';
 import { VideoView } from './VideoView';
 import { LanguageView } from './LanguageView';
 import EventMapView from './EventMapView';
+import LoadingView from './LoadingView';
 
 export {
     FavoriteListView,
@@ -28,4 +29,5 @@ export {
     UserSettingsView,
     VideoView,
     LanguageView,
+    LoadingView,
 };
