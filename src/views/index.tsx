@@ -1,23 +1,33 @@
-import NewsListView from './NewsListView';
+import NewsListView from './NewsListView/component';
 import FavoriteListView from './FavoriteListView';
-import { EmptyFavorite } from './EmptyFavorite';
+import { EmptyFavorite } from './FavoriteListView/component/EmptyFavorite';
 import MoreView from './MoreView';
 import FilterView from './FilterView';
 import EventFilterView from './EventFilterView';
 import EventListView from './EventListView';
-import ParticipantCategoryView from './ParticipantCategoryView';
+import { UserCategoryView } from './UserCategoryView';
 import AllIcons from './AllIcons';
-import UserSettings from './UserSettings';
+import MarkdownEvent from './MarkdownEvent';
+import UserSettingsView from './UserSettings';
+import { VideoView } from './VideoView';
+import { LanguageView } from './LanguageView';
+import EventMapView from './EventMapView';
+import LoadingView from './LoadingView';
 
 export {
-    NewsListView,
     FavoriteListView,
+    NewsListView,
+    EventListView,
+    EventMapView,
     EmptyFavorite,
     MoreView,
     FilterView,
     EventFilterView,
-    EventListView,
-    ParticipantCategoryView,
+    UserCategoryView,
     AllIcons,
-    UserSettings,
+    MarkdownEvent,
+    UserSettingsView,
+    VideoView,
+    LanguageView,
+    LoadingView,
 };

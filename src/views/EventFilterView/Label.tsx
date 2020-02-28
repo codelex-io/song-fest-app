@@ -10,7 +10,7 @@ interface LabelProps {
 
 export const Label: React.FC<LabelProps> = ({ title, icon }) => (
     <View style={styles.container}>
-        <Icon size={20} type={icon} fill="#FFFFFF" />
+        <Icon size={20} type={icon} fill={colors.white} />
         <Text style={styles.title}>{title}</Text>
     </View>
 );

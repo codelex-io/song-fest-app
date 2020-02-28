@@ -10,18 +10,17 @@ import {
     ScrollView,
 } from 'react-native';
 import { Card } from './Card';
-import { Event } from '../EventListView/types';
+import { EventItem } from '../EventListView/types';
 import { colors, typography } from '../../styles';
-import { Icon, IconType, FilterButtonIcon, Header } from '@components';
-import { TimeFilterButton } from './TimeFilterButton';
+import { Icon, IconType, FilterButtonIcon, LongSearch, TimeFilterButton } from '@components';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
 
 interface EventFilterViewProps {
-    events: Event[];
+    events: EventItem[];
 }
 
-export default class EventListView extends React.Component<EventFilterViewProps> {
+export default class EventFilterView extends React.Component<EventFilterViewProps> {
     state = {
         modalVisible: false,
     };
@@ -34,14 +33,13 @@ export default class EventListView extends React.Component<EventFilterViewProps>
         const { events } = this.props;
         return (
             <View style={styles.hugeContainer}>
-                <Header title={'Pasākumi'} />
                 <View style={styles.searchContainer}>
                     <Modal animationType="slide" transparent={false} visible={this.state.modalVisible}>
                         <View style={styles.modalContainer}>
-                            <ScrollView>
+                            <ScrollView style={{ paddingHorizontal: 16 }}>
                                 <View style={styles.header}>
                                     <View style={styles.iconLeft}>
-                                        <Icon size={20} type={IconType.Heart} fill="#FFFFFF" />
+                                        <Icon size={20} type={IconType.ChevronLeft} fill={colors.white} />
                                     </View>
                                     <View style={styles.filterButtonUpper}>
                                         <FilterButtonIcon />
@@ -115,20 +113,15 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                             </ScrollView>
                         </View>
                     </Modal>
-                    <TouchableOpacity style={styles.searchContainerBlue}>
-                        <View style={styles.iconContainer}>
-                            <Icon size={20} type={IconType.Search} fill={colors.white} />
-                        </View>
-                        <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc. </Text>
-                    </TouchableOpacity>
+                    <LongSearch backgroundColor={colors.blue} />
                 </View>
                 <View style={styles.searchContainerButton}>
-                    <TimeFilterButton button={{ title: 'Šodien', active: true }} />
-                    <TimeFilterButton button={{ title: 'Rīt', active: false }} />
-                    <TimeFilterButton button={{ title: 'ŠONEDĒĻ', active: false }} />
-                    <TimeFilterButton button={{ title: 'CITS', active: false }} />
+                    <TimeFilterButton title="Šodien" active={true} onPress={() => null} />
+                    <TimeFilterButton title="Rīt" active={false} onPress={() => null} />
+                    <TimeFilterButton title="Šonedēļ" active={false} onPress={() => null} />
+                    <TimeFilterButton title="Cits" active={false} onPress={() => null} />
                 </View>
-                <FlatList<Event>
+                <FlatList<EventItem>
                     data={events}
                     renderItem={({ item }): React.ReactElement => (
                         <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
@@ -138,11 +131,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                 />
                 <View>
                     <View style={styles.fixedFilter}>
-                        <TouchableHighlight
-                            onPress={() => {
-                                this.setModalVisible(true);
-                            }}
-                        >
+                        <TouchableHighlight onPress={() => this.setModalVisible(true)}>
                             <FilterButtonIcon />
                         </TouchableHighlight>
                     </View>
@@ -167,7 +156,6 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         alignItems: 'stretch',
-        paddingHorizontal: 16,
     },
     searchContainerBlue: {
         backgroundColor: colors.blue,

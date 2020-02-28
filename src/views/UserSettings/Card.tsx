@@ -24,12 +24,9 @@ export const Card: React.FC<CardProps> = ({ title, active }) => (
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        paddingHorizontal: 16,
-        justifyContent: 'flex-start',
     },
     icon: {
-        flex: 1,
-        alignItems: 'flex-start',
+        paddingRight: 14,
     },
     text: {
         flex: 7,

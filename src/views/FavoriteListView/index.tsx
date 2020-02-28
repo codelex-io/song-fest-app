@@ -1,25 +1,22 @@
 import React from 'react';
-import { FavouriteGroup } from './types';
-import { FlatList, View } from 'react-native';
-import { Card } from './Card';
+import { useFavourites } from '@domain/favourites';
+import { default as FavoriteListViewComponent } from './component';
+import { EmptyFavorite } from './component/EmptyFavorite';
+import { useNavigation } from '@react-navigation/native';
 
-interface FavouriteGroupProps {
-    groups: FavouriteGroup[];
-}
-
-export default class FavoriteListView extends React.Component<FavouriteGroupProps> {
-    render() {
-        const { groups } = this.props;
+const FavoriteListView: React.FC = () => {
+    const { favourites, hasAnyItems, toggleFavourite } = useFavourites();
+    const navigation = useNavigation();
+    if (hasAnyItems()) {
         return (
-            <FlatList<FavouriteGroup>
-                data={groups}
-                keyExtractor={item => item.title}
-                renderItem={({ item }): React.ReactElement => (
-                    <View>
-                        <Card group={item} />
-                    </View>
-                )}
+            <FavoriteListViewComponent
+                favourites={favourites}
+                onNavigate={item => navigation.navigate('SingleNews', { itemId: item.id })}
+                onFavourite={item => toggleFavourite(item)}
             />
         );
     }
-}
+    return <EmptyFavorite />;
+};
+
+export default FavoriteListView;
