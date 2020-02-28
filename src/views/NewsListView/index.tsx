@@ -8,7 +8,7 @@ import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { View } from 'react-native';
 import { open } from '@domain/share';
-import { FilterButtons } from '@components';
+import { FilterButtons, Loading } from '@components';
 import { colors } from '@styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -39,6 +39,15 @@ export const NewsListViewIndex: React.FC = () => {
 
     const { toggleFavourite, isFavourite } = useFavourites();
     const navigation = useNavigation();
+
+    if (loading || !data) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                <Loading />
+            </View>
+        );
+    }
+
     return (
         <View style={{ backgroundColor: colors.white }}>
             <FilterButtons firstTitle="AKTUĀLI" secondTitle="VISI" currentActive={handleCurrentFilter} />
