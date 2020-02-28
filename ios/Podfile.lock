@@ -18,6 +18,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
+  - Gifu (3.2.0)
   - glog (0.3.5)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -241,6 +242,7 @@ PODS:
     - React
   - RNSVG (11.0.1):
     - React
+  - TinyConstraints (4.0.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -248,6 +250,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
+  - Gifu
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -283,11 +286,14 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - TinyConstraints
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - Gifu
+    - TinyConstraints
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -371,6 +377,7 @@ SPEC CHECKSUMS:
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
+  Gifu: 7bcb6427457d85e0b4dff5a84ec5947ac19a93ea
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
@@ -403,8 +410,9 @@ SPEC CHECKSUMS:
   RNScreens: ba539a5086136eb356e43699cb588a80369763ca
   RNShare: 0e19ddb0bf338b62702ce1d9e001ee14effa68a8
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
+  TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: cabc11eb0bb2bbade816383ca3af04f115a207e7
+PODFILE CHECKSUM: 0c4014c01ea1cebf286eea77f9c54268fdf8493f
 
 COCOAPODS: 1.8.4
