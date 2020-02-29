@@ -6,7 +6,7 @@ import { colors } from '@styles';
 export const EmptyFavorite: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Icon size={50} type={IconType.HeartFilled} fill={colors.orange} />
+            <Icon style={styles.icon} size={48} type={IconType.HeartFilled} fill={colors.orange} />
             <Text style={styles.title}>Šeit varēsi atrast savus favorītus</Text>
             <Text style={styles.title2}>
                 Favorītiem var pievienot pasākumus, jaunumus un video, ko vēlies ātri atrast
@@ -22,16 +22,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.white,
+    },
+    icon: {
+        marginBottom: 24,
     },
     title: {
-        paddingTop: 29.3,
         fontSize: 20,
         textAlign: 'center',
         lineHeight: 26,
+        marginBottom: 12,
     },
     title2: {
-        paddingTop: 12,
         fontSize: 16,
         textAlign: 'center',
         paddingHorizontal: 24,
