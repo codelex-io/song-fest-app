@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
 
 interface Props {
     title: string;
-    active?: boolean;
+    active: boolean;
     onPress: () => void;
     primaryColor?: string;
     secondaryColor?: string;
@@ -13,30 +13,26 @@ interface Props {
 
 const TextToggleBtn: React.FC<Props> = ({
     title,
-    active = false,
+    active,
     onPress,
     primaryColor = colors.white,
     secondaryColor = colors.green,
     style,
 }) => {
-    const [isActive, setIsActive] = useState<boolean>(active);
-    const handleToggle = () => {
-        onPress();
-        setIsActive(!isActive);
-    };
+
     return (
         <TouchableOpacity
             style={[
                 styles.container,
                 { ...style },
                 {
-                    backgroundColor: isActive ? secondaryColor : primaryColor,
+                    backgroundColor: active ? secondaryColor : primaryColor,
                     borderColor: primaryColor,
                 },
             ]}
-            onPress={handleToggle}
+            onPress={onPress}
         >
-            <Text style={[styles.text, { color: isActive ? primaryColor : secondaryColor }]}>{title}</Text>
+            <Text style={[styles.text, { color: active ? primaryColor : secondaryColor }]}>{title}</Text>
         </TouchableOpacity>
     );
 };
