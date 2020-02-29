@@ -6,6 +6,7 @@ import FilterButtonIcon from './FilterButtonIcon';
 import { SimpleHeader } from './headers/SimpleHeader';
 import { LongSearch } from './LongSearch';
 import { TimeFilterButton } from './TimeFilterButton';
+import Loading from './Loading';
 
 export {
     Header,
@@ -17,4 +18,5 @@ export {
     SimpleHeader,
     LongSearch,
     TimeFilterButton,
+    Loading,
 };

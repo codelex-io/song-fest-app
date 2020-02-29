@@ -1,10 +1,10 @@
 import React from 'react';
-import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, TimeFilterButton } from '@components';
+import { LongSearch, TimeFilterButton, Loading } from '@components';
 
 const Separator = () => <View style={{ padding: 8 }} />;
 
@@ -28,7 +28,7 @@ const EventListComponent: React.FC<Props> = ({
     onReadMore,
 }) => {
     if (loading) {
-        return <ActivityIndicator />;
+        return <Loading />;
     }
     return (
         <View>
