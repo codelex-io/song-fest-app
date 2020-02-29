@@ -29,7 +29,7 @@ const EventListView: React.FC = () => {
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
     const now = moment();
     const navigation = useNavigation();
-  
+
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
