@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import MarkdownEvent from './component/index';
 import { FETCH_TARGET_NEWS_ITEM, FETCH_TARGET_EVENTS_ITEM } from './graphql/queries';
@@ -9,10 +9,9 @@ import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
 import { open } from '@domain/share';
 import { ActivityIndicator } from 'react-native';
 import { useRoute, RouteProp } from '@react-navigation/native';
-import { graphqlSync } from 'graphql';
 
 type StackParamList = {
-    NewsList: { itemId: string, group: FavouriteGroupKey };
+    NewsList: { itemId: string; group: FavouriteGroupKey };
 };
 
 type ViewRouteProp = RouteProp<StackParamList, 'NewsList'>;
@@ -26,7 +25,7 @@ const SingleView: React.FC = () => {
         params: { itemId, group },
     } = useRoute<ViewRouteProp>();
 
-    const query = group === 'NEWS' ? FETCH_TARGET_NEWS_ITEM : FETCH_TARGET_EVENTS_ITEM
+    const query = group === 'NEWS' ? FETCH_TARGET_NEWS_ITEM : FETCH_TARGET_EVENTS_ITEM;
     const { loading, data } = useQuery<Data, Variables>(query, { variables: { id: itemId } });
     const { toggleFavourite, isFavourite } = useFavourites();
 

@@ -18,7 +18,15 @@ interface Props {
     onPress: (key: TimeSelector) => void;
 }
 
-const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNavigate, activeKey, onPress, onReadMore }) => {
+const EventListComponent: React.FC<Props> = ({
+    loading,
+    items,
+    onFavourite,
+    onNavigate,
+    activeKey,
+    onPress,
+    onReadMore,
+}) => {
     if (loading) {
         return <ActivityIndicator />;
     }
