@@ -30,6 +30,7 @@ export const VideoView: React.FC = () => {
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
                     title="tiešsaitē"
+                    active={true}
                     onPress={() => null}
                     primaryColor={colors.green}
                     secondaryColor={colors.white}
@@ -37,6 +38,7 @@ export const VideoView: React.FC = () => {
                 />
                 <TextToggleBtn
                     title="pēdējie"
+                    active={false}
                     onPress={() => null}
                     primaryColor={colors.green}
                     secondaryColor={colors.white}
@@ -44,6 +46,7 @@ export const VideoView: React.FC = () => {
                 />
                 <TextToggleBtn
                     title="populārakie"
+                    active={false}
                     onPress={() => null}
                     primaryColor={colors.green}
                     secondaryColor={colors.white}

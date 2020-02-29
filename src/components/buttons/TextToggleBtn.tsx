@@ -19,7 +19,6 @@ const TextToggleBtn: React.FC<Props> = ({
     secondaryColor = colors.green,
     style,
 }) => {
-
     return (
         <TouchableOpacity
             style={[

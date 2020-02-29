@@ -6,7 +6,7 @@ export interface ItemType {
     title: string;
     icon: IconType;
     backgroundColor: string;
-    onOpen: any;
+    onOpen: (navigate: (route: string) => void) => void;
 }
 
 const execute = (route: string, isInternal: boolean, navigate: (route: string) => void) => {
