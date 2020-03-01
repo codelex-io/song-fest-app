@@ -5,19 +5,13 @@ import { LongSearch, Empty } from '@components';
 import { TextToggleBtn } from '@components/buttons';
 import { TimeSelector } from '@domain';
 
-
 interface Props {
     loading: boolean;
     activeKey: TimeSelector;
     searchInput: string;
-
 }
 
-
-const EmptyView: React.FC<Props> = ({
-    activeKey,
-    searchInput,
-}) => {
+const EmptyView: React.FC<Props> = ({ activeKey, searchInput }) => {
     return (
         <View style={{ flex: 1, backgroundColor: colors.white }}>
             <LongSearch
@@ -62,7 +56,6 @@ const EmptyView: React.FC<Props> = ({
         </View>
     );
 };
-
 
 const styles = StyleSheet.create({
     searchContainerButton: {

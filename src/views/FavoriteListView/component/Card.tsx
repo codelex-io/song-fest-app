@@ -27,11 +27,8 @@ export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) =>
                     >
                         <Text style={styles.itemText}>{item.title}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                        onPress={() => onNavigate(item)}
-                    >
-                        <View style={{ flex: 1, justifyContent: 'center' }} >
+                    <TouchableOpacity activeOpacity={0.5} onPress={() => onNavigate(item)}>
+                        <View style={{ flex: 1, justifyContent: 'center' }}>
                             <Icon size={26} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
                         </View>
                     </TouchableOpacity>

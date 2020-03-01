@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
         fontFamily: typography.normal,
         fontSize: 16,
         lineHeight: 21,
-        color: colors.darkGrey1A
-    }
+        color: colors.darkGrey1A,
+    },
 });

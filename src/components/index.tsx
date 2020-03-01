@@ -6,8 +6,7 @@ import FilterButtonIcon from './FilterButtonIcon';
 import { SimpleHeader } from './headers/SimpleHeader';
 import { LongSearch } from './LongSearch';
 import Loading from './Loading';
-import Empty from './Empty'
-
+import Empty from './Empty';
 
 export {
     Header,
