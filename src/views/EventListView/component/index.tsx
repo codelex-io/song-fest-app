@@ -13,6 +13,7 @@ const Separator = () => <View style={{ padding: 8 }} />;
 interface Props {
     loading: boolean;
     items: EventItem[];
+    onReadMore: (item: EventItem) => void;
     onFavourite: (item: EventItem) => void;
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
@@ -23,6 +24,11 @@ const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNa
     if (items.length === 0) {
         return <View style={{ flex: 1 }} >
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Empty /></View>
+    onNavigate,
+    activeKey,
+    onPress,
+    onReadMore,
+}) => {
         </View>
     }
     return <View style={{ flex: 1 }} >
@@ -35,6 +41,7 @@ const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNa
                         backgroundColor={colors.findColorByIndex(index)}
                         onFavourite={() => onFavourite(item)}
                         onNavigate={() => onNavigate(item)}
+                            onReadMore={() => onReadMore(item)}
                     />
                 </View>
             )}

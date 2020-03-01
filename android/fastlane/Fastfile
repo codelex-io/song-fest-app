@@ -1,0 +1,63 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "deploys beta"
+  lane :test do
+    gradle(task: "test")
+  end
+
+
+  desc "Update version number"
+  lane :version_update do
+    path = '../app/build.gradle'
+	re = /versionCode\s+(\d+)/ 
+  revc = /versionName\s+"(\d+.\d+.\d+.\d+)"/
+
+	s = File.read(path)
+	versionCode = s[re, 1].to_i
+  versionName = s[revc,1].to_f
+	s[re, 1] = (versionCode + 1).to_s
+  s[revc,1] = (Time.new.strftime("%Y.%m.%d") + "." + (versionCode + 1).to_s)
+
+	 f = File.new(path, 'w')
+	 f.write(s)
+	 f.close
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Submit a new Beta Build to google play"
+  lane :beta do
+    version_update
+    gradle(
+	task: 'assemble', 
+	build_type: 'Release', 
+	)
+  upload_to_play_store(track: 'beta')
+	slack(message: 'Successfully distributed a new beta build', slack_url: ${{secrets.SLACK_URL}})
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+end

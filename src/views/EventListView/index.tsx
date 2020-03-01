@@ -50,6 +50,8 @@ const TopOfView: React.FC<Props> = ({ activeKey, onPress }) => {
 }
 
 const EventListView: React.FC = () => {
+    const navigation = useNavigation();
+
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
@@ -65,6 +67,7 @@ const EventListView: React.FC = () => {
                 items={filterByDate(now, items, activeTime)}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
                 onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
+                onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
                 activeKey={activeTime}
                 onPress={it => setActiveTime(it)}
             />

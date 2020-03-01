@@ -4,7 +4,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NewsStack, EventsStack, MapStack, VideoStack, MoreStack } from './stacks';
-import { UserCategoryView, FavoriteListView } from '@views';
+import { UserCategoryView, FavoriteListView, MarkdownEvent } from '@views';
 import { SimpleHeader, TabBarIcon } from '@components';
 
 const Stack = createStackNavigator();
@@ -41,6 +41,13 @@ const AppStack: React.FC = () => {
                     header: () => <SimpleHeader title={'MANI FAVORĪTI'} goBack={navigation.goBack} />,
                 }}
                 component={FavoriteListView}
+            />
+            <Stack.Screen
+                name="Article"
+                options={{
+                    header: () => <SimpleHeader title={''} goBack={navigation.goBack} />,
+                }}
+                component={MarkdownEvent}
             />
         </Stack.Navigator>
     );
