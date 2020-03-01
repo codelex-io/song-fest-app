@@ -5,10 +5,11 @@ import { typography, colors } from '@styles';
 
 interface LongSearchProps {
     backgroundColor: string;
+    onPress: () => void
 }
 
-export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor }) => (
-    <TouchableOpacity style={[styles.searchContainer, { backgroundColor }]}>
+export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor, onPress }) => (
+    <TouchableOpacity style={[styles.searchContainer, { backgroundColor }]} onPress={onPress}>
         <View style={styles.iconContainer}>
             <Icon size={20} type={IconType.Search} fill={colors.white} />
         </View>

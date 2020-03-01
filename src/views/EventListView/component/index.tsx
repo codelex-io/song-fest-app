@@ -15,15 +15,24 @@ interface Props {
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
     onPress: (key: TimeSelector) => void;
+    onSearch: () => void;
 }
 
-const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNavigate, activeKey, onPress }) => {
+const EventListComponent: React.FC<Props> = ({
+    loading,
+    items,
+    onFavourite,
+    onNavigate,
+    activeKey,
+    onPress,
+    onSearch }) => {
+
     if (loading) {
         return <Loading />;
     }
     return (
         <View>
-            <LongSearch backgroundColor={colors.blue} />
+            <LongSearch backgroundColor={colors.blue} onPress={onSearch} />
             <View style={styles.searchContainerButton}>
                 <TimeFilterButton title="šodien" active={activeKey === 'today'} onPress={() => onPress('today')} />
                 <TimeFilterButton title="rīt" active={activeKey === 'tomorrow'} onPress={() => onPress('tomorrow')} />

@@ -9,9 +9,9 @@ const Stack = createStackNavigator();
 const NewsStack: React.FC = () => {
     const navigation = useNavigation();
     return (
-        <Stack.Navigator initialRouteName="Events">
+        <Stack.Navigator initialRouteName="EVENTS">
             <Stack.Screen
-                name="Events"
+                name="EVENTS"
                 options={{
                     header: () => <Header title={'PASĀKUMI'} navigate={navigation.navigate} />,
                 }}

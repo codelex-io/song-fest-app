@@ -2,6 +2,10 @@ export interface Data {
     items: EventItem[];
 }
 
+export interface Variables {
+    SearchBy: string;
+}
+
 export interface EventItem {
     id: string;
     title: string;

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
 import EventListComponent from './component/index';
 import { FETCH_EVENT_ITEMS } from './graphql/queries';
-import { Data, EventItem as GraphQLEventItem } from './graphql/types';
+import { Data, EventItem as GraphQLEventItem, Variables } from './graphql/types';
 import { EventItem } from './types';
 import { Favourite } from '@domain/favourites/types';
 import { View } from 'react-native';
@@ -12,21 +12,42 @@ import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
 import { Loading } from '@components';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 
-const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
-    return {
-        ...item,
-        date: moment(item.date),
-        isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }),
-    };
+type StackParamList = {
+    SearchGroup: { payload: string };
 };
 
+type SearchResultsRoute = RouteProp<StackParamList, 'SearchGroup'>;
+
 const EventListView: React.FC = () => {
-    const { loading, data } = useQuery<Data>(FETCH_EVENT_ITEMS);
+    const navigation = useNavigation()
+    const route = useRoute<SearchResultsRoute>()
+
+    const [searchBy, setSearchBy] = useState<string>('')
+
+    const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS,
+        { variables: { SearchBy: searchBy } });
+
     const { toggleFavourite, isFavourite } = useFavourites();
+
+    console.log('payload', route)
+
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
+
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
     const now = moment();
+
+    useEffect(() => {
+        if (route.params) {
+            setSearchBy(route.params.payload)
+        }
+        refetch()
+    }, [route])
+
+    const handleFilterToggle = (it: TimeSelector) => {
+        setActiveTime(it)
+    }
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
@@ -42,10 +63,19 @@ const EventListView: React.FC = () => {
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
                 onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
                 activeKey={activeTime}
-                onPress={it => setActiveTime(it)}
+                onPress={it => handleFilterToggle(it)}
+                onSearch={() => navigation.navigate('Search', { group: 'EVENTS' })}
             />
         </View>
     );
+};
+
+const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
+    return {
+        ...item,
+        date: moment(item.date),
+        isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }),
+    };
 };
 
 export default EventListView;

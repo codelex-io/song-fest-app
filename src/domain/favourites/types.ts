@@ -1,4 +1,4 @@
-type FavouriteGroupKey = 'NEWS' | 'EVENTS' | 'VIDEO';
+export type FavouriteGroupKey = 'NEWS' | 'EVENTS' | 'VIDEO';
 
 export interface Favourite {
     id: string;
