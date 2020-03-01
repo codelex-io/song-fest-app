@@ -15,6 +15,9 @@ interface Props {
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
     onPress: (key: TimeSelector) => void;
+    onSearch: () => void;
+    searchInput: string;
+    onResetSearch: () => void;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -24,14 +27,22 @@ const EventListComponent: React.FC<Props> = ({
     onNavigate,
     activeKey,
     onPress,
+    onSearch,
+    searchInput,
+    onResetSearch,
     onReadMore,
 }) => {
     if (loading) {
         return <Loading />;
     }
     return (
-        <View style={styles.viewContainer}>
-            <LongSearch backgroundColor={colors.blue} />
+        <View>
+            <LongSearch
+                backgroundColor={colors.blue}
+                onPress={onSearch}
+                searchInput={searchInput}
+                onResetSearch={onResetSearch}
+            />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
                     title="šodien"
