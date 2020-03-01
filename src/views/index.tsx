@@ -13,6 +13,7 @@ import { VideoView } from './VideoView';
 import { LanguageView } from './LanguageView';
 import EventMapView from './EventMapView';
 import LoadingView from './LoadingView';
+import EmptyView from './EmptyView'
 
 export {
     FavoriteListView,
@@ -30,4 +31,5 @@ export {
     VideoView,
     LanguageView,
     LoadingView,
+    EmptyView
 };

@@ -26,7 +26,12 @@ export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) =>
                         onPress={() => onNavigate(item)}
                     >
                         <Text style={styles.itemText}>{item.title}</Text>
-                        <View style={{ alignSelf: 'center' }}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.5}
+                        onPress={() => onNavigate(item)}
+                    >
+                        <View style={{ flex: 1, justifyContent: 'center' }} >
                             <Icon size={26} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
                         </View>
                     </TouchableOpacity>
@@ -39,15 +44,12 @@ export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) =>
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
-        marginLeft: 16,
-        marginRight: 16,
         backgroundColor: colors.white,
     },
     itemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 16,
-        marginRight: 24,
     },
     favoriteIcon: {
         paddingRight: 14,
