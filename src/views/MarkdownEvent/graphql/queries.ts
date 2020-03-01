@@ -14,3 +14,15 @@ export const FETCH_TARGET_NEWS_ITEM = gql`
         }
     }
 `;
+export const FETCH_TARGET_EVENTS_ITEM = gql`
+    query($id: ID!) {
+        item: eventsItem(where: { id: $id }) {
+            id
+            title
+            date
+            image {
+                url
+            }
+        }
+    }
+`;
