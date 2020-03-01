@@ -16,6 +16,8 @@ interface Props {
     activeKey: TimeSelector;
     onPress: (key: TimeSelector) => void;
     onSearch: () => void;
+    searchInput: string;
+    onResetSearch: () => void;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -25,14 +27,21 @@ const EventListComponent: React.FC<Props> = ({
     onNavigate,
     activeKey,
     onPress,
-    onSearch }) => {
-
+    onSearch,
+    searchInput,
+    onResetSearch,
+}) => {
     if (loading) {
         return <Loading />;
     }
     return (
         <View>
-            <LongSearch backgroundColor={colors.blue} onPress={onSearch} />
+            <LongSearch
+                backgroundColor={colors.blue}
+                onPress={onSearch}
+                searchInput={searchInput}
+                onResetSearch={onResetSearch}
+            />
             <View style={styles.searchContainerButton}>
                 <TimeFilterButton title="šodien" active={activeKey === 'today'} onPress={() => onPress('today')} />
                 <TimeFilterButton title="rīt" active={activeKey === 'tomorrow'} onPress={() => onPress('tomorrow')} />

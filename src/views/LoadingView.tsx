@@ -6,7 +6,7 @@ import { LongSearch, TimeFilterButton, Loading } from '@components';
 const LoadingView: React.FC = () => {
     return (
         <View style={{ flex: 1, backgroundColor: colors.white }}>
-            <LongSearch backgroundColor={colors.blue} />
+            <LongSearch backgroundColor={colors.blue} onPress={() => console.log('hello, i like coca cola')} />
             <View style={styles.searchContainerButton}>
                 <TimeFilterButton title="šodien" active={false} onPress={() => null} />
                 <TimeFilterButton title="rīt" active={true} onPress={() => null} />

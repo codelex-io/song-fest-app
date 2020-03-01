@@ -21,33 +21,33 @@ type StackParamList = {
 type SearchResultsRoute = RouteProp<StackParamList, 'SearchGroup'>;
 
 const EventListView: React.FC = () => {
-    const navigation = useNavigation()
-    const route = useRoute<SearchResultsRoute>()
+    const navigation = useNavigation();
+    const route = useRoute<SearchResultsRoute>();
 
-    const [searchBy, setSearchBy] = useState<string>('')
+    const [currentSearch, setCurrentSearch] = useState<string>('');
 
-    const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS,
-        { variables: { SearchBy: searchBy } });
+    const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
+        variables: { SearchBy: currentSearch },
+    });
 
     const { toggleFavourite, isFavourite } = useFavourites();
-
-    console.log('payload', route)
 
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
 
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
+
     const now = moment();
 
     useEffect(() => {
         if (route.params) {
-            setSearchBy(route.params.payload)
+            setCurrentSearch(route.params.payload);
         }
-        refetch()
-    }, [route])
+        refetch();
+    }, [route]);
 
     const handleFilterToggle = (it: TimeSelector) => {
-        setActiveTime(it)
-    }
+        setActiveTime(it);
+    };
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
@@ -65,6 +65,11 @@ const EventListView: React.FC = () => {
                 activeKey={activeTime}
                 onPress={it => handleFilterToggle(it)}
                 onSearch={() => navigation.navigate('Search', { group: 'EVENTS' })}
+                searchInput={currentSearch}
+                onResetSearch={() => {
+                    setCurrentSearch('');
+                    refetch();
+                }}
             />
         </View>
     );

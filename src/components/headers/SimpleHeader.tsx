@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { colors } from '@styles';
 import Icon, { IconType } from '../Icon';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
-import { styles } from './styles'
+import { styles } from './styles';
 
 interface HeaderProps {
     title: string;
@@ -24,5 +24,3 @@ export const SimpleHeader: React.FC<HeaderProps> = ({ title, goBack }) => (
         )}
     </SafeAreaConsumer>
 );
-
-

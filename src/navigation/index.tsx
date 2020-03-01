@@ -44,7 +44,7 @@ const AppStack: React.FC = () => {
                 component={FavoriteListView}
             />
             <Stack.Screen
-                name='Search'
+                name="Search"
                 options={{
                     header: () => <SearchHeader goBack={navigation.goBack} navigate={navigation.navigate} />,
                 }}
