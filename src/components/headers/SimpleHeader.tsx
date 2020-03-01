@@ -1,9 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { typography, colors } from '@styles';
+import { Text, View } from 'react-native';
+import { colors } from '@styles';
 import { IconType } from '../Icon';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
 import { IconBtn44 } from '@components/buttons';
+import { styles } from './styles';
 
 interface HeaderProps {
     title: string;

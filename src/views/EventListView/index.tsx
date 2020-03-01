@@ -11,7 +11,6 @@ import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
-import { useNavigation } from '@react-navigation/native';
 import { Loading } from '@components';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 
