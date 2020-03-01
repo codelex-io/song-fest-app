@@ -27,7 +27,7 @@ const EventListView: React.FC = () => {
     const [currentSearch, setCurrentSearch] = useState<string>('');
 
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
-        variables: { SearchBy: currentSearch },
+        variables: { searchBy: currentSearch },
     });
 
     const { toggleFavourite, isFavourite } = useFavourites();

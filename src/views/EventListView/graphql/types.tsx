@@ -3,7 +3,7 @@ export interface Data {
 }
 
 export interface Variables {
-    SearchBy: string;
+    searchBy: string;
 }
 
 export interface EventItem {
