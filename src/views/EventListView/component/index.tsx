@@ -4,13 +4,13 @@ import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, TimeFilterButton, Loading } from '@components';
-
-const Separator = () => <View style={{ padding: 8 }} />;
+import { LongSearch, Loading } from '@components';
+import { TextToggleBtn } from '@components/buttons';
 
 interface Props {
     loading: boolean;
     items: EventItem[];
+    onReadMore: (item: EventItem) => void;
     onFavourite: (item: EventItem) => void;
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
@@ -30,6 +30,7 @@ const EventListComponent: React.FC<Props> = ({
     onSearch,
     searchInput,
     onResetSearch,
+    onReadMore,
 }) => {
     if (loading) {
         return <Loading />;
@@ -43,16 +44,37 @@ const EventListComponent: React.FC<Props> = ({
                 onResetSearch={onResetSearch}
             />
             <View style={styles.searchContainerButton}>
-                <TimeFilterButton title="šodien" active={activeKey === 'today'} onPress={() => onPress('today')} />
-                <TimeFilterButton title="rīt" active={activeKey === 'tomorrow'} onPress={() => onPress('tomorrow')} />
-                <TimeFilterButton
+                <TextToggleBtn
+                    title="šodien"
+                    active={activeKey === 'today'}
+                    onPress={() => onPress('today')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
+                <TextToggleBtn
+                    title="rīt"
+                    active={activeKey === 'tomorrow'}
+                    onPress={() => onPress('tomorrow')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
+                <TextToggleBtn
                     title="šonedēļ"
                     active={activeKey === 'this-week'}
                     onPress={() => onPress('this-week')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
                 />
-                <TimeFilterButton title="cits" active={activeKey === 'all'} onPress={() => onPress('all')} />
+                <TextToggleBtn
+                    title="cits"
+                    active={activeKey === 'all'}
+                    onPress={() => onPress('all')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
             </View>
             <FlatList<EventItem>
+                style={styles.listContainer}
                 data={items}
                 renderItem={({ item, index }): React.ReactElement => (
                     <View style={{ paddingHorizontal: 16 }}>
@@ -61,19 +83,26 @@ const EventListComponent: React.FC<Props> = ({
                             backgroundColor={colors.findColorByIndex(index)}
                             onFavourite={() => onFavourite(item)}
                             onNavigate={() => onNavigate(item)}
+                            onReadMore={() => onReadMore(item)}
                         />
                     </View>
                 )}
-                ItemSeparatorComponent={() => <Separator />}
             />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    viewContainer: {
+        flex: 1,
+    },
     searchContainerButton: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        paddingHorizontal: 16,
+    },
+    listContainer: {
+        flex: 1,
         paddingHorizontal: 16,
     },
 });

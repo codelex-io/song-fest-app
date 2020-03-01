@@ -11,6 +11,7 @@ import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
+import { useNavigation } from '@react-navigation/native';
 import { Loading } from '@components';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 
@@ -48,6 +49,7 @@ const EventListView: React.FC = () => {
     const handleFilterToggle = (it: TimeSelector) => {
         setActiveTime(it);
     };
+
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
@@ -62,6 +64,7 @@ const EventListView: React.FC = () => {
                 items={filterByDate(now, items, activeTime)}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
                 onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
+                onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
                 activeKey={activeTime}
                 onPress={it => handleFilterToggle(it)}
                 onSearch={() => navigation.navigate('Search', { group: 'EVENTS' })}

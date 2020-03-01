@@ -12,34 +12,29 @@ interface CardProps {
     backgroundColor: string;
     onFavourite: () => void;
     onNavigate: () => void;
+    onReadMore: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate }) => (
-    <TouchableOpacity style={styles.container}>
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore }) => (
+    <TouchableOpacity style={styles.container} onPress={onReadMore}>
         {item.image?.url && (
-            <View style={styles.imageContainer}>
+            <View>
                 <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
             </View>
         )}
         <View style={[styles.bottomContainer, { backgroundColor }]}>
-            <View style={styles.row}>
-                <View style={styles.content}>
-                    <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.location}>{item.locationTitle}</Text>
-                    <View style={styles.labels}>
-                        <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
-                        <Label title={item.time} iconType={IconType.Clock} />
-                    </View>
-                </View>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.location}>{item.locationTitle}</Text>
+            <View style={styles.labels}>
+                <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
+                <Label title={item.time} iconType={IconType.Clock} />
             </View>
-            <View style={styles.row}>
-                <IconButtons
-                    onShare={() => null}
-                    isFavourite={item.isFavourite}
-                    onFavourite={onFavourite}
-                    onNavigate={onNavigate}
-                />
-            </View>
+            <IconButtons
+                onShare={() => null}
+                isFavourite={item.isFavourite}
+                onFavourite={onFavourite}
+                onNavigate={onNavigate}
+            />
         </View>
     </TouchableOpacity>
 );
@@ -47,24 +42,14 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    bottomContainer: {
-        backgroundColor: colors.orange,
-        padding: 16,
-        flexDirection: 'column',
-    },
-    row: {
-        flexDirection: 'row',
-    },
-    imageContainer: {
-        height: 180,
+        marginVertical: 8,
     },
     image: {
         width: '100%',
         height: 180,
     },
-    content: {
-        flex: 1,
+    bottomContainer: {
+        padding: 16,
     },
     title: {
         color: colors.white,
@@ -78,11 +63,10 @@ const styles = StyleSheet.create({
         fontFamily: typography.normal,
         fontSize: 14,
         lineHeight: 18,
-        marginBottom: 14,
         color: colors.white,
+        marginBottom: 14,
     },
     labels: {
-        flexDirection: 'column',
         marginBottom: 12,
     },
 });
