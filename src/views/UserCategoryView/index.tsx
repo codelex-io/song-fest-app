@@ -12,26 +12,24 @@ interface Props {
 export const UserCategoryView: React.FC<Props> = ({ onSelect }) => {
     return (
         <View style={styles.container}>
-            <View style={{ flex: 2 }}>
-                <Card
-                    icon={IconType.Yoga}
-                    title={'Dalībniekam'}
-                    backgroundColor={colors.orange}
-                    onPress={() => onSelect('participant')}
-                />
-                <Card
-                    icon={IconType.Parent}
-                    title={'Dalībnieka vecākam'}
-                    backgroundColor={colors.green}
-                    onPress={() => onSelect('parent')}
-                />
-                <Card
-                    icon={IconType.Eye}
-                    title={'Apmeklētājam'}
-                    backgroundColor={colors.blue}
-                    onPress={() => onSelect('visitor')}
-                />
-            </View>
+            <Card
+                icon={IconType.Yoga}
+                title={'Dalībniekam'}
+                backgroundColor={colors.orange}
+                onPress={() => onSelect('participant')}
+            />
+            <Card
+                icon={IconType.Parent}
+                title={'Dalībnieka vecākam'}
+                backgroundColor={colors.green}
+                onPress={() => onSelect('parent')}
+            />
+            <Card
+                icon={IconType.Eye}
+                title={'Apmeklētājam'}
+                backgroundColor={colors.blue}
+                onPress={() => onSelect('visitor')}
+            />
         </View>
     );
 };
@@ -39,10 +37,8 @@ export const UserCategoryView: React.FC<Props> = ({ onSelect }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        paddingHorizontal: 16,
         justifyContent: 'center',
+        paddingHorizontal: 16,
         backgroundColor: colors.white,
-        alignItems: 'center',
     },
 });

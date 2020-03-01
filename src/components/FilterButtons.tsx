@@ -1,37 +1,54 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '../styles';
 import { typography } from '../styles';
 
 interface FilterButtonsProps {
-    buttons: {
-        title: string;
-        active: boolean;
-    }[];
+    firstTitle: string;
+    secondTitle: string;
+    triggerToggle: (value: boolean) => void;
+    currentActive: boolean;
 }
 
-export class FilterButtons extends React.Component<FilterButtonsProps> {
-    render() {
-        const { buttons } = this.props;
-        return (
-            <View style={styles.container}>
-                <View
-                    style={[styles.containerLeft, buttons[0].active ? styles.containerActive : styles.containeInactive]}
-                >
-                    <Text style={[styles.text, buttons[0].active ? styles.textActive : false]}>{buttons[0].title}</Text>
-                </View>
-                <View
-                    style={[
-                        styles.containerRight,
-                        buttons[1].active ? styles.containerActive : styles.containeInactive,
-                    ]}
-                >
-                    <Text style={[styles.text, buttons[1].active ? styles.textActive : false]}>{buttons[1].title}</Text>
-                </View>
-            </View>
-        );
-    }
-}
+export const FilterButtons: React.FC<FilterButtonsProps> = ({
+    firstTitle,
+    secondTitle,
+    currentActive,
+    triggerToggle,
+}) => {
+    const [isFirstActive, setIsFirstActive] = useState(currentActive);
+
+    const handleToggle = (clickOn: string) => {
+        if (clickOn === 'first' && isFirstActive) {
+            return;
+        } else if (clickOn === 'first' && !isFirstActive) {
+            setIsFirstActive(true);
+            triggerToggle(true);
+            return;
+        } else if (clickOn === 'second' && !isFirstActive) {
+            return;
+        } else if (clickOn === 'second' && isFirstActive) {
+            setIsFirstActive(false);
+            triggerToggle(false);
+        }
+    };
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity
+                onPress={() => handleToggle('first')}
+                style={[styles.containerLeft, isFirstActive ? styles.containerActive : styles.containeInactive]}
+            >
+                <Text style={[styles.text, isFirstActive ? styles.textActive : false]}>{firstTitle}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => handleToggle('second')}
+                style={[styles.containerRight, !isFirstActive ? styles.containerActive : styles.containeInactive]}
+            >
+                <Text style={[styles.text, !isFirstActive ? styles.textActive : false]}>{secondTitle}</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -39,7 +56,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 8,
-        marginBottom: 16,
+        marginBottom: 8,
         marginHorizontal: 16,
     },
     containerActive: {
