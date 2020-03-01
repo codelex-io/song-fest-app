@@ -4,11 +4,9 @@ import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { /**LongSearch, TimeFilterButton,*/ Empty } from '@components';
+import { LongSearch, Loading } from '@components';
+import { TextToggleBtn } from '@components/buttons';
 
-
-
-const Separator = () => <View style={{ padding: 8 }} />;
 
 interface Props {
     loading: boolean;
@@ -18,6 +16,9 @@ interface Props {
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
     onPress: (key: TimeSelector) => void;
+    onSearch: () => void;
+    searchInput: string;
+    onResetSearch: () => void;
 }
 
 const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNavigate /** , activeKey, onPress */ }) => {
@@ -27,12 +28,56 @@ const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNa
     onNavigate,
     activeKey,
     onPress,
+    onSearch,
+    searchInput,
+    onResetSearch,
     onReadMore,
 }) => {
+    if (loading) {
+        return <Loading />;
+    }
+    return (
+        <View>
+            <LongSearch
+                backgroundColor={colors.blue}
+                onPress={onSearch}
+                searchInput={searchInput}
+                onResetSearch={onResetSearch}
+            />
+            <View style={styles.searchContainerButton}>
+                <TextToggleBtn
+                    title="šodien"
+                    active={activeKey === 'today'}
+                    onPress={() => onPress('today')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
+                <TextToggleBtn
+                    title="rīt"
+                    active={activeKey === 'tomorrow'}
+                    onPress={() => onPress('tomorrow')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
+                <TextToggleBtn
+                    title="šonedēļ"
+                    active={activeKey === 'this-week'}
+                    onPress={() => onPress('this-week')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
+                <TextToggleBtn
+                    title="cits"
+                    active={activeKey === 'all'}
+                    onPress={() => onPress('all')}
+                    primaryColor={colors.white}
+                    secondaryColor={colors.orange}
+                />
         </View>
     }
     return <View style={{ flex: 1 }} >
         <FlatList<EventItem>
+                style={styles.listContainer}
             data={items}
             renderItem={({ item, index }): React.ReactElement => (
                 <View style={{ paddingHorizontal: 16 }}>
@@ -45,11 +90,17 @@ const EventListComponent: React.FC<Props> = ({ loading, items, onFavourite, onNa
                     />
                 </View>
             )}
-            ItemSeparatorComponent={() => <Separator />}
         />
     </View>
 };
 
+    viewContainer: {
+        flex: 1,
+    },
+        paddingHorizontal: 16,
+    },
+    listContainer: {
+        flex: 1,
 
 export default EventListComponent;
 

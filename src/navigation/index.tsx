@@ -4,8 +4,9 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NewsStack, EventsStack, MapStack, VideoStack, MoreStack } from './stacks';
-import { UserCategoryView, FavoriteListView, MarkdownEvent } from '@views';
+import { UserCategoryView, FavoriteListView, SearchView, MarkdownEvent } from '@views';
 import { SimpleHeader, TabBarIcon } from '@components';
+import SearchHeader from '@components/headers/SearchHeader';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,6 +49,13 @@ const AppStack: React.FC = () => {
                     header: () => <SimpleHeader title={''} goBack={navigation.goBack} />,
                 }}
                 component={MarkdownEvent}
+            />
+            <Stack.Screen
+                name="Search"
+                options={{
+                    header: () => <SearchHeader goBack={navigation.goBack} navigate={navigation.navigate} />,
+                }}
+                component={SearchView}
             />
         </Stack.Navigator>
     );
