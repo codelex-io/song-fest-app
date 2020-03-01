@@ -26,7 +26,7 @@ const TextToggleBtn: React.FC<Props> = ({
                 { ...style },
                 {
                     backgroundColor: active ? secondaryColor : primaryColor,
-                    borderColor: primaryColor,
+                    borderColor: secondaryColor,
                 },
             ]}
             onPress={onPress}
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         paddingVertical: 11,
         paddingHorizontal: 12,
         borderWidth: 1,
+        marginRight: 8,
     },
     text: {
         fontFamily: typography.bold,

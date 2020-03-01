@@ -49,28 +49,28 @@ const EventListComponent: React.FC<Props> = ({
                     active={activeKey === 'today'}
                     onPress={() => onPress('today')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
                 <TextToggleBtn
                     title="rīt"
                     active={activeKey === 'tomorrow'}
                     onPress={() => onPress('tomorrow')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
                 <TextToggleBtn
                     title="šonedēļ"
                     active={activeKey === 'this-week'}
                     onPress={() => onPress('this-week')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
                 <TextToggleBtn
                     title="cits"
                     active={activeKey === 'all'}
                     onPress={() => onPress('all')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
             </View>
             <FlatList<EventItem>
