@@ -32,6 +32,6 @@ export {
     VideoView,
     LanguageView,
     LoadingView,
-    EmptyView
+    EmptyView,
     SearchView,
 };

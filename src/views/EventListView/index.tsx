@@ -6,43 +6,19 @@ import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem, Variables } from './graphql/types';
 import { EventItem } from './types';
 import { Favourite } from '@domain/favourites/types';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
-
+import { Loading } from '@components';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
-const { toggleFavourite, isFavourite } = useFavourites();
-const [activeTime, setActiveTime] = useState<TimeSelector>('all');
-const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
-const now = moment();
 
 type StackParamList = {
     SearchGroup: { payload: string };
 };
 
 type SearchResultsRoute = RouteProp<StackParamList, 'SearchGroup'>;
-
-    onPress: (key: TimeSelector) => void;
-}
-
-
-const TopOfView: React.FC<Props> = ({ activeKey, onPress }) => {
-    return <View style={{ flex: 1 }} >
-        <LongSearch backgroundColor={colors.blue} />
-        <View style={styles.searchContainerButton}>
-            <TimeFilterButton title="šodien" active={activeKey === 'today'} onPress={() => onPress('today')} />
-            <TimeFilterButton title="rīt" active={activeKey === 'tomorrow'} onPress={() => onPress('tomorrow')} />
-            <TimeFilterButton
-                title="šonedēļ"
-                active={activeKey === 'this-week'}
-                onPress={() => onPress('this-week')}
-            />
-            <TimeFilterButton title="cits" active={activeKey === 'all'} onPress={() => onPress('all')} />
-        </View>
-    </View>
-}
 
 const EventListView: React.FC = () => {
     const navigation = useNavigation();
@@ -54,9 +30,13 @@ const EventListView: React.FC = () => {
         variables: { searchBy: currentSearch },
     });
 
+    const { toggleFavourite, isFavourite } = useFavourites();
 
+    const [activeTime, setActiveTime] = useState<TimeSelector>('all');
 
+    const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
 
+    const now = moment();
 
     useEffect(() => {
         if (route.params) {
@@ -72,13 +52,12 @@ const EventListView: React.FC = () => {
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
-                <TopOfView activeKey={activeTime} onPress={it => setActiveTime(it)} />
                 <Loading />
             </View>
         );
     }
     return (
-        <View style={{ backgroundColor: colors.white, flex: 1 }}>
+        <View style={{ backgroundColor: colors.white }}>
             <EventListComponent
                 loading={loading}
                 items={filterByDate(now, items, activeTime)}
@@ -105,16 +84,5 @@ const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean
         isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }),
     };
 };
-
-
-const styles = StyleSheet.create({
-    searchContainerButton: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        paddingHorizontal: 16,
-    },
-});
-
-
 
 export default EventListView;
