@@ -11,7 +11,7 @@ const FavoriteListView: React.FC = () => {
         return (
             <FavoriteListViewComponent
                 favourites={favourites}
-                onNavigate={item => navigation.navigate('SingleNews', { itemId: item.id })}
+                onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: item.group })}
                 onFavourite={item => toggleFavourite(item)}
             />
         );

@@ -63,7 +63,7 @@ export const NewsListViewIndex: React.FC = () => {
             <NewsListViewComponent
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
-                onNavigate={item => navigation.navigate('SingleNews', { itemId: item.id })}
+                onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
                 onShare={item => open(item.link)}
             />

@@ -12,10 +12,11 @@ interface CardProps {
     backgroundColor: string;
     onFavourite: () => void;
     onNavigate: () => void;
+    onReadMore: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate }) => (
-    <TouchableOpacity style={styles.container}>
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore }) => (
+    <TouchableOpacity style={styles.container} onPress={onReadMore}>
         {item.image?.url && (
             <View>
                 <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />

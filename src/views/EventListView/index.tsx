@@ -11,6 +11,7 @@ import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
+import { useNavigation } from '@react-navigation/native';
 import { Loading } from '@components';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
@@ -27,6 +28,8 @@ const EventListView: React.FC = () => {
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
     const now = moment();
+    const navigation = useNavigation();
+
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
@@ -35,14 +38,17 @@ const EventListView: React.FC = () => {
         );
     }
     return (
-        <EventListComponent
-            loading={loading}
-            items={filterByDate(now, items, activeTime)}
-            onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
-            onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
-            activeKey={activeTime}
-            onPress={it => setActiveTime(it)}
-        />
+        <View style={{ backgroundColor: colors.white }}>
+            <EventListComponent
+                loading={loading}
+                items={filterByDate(now, items, activeTime)}
+                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
+                onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
+                onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
+                activeKey={activeTime}
+                onPress={it => setActiveTime(it)}
+            />
+        </View>
     );
 };
 

@@ -13,7 +13,7 @@ const VideoStack: React.FC = () => {
             <Stack.Screen
                 name="Video"
                 options={{
-                    header: () => <Header title={'KARTE'} navigate={navigation.navigate} />,
+                    header: () => <Header title={'VIDEO'} navigate={navigation.navigate} />,
                 }}
                 component={VideoView}
             />
