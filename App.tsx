@@ -8,11 +8,12 @@ import { LocalizationContextProvider } from './src/localization/LocalizationCont
 import { initLanguage } from './src/localization';
 import { initSettings, SettingsContextProvider } from './src/domain/settings';
 import { useStoryBook, StoryBookContextProvider } from './src/domain/storybook';
+import { init } from './src/notifications';
 import Navigation from './src/navigation';
 import Storybook from './storybook';
 import { StatusBarWrapper } from './src/components'
 
-const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
+const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings(), init()]);
 
 const App: React.FC = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
