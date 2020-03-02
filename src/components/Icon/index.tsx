@@ -39,11 +39,12 @@ interface IconProps {
     size?: number;
     fill?: string;
     type?: IconType;
+    style?: { [key: string]: string | number };
 }
 
-export const Icon: React.FC<IconProps> = ({ size = 24, fill = 'blue', type = IconType.Yoga }) => {
+export const Icon: React.FC<IconProps> = ({ size = 24, fill = 'blue', type = IconType.Yoga, style }) => {
     return (
-        <Svg width={size} height={size} viewBox={`0 0 ${size}  ${size}`}>
+        <Svg width={size} height={size} viewBox="0 0 24 24" style={{ ...style }}>
             <Path {...findIcon(type)} fill={fill} />
         </Svg>
     );
