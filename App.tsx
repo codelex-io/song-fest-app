@@ -10,6 +10,7 @@ import { initSettings, SettingsContextProvider } from './src/domain/settings';
 import { useStoryBook, StoryBookContextProvider } from './src/domain/storybook';
 import Navigation from './src/navigation';
 import Storybook from './storybook';
+import { StatusBarWrapper } from './src/components'
 
 const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
 
@@ -47,6 +48,8 @@ const App: React.FC = () => {
 
 export default () => (
     <StoryBookContextProvider>
-        <App />
+        <StatusBarWrapper>
+            <App />
+        </StatusBarWrapper>
     </StoryBookContextProvider>
 );

@@ -11,7 +11,12 @@ export const mediumGrey4D = '#4D4D4D';
 export const lightGrey3A = '#A3A3A3';
 export const extrLighgrey6E = '#E6E6E6';
 
+const mainColors = [green, orange, blue, purple];
+
 export const findColorByIndex = (index: number): string => {
-    const colors = [green, orange, blue, purple];
-    return colors[index % colors.length];
+    return mainColors[index % mainColors.length];
+};
+
+export const randomColor = (): string => {
+    return mainColors[Math.floor(Math.random() * mainColors.length)];
 };

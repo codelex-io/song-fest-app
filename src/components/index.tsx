@@ -7,6 +7,7 @@ import { SimpleHeader } from './headers/SimpleHeader';
 import { LongSearch } from './LongSearch';
 import Loading from './Loading';
 import Empty from './Empty';
+import { StatusBarWrapper } from './StatusBarWrapper';
 
 export {
     Header,
@@ -19,4 +20,5 @@ export {
     LongSearch,
     Loading,
     Empty,
+    StatusBarWrapper,
 };
