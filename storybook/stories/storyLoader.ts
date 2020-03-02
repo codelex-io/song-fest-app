@@ -16,3 +16,4 @@ import './views/VideoView.stories';
 import './views/VideoView.stories';
 import './views/EventMapView.stories';
 import './views/LoadingView.stories';
+import './views/EmptyView.stories';

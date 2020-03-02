@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { UserCategoryView } from '@views';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
 import { NewsStack, EventsStack, MapStack, VideoStack, MoreStack } from './stacks';
+import { colors } from '@styles';
 
 type AppTabsParamList = {
     NEWS: undefined,
@@ -16,6 +18,14 @@ type AppTabsParamList = {
 
 const Tab = createBottomTabNavigator<AppTabsParamList>()
 
+const NavigationTheme: Theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: colors.white,
+    },
+};
+
 const Navigation: React.FC = () => {
     const { userType, setUserType } = useSettings();
 
@@ -24,7 +34,7 @@ const Navigation: React.FC = () => {
     }
 
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={NavigationTheme}>
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused }) => {

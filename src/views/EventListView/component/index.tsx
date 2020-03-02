@@ -15,6 +15,9 @@ interface Props {
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
     onPress: (key: TimeSelector) => void;
+    onSearch: () => void;
+    searchInput: string;
+    onResetSearch: () => void;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -24,42 +27,50 @@ const EventListComponent: React.FC<Props> = ({
     onNavigate,
     activeKey,
     onPress,
+    onSearch,
+    searchInput,
+    onResetSearch,
     onReadMore,
 }) => {
     if (loading) {
         return <Loading />;
     }
     return (
-        <View style={styles.viewContainer}>
-            <LongSearch backgroundColor={colors.blue} />
+        <View>
+            <LongSearch
+                backgroundColor={colors.blue}
+                onPress={onSearch}
+                searchInput={searchInput}
+                onResetSearch={onResetSearch}
+            />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
                     title="šodien"
                     active={activeKey === 'today'}
                     onPress={() => onPress('today')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
                 <TextToggleBtn
                     title="rīt"
                     active={activeKey === 'tomorrow'}
                     onPress={() => onPress('tomorrow')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
                 <TextToggleBtn
                     title="šonedēļ"
                     active={activeKey === 'this-week'}
                     onPress={() => onPress('this-week')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
                 <TextToggleBtn
                     title="cits"
                     active={activeKey === 'all'}
                     onPress={() => onPress('all')}
                     primaryColor={colors.white}
-                    secondaryColor={colors.orange}
+                    secondaryColor={colors.green}
                 />
             </View>
             <FlatList<EventItem>

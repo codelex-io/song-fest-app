@@ -2,9 +2,8 @@ import React from 'react'
 import { StackNavigationOptions } from '@react-navigation/stack'
 import { NewsStackParamsList } from './NewsStack'
 import { SimpleHeader } from '@components'
-import { FavoriteListView, MarkdownEvent } from '@views'
+import { FavoriteListView, MarkdownEvent, SearchView } from '@views'
 import { TypedNavigator } from '@react-navigation/native'
-import SearchView from '@views/SearchView'
 
 const SharedStack = (Stack: TypedNavigator<NewsStackParamsList,
    StackNavigationOptions,
