@@ -6,29 +6,24 @@ import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem, Variables } from './graphql/types';
 import { EventItem } from './types';
 import { Favourite } from '@domain/favourites/types';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
 import { Loading } from '@components';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
-type StackParamList = {
-    SearchGroup: { payload: string };
-};
+const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
 
-type SearchResultsRoute = RouteProp<StackParamList, 'SearchGroup'>;
-
-const EventListView: React.FC = () => {
-    const navigation = useNavigation();
-    const route = useRoute<SearchResultsRoute>();
-
+    console.log('route initial', route)
     const [currentSearch, setCurrentSearch] = useState<string>('');
 
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
         variables: { searchBy: currentSearch },
     });
+
+    console.log(data)
 
     const { toggleFavourite, isFavourite } = useFavourites();
 
@@ -42,8 +37,11 @@ const EventListView: React.FC = () => {
         if (route.params) {
             setCurrentSearch(route.params.payload);
         }
-        refetch();
     }, [route]);
+
+    useEffect(() => {
+        refetch()
+    }, [currentSearch])
 
     const handleFilterToggle = (it: TimeSelector) => {
         setActiveTime(it);
@@ -58,6 +56,9 @@ const EventListView: React.FC = () => {
     }
     return (
         <View style={{ backgroundColor: colors.white }}>
+            <Text>
+                {JSON.stringify(data, null, 4)}
+            </Text>
             <EventListComponent
                 loading={loading}
                 items={filterByDate(now, items, activeTime)}
@@ -66,7 +67,7 @@ const EventListView: React.FC = () => {
                 onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
                 activeKey={activeTime}
                 onPress={it => handleFilterToggle(it)}
-                onSearch={() => navigation.navigate('Search', { group: 'EVENTS' })}
+                onSearch={() => navigation.navigate('Search')}
                 searchInput={currentSearch}
                 onResetSearch={() => {
                     setCurrentSearch('');

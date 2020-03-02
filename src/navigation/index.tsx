@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, RouteProp } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { UserCategoryView } from '@views';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
-import { NewsStack, EventsStack, MapStack, VideoStack, MoreStack } from './stacks';
+import { MapStack, MoreStack, SharedStack } from './stacks';
 import { colors } from '@styles';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type AppTabsParamList = {
     NEWS: undefined,
@@ -15,6 +16,12 @@ type AppTabsParamList = {
     VIDEO: undefined,
     MORE: undefined
 }
+
+export type AppTabsNavParams<T extends keyof AppTabsParamList> = {
+    navigation: StackNavigationProp<AppTabsParamList, T>;
+    route: RouteProp<AppTabsParamList, T>;
+};
+
 
 const Tab = createBottomTabNavigator<AppTabsParamList>()
 
@@ -44,10 +51,10 @@ const Navigation: React.FC = () => {
                     tabBarLabel: () => false,
                 })}
             >
-                <Tab.Screen name="NEWS" component={NewsStack} />
-                <Tab.Screen name="EVENTS" component={EventsStack} />
+                <Tab.Screen name="NEWS" component={SharedStack} />
+                <Tab.Screen name="EVENTS" component={SharedStack} />
+                <Tab.Screen name="VIDEO" component={SharedStack} />
                 <Tab.Screen name="MAP" component={MapStack} />
-                <Tab.Screen name="VIDEO" component={VideoStack} />
                 <Tab.Screen name="MORE" component={MoreStack} />
             </Tab.Navigator>
         </NavigationContainer>
