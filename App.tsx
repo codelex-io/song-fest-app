@@ -13,7 +13,7 @@ import Navigation from './src/navigation';
 import Storybook from './storybook';
 import { StatusBarWrapper } from './src/components'
 
-const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings(), init()]);
+const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
 
 const App: React.FC = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
