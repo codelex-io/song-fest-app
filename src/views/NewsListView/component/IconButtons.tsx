@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon, IconType } from '@components';
+import { View, StyleSheet } from 'react-native';
+import { IconType } from '@components';
 import { colors } from '@styles';
+import { IconBtn40 } from '@components/buttons';
 
 interface Props {
     onShare: () => void;
@@ -9,23 +10,20 @@ interface Props {
     onFavourite: () => void;
 }
 
-const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: string }> = ({
-    onPress,
-    iconType,
-    fill,
-}) => (
-    <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={0.8}>
-        <Icon size={40} type={iconType} fill={fill} />
-    </TouchableOpacity>
-);
-
 export const IconButtons: React.FC<Props> = ({ onShare, isFavourite, onFavourite }) => (
     <View style={styles.container}>
-        <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.blue} />
-        <SingleButton
+        <IconBtn40
+            onPress={onShare}
+            icon={IconType.Share}
+            color={colors.blue}
+            bgColor={colors.white}
+            style={{ marginRight: 16 }}
+        />
+        <IconBtn40
             onPress={onFavourite}
-            iconType={isFavourite ? IconType.HeartFilled : IconType.Heart}
-            fill={colors.orange}
+            icon={isFavourite ? IconType.HeartFilled : IconType.Heart}
+            color={colors.orange}
+            bgColor={colors.white}
         />
     </View>
 );
@@ -33,14 +31,5 @@ export const IconButtons: React.FC<Props> = ({ onShare, isFavourite, onFavourite
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        paddingTop: 16,
-    },
-    button: {
-        height: 40,
-        width: 40,
-        backgroundColor: colors.white,
-        marginRight: 16,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });

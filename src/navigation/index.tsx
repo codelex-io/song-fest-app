@@ -1,49 +1,35 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, DefaultTheme, RouteProp } from '@react-navigation/native';
+import { Theme } from '@react-navigation/native/lib/typescript/src/types';
+import { UserCategoryView } from '@views';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NewsStack, EventsStack, MapStack, VideoStack, MoreStack } from './stacks';
-import { UserCategoryView, FavoriteListView } from '@views';
-import { SimpleHeader, TabBarIcon } from '@components';
+import { TabBarIcon } from '@components';
+import { MapStack, MoreStack, SharedStack } from './stacks';
+import { colors } from '@styles';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-const AppTabs = () => {
-    return (
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused }) => {
-                    const { name } = route;
-                    return <TabBarIcon route={name} focused={focused} />;
-                },
-                tabBarLabel: () => false,
-            })}
-        >
-            <Tab.Screen name="News" component={NewsStack} />
-            <Tab.Screen name="Events" component={EventsStack} />
-            <Tab.Screen name="Map" component={MapStack} />
-            <Tab.Screen name="Video" component={VideoStack} />
-            <Tab.Screen name="More" component={MoreStack} />
-        </Tab.Navigator>
-    );
+type AppTabsParamList = {
+    NEWS: undefined;
+    EVENTS: undefined;
+    MAP: undefined;
+    VIDEO: undefined;
+    MORE: undefined;
 };
 
-const AppStack: React.FC = () => {
-    const navigation = useNavigation();
-    return (
-        <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" options={{ headerShown: false }} component={AppTabs} />
-            <Stack.Screen
-                name="Favorites"
-                options={{
-                    header: () => <SimpleHeader title={'MANI FAVORĪTI'} goBack={navigation.goBack} />,
-                }}
-                component={FavoriteListView}
-            />
-        </Stack.Navigator>
-    );
+export type AppTabsNavParams<T extends keyof AppTabsParamList> = {
+    navigation: StackNavigationProp<AppTabsParamList, T>;
+    route: RouteProp<AppTabsParamList, T>;
+};
+
+const Tab = createBottomTabNavigator<AppTabsParamList>();
+
+const NavigationTheme: Theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: colors.white,
+    },
 };
 
 const Navigation: React.FC = () => {
@@ -54,10 +40,22 @@ const Navigation: React.FC = () => {
     }
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="App" options={{ headerShown: false }} component={AppStack} />
-            </Stack.Navigator>
+        <NavigationContainer theme={NavigationTheme}>
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused }) => {
+                        const { name } = route;
+                        return <TabBarIcon route={name} focused={focused} />;
+                    },
+                    tabBarLabel: () => false,
+                })}
+            >
+                <Tab.Screen name="NEWS" component={SharedStack} />
+                <Tab.Screen name="EVENTS" component={SharedStack} />
+                <Tab.Screen name="MAP" component={MapStack} />
+                <Tab.Screen name="VIDEO" component={SharedStack} />
+                <Tab.Screen name="MORE" component={MoreStack} />
+            </Tab.Navigator>
         </NavigationContainer>
     );
 };

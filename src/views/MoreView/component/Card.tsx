@@ -1,40 +1,34 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon, IconType } from '@components';
-import { colors, typography } from '@styles';
+import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { IconType, Icon } from '@components';
+import { typography, colors } from '@styles';
+import { moreViewStyles } from './index';
 
 interface CardProps {
     title: string;
     icon: IconType;
-    backgroundColor: string;
     onOpen: () => void;
+    backgroundColor: string;
 }
 
-export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => (
-    <TouchableOpacity style={styles.container} onPress={onOpen}>
-        <View style={[styles.containerBox, { backgroundColor }]}>
-            <Icon size={24} type={icon} fill={colors.white} />
+export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => {
+    return (
+        <View style={moreViewStyles.card}>
+            <TouchableOpacity style={moreViewStyles.button} onPress={onOpen}>
+                <View style={[styles.icon, { backgroundColor }]}>
+                    <Icon type={icon} fill={colors.white} />
+                </View>
+                <Text style={[styles.text]}> {title}</Text>
+            </TouchableOpacity>
         </View>
-        <Text style={styles.text}> {title}</Text>
-    </TouchableOpacity>
-);
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        height: 88,
-        justifyContent: 'space-between',
-    },
-    containerBox: {
-        height: 44,
-        width: 44,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 27,
+    icon: {
+        padding: 10,
     },
     text: {
-        width: 99,
         textAlign: 'center',
         letterSpacing: 0.1,
         paddingTop: 8,

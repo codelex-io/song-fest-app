@@ -16,27 +16,27 @@ interface TabDescriptor {
 
 const tabs: TabDescriptor[] = [
     {
-        key: 'News',
+        key: 'NEWS',
         color: colors.orange,
         icon: IconType.News,
     },
     {
-        key: 'Events',
+        key: 'EVENTS',
         color: colors.blue,
         icon: IconType.Calendar,
     },
     {
-        key: 'Map',
+        key: 'MAP',
         color: colors.green,
         icon: IconType.Map,
     },
     {
-        key: 'Video',
+        key: 'VIDEO',
         color: colors.lightBlue,
         icon: IconType.Video,
     },
     {
-        key: 'More',
+        key: 'MORE',
         color: colors.purple,
         icon: IconType.More,
     },
@@ -56,14 +56,14 @@ export const TabBarIcon: React.FC<Props> = ({ route, focused }) => {
     const backgroundColor = focused ? color : colors.white;
     return (
         <View style={[styles.container, { backgroundColor }]}>
-            <Icon size={24} type={icon} fill={fill} />
+            <Icon type={icon} fill={fill} />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: 64,
+        paddingVertical: 20,
         width: '100%',
         alignItems: 'center',
         alignContent: 'center',

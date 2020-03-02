@@ -11,3 +11,7 @@ export interface NewsItem {
     };
     link: string;
 }
+
+export interface Variables {
+    first: number;
+}

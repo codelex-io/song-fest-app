@@ -1,98 +1,52 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Svg } from 'react-native-svg';
+import { Svg, Path } from 'react-native-svg';
 import { findIcon } from './assets';
 
 export enum IconType {
-    CalendarClock = 'CalendarClock',
+    Yoga = 'Yoga',
+    Parent = 'Parent',
+    Eye = 'Eye',
+    HeartFilled = 'HeartFilled',
+    Share = 'Share',
+    Heart = 'Heart',
+    News = 'News',
     Calendar = 'Calendar',
-    Camcorder = 'Camcorder',
+    Map = 'Map',
+    Video = 'Video',
+    More = 'More',
+    Search = 'Search',
+    Clock = 'Clock',
+    Navigation = 'Navigation',
+    CrosshairsGPS = 'CrosshairsGPS',
+    MenuDown = 'MenuDown',
+    Gift = 'Gift',
+    Alert = 'Alert',
+    HelpCircle = 'HelpCircle',
+    Bus = 'Bus',
+    Information = 'Information',
+    PineTreeBox = 'PineTreeBox',
+    FileDocumentBox = 'FileDocumentBox',
+    Phone = 'Phone',
+    Settings = 'Settings',
     ChevronLeft = 'ChevronLeft',
     ChevronRight = 'ChevronRight',
-    Clock = 'Clock',
-    Close = 'Close',
-    Cookie = 'Cookie',
-    CrosshairsGPS = 'CrosshairsGPS',
-    Dance = 'Dance',
-    DirectionsBus = 'DirectionsBus',
-    DotsHorizontal = 'DotsHorizontal',
-    DotsVertical = 'DotsVertical',
-    Eye = 'Eye',
-    FileDocumentBox = 'FileDocumentBox',
-    Filter = 'Filter',
-    Fire = 'Fire',
-    Flower = 'Flower',
-    Gift = 'Gift',
-    Heart = 'Heart',
-    HeartFilled = 'HeartFilled',
-    HelpOutline = 'HelpOutline',
-    HelpCircle = 'HelpCircle',
-    HumanMaleFemale = 'HumanMaleFemale',
-    HumanMaleGirl = 'HumanMaleGirl',
-    ImageFilterVintage = 'ImageFilterVintage',
-    Info = 'Info',
-    Information = 'Information',
-    Itunes = 'Itunes',
-    Kas = 'Kas',
-    LibraryVideo = 'LibraryVideo',
-    Map = 'Map',
-    MapMarker = 'MapMarker',
-    Menu = 'Menu',
-    MenuDown = 'MenuDown',
-    More = 'More',
-    MusicNoteEighth = 'MusicNoteEighth',
-    Navigation = 'Navigation',
-    NewReleases = 'NewReleases',
-    News = 'News',
-    OndemandVideo = 'OndemandVideo',
-    OpenInNew = 'OpenInNew',
-    Parent = 'Parent',
-    Parking = 'Parking',
-    PartyPopper = 'PartyPopper',
-    Phone = 'Phone',
-    PineTreeBox = 'PineTreeBox',
-    Pizza = 'Pizza',
-    Place = 'Place',
-    PlayCircle = 'PlayCircle',
     RadioBoxBlank = 'RadioBoxBlank',
     RadioBoxMarked = 'RadioBoxMarked',
-    Saxophone = 'Saxophone',
-    Scooter = 'Scooter',
-    Search = 'Search',
-    Settings = 'Settings',
-    Share = 'Share',
-    ShoePrint = 'ShoePrint',
-    SilverwareForkKnife = 'SilverwareForkKnife',
-    Social = 'Social',
-    Star = 'Star',
-    Video = 'Video',
-    Whatshot = 'Whatshot',
-    Yoga = 'Yoga',
-    Alert = 'Alert',
-    Bus = 'Bus',
-    Account = 'Account',
-    AppsBox = 'AppsBox',
-    Artist = 'Artist',
-    AttachMoney = 'AttachMoney',
-    Balloon = 'Balloon',
-    Bullhorn = 'Bullhorn',
-    CalendarAlert = 'CalendarAlert',
+    Filter = 'Filter',
 }
 
 interface IconProps {
-    size: number;
-    type: IconType;
+    size?: number;
     fill?: string;
+    type?: IconType;
+    style?: { [key: string]: string | number };
 }
 
-const Icon: React.FC<IconProps> = ({ size, type, fill }) => {
-    const SvgIcon = findIcon(type);
+export const Icon: React.FC<IconProps> = ({ size = 24, fill = 'blue', type = IconType.Yoga, style }) => {
     return (
-        <View style={{ height: size, width: size }}>
-            <Svg>
-                <SvgIcon height={size} width={size} fill={fill} />
-            </Svg>
-        </View>
+        <Svg width={size} height={size} viewBox="0 0 24 24" style={{ ...style }}>
+            <Path {...findIcon(type)} fill={fill} />
+        </Svg>
     );
 };
 
