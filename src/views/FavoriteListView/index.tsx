@@ -2,9 +2,9 @@ import React from 'react';
 import { useFavourites } from '@domain/favourites';
 import { default as FavoriteListViewComponent } from './component';
 import { EmptyFavorite } from './component/EmptyFavorite';
-import { NewsStackNavParams } from 'src/navigation/stacks/NewsStack';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
-const FavoriteListView: React.FC<NewsStackNavParams<'Favorites'>> = ({ navigation }) => {
+const FavoriteListView: React.FC<SharedStackNavList<'Favorites'>> = ({ navigation }) => {
     const { favourites, hasAnyItems, toggleFavourite } = useFavourites();
     if (hasAnyItems()) {
         return (

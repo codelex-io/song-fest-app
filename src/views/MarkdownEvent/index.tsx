@@ -10,14 +10,16 @@ import { open } from '@domain/share';
 import { Loading } from '@components';
 import { View } from 'react-native';
 import { colors } from '@styles';
-import { NewsStackNavParams } from 'src/navigation/stacks/NewsStack';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
-const SingleView: React.FC<NewsStackNavParams<'Article'>> = ({ route }) => {
-    const { params: { itemId, group } } = route
+const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route }) => {
+    const {
+        params: { itemId, group },
+    } = route;
 
     const query = group === 'NEWS' ? FETCH_TARGET_NEWS_ITEM : FETCH_TARGET_EVENTS_ITEM;
     const { loading, data } = useQuery<Data, Variables>(query, { variables: { id: itemId } });

@@ -1,10 +1,7 @@
-import React from 'react'
-import { Text } from 'react-native'
+import React from 'react';
+import { Text } from 'react-native';
 const SearchView: React.FC = () => {
+    return <Text>Hello Search</Text>;
+};
 
-   return (
-      <Text>Hello Search</Text>
-   )
-}
-
-export default SearchView
+export default SearchView;

@@ -10,20 +10,19 @@ import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type AppTabsParamList = {
-    NEWS: undefined,
-    EVENTS: undefined,
-    MAP: undefined,
-    VIDEO: undefined,
-    MORE: undefined
-}
+    NEWS: undefined;
+    EVENTS: undefined;
+    MAP: undefined;
+    VIDEO: undefined;
+    MORE: undefined;
+};
 
 export type AppTabsNavParams<T extends keyof AppTabsParamList> = {
     navigation: StackNavigationProp<AppTabsParamList, T>;
     route: RouteProp<AppTabsParamList, T>;
 };
 
-
-const Tab = createBottomTabNavigator<AppTabsParamList>()
+const Tab = createBottomTabNavigator<AppTabsParamList>();
 
 const NavigationTheme: Theme = {
     ...DefaultTheme,
@@ -53,8 +52,8 @@ const Navigation: React.FC = () => {
             >
                 <Tab.Screen name="NEWS" component={SharedStack} />
                 <Tab.Screen name="EVENTS" component={SharedStack} />
-                <Tab.Screen name="VIDEO" component={SharedStack} />
                 <Tab.Screen name="MAP" component={MapStack} />
+                <Tab.Screen name="VIDEO" component={SharedStack} />
                 <Tab.Screen name="MORE" component={MoreStack} />
             </Tab.Navigator>
         </NavigationContainer>

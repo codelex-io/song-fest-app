@@ -36,7 +36,7 @@ const EventListComponent: React.FC<Props> = ({
         return <Loading />;
     }
     return (
-        <View>
+        <View style={styles.viewContainer}>
             <LongSearch
                 backgroundColor={colors.blue}
                 onPress={onSearch}
@@ -74,18 +74,15 @@ const EventListComponent: React.FC<Props> = ({
                 />
             </View>
             <FlatList<EventItem>
-                style={styles.listContainer}
                 data={items}
                 renderItem={({ item, index }): React.ReactElement => (
-                    <View style={{ paddingHorizontal: 16 }}>
-                        <Card
-                            item={item}
-                            backgroundColor={colors.findColorByIndex(index)}
-                            onFavourite={() => onFavourite(item)}
-                            onNavigate={() => onNavigate(item)}
-                            onReadMore={() => onReadMore(item)}
-                        />
-                    </View>
+                    <Card
+                        item={item}
+                        backgroundColor={colors.findColorByIndex(index)}
+                        onFavourite={() => onFavourite(item)}
+                        onNavigate={() => onNavigate(item)}
+                        onReadMore={() => onReadMore(item)}
+                    />
                 )}
             />
         </View>
@@ -99,11 +96,8 @@ const styles = StyleSheet.create({
     searchContainerButton: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        paddingHorizontal: 16,
-    },
-    listContainer: {
-        flex: 1,
-        paddingHorizontal: 16,
+        marginHorizontal: 16,
+        paddingBottom: 8,
     },
 });
 
