@@ -1,14 +1,25 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation, DefaultTheme } from '@react-navigation/native';
+import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NewsStack, EventsStack, MapStack, VideoStack, MoreStack } from './stacks';
-import { UserCategoryView, FavoriteListView } from '@views';
+import { UserCategoryView, FavoriteListView, SearchView, MarkdownEvent } from '@views';
 import { SimpleHeader, TabBarIcon } from '@components';
+import { colors } from '@styles';
+import SearchHeader from '@components/headers/SearchHeader';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const NavigationTheme: Theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: colors.white,
+    },
+};
 
 const AppTabs = () => {
     return (
@@ -42,6 +53,20 @@ const AppStack: React.FC = () => {
                 }}
                 component={FavoriteListView}
             />
+            <Stack.Screen
+                name="Article"
+                options={{
+                    header: () => <SimpleHeader title={''} goBack={navigation.goBack} />,
+                }}
+                component={MarkdownEvent}
+            />
+            <Stack.Screen
+                name="Search"
+                options={{
+                    header: () => <SearchHeader goBack={navigation.goBack} navigate={navigation.navigate} />,
+                }}
+                component={SearchView}
+            />
         </Stack.Navigator>
     );
 };
@@ -54,7 +79,7 @@ const Navigation: React.FC = () => {
     }
 
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={NavigationTheme}>
             <Stack.Navigator>
                 <Stack.Screen name="App" options={{ headerShown: false }} component={AppStack} />
             </Stack.Navigator>
