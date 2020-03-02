@@ -2,29 +2,28 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@styles';
 import { Icon, IconType } from '@components';
-import { GroupOfFavourites } from '@domain/favourites/types';
-import NavigationAware from '../../../navigation/NavigationAware';
+import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
 
-interface CardProps extends NavigationAware {
+interface CardProps {
     group: GroupOfFavourites;
+    onNavigate: (item: Favourite) => void;
+    onFavourite: (item: Favourite) => void;
 }
 
-export const Card: React.FC<CardProps> = ({ group, navigation }) => {
+export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {group.key}</Text>
             {group.items.map(item => (
                 <View key={item.id} style={styles.itemContainer}>
-                    <TouchableOpacity style={styles.favoriteIcon}>
+                    <TouchableOpacity style={styles.favoriteIcon} onPress={() => onFavourite(item)}>
                         <Icon size={26} type={IconType.HeartFilled} fill={colors.orange} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={{ flex: 1, flexDirection: 'row' }}
                         activeOpacity={0.5}
-                        onPress={() => {
-                            navigation.navigate('SingleNews', { newsItemId: item.id });
-                        }}
+                        onPress={() => onNavigate(item)}
                     >
                         <Text style={styles.itemText}>{item.title}</Text>
                         <View style={{ alignSelf: 'center' }}>

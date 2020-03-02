@@ -30,6 +30,9 @@ build/
 local.properties
 *.iml
 gen/
+*.android.bundle
+.project
+.classpath
 
 # Visual Studio Code
 #
@@ -57,6 +60,8 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+*/fastlane/builds
+*/ios/screenshots
 
 # Bundle artifact
 *.jsbundle

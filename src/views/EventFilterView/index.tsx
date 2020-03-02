@@ -20,7 +20,7 @@ interface EventFilterViewProps {
     events: EventItem[];
 }
 
-export default class EventListView extends React.Component<EventFilterViewProps> {
+export default class EventFilterView extends React.Component<EventFilterViewProps> {
     state = {
         modalVisible: false,
     };
@@ -116,10 +116,10 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                     <LongSearch backgroundColor={colors.blue} />
                 </View>
                 <View style={styles.searchContainerButton}>
-                    <TimeFilterButton button={{ title: 'Šodien', active: true }} />
-                    <TimeFilterButton button={{ title: 'Rīt', active: false }} />
-                    <TimeFilterButton button={{ title: 'ŠONEDĒĻ', active: false }} />
-                    <TimeFilterButton button={{ title: 'CITS', active: false }} />
+                    <TimeFilterButton title="Šodien" active={true} onPress={() => null} />
+                    <TimeFilterButton title="Rīt" active={false} onPress={() => null} />
+                    <TimeFilterButton title="Šonedēļ" active={false} onPress={() => null} />
+                    <TimeFilterButton title="Cits" active={false} onPress={() => null} />
                 </View>
                 <FlatList<EventItem>
                     data={events}
@@ -131,11 +131,7 @@ export default class EventListView extends React.Component<EventFilterViewProps>
                 />
                 <View>
                     <View style={styles.fixedFilter}>
-                        <TouchableHighlight
-                            onPress={() => {
-                                this.setModalVisible(true);
-                            }}
-                        >
+                        <TouchableHighlight onPress={() => this.setModalVisible(true)}>
                             <FilterButtonIcon />
                         </TouchableHighlight>
                     </View>

@@ -10,15 +10,16 @@ import { View } from 'react-native';
 import { open } from '@domain/share';
 import { FilterButtons } from '@components';
 import { colors } from '@styles';
-import NavigationAware from '../../navigation/NavigationAware';
+import { useNavigation } from '@react-navigation/native';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
-export const NewsListViewIndex: React.FC<NavigationAware> = ({ navigation }) => {
+export const NewsListViewIndex: React.FC = () => {
     const { loading, data } = useQuery<Data>(FETCH_NEWS_ITEMS);
     const { toggleFavourite, isFavourite } = useFavourites();
+    const navigation = useNavigation();
     return (
         <View style={{ backgroundColor: colors.white }}>
             <FilterButtons
@@ -28,9 +29,9 @@ export const NewsListViewIndex: React.FC<NavigationAware> = ({ navigation }) => 
                 ]}
             />
             <NewsListViewComponent
-                navigation={navigation}
                 loading={loading}
                 items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                onNavigate={item => navigation.navigate('SingleNews', { itemId: item.id })}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
                 onShare={item => open(item.link)}
             />
