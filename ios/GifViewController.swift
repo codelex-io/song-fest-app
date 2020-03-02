@@ -22,6 +22,21 @@ class GifViewController: UIViewController {
     return view
   }()
   
+  
+  @IBAction func touchUp(_ sender: UIButton) {
+    print("button clicked")
+    let jsCodeLocation = URL(string: "http://localhost:8081/index.bundle?platform=ios")
+    let rootView = RCTRootView(bundleURL: jsCodeLocation!, moduleName: "SongFestApp", initialProperties: nil, launchOptions: nil)
+    let rootViewController = UIViewController()
+    rootViewController.view = rootView
+
+    let window : UIWindow
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window.rootViewController = rootViewController
+    window.makeKeyAndVisible()
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     

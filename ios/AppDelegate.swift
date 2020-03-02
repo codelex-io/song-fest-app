@@ -10,20 +10,27 @@ import Foundation
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
+  func sourceURL(for bridge: RCTBridge!) -> URL! {
+      let jsCodeLocation = URL(string: "http://localhost:8081/index.bundle?platform=ios")
+    return jsCodeLocation!
+  }
+  
   var window: UIWindow?
   var bridge: RCTBridge!
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    let jsCodeLocation = URL(string: "http://localhost:8081/index.bundle?platform=ios")
-    let rootView = RCTRootView(bundleURL: jsCodeLocation!, moduleName: "SongFestApp", initialProperties: nil, launchOptions: launchOptions)
-    let rootViewController = UIViewController()
-    rootViewController.view = rootView
-
+    
+    bridge = RCTBridge.init(delegate: self, launchOptions: launchOptions)
+    let rootView = RCTRootView.init(bridge: bridge, moduleName: "SongFestApp", initialProperties: nil)
+    rootView.backgroundColor = UIColor.white
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    self.window?.rootViewController = rootViewController
-    self.window?.makeKeyAndVisible()
+    let rootController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GifViewController") as! GifViewController
 
+    self.window?.rootViewController = rootController
+    self.window?.makeKeyAndVisible()
+    
     return true
   }
+  
 }
