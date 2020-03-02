@@ -4,29 +4,15 @@ import { View } from 'react-native';
 import { TouchableOpacity, ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { FavouriteGroupKey } from '@domain/favourites/types';
 import { styles } from './styles';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
-type StackParamList = {
-    SearchGroup: { group: FavouriteGroupKey };
-};
-
-type SearchRouteProp = RouteProp<StackParamList, 'SearchGroup'>;
-
-interface Props {
-    goBack: () => void;
-    navigate: (route: string, payload: { [key: string]: string }) => void;
-}
-
-const SearchHeader: React.FC<Props> = ({ goBack, navigate }) => {
-    const { group } = useRoute<SearchRouteProp>().params;
-
+const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) => {
     const [input, setInput] = useState('');
 
     const handleSubmit = () => {
         setInput('');
-        navigate(group, { payload: input });
+        navigation.navigate('Feed', { payload: input });
     };
 
     const inputAccessoryViewID = 'searchHeaderInput';
@@ -36,7 +22,7 @@ const SearchHeader: React.FC<Props> = ({ goBack, navigate }) => {
                 <View style={{ paddingTop: insets?.top }}>
                     <ScrollView keyboardDismissMode="interactive">
                         <View style={styles.header}>
-                            <TouchableOpacity style={styles.iconBox} onPress={goBack}>
+                            <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
                                 <Icon type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
                             </TouchableOpacity>
 

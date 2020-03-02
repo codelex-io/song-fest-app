@@ -16,33 +16,35 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore }) => (
-    <TouchableOpacity style={styles.container} onPress={onReadMore}>
-        {item.image?.url && (
-            <View>
-                <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
+    <View style={{ paddingHorizontal: 16 }}>
+        <TouchableOpacity style={styles.container} onPress={onReadMore}>
+            {item.image && item.image.url ? (
+                <View>
+                    <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
+                </View>
+            ) : null}
+            <View style={[styles.bottomContainer, { backgroundColor }]}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.location}>{item.locationTitle}</Text>
+                <View style={styles.labels}>
+                    <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
+                    <Label title={item.time} iconType={IconType.Clock} />
+                </View>
+                <IconButtons
+                    onShare={() => null}
+                    isFavourite={item.isFavourite}
+                    onFavourite={onFavourite}
+                    onNavigate={onNavigate}
+                />
             </View>
-        )}
-        <View style={[styles.bottomContainer, { backgroundColor }]}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.location}>{item.locationTitle}</Text>
-            <View style={styles.labels}>
-                <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
-                <Label title={item.time} iconType={IconType.Clock} />
-            </View>
-            <IconButtons
-                onShare={() => null}
-                isFavourite={item.isFavourite}
-                onFavourite={onFavourite}
-                onNavigate={onNavigate}
-            />
-        </View>
-    </TouchableOpacity>
+        </TouchableOpacity>
+    </View>
 );
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginVertical: 8,
+        marginBottom: 16,
     },
     image: {
         width: '100%',
