@@ -7,6 +7,7 @@ import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { NewsListViewIndex } from '@views/NewsListView';
+import { EventMapView } from '@views';
 
 export type SharedStackParamsList = {
     Feed: { payload: string };
@@ -20,11 +21,11 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
     route: RouteProp<SharedStackParamsList, T>;
 };
 
-const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO'>> = ({ route }) => {
+const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
     /* eslint-disable */
-   let feedComponent: React.FC<any> = EmptyView;
-   /* eslint-enable */
+    let feedComponent: React.FC<any> = EmptyView;
+    /* eslint-enable */
     let title: string;
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;
@@ -36,7 +37,11 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO'>> = ({ 
     } else if (route.name === 'VIDEO') {
         feedComponent = VideoView;
         title = 'VIDEO';
+    } else if (route.name === 'MAP') {
+        feedComponent = EventMapView
+        title = 'KARTE'
     }
+
     if (!route.name) {
         return null;
     }

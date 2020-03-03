@@ -45,13 +45,6 @@ export const NewsListViewIndex: React.FC = () => {
     const { toggleFavourite, isFavourite } = useFavourites();
     const navigation = useNavigation();
 
-    if (loading || !data) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
-                <Loading />
-            </View>
-        );
-    }
     return (
         <View style={styles.container}>
             <FilterButtons
@@ -60,13 +53,19 @@ export const NewsListViewIndex: React.FC = () => {
                 currentActive={isFirstActive}
                 triggerToggle={handleCurrentFilter}
             />
-            <NewsListViewComponent
-                loading={loading}
-                items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
-                onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
-                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
-                onShare={item => open(item.link)}
-            />
+            {loading || !data ?
+                <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
+                    <Loading />
+                </View>
+                :
+                <NewsListViewComponent
+                    loading={loading}
+                    items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                    onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
+                    onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
+                    onShare={item => open(item.link)}
+                />
+            }
         </View>
     );
 };
