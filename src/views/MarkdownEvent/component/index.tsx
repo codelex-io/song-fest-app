@@ -51,7 +51,6 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
         if (prevState.currentHeight !== this.state.currentHeight) {
             this.updateButton();
         }
-        return;
     }
     render() {
         const { item, onFavourite, onShare } = this.props;
