@@ -53,11 +53,11 @@ export const NewsListViewIndex: React.FC = () => {
                 currentActive={isFirstActive}
                 triggerToggle={handleCurrentFilter}
             />
-            {loading || !data ?
+            {loading || !data ? (
                 <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
                     <Loading />
                 </View>
-                :
+            ) : (
                 <NewsListViewComponent
                     loading={loading}
                     items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
@@ -65,7 +65,7 @@ export const NewsListViewIndex: React.FC = () => {
                     onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
                     onShare={item => open(item.link)}
                 />
-            }
+            )}
         </View>
     );
 };

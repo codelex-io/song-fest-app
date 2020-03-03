@@ -38,8 +38,8 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
         feedComponent = VideoView;
         title = 'VIDEO';
     } else if (route.name === 'MAP') {
-        feedComponent = EventMapView
-        title = 'KARTE'
+        feedComponent = EventMapView;
+        title = 'KARTE';
     }
 
     if (!route.name) {
