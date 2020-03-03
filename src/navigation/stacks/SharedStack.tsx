@@ -7,6 +7,7 @@ import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { NewsListViewIndex } from '@views/NewsListView';
+import { EventMapView } from '@views';
 
 export type SharedStackParamsList = {
     Feed: { payload: string };
@@ -40,6 +41,7 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
         feedComponent = EventMapView;
         title = 'KARTE';
     }
+
     if (!route.name) {
         return null;
     }
