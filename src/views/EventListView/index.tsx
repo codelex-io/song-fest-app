@@ -22,7 +22,6 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
         variables: { searchBy: currentSearch },
     });
-
     const { toggleFavourite, isFavourite } = useFavourites();
 
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');

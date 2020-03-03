@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { typography, colors } from '@styles';
+import { typography, colors, opacity } from '@styles';
 
 interface Props {
     title: string;
@@ -21,6 +21,7 @@ const TextToggleBtn: React.FC<Props> = ({
 }) => {
     return (
         <TouchableOpacity
+            activeOpacity={opacity.opacity8}
             style={[
                 styles.container,
                 { ...style },

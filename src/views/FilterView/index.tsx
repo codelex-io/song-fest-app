@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 import { FilterButton } from './FilterButton';
 import { SectorField } from './SectorField';
 import { Icon, IconType } from '@components';
-import { colors, typography } from '../../styles';
+import { colors, typography, opacity } from '@styles';
 import { FilterButtonIcon } from '../../components';
 
 export default class FilterView extends React.Component {
@@ -69,10 +69,10 @@ export default class FilterView extends React.Component {
                     </View>
 
                     <View style={styles.bottomButtons}>
-                        <TouchableOpacity style={styles.cancelButton}>
+                        <TouchableOpacity style={styles.cancelButton} activeOpacity={opacity.opacity8}>
                             <Text style={styles.buttonText}>ATCELT</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.filterButton}>
+                        <TouchableOpacity style={styles.filterButton} activeOpacity={opacity.opacity8}>
                             <Text style={styles.buttonText}>FILTRĒT</Text>
                         </TouchableOpacity>
                     </View>

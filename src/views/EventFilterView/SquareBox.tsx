@@ -1,21 +1,21 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
-import { colors } from '@styles';
+import { colors, opacity } from '@styles';
 
 export const SquareBox: React.FC = () => (
     <View style={styles.container}>
-        <TouchableOpacity style={styles.container2}>
+        <TouchableOpacity style={styles.container2} activeOpacity={opacity.opacity8}>
             <View style={styles.iconContainer}>
                 <Icon size={20} type={IconType.Share} fill={colors.blue} />
             </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.container2}>
+        <TouchableOpacity style={styles.container2} activeOpacity={opacity.opacity8}>
             <View style={styles.iconContainer}>
                 <Icon size={20} type={IconType.Heart} fill={colors.orange} />
             </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.container2}>
+        <TouchableOpacity style={styles.container2} activeOpacity={opacity.opacity8}>
             <View style={styles.iconContainer}>
                 <Icon size={20} type={IconType.Navigation} fill={colors.green} />
             </View>

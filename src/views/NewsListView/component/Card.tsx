@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors } from '@styles';
+import { colors, opacity } from '@styles';
 import { dateTimeUtils } from '@utils';
 import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
@@ -15,7 +15,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavourite, onShare }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={onNavigate} activeOpacity={0.5}>
+        <TouchableOpacity style={styles.container} onPress={onNavigate} activeOpacity={opacity.opacity8}>
             {item.image?.url && (
                 <View style={styles.pictureContainer}>
                     <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />

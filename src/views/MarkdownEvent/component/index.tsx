@@ -36,10 +36,6 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
         this.scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
     };
 
-    updateHeight(height: number) {
-        this.setState({ currentHeight: height });
-    }
-
     updateButton() {
         if (this.state.currentHeight > 500) {
             this.setState({ buttonUp: true });
@@ -47,6 +43,16 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
         }
     }
 
+    updateHeight(height: number) {
+        this.setState({ currentHeight: height });
+    }
+
+    componentDidUpdate(prevProps: Props, prevState: State): void {
+        if (prevState.currentHeight !== this.state.currentHeight) {
+            this.updateButton();
+        }
+        return;
+    }
     render() {
         const { item, onFavourite, onShare } = this.props;
         return (
@@ -78,7 +84,6 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
                     <View style={styles.markdownContainer}>
                         <Markdown style={markdownstyles}>{item.content}</Markdown>
                     </View>
-                    {this.updateButton()}
                     {this.state.buttonUp ? <BackButton onPress={this.scrollTo} /> : null}
                 </ScrollView>
             </View>

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
-import { typography, colors } from '@styles';
+import { typography, colors, opacity } from '@styles';
 
 interface LongSearchProps {
     backgroundColor: string;
@@ -11,15 +11,19 @@ interface LongSearchProps {
 }
 
 export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor, onPress, searchInput, onResetSearch }) => (
-    <TouchableOpacity style={[styles.searchContainer, { backgroundColor }]} onPress={onPress}>
+    <TouchableOpacity
+        style={[styles.searchContainer, { backgroundColor }]}
+        onPress={onPress}
+        activeOpacity={opacity.opacity8}
+    >
         <View style={styles.iconContainer}>
             <Icon size={20} type={IconType.Search} fill={colors.white} />
         </View>
         {searchInput ? (
             <Fragment>
-                <Text>rezultāti: {searchInput}</Text>
-                <TouchableOpacity onPress={onResetSearch}>
-                    <Text>Nodzēst</Text>
+                <Text style={styles.text}>rezultāti: {searchInput}</Text>
+                <TouchableOpacity onPress={onResetSearch} activeOpacity={opacity.opacity8}>
+                    <Text style={styles.text}>Nodzēst</Text>
                 </TouchableOpacity>
             </Fragment>
         ) : (
@@ -48,5 +52,8 @@ const styles = StyleSheet.create({
         fontFamily: typography.bold,
         fontSize: 14,
         lineHeight: 18,
+    },
+    text: {
+        color: colors.white,
     },
 });

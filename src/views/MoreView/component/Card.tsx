@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { IconType, Icon } from '@components';
-import { typography, colors } from '@styles';
+import { typography, colors, opacity } from '@styles';
 import { moreViewStyles } from './index';
 
 interface CardProps {
@@ -14,7 +14,7 @@ interface CardProps {
 export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen }) => {
     return (
         <View style={moreViewStyles.card}>
-            <TouchableOpacity style={moreViewStyles.button} onPress={onOpen}>
+            <TouchableOpacity style={moreViewStyles.button} onPress={onOpen} activeOpacity={opacity.opacity8}>
                 <View style={[styles.icon, { backgroundColor }]}>
                     <Icon type={icon} fill={colors.white} />
                 </View>
