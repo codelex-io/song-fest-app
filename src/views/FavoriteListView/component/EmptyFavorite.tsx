@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: colors.white,
     },
     icon: {
         marginBottom: 24,

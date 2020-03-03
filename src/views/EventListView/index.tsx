@@ -13,6 +13,7 @@ import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
 import { Loading } from '@components';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import { open } from '@domain/share';
 
 const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
     console.log('route initial', route);
@@ -66,6 +67,7 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
                 setCurrentSearch('');
                 refetch();
             }}
+            onShare={item => open(item.link)}
         />
     );
 };
