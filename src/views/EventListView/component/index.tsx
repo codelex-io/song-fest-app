@@ -38,7 +38,7 @@ const EventListComponent: React.FC<Props> = ({
         return <Loading />;
     }
     return (
-        <View>
+        <View style={styles.viewContainer}>
             <LongSearch
                 backgroundColor={colors.blue}
                 onPress={onSearch}

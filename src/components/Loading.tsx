@@ -6,7 +6,7 @@ export default class Loading extends Component {
     render() {
         return (
             <View>
-                <ActivityIndicator size="large" color={colors.orange} />
+                <ActivityIndicator size="small" color={colors.randomColor()} />
             </View>
         );
     }

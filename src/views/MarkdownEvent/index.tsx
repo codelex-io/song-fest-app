@@ -5,27 +5,21 @@ import { FETCH_TARGET_NEWS_ITEM, FETCH_TARGET_EVENTS_ITEM } from './graphql/quer
 import { Data, NewsItem as GraphQLNewsItem, Variables } from './graphql/types';
 import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
-import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
+import { Favourite } from '@domain/favourites/types';
 import { open } from '@domain/share';
-import { useRoute, RouteProp } from '@react-navigation/native';
 import { Loading } from '@components';
 import { View } from 'react-native';
 import { colors } from '@styles';
-
-type StackParamList = {
-    NewsList: { itemId: string; group: FavouriteGroupKey };
-};
-
-type ViewRouteProp = RouteProp<StackParamList, 'NewsList'>;
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
-const SingleView: React.FC = () => {
+const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route }) => {
     const {
         params: { itemId, group },
-    } = useRoute<ViewRouteProp>();
+    } = route;
 
     const query = group === 'NEWS' ? FETCH_TARGET_NEWS_ITEM : FETCH_TARGET_EVENTS_ITEM;
     const { loading, data } = useQuery<Data, Variables>(query, { variables: { id: itemId } });
