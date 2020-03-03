@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { TouchableOpacity, ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';
@@ -19,7 +19,7 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) =>
     return (
         <SafeAreaConsumer>
             {insets => (
-                <View style={{ paddingTop: insets?.top, backgroundColor: colors.white }}>
+                <View style={{ paddingTop: Platform.OS === 'ios' ? insets?.top : 0 }}>
                     <ScrollView keyboardDismissMode="interactive">
                         <View style={styles.header}>
                             <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
