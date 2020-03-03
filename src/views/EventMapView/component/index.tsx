@@ -8,7 +8,8 @@ import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
-import { typography, colors } from '@styles';
+import { typography } from '@styles';
+import { FilterButton } from './FilterButton';
 
 const width = Dimensions.get('window').width;
 
@@ -40,10 +41,7 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             },
         ],
     };
-<<<<<<< HEAD
 
-=======
->>>>>>> 65d3c3a3d678c0f17deda81840a44cbc3c42a1ff
     const eventCardPosition = (index: number) => {
         return {
             x: index * (width - 34),
@@ -116,15 +114,12 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             <View style={styles.eventsContainer}>
                 <Animated.View style={transformStyle}>
                     <View style={styles.buttonsContainer}>
-<<<<<<< HEAD
                         <TouchableOpacity onPress={animateToLocation}>
                             <MyLocation />
                         </TouchableOpacity>
                         <TouchableOpacity>
                             <FilterButton />
                         </TouchableOpacity>
-=======
->>>>>>> 65d3c3a3d678c0f17deda81840a44cbc3c42a1ff
                         <TouchableOpacity
                             style={styles.helperButton}
                             onPress={() => {
@@ -176,9 +171,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     helperButton: {
-        backgroundColor: colors.yellow,
         marginRight: 8,
-        padding: 10,
     },
 });
 
