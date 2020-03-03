@@ -9,7 +9,6 @@ import { IconButtons } from './IconButtons';
 import { NewsItem } from '../types';
 import { dateTimeUtils } from '@utils';
 
-
 interface Props {
     loading: boolean;
     item: NewsItem;
@@ -17,50 +16,49 @@ interface Props {
     onShare: (item: NewsItem) => void;
 }
 
-
 interface State {
-    viewHeight: number,
-    currentHeight: number,
+    currentHeight: number;
+    buttonUp: boolean;
+    scrollEnabled: boolean;
 }
 
-
-export default class MarkdownEvent extends React.Component<Props, State> {
+export default class MarkdownEvent extends React.PureComponent<Props, State> {
     constructor(props: Props) {
-        super(props)
+        super(props);
         this.state = {
-            viewHeight: 0,
             currentHeight: 0,
-        }
+            buttonUp: false,
+            scrollEnabled: false,
+        };
     }
-
-
     scroll = React.createRef<ScrollView>();
     scrollTo = () => {
         this.scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
     };
 
+    updateHeight(height: number) {
+        this.setState({ currentHeight: height });
+    }
 
-
-    //console.log(scrollEnabled)
-    scrollEnabled: boolean = true;
+    updateButton() {
+        if (this.state.currentHeight > 500) {
+            this.setState({ buttonUp: true });
+            this.setState({ scrollEnabled: true });
+        }
+    }
 
     render() {
-        const { item, onFavourite, onShare, } = this.props;
-        //const { viewHeight, currentHeight } = this.state;
-        // const scrollEnabled = this.state.currentHeight === this.state.viewHeight;
+        const { item, onFavourite, onShare } = this.props;
         return (
-            <View onLayout={event => {
-                const { height } = event.nativeEvent.layout;
-                console.log(height)
-                this.setState({ viewHeight: height })
-                console.log(this.state.viewHeight);
-            }}>
-                <ScrollView ref={this.scroll} style={{ paddingHorizontal: 16 }} onContentSizeChange={(width, height) => {
-                    console.log('height', height)
-                    this.setState({ currentHeight: height })
-                    console.log('currentHeight', this.state.currentHeight)
-
-                }} scrollEnabled={this.scrollEnabled} >
+            <View>
+                <ScrollView
+                    ref={this.scroll}
+                    style={{ paddingHorizontal: 16 }}
+                    onContentSizeChange={(width, height) => {
+                        this.updateHeight(height);
+                    }}
+                    scrollEnabled={this.state.scrollEnabled}
+                >
                     <View style={styles.imageContainer}>
                         <Image style={styles.image} source={{ uri: item.image?.url }} resizeMode="cover" />
                     </View>
@@ -77,12 +75,11 @@ export default class MarkdownEvent extends React.Component<Props, State> {
                             onNavigate={() => null}
                         />
                     </View>
-                    {
-                        <View style={styles.markdownContainer}>
-                            <Markdown style={markdownstyles}>{item.content}</Markdown>
-                        </View>
-                    }
-                    <BackButton onPress={this.scrollTo} />
+                    <View style={styles.markdownContainer}>
+                        <Markdown style={markdownstyles}>{item.content}</Markdown>
+                    </View>
+                    {this.updateButton()}
+                    {this.state.buttonUp ? <BackButton onPress={this.scrollTo} /> : null}
                 </ScrollView>
             </View>
         );
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         textAlign: 'left',
         flexDirection: 'column',
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
     timeDateContainer: {
         flexDirection: 'row',
@@ -128,5 +125,3 @@ const markdownstyles = StyleSheet.create({
         fontSize: 16,
     },
 });
-
-

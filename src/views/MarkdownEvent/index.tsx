@@ -35,7 +35,6 @@ const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route }) => {
 
     const item = toItem(data.item, isFavourite);
 
-
     return (
         <MarkdownEvent
             loading={loading}

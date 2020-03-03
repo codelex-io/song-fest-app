@@ -14,7 +14,7 @@ const screenHeight = Math.floor(Dimensions.get('window').height);
 const MoreView: React.FC<Props> = ({ navigate }) => {
     const scrollEnabled = screenHeight < 550;
     return (
-        <ScrollView style={moreViewStyles.container} scrollEnabled={scrollEnabled} >
+        <ScrollView style={moreViewStyles.container} scrollEnabled={scrollEnabled}>
             <View style={moreViewStyles.inner}>
                 {Items.map((item: ItemType, id: number) => (
                     <>
@@ -38,7 +38,7 @@ const MoreView: React.FC<Props> = ({ navigate }) => {
 };
 
 const screenWidth = Math.floor(Dimensions.get('window').width);
-const cardWidth = (screenWidth - 64) / 3
+const cardWidth = (screenWidth - 64) / 3;
 export const moreViewStyles = StyleSheet.create({
     container: {
         flex: 1,
