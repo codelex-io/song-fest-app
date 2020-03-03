@@ -25,7 +25,7 @@ export const IconButtons: React.FC<Props> = ({ onShare, isFavourite, onFavourite
         <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.blue} />
         <SingleButton
             onPress={onFavourite}
-            iconType={isFavourite ? IconType.Heart : IconType.HeartFilled}
+            iconType={isFavourite ? IconType.HeartFilled : IconType.Heart}
             fill={colors.orange}
         />
         <SingleButton onPress={onNavigate} iconType={IconType.Navigation} fill={colors.green} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { typography, colors } from '@styles';
 import Icon, { IconType } from '../Icon';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
     return (
         <SafeAreaConsumer>
             {insets => (
-                <View style={{ paddingTop: insets?.top }}>
+                <View style={{ paddingTop: Platform.OS === 'ios' ? insets?.top : 0 }}>
                     <View style={styles.container}>
                         <TouchableWithoutFeedback onLongPress={() => onLongPressTitle && onLongPressTitle()}>
                             <Text style={styles.text}>{title}</Text>
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: colors.white,
     },
     containerBox: {
         height: 40,
