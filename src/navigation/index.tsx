@@ -5,9 +5,10 @@ import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { UserCategoryView } from '@views';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
-import { MapStack, MoreStack, SharedStack } from './stacks';
 import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
+import SharedStack from './stacks/SharedStack';
+import MoreStack from './stacks/MoreStack';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -52,7 +53,7 @@ const Navigation: React.FC = () => {
             >
                 <Tab.Screen name="NEWS" component={SharedStack} />
                 <Tab.Screen name="EVENTS" component={SharedStack} />
-                <Tab.Screen name="MAP" component={MapStack} />
+                <Tab.Screen name="MAP" component={SharedStack} />
                 <Tab.Screen name="VIDEO" component={SharedStack} />
                 <Tab.Screen name="MORE" component={MoreStack} />
             </Tab.Navigator>

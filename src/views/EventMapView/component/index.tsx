@@ -6,9 +6,9 @@ import { MyLocation } from './MyLocation';
 import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
-import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
 import { typography, colors } from '@styles';
+import { LongSearch } from '@components';
 
 const width = Dimensions.get('window').width;
 
@@ -18,9 +18,20 @@ interface Props {
     onSelectEvent: (event: EventItem) => void;
     onFavourite: (item: EventItem) => void;
     onNavigate: (item: EventItem) => void;
+    onSearch: () => void;
+    searchInput: string;
+    onResetSearch: () => void;
 }
 
-const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite, onNavigate }) => {
+const EventMapComponent: React.FC<Props> = ({
+    items,
+    onSelectEvent,
+    onFavourite,
+    onNavigate,
+    onSearch,
+    searchInput,
+    onResetSearch,
+}) => {
     const scrollViewRef = useRef<ScrollViewHandle>(null);
     const mapViewRef = useRef<MapView>(null);
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
@@ -34,35 +45,14 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
     };
 
     const transformStyle = {
-        transform: [
-            {
-                translateY: animation,
-            },
-        ],
+        transform: [{ translateY: animation, },],
     };
-<<<<<<< HEAD
 
-=======
->>>>>>> 65d3c3a3d678c0f17deda81840a44cbc3c42a1ff
     const eventCardPosition = (index: number) => {
         return {
             x: index * (width - 34),
-            y: 0,
-            animated: true,
+            y: 0, animated: true,
         };
-    };
-
-    const showLocationErrorAlert = (message: string) => {
-        Alert.alert(
-            'Nav iespējams noteikt atrašanās vietu',
-            'Lūdzu pārbaudiet vai ir ieslēgts GPS un lietotnei ir atļauta atrašanās vietas piekļuve. ' + message,
-            [
-                {
-                    text: 'OK',
-                },
-            ],
-            { cancelable: false },
-        );
     };
 
     const animateToLocation = () => {
@@ -87,7 +77,12 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
 
     return (
         <View style={styles.container}>
-            <SearchBar />
+            <LongSearch
+                backgroundColor={colors.blue}
+                onPress={onSearch}
+                searchInput={searchInput}
+                onResetSearch={onResetSearch}
+            />
             <MapView
                 initialRegion={{
                     latitude: 56.951637,
@@ -116,15 +111,9 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             <View style={styles.eventsContainer}>
                 <Animated.View style={transformStyle}>
                     <View style={styles.buttonsContainer}>
-<<<<<<< HEAD
-                        <TouchableOpacity onPress={animateToLocation}>
+                        <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
                             <MyLocation />
                         </TouchableOpacity>
-                        <TouchableOpacity>
-                            <FilterButton />
-                        </TouchableOpacity>
-=======
->>>>>>> 65d3c3a3d678c0f17deda81840a44cbc3c42a1ff
                         <TouchableOpacity
                             style={styles.helperButton}
                             onPress={() => {
@@ -133,10 +122,6 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
                             }}
                         >
                             <ArrowButton open={isScrollOpen} />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.helperButton}>
-                            <MyLocation />
                         </TouchableOpacity>
                     </View>
                     <EventScroll
@@ -181,5 +166,14 @@ const styles = StyleSheet.create({
         padding: 10,
     },
 });
+
+const showLocationErrorAlert = (message: string) => {
+    Alert.alert(
+        'Nav iespējams noteikt atrašanās vietu',
+        'Lūdzu pārbaudiet vai ir ieslēgts GPS un lietotnei ir atļauta atrašanās vietas piekļuve. ' + message,
+        [{ text: 'OK', },],
+        { cancelable: false },
+    );
+};
 
 export default EventMapComponent;

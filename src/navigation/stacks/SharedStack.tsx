@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { SimpleHeader, Header } from '@components';
-import { FavoriteListView, MarkdownEvent, SearchView, EventListView, VideoView, EmptyView } from '@views';
+import { FavoriteListView, MarkdownEvent, SearchView, EventListView, VideoView, EmptyView, EventMapView } from '@views';
 import SearchHeader from '@components/headers/SearchHeader';
 import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
@@ -20,11 +20,11 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
     route: RouteProp<SharedStackParamsList, T>;
 };
 
-const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO'>> = ({ route }) => {
+const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
     /* eslint-disable */
-   let feedComponent: React.FC<any> = EmptyView;
-   /* eslint-enable */
+    let feedComponent: React.FC<any> = EmptyView;
+    /* eslint-enable */
     let title: string;
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;
@@ -36,6 +36,9 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO'>> = ({ 
     } else if (route.name === 'VIDEO') {
         feedComponent = VideoView;
         title = 'VIDEO';
+    } else if (route.name === 'MAP') {
+        feedComponent = EventMapView;
+        title = 'KARTE';
     }
     if (!route.name) {
         return null;

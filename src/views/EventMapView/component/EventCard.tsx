@@ -5,10 +5,12 @@ import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
 import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const width = Dimensions.get('window').width;
 
-interface EventDescriptionProps {
+interface EventDescriptionProps extends SharedStackNavList<'Feed'> {
     item: EventItem;
     onFavourite: () => void;
     onNavigate: () => void;
@@ -24,9 +26,11 @@ export const EventCard: React.FC<EventDescriptionProps> = ({
     onFavourite,
     itemIndex,
     totalItems,
+    navigation,
 }) => {
     return (
         <View style={[styles.event, { backgroundColor }]}>
+            <TouchableOpacity onPress={() => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })} />
             <Text style={styles.eventTitle}>{item.title}</Text>
             <Text style={styles.eventLocation}>{item.locationTitle}</Text>
             <View>
