@@ -14,8 +14,14 @@ import Storybook from './storybook';
 import { StatusBarWrapper } from './src/components'
 import {NativeModules} from 'react-native';
 
-
-const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
+const bootstrap = async () => Promise.all([
+    initApollo(),
+    initFavourites(),
+    initLanguage(),
+    initSettings(),
+    init(),
+    new Promise(resolve => setTimeout(resolve, 1500))
+]);
 
 const App: React.FC = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
