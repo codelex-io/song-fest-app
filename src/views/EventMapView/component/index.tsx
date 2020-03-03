@@ -21,6 +21,7 @@ interface Props {
     onSearch: () => void;
     searchInput: string;
     onResetSearch: () => void;
+    onReadMore: (item: EventItem) => void;
 }
 
 const EventMapComponent: React.FC<Props> = ({
@@ -31,6 +32,7 @@ const EventMapComponent: React.FC<Props> = ({
     onSearch,
     searchInput,
     onResetSearch,
+    onReadMore,
 }) => {
     const scrollViewRef = useRef<ScrollViewHandle>(null);
     const mapViewRef = useRef<MapView>(null);
@@ -129,6 +131,7 @@ const EventMapComponent: React.FC<Props> = ({
                         onFavourite={item => onFavourite(item)}
                         onNavigate={item => onNavigate(item)}
                         ref={scrollViewRef}
+                        onReadMore={(item: EventItem) => onReadMore(item)}
                     />
                 </Animated.View>
             </View>

@@ -18,9 +18,10 @@ interface Props extends ScrollViewProps {
     items: EventItem[];
     onFavourite: (item: EventItem) => void;
     onNavigate: (item: EventItem) => void;
+    onReadMore: (item: EventItem) => void;
 }
 
-const EventScroll: RefForwardingComponent<ScrollViewHandle, PropsWithChildren<Props>> = (props, ref) => {
+const EventScroll: RefForwardingComponent<ScrollViewHandle, PropsWithChildren<Props>> = ({ items, onFavourite, onNavigate, onReadMore }, ref) => {
     const scrollViewRef = useRef<ScrollView>(null);
     useImperativeHandle(ref, () => ({
         scrollTo: (options: ScrollToOptions) => {
@@ -38,15 +39,16 @@ const EventScroll: RefForwardingComponent<ScrollViewHandle, PropsWithChildren<Pr
             snapToAlignment={'center'}
             ref={scrollViewRef}
         >
-            {props.items.map((item, index) => (
+            {items.map((item, index) => (
                 <EventCard
                     key={item.id}
                     backgroundColor={colors.findColorByIndex(index)}
                     item={item}
                     itemIndex={index + 1}
-                    totalItems={props.items.length}
-                    onFavourite={() => props.onFavourite(item)}
-                    onNavigate={() => props.onNavigate(item)}
+                    totalItems={items.length}
+                    onFavourite={() => onFavourite(item)}
+                    onNavigate={() => onNavigate(item)}
+                    onReadMore={() => onReadMore(item)}
                 />
             ))}
         </ScrollView>

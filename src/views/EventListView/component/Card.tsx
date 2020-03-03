@@ -18,11 +18,13 @@ interface CardProps {
 export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore }) => (
     <View style={{ paddingHorizontal: 16 }}>
         <TouchableOpacity style={styles.container} onPress={onReadMore}>
-            {item.image && item.image.url ? (
+
+            {item.image && item.image.url &&
                 <View>
                     <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
                 </View>
-            ) : null}
+            }
+
             <View style={[styles.bottomContainer, { backgroundColor }]}>
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.location}>{item.locationTitle}</Text>

@@ -1,22 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
 import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const width = Dimensions.get('window').width;
 
-interface EventDescriptionProps extends SharedStackNavList<'Feed'> {
+interface EventDescriptionProps {
     item: EventItem;
     onFavourite: () => void;
     onNavigate: () => void;
     itemIndex: number;
     totalItems: number;
     backgroundColor: string;
+    onReadMore: () => void
 }
 
 export const EventCard: React.FC<EventDescriptionProps> = ({
@@ -26,32 +25,33 @@ export const EventCard: React.FC<EventDescriptionProps> = ({
     onFavourite,
     itemIndex,
     totalItems,
-    navigation,
+    onReadMore
 }) => {
     return (
         <View style={[styles.event, { backgroundColor }]}>
-            <TouchableOpacity onPress={() => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })} />
-            <Text style={styles.eventTitle}>{item.title}</Text>
-            <Text style={styles.eventLocation}>{item.locationTitle}</Text>
-            <View>
-                <View style={styles.eventiconLabel}>
-                    <Icon size={25} type={IconType.Calendar} fill="white" />
-                    <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
+            <TouchableOpacity onPress={onReadMore} >
+                <Text style={styles.eventTitle}>{item.title}</Text>
+                <Text style={styles.eventLocation}>{item.locationTitle}</Text>
+                <View>
+                    <View style={styles.eventiconLabel}>
+                        <Icon size={25} type={IconType.Calendar} fill="white" />
+                        <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
+                    </View>
+                    <View style={styles.eventiconLabel}>
+                        <Icon size={25} type={IconType.Clock} fill="white" />
+                        <Text style={styles.eventLabelText}>{item.time}</Text>
+                    </View>
                 </View>
-                <View style={styles.eventiconLabel}>
-                    <Icon size={25} type={IconType.Clock} fill="white" />
-                    <Text style={styles.eventLabelText}>{item.time}</Text>
+                <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
+                <View style={styles.row}>
+                    <IconButtons
+                        onShare={() => null}
+                        isFavourite={item.isFavourite}
+                        onFavourite={onFavourite}
+                        onNavigate={onNavigate}
+                    />
                 </View>
-            </View>
-            <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
-            <View style={styles.row}>
-                <IconButtons
-                    onShare={() => null}
-                    isFavourite={item.isFavourite}
-                    onFavourite={onFavourite}
-                    onNavigate={onNavigate}
-                />
-            </View>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     event: {
-        backgroundColor: colors.blue,
         width: width - 50,
         height: 280,
         zIndex: 9,
