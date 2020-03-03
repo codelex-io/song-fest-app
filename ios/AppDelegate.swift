@@ -6,16 +6,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
   var window: UIWindow?
   var bridge: RCTBridge!
-  var reactView: RCTRootView!
+  static var reactView: RCTRootView!
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     bridge = RCTBridge.init(delegate: self, launchOptions: launchOptions)
     self.window = UIWindow(frame: UIScreen.main.bounds)
     self.showLoading()
     
-    reactView = RCTRootView(bundleURL: sourceURL(for: self.bridge), moduleName: "SongFestApp", initialProperties: nil, launchOptions: nil)
-    reactView.backgroundColor = UIColor.white
-            
+    AppDelegate.reactView = RCTRootView(
+      bundleURL: sourceURL(for: self.bridge),
+      moduleName: "SongFestApp",
+      initialProperties: nil,
+      launchOptions: nil
+    )
+    AppDelegate.reactView.backgroundColor = UIColor.white
+    
     return true
   }
   
@@ -30,17 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
   @objc
   func showReactApp() -> Void {
     DispatchQueue.main.async {
-      print("=================")
-      print("show react app")
-      
       let controller = UIViewController()
-      controller.view = self.reactView
+      controller.view = AppDelegate.reactView
       
-      self.window?.rootViewController = controller
-      self.window?.makeKeyAndVisible()
-      
-      print("=================")
-      print("finished showing app")
+      UIApplication.shared.windows.first?.rootViewController = controller
+      UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
   }
   
