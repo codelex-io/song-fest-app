@@ -1,36 +1,54 @@
-//
-//  AppDelegate.swift
-//  SongFestApp
-//
-//  Created by sandris on 02/03/2020.
-//  Copyright © 2020 Facebook. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
+@objc(AppDelegate)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
-  func sourceURL(for bridge: RCTBridge!) -> URL! {
-      let jsCodeLocation = URL(string: "http://localhost:8081/index.bundle?platform=ios")
-    return jsCodeLocation!
-  }
-  
   var window: UIWindow?
   var bridge: RCTBridge!
+  var reactView: RCTRootView!
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
     bridge = RCTBridge.init(delegate: self, launchOptions: launchOptions)
-    let rootView = RCTRootView.init(bridge: bridge, moduleName: "SongFestApp", initialProperties: nil)
-    rootView.backgroundColor = UIColor.white
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    let rootController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GifViewController") as! GifViewController
-
-    self.window?.rootViewController = rootController
-    self.window?.makeKeyAndVisible()
+    self.showLoading()
     
+    reactView = RCTRootView(bundleURL: sourceURL(for: self.bridge), moduleName: "SongFestApp", initialProperties: nil, launchOptions: nil)
+    reactView.backgroundColor = UIColor.white
+            
     return true
   }
   
+  func showLoading() -> Void {
+    let controller = UIStoryboard(name: "Main", bundle: nil)
+      .instantiateViewController(withIdentifier: "GifViewController") as! GifViewController
+
+    self.window?.rootViewController = controller
+    self.window?.makeKeyAndVisible()
+  }
+    
+  @objc
+  func showReactApp() -> Void {
+    DispatchQueue.main.async {
+      print("=================")
+      print("show react app")
+      
+      let controller = UIViewController()
+      controller.view = self.reactView
+      
+      self.window?.rootViewController = controller
+      self.window?.makeKeyAndVisible()
+      
+      print("=================")
+      print("finished showing app")
+    }
+  }
+  
+  func sourceURL(for bridge: RCTBridge!) -> URL! {
+    return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
+  }
+  
+  @objc static func requiresMainQueueSetup() -> Bool {
+      return false
+  }
 }

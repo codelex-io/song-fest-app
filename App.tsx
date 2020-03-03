@@ -12,6 +12,8 @@ import { init } from './src/notifications';
 import Navigation from './src/navigation';
 import Storybook from './storybook';
 import { StatusBarWrapper } from './src/components'
+import {NativeModules} from 'react-native';
+
 
 const bootstrap = async () => Promise.all([initApollo(), initFavourites(), initLanguage(), initSettings()]);
 
@@ -22,6 +24,10 @@ const App: React.FC = () => {
         bootstrap().then(() => {
             SplashScreen.hide();
             setLoaded(true);
+
+            const AppDelegate = NativeModules.AppDelegate;
+            console.log(AppDelegate.showReactApp)
+            AppDelegate.showReactApp();
         });
     }, []);
     if (!isLoaded) {
