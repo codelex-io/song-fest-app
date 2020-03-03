@@ -16,8 +16,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="launchImageView" image="launch-photo-text" translatesAutoresizingMaskIntoConstraints="NO" id="rAK-Vf-Ab2">
+                                <rect key="frame" x="37" y="278" width="340" height="340"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="340" id="AQb-RD-SUR"/>
+                                    <constraint firstAttribute="width" constant="340" id="wh1-Te-sia"/>
+                                </constraints>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="codelex-logo" image="codelex-logo" translatesAutoresizingMaskIntoConstraints="NO" id="mcW-ef-3x7">
-                                <rect key="frame" x="234" y="823" width="124" height="39"/>
+                                <rect key="frame" x="234" y="793" width="124" height="39"/>
                                 <accessibility key="accessibilityConfiguration" identifier="codelex-logo">
                                     <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -28,7 +35,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="accurat-logo" image="accurat-logo" translatesAutoresizingMaskIntoConstraints="NO" id="kCq-fh-ZyQ">
-                                <rect key="frame" x="56" y="823" width="124" height="39"/>
+                                <rect key="frame" x="56" y="793" width="124" height="39"/>
                                 <accessibility key="accessibilityConfiguration" identifier="accurat-logo">
                                     <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -39,7 +46,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&amp;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gnh-Ph-0HO">
-                                <rect key="frame" x="200" y="830.5" width="14" height="24"/>
+                                <rect key="frame" x="200" y="800" width="14" height="24"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -48,26 +55,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="creator-lbl" text="Mobilo aplikāciju veidoja" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plh-ym-g8O">
-                                <rect key="frame" x="101" y="784" width="212" height="24"/>
+                                <rect key="frame" x="101" y="754" width="212" height="24"/>
                                 <accessibility key="accessibilityConfiguration" identifier="creator-lbl" label="Created by">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="songfest-launch-gif-1" translatesAutoresizingMaskIntoConstraints="NO" id="rAK-Vf-Ab2">
-                                <rect key="frame" x="37" y="278" width="340" height="340"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="340" id="AQb-RD-SUR"/>
-                                    <constraint firstAttribute="width" constant="340" id="wh1-Te-sia"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="asd.msld" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydn-vu-A2t">
-                                <rect key="frame" x="247" y="136" width="70" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -81,11 +74,10 @@
                             <constraint firstItem="mcW-ef-3x7" firstAttribute="height" secondItem="kCq-fh-ZyQ" secondAttribute="height" id="P6B-Nr-RDx"/>
                             <constraint firstItem="mcW-ef-3x7" firstAttribute="top" secondItem="Plh-ym-g8O" secondAttribute="bottom" constant="15" id="TKg-5G-yo2"/>
                             <constraint firstItem="mcW-ef-3x7" firstAttribute="centerY" secondItem="kCq-fh-ZyQ" secondAttribute="centerY" id="TOv-91-cJa"/>
-                            <constraint firstAttribute="bottom" secondItem="kCq-fh-ZyQ" secondAttribute="bottom" constant="34" id="ZCH-Xi-EXQ"/>
+                            <constraint firstAttribute="bottom" secondItem="kCq-fh-ZyQ" secondAttribute="bottom" constant="64" id="ZCH-Xi-EXQ"/>
                             <constraint firstItem="Gnh-Ph-0HO" firstAttribute="centerX" secondItem="11P-QY-Tps" secondAttribute="centerX" id="d3o-sJ-XcU"/>
                             <constraint firstItem="mcW-ef-3x7" firstAttribute="leading" secondItem="Gnh-Ph-0HO" secondAttribute="trailing" constant="20" id="fLT-c3-Ax8"/>
                             <constraint firstItem="rAK-Vf-Ab2" firstAttribute="centerY" secondItem="11P-QY-Tps" secondAttribute="centerY" id="nAX-Br-eoM"/>
-                            <constraint firstAttribute="bottom" secondItem="mcW-ef-3x7" secondAttribute="bottom" constant="34" id="tfV-OI-eMq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iz0-oQ-lZF"/>
                     </view>
@@ -96,8 +88,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="accurat-logo" width="45" height="14"/>
-        <image name="codelex-logo" width="45" height="14"/>
-        <image name="songfest-launch-gif-1" width="133.5" height="145.5"/>
+        <image name="accurat-logo" width="373" height="117"/>
+        <image name="codelex-logo" width="373" height="117"/>
+        <image name="launch-photo-text" width="1327" height="1446.5"/>
     </resources>
 </document>

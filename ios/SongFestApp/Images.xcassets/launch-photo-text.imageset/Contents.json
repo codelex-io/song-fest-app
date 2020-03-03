@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "accurat-1x.png",
+      "filename" : "launch-photo-text.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "accurat-2x.png",
+      "filename" : "launch-photo-text-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "accurat-3x.png",
+      "filename" : "launch-photo-text-2.png",
       "scale" : "3x"
     }
   ],

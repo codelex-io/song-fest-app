@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SongFestAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SongFestAppTests.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		222D5477240E8DF5006707DF /* AppViewControllerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 222D5476240E8DF5006707DF /* AppViewControllerBridge.m */; };
 		227E54E624093F5B00A1AC78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227E54E524093F5B00A1AC78 /* Main.storyboard */; };
@@ -25,6 +24,8 @@
 		8562BD6712C349009BA0F297 /* DINPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69F30D76AF1C450D8B56573F /* DINPro-Black.ttf */; };
 		85DD735733444D09BE77C9D0 /* DINPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98649D0CBD064D879BD7F7E1 /* DINPro-Regular.ttf */; };
 		8B24B07A32C34997B4CBE618 /* DINPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F36BC9073154ECAB6635278 /* DINPro-Light.ttf */; };
+		93D2C511240EF838007EE557 /* accurat-svg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 93D2C50F240EF838007EE557 /* accurat-svg.svg */; };
+		93D2C512240EF838007EE557 /* codelex-svg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 93D2C510240EF838007EE557 /* codelex-svg.svg */; };
 		A50903E452D634CE572F43CD /* libPods-SongFestApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8486CCD792395AAD80956F45 /* libPods-SongFestApp.a */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +52,6 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SongFestAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongFestAppTests.m; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SongFestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SongFestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SongFestApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SongFestApp/Info.plist; sourceTree = "<group>"; };
 		150E6CAFA5EF11AE47ED825C /* Pods-SongFestAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestAppTests.release.xcconfig"; path = "Target Support Files/Pods-SongFestAppTests/Pods-SongFestAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +76,8 @@
 		8486CCD792395AAD80956F45 /* libPods-SongFestApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SongFestApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F36BC9073154ECAB6635278 /* DINPro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Light.ttf"; path = "../assets/fonts/DINPro/DINPro-Light.ttf"; sourceTree = "<group>"; };
 		914896C0CEFDAA592DADF952 /* Pods-SongFestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongFestApp.release.xcconfig"; path = "Target Support Files/Pods-SongFestApp/Pods-SongFestApp.release.xcconfig"; sourceTree = "<group>"; };
+		93D2C50F240EF838007EE557 /* accurat-svg.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "accurat-svg.svg"; sourceTree = "<group>"; };
+		93D2C510240EF838007EE557 /* codelex-svg.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "codelex-svg.svg"; sourceTree = "<group>"; };
 		98649D0CBD064D879BD7F7E1 /* DINPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Regular.ttf"; path = "../assets/fonts/DINPro/DINPro-Regular.ttf"; sourceTree = "<group>"; };
 		9D8370FC4C13D1AE1CC8852B /* libPods-SongFestApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SongFestApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3FDAA3D21424577BD09B654 /* DINPro-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Bold.ttf"; path = "../assets/fonts/DINPro/DINPro-Bold.ttf"; sourceTree = "<group>"; };
@@ -134,12 +136,13 @@
 		13B07FAE1A68108700A75B9A /* SongFestApp */ = {
 			isa = PBXGroup;
 			children = (
+				93D2C50F240EF838007EE557 /* accurat-svg.svg */,
+				93D2C510240EF838007EE557 /* codelex-svg.svg */,
 				227E54EA2409433400A1AC78 /* songfest-launch-gif.gif */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				5EA56BF323FF196500877F7A /* icon.png */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				227E54E524093F5B00A1AC78 /* Main.storyboard */,
 				227E54E8240940A200A1AC78 /* GifViewController.swift */,
 				227E54E7240940A100A1AC78 /* SongFestApp-Bridging-Header.h */,
@@ -357,15 +360,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8562BD6712C349009BA0F297 /* DINPro-Black.ttf in Resources */,
 				50B9DA17EAEA4A31AA2830CE /* DINPro-Bold.ttf in Resources */,
 				5EA56BF423FF196500877F7A /* icon.png in Resources */,
 				227E54EB2409433400A1AC78 /* songfest-launch-gif.gif in Resources */,
 				227E54EF2409597500A1AC78 /* Launch Screen.storyboard in Resources */,
 				8B24B07A32C34997B4CBE618 /* DINPro-Light.ttf in Resources */,
+				93D2C512240EF838007EE557 /* codelex-svg.svg in Resources */,
 				5953D1C75943489A8ABECE45 /* DINPro-Medium.ttf in Resources */,
 				227E54E624093F5B00A1AC78 /* Main.storyboard in Resources */,
+				93D2C511240EF838007EE557 /* accurat-svg.svg in Resources */,
 				85DD735733444D09BE77C9D0 /* DINPro-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,18 +506,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = SongFestApp;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -552,6 +544,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				INFOPLIST_FILE = SongFestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -631,6 +624,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Q85LUJJHUP;
 				INFOPLIST_FILE = SongFestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
