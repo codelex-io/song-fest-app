@@ -14,4 +14,5 @@ export interface EventItem {
         latitude: number;
         longitude: number;
     };
+    link: string;
 }

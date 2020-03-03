@@ -16,27 +16,27 @@ interface TabDescriptor {
 
 const tabs: TabDescriptor[] = [
     {
-        key: 'News',
+        key: 'NEWS',
         color: colors.orange,
         icon: IconType.News,
     },
     {
-        key: 'Events',
+        key: 'EVENTS',
         color: colors.blue,
         icon: IconType.Calendar,
     },
     {
-        key: 'Map',
+        key: 'MAP',
         color: colors.green,
         icon: IconType.Map,
     },
     {
-        key: 'Video',
+        key: 'VIDEO',
         color: colors.lightBlue,
         icon: IconType.Video,
     },
     {
-        key: 'More',
+        key: 'MORE',
         color: colors.purple,
         icon: IconType.More,
     },
