@@ -9,6 +9,7 @@ import { IconButtons } from './IconButtons';
 import { NewsItem } from '../types';
 import { dateTimeUtils } from '@utils';
 
+
 interface Props {
     loading: boolean;
     item: NewsItem;
@@ -16,16 +17,50 @@ interface Props {
     onShare: (item: NewsItem) => void;
 }
 
-export default class MarkdownEvent extends React.Component<Props> {
+
+interface State {
+    viewHeight: number,
+    currentHeight: number,
+}
+
+
+export default class MarkdownEvent extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props)
+        this.state = {
+            viewHeight: 0,
+            currentHeight: 0,
+        }
+    }
+
+
     scroll = React.createRef<ScrollView>();
     scrollTo = () => {
         this.scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
     };
+
+
+
+    //console.log(scrollEnabled)
+    scrollEnabled: boolean = true;
+
     render() {
-        const { item, onFavourite, onShare } = this.props;
+        const { item, onFavourite, onShare, } = this.props;
+        //const { viewHeight, currentHeight } = this.state;
+        // const scrollEnabled = this.state.currentHeight === this.state.viewHeight;
         return (
-            <View style={styles.container}>
-                <ScrollView ref={this.scroll} style={{ paddingHorizontal: 16 }}>
+            <View onLayout={event => {
+                const { height } = event.nativeEvent.layout;
+                console.log(height)
+                this.setState({ viewHeight: height })
+                console.log(this.state.viewHeight);
+            }}>
+                <ScrollView ref={this.scroll} style={{ paddingHorizontal: 16 }} onContentSizeChange={(width, height) => {
+                    console.log('height', height)
+                    this.setState({ currentHeight: height })
+                    console.log('currentHeight', this.state.currentHeight)
+
+                }} scrollEnabled={this.scrollEnabled} >
                     <View style={styles.imageContainer}>
                         <Image style={styles.image} source={{ uri: item.image?.url }} resizeMode="cover" />
                     </View>
@@ -61,10 +96,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         textAlign: 'left',
         flexDirection: 'column',
-    },
-    header: {
-        height: 50,
-        alignItems: 'stretch',
+        backgroundColor: colors.white
     },
     timeDateContainer: {
         flexDirection: 'row',
@@ -96,3 +128,5 @@ const markdownstyles = StyleSheet.create({
         fontSize: 16,
     },
 });
+
+

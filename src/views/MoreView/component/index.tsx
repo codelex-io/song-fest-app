@@ -9,9 +9,12 @@ interface Props {
     navigate: (route: string) => void;
 }
 
+const screenHeight = Math.floor(Dimensions.get('window').height);
+
 const MoreView: React.FC<Props> = ({ navigate }) => {
+    const scrollEnabled = screenHeight < 550;
     return (
-        <ScrollView style={moreViewStyles.container}>
+        <ScrollView style={moreViewStyles.container} scrollEnabled={scrollEnabled} >
             <View style={moreViewStyles.inner}>
                 {Items.map((item: ItemType, id: number) => (
                     <>
@@ -35,16 +38,7 @@ const MoreView: React.FC<Props> = ({ navigate }) => {
 };
 
 const screenWidth = Math.floor(Dimensions.get('window').width);
-
-let columnCount = 3;
-if (screenWidth < 360) {
-    columnCount = 2;
-} else if (screenWidth > 600) {
-    columnCount = 5;
-}
-
-const cardWidth = Math.floor((screenWidth - 32) / columnCount);
-
+const cardWidth = (screenWidth - 64) / 3
 export const moreViewStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -54,15 +48,15 @@ export const moreViewStyles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         paddingTop: 4,
-        paddingHorizontal: 16,
+        paddingHorizontal: 8,
     },
     card: {
+        width: cardWidth,
+        marginHorizontal: 8,
         alignItems: 'center',
         marginVertical: 12,
-        width: cardWidth,
     },
     button: {
-        width: 99,
         alignItems: 'center',
     },
 });

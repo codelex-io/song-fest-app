@@ -14,7 +14,7 @@ interface HeaderProps {
 export const SimpleHeader: React.FC<HeaderProps> = ({ title, goBack }) => (
     <SafeAreaConsumer>
         {insets => (
-            <View style={[styles.header, { marginTop: insets?.top }]}>
+            <View style={[styles.simpleHeader, { marginTop: insets?.top }]}>
                 <IconBtn44
                     style={styles.iconBox}
                     icon={IconType.ChevronLeft}
@@ -22,7 +22,7 @@ export const SimpleHeader: React.FC<HeaderProps> = ({ title, goBack }) => (
                     bgColor={colors.white}
                     onPress={goBack}
                 />
-                <Text style={styles.text}>{title}</Text>
+                <Text style={styles.simpleText}>{title}</Text>
             </View>
         )}
     </SafeAreaConsumer>

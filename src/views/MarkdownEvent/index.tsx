@@ -41,6 +41,7 @@ const SingleView: React.FC = () => {
 
     const item = toItem(data.item, isFavourite);
 
+
     return (
         <MarkdownEvent
             loading={loading}

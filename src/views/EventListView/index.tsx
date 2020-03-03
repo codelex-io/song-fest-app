@@ -13,6 +13,7 @@ import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
 import { Loading } from '@components';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { open } from '@domain/share';
 
 type StackParamList = {
     SearchGroup: { payload: string };
@@ -37,7 +38,6 @@ const EventListView: React.FC = () => {
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
 
     const now = moment();
-
     useEffect(() => {
         if (route.params) {
             setCurrentSearch(route.params.payload);
@@ -72,6 +72,7 @@ const EventListView: React.FC = () => {
                     setCurrentSearch('');
                     refetch();
                 }}
+                onShare={item => open(item.link)}
             />
         </View>
     );

@@ -33,11 +33,11 @@ const SearchHeader: React.FC<Props> = ({ goBack, navigate }) => {
     return (
         <SafeAreaConsumer>
             {insets => (
-                <View style={{ paddingTop: insets?.top }}>
+                <View style={{ paddingTop: insets?.top, backgroundColor: colors.white }}>
                     <ScrollView keyboardDismissMode="interactive">
                         <View style={styles.header}>
                             <TouchableOpacity style={styles.iconBox} onPress={goBack}>
-                                <Icon type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
+                                <Icon type={IconType.ChevronLeft} fill={colors.white} />
                             </TouchableOpacity>
 
                             <TextInput
