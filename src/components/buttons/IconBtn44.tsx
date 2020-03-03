@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components/Icon';
+import { opacity } from '@styles';
 
 interface Props {
     onPress?: () => void;
@@ -20,7 +21,7 @@ const IconBtn44: React.FC<Props> = ({ onPress, style, icon, color, bgColor }) =>
                 },
                 { ...style },
             ]}
-            activeOpacity={0.8}
+            activeOpacity={opacity.opacity8}
         >
             <Icon type={icon} fill={color} />
         </TouchableOpacity>

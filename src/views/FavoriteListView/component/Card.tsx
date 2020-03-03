@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors } from '@styles';
+import { colors, opacity } from '@styles';
 import { Icon, IconType } from '@components';
 import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
 
@@ -16,18 +16,22 @@ export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) =>
             <Text style={styles.title}> {group.key}</Text>
             {group.items.map(item => (
                 <View key={item.id} style={styles.itemContainer}>
-                    <TouchableOpacity style={styles.favoriteIcon} onPress={() => onFavourite(item)}>
+                    <TouchableOpacity
+                        style={styles.favoriteIcon}
+                        onPress={() => onFavourite(item)}
+                        activeOpacity={opacity.opacity8}
+                    >
                         <Icon size={26} type={IconType.HeartFilled} fill={colors.orange} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={{ flex: 1, flexDirection: 'row' }}
-                        activeOpacity={0.5}
+                        activeOpacity={opacity.opacity8}
                         onPress={() => onNavigate(item)}
                     >
                         <Text style={styles.itemText}>{item.title}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.5} onPress={() => onNavigate(item)}>
+                    <TouchableOpacity activeOpacity={opacity.opacity8} onPress={() => onNavigate(item)}>
                         <View style={{ flex: 1, justifyContent: 'center' }}>
                             <Icon size={26} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
                         </View>

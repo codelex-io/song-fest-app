@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconType } from '@components';
 import { Label } from './Label';
-import { colors, typography } from '@styles';
+import { colors, typography, opacity } from '@styles';
 import { IconButtons } from './IconButtons';
 import { EventItem } from '../types';
 import { dateTimeUtils } from '@utils';
@@ -19,7 +19,7 @@ interface CardProps {
 export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore, onShare }) => {
     return (
         <View style={{ paddingHorizontal: 16 }}>
-            <TouchableOpacity style={styles.container} onPress={onReadMore}>
+            <TouchableOpacity style={styles.container} onPress={onReadMore} activeOpacity={opacity.opacity8}>
                 {item.image && item.image.url && (
                     <View>
                         <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />

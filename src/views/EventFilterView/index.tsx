@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Card } from './Card';
 import { EventItem } from '../EventListView/types';
-import { colors, typography } from '../../styles';
+import { colors, typography, opacity } from '@styles';
 import { Icon, IconType, FilterButtonIcon, LongSearch } from '@components';
 import { FilterButton } from '../FilterView/FilterButton';
 import { SectorField } from '../FilterView/SectorField';
@@ -104,10 +104,11 @@ export default class EventFilterView extends React.Component<EventFilterViewProp
                                         onPress={() => {
                                             this.setModalVisible(!this.state.modalVisible);
                                         }}
+                                        activeOpacity={opacity.opacity8}
                                     >
                                         <Text style={styles.buttonText}>ATCELT</Text>
                                     </TouchableHighlight>
-                                    <TouchableOpacity style={styles.filterButton}>
+                                    <TouchableOpacity style={styles.filterButton} activeOpacity={opacity.opacity8}>
                                         <Text style={styles.buttonText}>FILTRĒT</Text>
                                     </TouchableOpacity>
                                 </View>
