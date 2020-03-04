@@ -11,7 +11,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		222D5477240E8DF5006707DF /* AppViewControllerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 222D5476240E8DF5006707DF /* AppViewControllerBridge.m */; };
 		227E54E624093F5B00A1AC78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227E54E524093F5B00A1AC78 /* Main.storyboard */; };
-		227E54E9240940A200A1AC78 /* GifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E54E8240940A200A1AC78 /* GifViewController.swift */; };
+		227E54E9240940A200A1AC78 /* PostLaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E54E8240940A200A1AC78 /* PostLaunchController.swift */; };
 		227E54EB2409433400A1AC78 /* songfest-launch-gif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 227E54EA2409433400A1AC78 /* songfest-launch-gif.gif */; };
 		227E54EF2409597500A1AC78 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227E54EE2409597500A1AC78 /* Launch Screen.storyboard */; };
 		22EFA9C8240D8F0300C29222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EFA9C7240D8F0300C29222 /* AppDelegate.swift */; };
@@ -59,7 +59,7 @@
 		222D5476240E8DF5006707DF /* AppViewControllerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppViewControllerBridge.m; sourceTree = "<group>"; };
 		227E54E524093F5B00A1AC78 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		227E54E7240940A100A1AC78 /* SongFestApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SongFestApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		227E54E8240940A200A1AC78 /* GifViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifViewController.swift; sourceTree = "<group>"; };
+		227E54E8240940A200A1AC78 /* PostLaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLaunchController.swift; sourceTree = "<group>"; };
 		227E54EA2409433400A1AC78 /* songfest-launch-gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "songfest-launch-gif.gif"; sourceTree = "<group>"; };
 		227E54EE2409597500A1AC78 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		22EFA9C7240D8F0300C29222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				5EA56BF323FF196500877F7A /* icon.png */,
 				227E54E524093F5B00A1AC78 /* Main.storyboard */,
-				227E54E8240940A200A1AC78 /* GifViewController.swift */,
+				227E54E8240940A200A1AC78 /* PostLaunchController.swift */,
 				227E54E7240940A100A1AC78 /* SongFestApp-Bridging-Header.h */,
 				227E54EE2409597500A1AC78 /* Launch Screen.storyboard */,
 				22EFA9C7240D8F0300C29222 /* AppDelegate.swift */,
@@ -478,7 +478,7 @@
 			files = (
 				222D5477240E8DF5006707DF /* AppViewControllerBridge.m in Sources */,
 				22EFA9C8240D8F0300C29222 /* AppDelegate.swift in Sources */,
-				227E54E9240940A200A1AC78 /* GifViewController.swift in Sources */,
+				227E54E9240940A200A1AC78 /* PostLaunchController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
