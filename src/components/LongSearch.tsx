@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
-import { typography, colors } from '@styles';
+import { typography, colors, opacity } from '@styles';
 
 interface LongSearchProps {
     backgroundColor: string;
@@ -17,36 +17,30 @@ export const LongSearch: React.FC<LongSearchProps> = ({
     searchInput,
     onResetSearch,
     customStyles,
-}) => {
-
-    return (
+}) => (
         <TouchableOpacity
-            style={[
-                styles.container,
-                { backgroundColor },
-                { ...customStyles }
-            ]}
-            onPress={onPress}>
-
-            <Icon size={24} type={IconType.Search} fill={colors.white} />
-
+            style={[styles.searchContainer, { backgroundColor }, { ...customStyles }]}
+            onPress={onPress}
+            activeOpacity={opacity.opacity8}
+        >
+            <View style={styles.iconContainer}>
+                <Icon size={20} type={IconType.Search} fill={colors.white} />
+            </View>
             {searchInput ? (
                 <Fragment>
-                    <Text>rezultāti: {searchInput}</Text>
-                    <TouchableOpacity onPress={onResetSearch}>
-                        <Text>Nodzēst</Text>
+                    <Text style={styles.text}>rezultāti: {searchInput}</Text>
+                    <TouchableOpacity onPress={onResetSearch} activeOpacity={opacity.opacity8}>
+                        <Text style={styles.text}>Nodzēst</Text>
                     </TouchableOpacity>
                 </Fragment>
             ) : (
                     <Text style={styles.text}>Meklēt pēc nosaukuma, vietas uc.</Text>
                 )}
-
         </TouchableOpacity>
     );
-}
 
 let styles = StyleSheet.create({
-    container: {
+    searchContainer: {
         alignItems: 'center',
         flexDirection: 'row',
         paddingVertical: 10,
@@ -55,6 +49,7 @@ let styles = StyleSheet.create({
         marginHorizontal: 16,
         marginBottom: 16,
     },
+    iconContainer: {},
     text: {
         color: colors.white,
         textAlign: 'center',

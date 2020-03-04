@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
-import { colors } from '@styles';
+import { colors, opacity } from '@styles';
 
 interface Props {
     onShare: () => void;
@@ -14,7 +14,7 @@ const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: st
     iconType,
     fill,
 }) => (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} activeOpacity={opacity.opacity8}>
         <Icon type={iconType} fill={fill} />
     </TouchableOpacity>
 );

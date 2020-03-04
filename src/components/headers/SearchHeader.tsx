@@ -23,7 +23,7 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) =>
                     <ScrollView keyboardDismissMode="interactive">
                         <View style={styles.header}>
                             <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
-                                <Icon type={IconType.ChevronLeft} fill={colors.darkGrey1A} />
+                                <Icon type={IconType.ChevronLeft} fill={colors.white} />
                             </TouchableOpacity>
 
                             <TextInput
@@ -35,6 +35,7 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) =>
                                 onChangeText={text => setInput(text)}
                                 value={input}
                                 onSubmitEditing={handleSubmit}
+                                selectionColor={colors.white}
                             />
                         </View>
                     </ScrollView>

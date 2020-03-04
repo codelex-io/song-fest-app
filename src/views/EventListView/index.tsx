@@ -13,6 +13,7 @@ import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
 import { Loading } from '@components';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import { open } from '@domain/share';
 
 const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
     const [currentSearch, setCurrentSearch] = useState<string>('');
@@ -20,7 +21,6 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
         variables: { searchBy: currentSearch },
     });
-
     const { toggleFavourite, isFavourite } = useFavourites();
 
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
@@ -65,6 +65,7 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
                 setCurrentSearch('');
                 refetch();
             }}
+            onShare={item => open(item.link)}
         />
     );
 };

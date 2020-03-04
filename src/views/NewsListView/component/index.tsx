@@ -10,11 +10,15 @@ interface Props {
     onNavigate: (item: NewsItem) => void;
     onFavourite: (item: NewsItem) => void;
     onShare: (item: NewsItem) => void;
+    onRefresh: () => void;
+    refreshing: () => boolean;
 }
 
-const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare }) => {
+const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare, loading, onRefresh }) => {
     return (
         <FlatList<NewsItem>
+            onRefresh={onRefresh}
+            refreshing={loading}
             data={items}
             renderItem={({ item, index }): React.ReactElement => (
                 <Card

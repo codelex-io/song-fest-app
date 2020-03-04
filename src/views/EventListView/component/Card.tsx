@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconType } from '@components';
 import { Label } from './Label';
-import { colors, typography } from '@styles';
+import { colors, typography, opacity } from '@styles';
 import { IconButtons } from './IconButtons';
 import { EventItem } from '../types';
 import { dateTimeUtils } from '@utils';
@@ -13,40 +13,41 @@ interface CardProps {
     onFavourite: () => void;
     onNavigate: () => void;
     onReadMore: () => void;
+    onShare: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore }) => (
-    <View style={{ paddingHorizontal: 16 }}>
-        <TouchableOpacity style={styles.container} onPress={onReadMore}>
-
-            {item.image && item.image.url &&
-                <View>
-                    <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
+export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore, onShare }) => {
+    return (
+        <View style={{ paddingHorizontal: 16 }}>
+            <TouchableOpacity style={styles.container} onPress={onReadMore} activeOpacity={opacity.opacity8}>
+                {item.image && item.image.url && (
+                    <View>
+                        <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
+                    </View>
+                )}
+                <View style={[styles.bottomContainer, { backgroundColor }]}>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.location}>{item.locationTitle}</Text>
+                    <View style={styles.labels}>
+                        <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
+                        <Label title={item.time} iconType={IconType.Clock} />
+                    </View>
+                    <IconButtons
+                        onShare={onShare}
+                        isFavourite={item.isFavourite}
+                        onFavourite={onFavourite}
+                        onNavigate={onNavigate}
+                    />
                 </View>
-            }
-
-            <View style={[styles.bottomContainer, { backgroundColor }]}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.location}>{item.locationTitle}</Text>
-                <View style={styles.labels}>
-                    <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
-                    <Label title={item.time} iconType={IconType.Clock} />
-                </View>
-                <IconButtons
-                    onShare={() => null}
-                    isFavourite={item.isFavourite}
-                    onFavourite={onFavourite}
-                    onNavigate={onNavigate}
-                />
-            </View>
-        </TouchableOpacity>
-    </View>
-);
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginBottom: 16,
+        marginBottom: 8,
     },
     image: {
         width: '100%',

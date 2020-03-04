@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
-import { colors, typography } from '@styles';
+import { colors, typography, opacity } from '@styles';
 
 interface CardProps {
     icon: IconType;
@@ -11,7 +11,11 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor, onPress }) => (
-    <TouchableOpacity style={[styles.columnContainer, { backgroundColor }]} onPress={onPress}>
+    <TouchableOpacity
+        style={[styles.columnContainer, { backgroundColor }]}
+        onPress={onPress}
+        activeOpacity={opacity.opacity8}
+    >
         <View style={styles.containerBox}>
             <Icon size={24} type={icon} fill={backgroundColor} />
         </View>

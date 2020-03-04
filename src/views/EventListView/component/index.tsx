@@ -18,6 +18,7 @@ interface Props {
     onSearch: () => void;
     searchInput: string;
     onResetSearch: () => void;
+    onShare: (item: EventItem) => void;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -31,6 +32,7 @@ const EventListComponent: React.FC<Props> = ({
     searchInput,
     onResetSearch,
     onReadMore,
+    onShare,
 }) => {
     if (loading) {
         return <Loading />;
@@ -83,6 +85,7 @@ const EventListComponent: React.FC<Props> = ({
                         onFavourite={() => onFavourite(item)}
                         onNavigate={() => onNavigate(item)}
                         onReadMore={() => onReadMore(item)}
+                        onShare={() => onShare(item)}
                     />
                 )}
             />

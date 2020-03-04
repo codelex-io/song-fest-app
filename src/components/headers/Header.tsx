@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import { typography, colors } from '@styles';
+import { typography, colors, opacity } from '@styles';
 import Icon, { IconType } from '../Icon';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
@@ -20,7 +20,11 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
                         <TouchableWithoutFeedback onLongPress={() => onLongPressTitle && onLongPressTitle()}>
                             <Text style={styles.text}>{title}</Text>
                         </TouchableWithoutFeedback>
-                        <TouchableOpacity style={styles.containerBox} onPress={() => navigate('Favorites')}>
+                        <TouchableOpacity
+                            style={styles.containerBox}
+                            onPress={() => navigate('Favorites')}
+                            activeOpacity={opacity.opacity8}
+                        >
                             <Icon type={IconType.HeartFilled} fill={colors.white} />
                         </TouchableOpacity>
                     </View>

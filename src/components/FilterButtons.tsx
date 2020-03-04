@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors } from '../styles';
+import { colors, opacity } from '../styles';
 import { typography } from '../styles';
 
 interface FilterButtonsProps {
@@ -35,12 +35,14 @@ export const FilterButtons: React.FC<FilterButtonsProps> = ({
     return (
         <View style={styles.container}>
             <TouchableOpacity
+                activeOpacity={opacity.opacity8}
                 onPress={() => handleToggle('first')}
                 style={[styles.containerLeft, isFirstActive ? styles.containerActive : styles.containeInactive]}
             >
                 <Text style={[styles.text, isFirstActive ? styles.textActive : false]}>{firstTitle}</Text>
             </TouchableOpacity>
             <TouchableOpacity
+                activeOpacity={opacity.opacity8}
                 onPress={() => handleToggle('second')}
                 style={[styles.containerRight, !isFirstActive ? styles.containerActive : styles.containeInactive]}
             >

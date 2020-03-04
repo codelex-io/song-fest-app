@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { typography, colors } from '@styles';
+import { typography, colors, opacity } from '@styles';
 
 interface Props {
     onPress: () => void;
@@ -8,7 +8,7 @@ interface Props {
 
 const BackButton: React.FC<Props> = ({ onPress }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
+        <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={opacity.opacity8}>
             <Text style={styles.filterText}>Atpakaļ uz augšu</Text>
         </TouchableOpacity>
     );
