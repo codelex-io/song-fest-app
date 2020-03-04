@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, opacity } from '@styles';
 import { Icon, IconType } from '@components';
 import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
+import { LocalizationContext } from '../../../localization/LocalizationContext';
 
 interface CardProps {
     group: GroupOfFavourites;
@@ -11,9 +12,10 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) => {
+    const { translations } = useContext(LocalizationContext);
     return (
         <View style={styles.container}>
-            <Text style={styles.title}> {group.key}</Text>
+            <Text style={styles.title}> {translations.getString(group.key)}</Text>
             {group.items.map(item => (
                 <View key={item.id} style={styles.itemContainer}>
                     <TouchableOpacity

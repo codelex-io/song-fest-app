@@ -15,6 +15,7 @@ import EventMapView from './EventMapView';
 import LoadingView from './LoadingView';
 import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
+import UserSettings from './UserSettings';
 
 export {
     FavoriteListView,
@@ -34,4 +35,5 @@ export {
     LoadingView,
     EmptyView,
     SearchView,
+    UserSettings,
 };

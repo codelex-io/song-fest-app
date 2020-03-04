@@ -57,7 +57,7 @@ const translations = {
         SPONSORS: 'Sponsors offer',
         IMPORTANT_TO_KNOW: 'Important to know',
         QUESTIONS: 'Frequently asked questions',
-        TRANSPORTATION: 'Transportation',
+        TRANSPORTATION: 'Transport',
         INFO_CENTER: 'Info center',
         GREEN_FOOT: 'Green foot',
         RULES: 'Rules',

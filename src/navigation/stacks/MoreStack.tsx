@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import { MoreView, LanguageView } from '@views';
+import { MoreView, LanguageView, UserSettings } from '@views';
 import { Header, SimpleHeader } from '@components';
 import { useStoryBook } from '@domain/storybook';
 import { LocalizationContext } from '../../localization/LocalizationContext';
@@ -43,6 +43,15 @@ const MoreStack: React.FC = () => {
                     ),
                 }}
                 component={LanguageView}
+            />
+            <Stack.Screen
+                name="UserCategory"
+                options={{
+                    header: () => (
+                        <SimpleHeader title={translations.getString('USER_SETTINGS')} goBack={navigation.goBack} />
+                    ),
+                }}
+                component={UserSettings}
             />
         </Stack.Navigator>
     );

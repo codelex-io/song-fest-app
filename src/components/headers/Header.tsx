@@ -20,13 +20,18 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
                         <TouchableWithoutFeedback onLongPress={() => onLongPressTitle && onLongPressTitle()}>
                             <Text style={styles.text}>{title}</Text>
                         </TouchableWithoutFeedback>
-                        <TouchableOpacity
-                            style={styles.containerBox}
-                            onPress={() => navigate('Favorites')}
-                            activeOpacity={opacity.opacity8}
-                        >
-                            <Icon type={IconType.HeartFilled} fill={colors.white} />
-                        </TouchableOpacity>
+                        <View style={{ flexDirection: 'row' }}>
+                            <TouchableOpacity style={styles.containerBox1}>
+                                <Icon type={IconType.Parent} fill={colors.white} />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.containerBox}
+                                onPress={() => navigate('Favorites')}
+                                activeOpacity={opacity.opacity8}
+                            >
+                                <Icon type={IconType.HeartFilled} fill={colors.white} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             )}
@@ -52,6 +57,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.orange,
+        marginLeft: 16,
+    },
+    containerBox1: {
+        height: 40,
+        width: 40,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.green,
     },
     text: {
         fontFamily: typography.bold,
