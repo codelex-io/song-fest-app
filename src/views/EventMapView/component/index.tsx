@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Polygon } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { MyLocation } from './MyLocation';
 import { EventItem } from '../types';
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     eventsContainer: {
         position: 'absolute',
         bottom: 0,
-        backgroundColor: 'gray',
         width: width,
     },
     buttonsContainer: {
