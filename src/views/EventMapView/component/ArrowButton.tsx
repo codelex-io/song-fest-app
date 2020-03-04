@@ -5,7 +5,7 @@ import { Icon, IconType } from '@components';
 interface Props {
     open: boolean;
     onPress: () => void;
-    style: { [key: string]: string }
+    style: { [key: string]: string | number }
 }
 
 export const ArrowButton: React.FC<Props> = ({ open, onPress, style }) => {

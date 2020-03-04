@@ -38,6 +38,7 @@ const EventScroll: RefForwardingComponent<ScrollViewHandle, PropsWithChildren<Pr
             snapToInterval={width - 34}
             snapToAlignment={'center'}
             ref={scrollViewRef}
+            onScroll={(event) => console.log('event', event)}
         >
             {items.map((item, index) => (
                 <EventCard

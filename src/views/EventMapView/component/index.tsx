@@ -8,6 +8,7 @@ import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { EventMarker } from './EventMarker';
 import { colors } from '@styles';
 import { LongSearch } from '@components';
+import { ArrowButton } from './ArrowButton';
 
 const width = Dimensions.get('window').width;
 
@@ -38,6 +39,7 @@ const EventMapComponent: React.FC<Props> = ({
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
 
+    console.log(scrollViewRef.current)
 
     const startAnimation = () => {
         Animated.timing(animation, {
@@ -120,46 +122,48 @@ const EventMapComponent: React.FC<Props> = ({
                     />
                 ))}
             </MapView>
-            <View style={styles.eventsContainer}>
-                <Animated.View style={transformStyle}>
-                    <View style={styles.buttonsContainer}>
-                        <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
-                            <MyLocation />
-                        </TouchableOpacity>
+            <Animated.View style={[styles.eventsContainer, transformStyle]}>
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
+                        <MyLocation />
+                    </TouchableOpacity>
 
-                        <TouchableOpacity
-                            style={styles.helperButton}
-                            onPress={() => {
-                                setScrollOpen(!isScrollOpen);
-                                startAnimation();
-                            }}
-                            style={styles.helperButton as any} />
-                    </View>
-                    <EventScroll
-                        items={items}
-                        onFavourite={item => onFavourite(item)}
-                        onNavigate={item => onNavigate(item)}
-                        ref={scrollViewRef}
-                        onReadMore={(item: EventItem) => onReadMore(item)}
-                    />
-                </Animated.View>
-            </View>
+                    <ArrowButton open={isScrollOpen} onPress={() => {
+                        setScrollOpen(!isScrollOpen)
+                        startAnimation()
+                    }} style={styles.helperButton} />
+                </View>
+                <EventScroll
+                    items={items}
+                    onFavourite={item => onFavourite(item)}
+                    onNavigate={item => onNavigate(item)}
+                    ref={scrollViewRef}
+                    onReadMore={(item: EventItem) => onReadMore(item)}
+                />
+            </Animated.View>
         </View >
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
     },
     map: {
-        alignSelf: 'stretch',
-        width: width,
-        flex: 1,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
     },
     eventsContainer: {
         position: 'absolute',
         bottom: 0,
+        backgroundColor: 'gray',
         width: width,
     },
     buttonsContainer: {
@@ -170,6 +174,8 @@ const styles = StyleSheet.create({
     },
     helperButton: {
         marginRight: 8,
+        backgroundColor: colors.yellow,
+        padding: 10,
     },
 });
 
