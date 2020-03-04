@@ -19,6 +19,7 @@ const EmptyView: React.FC<Props> = ({ activeKey, searchInput }) => {
                 onPress={() => null}
                 searchInput={searchInput}
                 onResetSearch={() => null}
+                styles={styles.longSearch}
             />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
@@ -58,6 +59,9 @@ const EmptyView: React.FC<Props> = ({ activeKey, searchInput }) => {
 };
 
 const styles = StyleSheet.create({
+    longSearch: {
+        margin: '8 16 16 16',
+    },
     searchContainerButton: {
         flexDirection: 'row',
         flexWrap: 'wrap',

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
@@ -7,7 +7,7 @@ import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { EventMarker } from './EventMarker';
-import { typography, colors } from '@styles';
+import { colors } from '@styles';
 import { LongSearch } from '@components';
 
 const width = Dimensions.get('window').width;
@@ -39,12 +39,17 @@ const EventMapComponent: React.FC<Props> = ({
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
 
+
     const startAnimation = () => {
         Animated.timing(animation, {
             toValue: isScrollOpen ? 0 : 290,
             duration: 500,
         }).start();
     };
+    useEffect(() => {
+        console.log('scroll triggered', isScrollOpen ? 'opened' : 'closed')
+        startAnimation()
+    }, [isScrollOpen])
 
     const transformStyle = {
         transform: [{ translateY: animation, },],
@@ -80,10 +85,16 @@ const EventMapComponent: React.FC<Props> = ({
     return (
         <View style={styles.container}>
             <LongSearch
-                backgroundColor={colors.blue}
+                backgroundColor={colors.green}
                 onPress={onSearch}
                 searchInput={searchInput}
                 onResetSearch={onResetSearch}
+                customStyles={{
+                    position: 'absolute',
+                    right: 0,
+                    left: 0,
+                    zIndex: 1,
+                }}
             />
             <MapView
                 initialRegion={{
@@ -116,15 +127,14 @@ const EventMapComponent: React.FC<Props> = ({
                         <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
                             <MyLocation />
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.helperButton}
+
+                        <ArrowButton
+                            open={isScrollOpen}
                             onPress={() => {
                                 setScrollOpen(!isScrollOpen);
                                 startAnimation();
                             }}
-                        >
-                            <ArrowButton open={isScrollOpen} />
-                        </TouchableOpacity>
+                            style={styles.helperButton as any} />
                     </View>
                     <EventScroll
                         items={items}
@@ -135,17 +145,13 @@ const EventMapComponent: React.FC<Props> = ({
                     />
                 </Animated.View>
             </View>
-        </View>
+        </View >
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'absolute',
-        width: width,
-        height: '100%',
-        fontFamily: typography.normal,
     },
     map: {
         alignSelf: 'stretch',

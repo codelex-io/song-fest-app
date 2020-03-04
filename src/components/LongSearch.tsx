@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { typography, colors } from '@styles';
 
@@ -8,45 +8,60 @@ interface LongSearchProps {
     onPress?: () => void;
     searchInput?: string;
     onResetSearch?: () => void;
+    customStyles?: any
 }
 
-export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor, onPress, searchInput, onResetSearch }) => (
-    <TouchableOpacity style={[styles.searchContainer, { backgroundColor }]} onPress={onPress}>
-        <View style={styles.iconContainer}>
-            <Icon size={20} type={IconType.Search} fill={colors.white} />
-        </View>
-        {searchInput ? (
-            <Fragment>
-                <Text>rezultāti: {searchInput}</Text>
-                <TouchableOpacity onPress={onResetSearch}>
-                    <Text>Nodzēst</Text>
-                </TouchableOpacity>
-            </Fragment>
-        ) : (
-            <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc.</Text>
-        )}
-    </TouchableOpacity>
-);
+export const LongSearch: React.FC<LongSearchProps> = ({
+    backgroundColor,
+    onPress,
+    searchInput,
+    onResetSearch,
+    customStyles,
+}) => {
 
-const styles = StyleSheet.create({
-    searchContainer: {
-        height: 44,
+    return (
+        <TouchableOpacity
+            style={[
+                styles.container,
+                { backgroundColor },
+                { ...customStyles }
+            ]}
+            onPress={onPress}>
+
+            <Icon size={24} type={IconType.Search} fill={colors.white} />
+
+            {searchInput ? (
+                <Fragment>
+                    <Text>rezultāti: {searchInput}</Text>
+                    <TouchableOpacity onPress={onResetSearch}>
+                        <Text>Nodzēst</Text>
+                    </TouchableOpacity>
+                </Fragment>
+            ) : (
+                    <Text style={styles.text}>Meklēt pēc nosaukuma, vietas uc.</Text>
+                )}
+
+        </TouchableOpacity>
+    );
+}
+
+let styles = StyleSheet.create({
+    container: {
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'center',
+        paddingVertical: 10,
+        paddingHorizontal: 12,
         marginTop: 8,
-        marginBottom: 16,
         marginHorizontal: 16,
+        marginBottom: 16,
     },
-    iconContainer: {
-        paddingRight: 11.25,
-    },
-    searchText: {
+    text: {
         color: colors.white,
         textAlign: 'center',
         textTransform: 'uppercase',
         fontFamily: typography.bold,
         fontSize: 14,
         lineHeight: 18,
+        marginLeft: 8,
     },
 });
