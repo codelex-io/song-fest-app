@@ -64,9 +64,7 @@ export const NewsListViewIndex: React.FC = () => {
                     onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
                     onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
                     onShare={item => open(item.link)}
-                    onRefresh={() => {
-                        refetch();
-                    }}
+                    onRefresh={() => refetch()}
                     refreshing={() => !loading}
                 />
             )}

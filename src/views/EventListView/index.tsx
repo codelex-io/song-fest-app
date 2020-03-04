@@ -53,9 +53,7 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
     }
     return (
         <EventListComponent
-            onRefresh={() => {
-                refetch();
-            }}
+            onRefresh={() => refetch()}
             refreshing={() => !loading}
             loading={loading}
             items={filterByDate(now, items, activeTime)}
