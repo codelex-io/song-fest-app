@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
 import { FETCH_NEWS_ITEMS, FETCH_NEWS_ALL_ITEMS } from './graphql/queries';
@@ -11,6 +11,7 @@ import { open } from '@domain/share';
 import { FilterButtons, Loading } from '@components';
 import { colors } from '@styles';
 import { useNavigation } from '@react-navigation/native';
+import { LocalizationContext } from '../../localization/LocalizationContext';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
@@ -44,12 +45,13 @@ export const NewsListViewIndex: React.FC = () => {
 
     const { toggleFavourite, isFavourite } = useFavourites();
     const navigation = useNavigation();
+    const { translations } = useContext(LocalizationContext);
 
     return (
         <View style={styles.container}>
             <FilterButtons
-                firstTitle="AKTUĀLI"
-                secondTitle="VISI"
+                firstTitle={translations.getString('CURRENT')}
+                secondTitle={translations.getString('ALL')}
                 currentActive={isFirstActive}
                 triggerToggle={handleCurrentFilter}
             />

@@ -1,32 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconType } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
 import { UserType } from '@domain/settings';
+import { LocalizationContext } from '../../localization/LocalizationContext';
 
 interface Props {
     onSelect: (userType: UserType) => void;
 }
 
 export const UserCategoryView: React.FC<Props> = ({ onSelect }) => {
+    const { translations } = useContext(LocalizationContext);
     return (
         <View style={styles.container}>
             <Card
                 icon={IconType.Yoga}
-                title={'Dalībniekam'}
+                title={translations.getString('PARTICIPANT')}
                 backgroundColor={colors.orange}
                 onPress={() => onSelect('participant')}
             />
             <Card
                 icon={IconType.Parent}
-                title={'Dalībnieka vecākam'}
+                title={translations.getString('PARENT')}
                 backgroundColor={colors.green}
                 onPress={() => onSelect('parent')}
             />
             <Card
                 icon={IconType.Eye}
-                title={'Apmeklētājam'}
+                title={translations.getString('VISITOR')}
                 backgroundColor={colors.blue}
                 onPress={() => onSelect('visitor')}
             />

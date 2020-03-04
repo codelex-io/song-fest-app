@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { MoreView, LanguageView } from '@views';
-import { Header } from '@components';
+import { Header, SimpleHeader } from '@components';
 import { useStoryBook } from '@domain/storybook';
+import { LocalizationContext } from '../../localization/LocalizationContext';
 
 const Stack = createStackNavigator();
 
@@ -11,6 +12,8 @@ const MoreStack: React.FC = () => {
     const [devPressCount, setDevPressCount] = useState<number>(0);
     const navigation = useNavigation();
     const { setStoryBookActive } = useStoryBook();
+    const { translations } = useContext(LocalizationContext);
+
     return (
         <Stack.Navigator initialRouteName="More">
             <Stack.Screen
@@ -18,7 +21,7 @@ const MoreStack: React.FC = () => {
                 options={{
                     header: () => (
                         <Header
-                            title={'VAIRĀK'}
+                            title={translations.getString('MORE')}
                             navigate={navigation.navigate}
                             onLongPressTitle={() => {
                                 if (devPressCount < 2) {
@@ -32,7 +35,15 @@ const MoreStack: React.FC = () => {
                 }}
                 component={MoreView}
             />
-            <Stack.Screen name="Language" options={{ title: 'VALODA' }} component={LanguageView} />
+            <Stack.Screen
+                name="Language"
+                options={{
+                    header: () => (
+                        <SimpleHeader title={translations.getString('LANGUAGE')} goBack={navigation.goBack} />
+                    ),
+                }}
+                component={LanguageView}
+            />
         </Stack.Navigator>
     );
 };
