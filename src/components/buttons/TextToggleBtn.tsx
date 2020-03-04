@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         borderWidth: 1,
         marginRight: 8,
+        marginBottom: 8,
     },
     text: {
         fontFamily: typography.bold,

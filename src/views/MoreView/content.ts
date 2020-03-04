@@ -60,7 +60,7 @@ export const Items: ItemType[] = [
         id: 3,
         title: 'TRANSPORTATION',
         icon: IconType.Bus,
-        backgroundColor: colors.purple,
+        backgroundColor: colors.yellow,
         onOpen: (navigate: (route: string) => void) => execute('Video', 'internal', navigate),
     },
     {
@@ -95,8 +95,8 @@ export const Items: ItemType[] = [
         id: 8,
         title: 'USER_SETTINGS',
         icon: IconType.Settings,
-        backgroundColor: colors.purple,
-        onOpen: (navigate: (route: string) => void) => execute('Language', 'internal', navigate),
+        backgroundColor: colors.yellow,
+        onOpen: (navigate: (route: string) => void) => execute('UserCategory', 'internal', navigate),
     },
     {
         id: 9,

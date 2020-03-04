@@ -83,7 +83,12 @@ const EventListComponent: React.FC<Props> = ({
             </View>
             <FlatList<EventItem>
                 refreshControl={
-                    <RefreshControl onRefresh={onRefresh} refreshing={loading} colors={[colors.randomColor()]} />
+                    <RefreshControl
+                        onRefresh={onRefresh}
+                        refreshing={loading}
+                        colors={[colors.randomColor()]}
+                        tintColor={colors.randomColor()}
+                    />
                 }
                 data={items}
                 renderItem={({ item, index }): React.ReactElement => (
