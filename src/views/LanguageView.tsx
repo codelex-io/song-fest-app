@@ -11,10 +11,6 @@ export const LanguageView: React.FC = () => {
 
     return (
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
-            <Text style={{ marginTop: 20, fontSize: 20, textAlign: 'center' }}>
-                {translations.getString('LANGUAGE_SETTINGS')}
-            </Text>
-
             {translations.getAvailableLanguages().map((item: string) => (
                 <View key={item}>
                     <TouchableOpacity

@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Dimensions, Text } from 'react-native';
+import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Card } from './Card';
 import { colors } from '@styles';
 import { Items, ItemType } from '../content';
-import { styles } from 'react-native-markdown-display';
 
 interface Props {
     navigate: (route: string) => void;
@@ -16,21 +15,14 @@ const MoreView: React.FC<Props> = ({ navigate }) => {
     return (
         <ScrollView style={moreViewStyles.container} scrollEnabled={scrollEnabled}>
             <View style={moreViewStyles.inner}>
-                {Items.map((item: ItemType, id: number) => (
-                    <>
-                        <Card
-                            key={item.id}
-                            title={item.title}
-                            icon={item.icon}
-                            backgroundColor={item.backgroundColor}
-                            onOpen={() => item.onOpen(navigate)}
-                        />
-                        {id === Items.length ? (
-                            <View key={'stretcher'} style={styles.last}>
-                                <Text>last</Text>
-                            </View>
-                        ) : null}
-                    </>
+                {Items.map((item: ItemType) => (
+                    <Card
+                        key={item.id}
+                        title={item.title}
+                        icon={item.icon}
+                        backgroundColor={item.backgroundColor}
+                        onOpen={() => item.onOpen(navigate)}
+                    />
                 ))}
             </View>
         </ScrollView>

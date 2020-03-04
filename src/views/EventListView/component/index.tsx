@@ -1,11 +1,12 @@
-import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { FlatList, View, StyleSheet, RefreshControl } from 'react-native';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
 import { LongSearch, Loading } from '@components';
 import { TextToggleBtn } from '@components/buttons';
+import { LocalizationContext } from '../../../localization/LocalizationContext';
 
 interface Props {
     loading: boolean;
@@ -19,6 +20,8 @@ interface Props {
     searchInput: string;
     onResetSearch: () => void;
     onShare: (item: EventItem) => void;
+    onRefresh: () => void;
+    refreshing: () => boolean;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -33,7 +36,9 @@ const EventListComponent: React.FC<Props> = ({
     onResetSearch,
     onReadMore,
     onShare,
+    onRefresh,
 }) => {
+    const { translations } = useContext(LocalizationContext);
     if (loading) {
         return <Loading />;
     }
@@ -48,28 +53,28 @@ const EventListComponent: React.FC<Props> = ({
             />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
-                    title="šodien"
+                    title={translations.getString('TODAY')}
                     active={activeKey === 'today'}
                     onPress={() => onPress('today')}
                     primaryColor={colors.white}
                     secondaryColor={colors.green}
                 />
                 <TextToggleBtn
-                    title="rīt"
+                    title={translations.getString('TOMORROW')}
                     active={activeKey === 'tomorrow'}
                     onPress={() => onPress('tomorrow')}
                     primaryColor={colors.white}
                     secondaryColor={colors.green}
                 />
                 <TextToggleBtn
-                    title="šonedēļ"
+                    title={translations.getString('THIS_WEEK')}
                     active={activeKey === 'this-week'}
                     onPress={() => onPress('this-week')}
                     primaryColor={colors.white}
                     secondaryColor={colors.green}
                 />
                 <TextToggleBtn
-                    title="cits"
+                    title={translations.getString('OTHERS')}
                     active={activeKey === 'all'}
                     onPress={() => onPress('all')}
                     primaryColor={colors.white}
@@ -77,6 +82,9 @@ const EventListComponent: React.FC<Props> = ({
                 />
             </View>
             <FlatList<EventItem>
+                refreshControl={
+                    <RefreshControl onRefresh={onRefresh} refreshing={loading} colors={[colors.randomColor()]} />
+                }
                 data={items}
                 renderItem={({ item, index }): React.ReactElement => (
                     <Card

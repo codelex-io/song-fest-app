@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { SimpleHeader, Header } from '@components';
 import { FavoriteListView, MarkdownEvent, SearchView, EventListView, VideoView, EmptyView, EventMapView } from '@views';
@@ -7,6 +7,7 @@ import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { NewsListViewIndex } from '@views/NewsListView';
+import { LocalizationContext } from '../../localization/LocalizationContext';
 
 export type SharedStackParamsList = {
     Feed: { payload: string };
@@ -26,19 +27,20 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
     let feedComponent: React.FC<any> = EmptyView;
     /* eslint-enable */
     let title: string;
+    const { translations } = useContext(LocalizationContext);
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;
-        title = 'JAUNUMI';
+        title = 'NEWS';
     }
     if (route.name === 'EVENTS') {
         feedComponent = EventListView;
-        title = 'PASĀKUMI';
+        title = 'EVENTS';
     } else if (route.name === 'VIDEO') {
         feedComponent = VideoView;
         title = 'VIDEO';
     } else if (route.name === 'MAP') {
         feedComponent = EventMapView;
-        title = 'KARTE';
+        title = 'MAP';
     }
 
     if (!route.name) {
@@ -49,14 +51,16 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
             <Stack.Screen
                 name="Feed"
                 options={({ navigation }) => ({
-                    header: () => <Header title={title} navigate={navigation.navigate} />,
+                    header: () => <Header title={translations.getString(title)} navigate={navigation.navigate} />,
                 })}
                 component={feedComponent}
             />
             <Stack.Screen
                 name="Favorites"
                 options={({ navigation }) => ({
-                    header: () => <SimpleHeader title={'MANI FAVORĪTI'} goBack={navigation.goBack} />,
+                    header: () => (
+                        <SimpleHeader title={translations.getString('FAVORITE')} goBack={navigation.goBack} />
+                    ),
                 })}
                 component={FavoriteListView}
             />

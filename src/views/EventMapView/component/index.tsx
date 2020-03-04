@@ -3,7 +3,6 @@ import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { MyLocation } from './MyLocation';
-import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { EventMarker } from './EventMarker';
@@ -128,8 +127,8 @@ const EventMapComponent: React.FC<Props> = ({
                             <MyLocation />
                         </TouchableOpacity>
 
-                        <ArrowButton
-                            open={isScrollOpen}
+                        <TouchableOpacity
+                            style={styles.helperButton}
                             onPress={() => {
                                 setScrollOpen(!isScrollOpen);
                                 startAnimation();
@@ -170,9 +169,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     helperButton: {
-        backgroundColor: colors.yellow,
         marginRight: 8,
-        padding: 10,
     },
 });
 
