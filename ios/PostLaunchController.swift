@@ -24,7 +24,7 @@ class PostLaunchController: UIViewController {
     UIView.animate(
       withDuration: 1.55,
       delay: 0.8,
-      options: [.curveEaseOut, .autoreverse, .repeat],
+      options: [.curveEaseOut],
       animations: {
         self.loadinggif.alpha = 1.0
       },
