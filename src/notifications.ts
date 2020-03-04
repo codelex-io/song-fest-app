@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'react-native-firebase';
 import { errors } from '@utils';
@@ -40,6 +41,9 @@ const createNotificationListeners = async () => {
 };
 
 export const init = async () => {
+    if (Platform.OS !== 'android') {
+        return;
+    }
     const channel = new firebase.notifications.Android.Channel(
         'insider',
         'insider channel',
