@@ -1,6 +1,6 @@
 import React from 'react';
 import { NewsItem } from '../types';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { colors } from '@styles';
 import Card from './Card';
 
@@ -10,11 +10,16 @@ interface Props {
     onNavigate: (item: NewsItem) => void;
     onFavourite: (item: NewsItem) => void;
     onShare: (item: NewsItem) => void;
+    onRefresh: () => void;
+    refreshing: () => boolean;
 }
 
-const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare }) => {
+const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare, loading, onRefresh }) => {
     return (
         <FlatList<NewsItem>
+            refreshControl={
+                <RefreshControl onRefresh={onRefresh} refreshing={loading} colors={[colors.randomColor()]} />
+            }
             data={items}
             renderItem={({ item, index }): React.ReactElement => (
                 <Card

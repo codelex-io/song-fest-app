@@ -35,6 +35,7 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) =>
                                 onChangeText={text => setInput(text)}
                                 value={input}
                                 onSubmitEditing={handleSubmit}
+                                selectionColor={colors.white}
                             />
                         </View>
                     </ScrollView>

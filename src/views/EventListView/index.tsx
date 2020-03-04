@@ -22,7 +22,6 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
         variables: { searchBy: currentSearch },
     });
-
     const { toggleFavourite, isFavourite } = useFavourites();
 
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
@@ -54,6 +53,8 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
     }
     return (
         <EventListComponent
+            onRefresh={() => refetch()}
+            refreshing={() => !loading}
             loading={loading}
             items={filterByDate(now, items, activeTime)}
             onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}

@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     },
     iconBox: {
         paddingLeft: 8,
-        paddingVertical: 22,
+        paddingVertical: 13,
     },
     text: {
         fontSize: 14,
