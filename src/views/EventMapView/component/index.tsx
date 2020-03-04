@@ -1,13 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 'react-native';
 import MapView from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
 import { MyLocation } from './MyLocation';
 import { ArrowButton } from './ArrowButton';
 import { EventItem } from '../types';
 import { EventScroll, ScrollViewHandle } from './EventScroll';
 import { SearchBar } from './SearchBar';
 import { EventMarker } from './EventMarker';
-import { typography, colors } from '@styles';
+import { typography } from '@styles';
+import { FilterButton } from './FilterButton';
 
 const width = Dimensions.get('window').width;
 
@@ -23,14 +25,15 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
     const scrollViewRef = useRef<ScrollViewHandle>(null);
     const mapViewRef = useRef<MapView>(null);
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
-
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
+
     const startAnimation = () => {
         Animated.timing(animation, {
             toValue: isScrollOpen ? 0 : 290,
             duration: 500,
         }).start();
     };
+
     const transformStyle = {
         transform: [
             {
@@ -38,6 +41,7 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             },
         ],
     };
+
     const eventCardPosition = (index: number) => {
         return {
             x: index * (width - 34),
@@ -45,6 +49,40 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             animated: true,
         };
     };
+
+    const showLocationErrorAlert = (message: string) => {
+        Alert.alert(
+            'Nav iespējams noteikt atrašanās vietu',
+            'Lūdzu pārbaudiet vai ir ieslēgts GPS un lietotnei ir atļauta atrašanās vietas piekļuve. ' + message,
+            [
+                {
+                    text: 'OK',
+                },
+            ],
+            { cancelable: false },
+        );
+    };
+
+    const animateToLocation = () => {
+        Geolocation.getCurrentPosition(
+            position => {
+                mapViewRef.current?.animateToRegion(
+                    {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        latitudeDelta: 0.002,
+                        longitudeDelta: 0.002,
+                    },
+                    1000,
+                );
+            },
+            error => {
+                showLocationErrorAlert(error.message);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+        );
+    };
+
     return (
         <View style={styles.container}>
             <SearchBar />
@@ -76,6 +114,12 @@ const EventMapComponent: React.FC<Props> = ({ items, onSelectEvent, onFavourite,
             <View style={styles.eventsContainer}>
                 <Animated.View style={transformStyle}>
                     <View style={styles.buttonsContainer}>
+                        <TouchableOpacity onPress={animateToLocation}>
+                            <MyLocation />
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <FilterButton />
+                        </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.helperButton}
                             onPress={() => {
@@ -127,9 +171,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     helperButton: {
-        backgroundColor: colors.yellow,
         marginRight: 8,
-        padding: 10,
     },
 });
 
