@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
+import { LocalizationContext } from '../localization/LocalizationContext';
 
 const SearchView = () => {
+    const { translations } = useContext(LocalizationContext);
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Meklējiet pēc nosaukuma, vietas uc.</Text>
+            <Text style={styles.text}>{translations.getString('SEARCH')}</Text>
         </View>
     );
 };

@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';
+import { LocalizationContext } from '../../../localization/LocalizationContext';
 
 export const EmptyFavorite: React.FC = () => {
+    const { translations } = useContext(LocalizationContext);
     return (
         <View style={styles.container}>
             <Icon style={styles.icon} size={44} type={IconType.HeartFilled} fill={colors.orange} />
-            <Text style={styles.title}>Šeit varēsi atrast savus favorītus</Text>
-            <Text style={styles.title2}>
-                Favorītiem var pievienot pasākumus, jaunumus un video, ko vēlies ātri atrast
-            </Text>
+            <Text style={styles.title}>{translations.getString('FAVORITES_HERE')}</Text>
+            <Text style={styles.title2}>{translations.getString('FAVORITE_INFO')}</Text>
         </View>
     );
 };
