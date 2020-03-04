@@ -32,7 +32,7 @@ const execute = (route: string, typeOfLink: TypeOfLink, navigate: (route: string
 export const Items: ItemType[] = [
     {
         id: 0,
-        title: 'SPONSONRS',
+        title: 'SPONSORS',
         icon: IconType.Gift,
         backgroundColor: colors.green,
         onOpen: (navigate: (route: string) => void) =>
