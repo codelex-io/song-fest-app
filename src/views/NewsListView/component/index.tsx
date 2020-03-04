@@ -18,7 +18,12 @@ const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare
     return (
         <FlatList<NewsItem>
             refreshControl={
-                <RefreshControl onRefresh={onRefresh} refreshing={loading} colors={[colors.randomColor()]} />
+                <RefreshControl
+                    onRefresh={onRefresh}
+                    refreshing={loading}
+                    colors={[colors.randomColor()]}
+                    tintColor={colors.randomColor()}
+                />
             }
             data={items}
             renderItem={({ item, index }): React.ReactElement => (
