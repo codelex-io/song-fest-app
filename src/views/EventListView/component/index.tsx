@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, RefreshControl } from 'react-native';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
@@ -19,6 +19,8 @@ interface Props {
     searchInput: string;
     onResetSearch: () => void;
     onShare: (item: EventItem) => void;
+    onRefresh: () => void;
+    refreshing: () => boolean;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -33,6 +35,7 @@ const EventListComponent: React.FC<Props> = ({
     onResetSearch,
     onReadMore,
     onShare,
+    onRefresh,
 }) => {
     if (loading) {
         return <Loading />;
@@ -76,6 +79,9 @@ const EventListComponent: React.FC<Props> = ({
                 />
             </View>
             <FlatList<EventItem>
+                refreshControl={
+                    <RefreshControl onRefresh={onRefresh} refreshing={loading} colors={[colors.randomColor()]} />
+                }
                 data={items}
                 renderItem={({ item, index }): React.ReactElement => (
                     <Card
