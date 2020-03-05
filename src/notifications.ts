@@ -1,14 +1,14 @@
-import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import firebase from 'react-native-firebase';
+import messaging from '@react-native-firebase/messaging';
 import { errors } from '@utils';
+import { Platform } from 'react-native';
 
 const KEY = 'fcmToken';
 
 const getToken = async (): Promise<void> => {
     let fcmToken = await AsyncStorage.getItem(KEY);
     if (!fcmToken) {
-        fcmToken = await firebase.messaging().getToken();
+        fcmToken = await messaging().getToken();
         if (fcmToken) {
             await AsyncStorage.setItem(KEY, fcmToken);
         }
@@ -16,7 +16,7 @@ const getToken = async (): Promise<void> => {
 };
 
 const checkPermission = async () => {
-    const enabled = await firebase.messaging().hasPermission();
+    const enabled = await messaging().hasPermission();
     if (enabled) {
         getToken();
     } else {
@@ -26,7 +26,7 @@ const checkPermission = async () => {
 
 const requestPermission = async () => {
     try {
-        await firebase.messaging().requestPermission();
+        await messaging().requestPermission();
         getToken();
     } catch (error) {
         errors.onError(error);
@@ -34,22 +34,18 @@ const requestPermission = async () => {
 };
 
 const createNotificationListeners = async () => {
-    firebase.notifications().onNotification(notification => {
-        notification.android.setChannelId('insider').setSound('default');
-        firebase.notifications().displayNotification(notification);
+    messaging().onMessage(message => {
+        console.log(message.data);
     });
 };
 
-export const init = async () => {
-    if (Platform.OS !== 'android') {
+export const init = async (isRealDevice: boolean) => {
+    if (Platform.OS === 'ios' && !isRealDevice) {
         return;
     }
-    const channel = new firebase.notifications.Android.Channel(
-        'insider',
-        'insider channel',
-        firebase.notifications.Android.Importance.Max,
-    );
-    await firebase.notifications().android.createChannel(channel);
+    if (Platform.OS === 'ios') {
+        await messaging().registerForRemoteNotifications();
+    }
     await checkPermission();
     await createNotificationListeners();
 };

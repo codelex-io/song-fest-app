@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>73566660844-3rln1je7i8je292r9nh8d2s44r41r0kq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.73566660844-3rln1je7i8je292r9nh8d2s44r41r0kq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDtqI6oka3X1WE3E9UN7HUr_6JN7DYkALw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>73566660844</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>SongFestApp</string>
+	<key>PROJECT_ID</key>
+	<string>song-fest-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>song-fest-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:73566660844:ios:995b970dda5474ea579dc9</string>
+	<key>DATABASE_URL</key>
+	<string>https://song-fest-app.firebaseio.com</string>
+</dict>
+</plist>

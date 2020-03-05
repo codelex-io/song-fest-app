@@ -13,20 +13,24 @@ import Storybook from './storybook';
 import { StatusBarWrapper } from './src/components'
 import { hideSplashScreen } from './src/splash'
 
-const bootstrap = async () => Promise.all([
+const bootstrap = async (isRealDevice: boolean) => Promise.all([
     initApollo(),
     initFavourites(),
     initLanguage(),
     initSettings(),
-    init(),
+    init(isRealDevice),
     new Promise(resolve => setTimeout(resolve, 1500))
 ]);
 
-const App: React.FC = () => {
+interface Props {
+    isRealDevice: boolean
+}
+
+const App: React.FC<Props> = ({isRealDevice}) => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const { isStoryBookActive } = useStoryBook();
     useEffect(() => {
-        bootstrap().then(() => {
+        bootstrap(isRealDevice).then(() => {
             setLoaded(true);
             hideSplashScreen();
         });
