@@ -12,7 +12,6 @@ export const ArrowButton: React.FC<Props> = ({ open, onPress, style }) => {
     const spinValue = new Animated.Value(0);
 
     useEffect(() => {
-        console.log('open clicked', open ? 'opening' : 'closing')
         open
             ? Animated.timing(spinValue, {
                 toValue: 1,

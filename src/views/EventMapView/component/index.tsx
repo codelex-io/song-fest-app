@@ -1,14 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 'react-native';
-import MapView, { Polygon } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { MyLocation } from './MyLocation';
 import { EventItem } from '../types';
-import { EventScroll, ScrollViewHandle } from './EventScroll';
+import { ScrollViewHandle } from './EventScroll';
 import { EventMarker } from './EventMarker';
 import { colors } from '@styles';
 import { LongSearch } from '@components';
 import { ArrowButton } from './ArrowButton';
+import Carousel from 'react-native-snap-carousel';
+import { EventCard } from './EventCard';
 
 const width = Dimensions.get('window').width;
 
@@ -34,12 +36,11 @@ const EventMapComponent: React.FC<Props> = ({
     onResetSearch,
     onReadMore,
 }) => {
-    const scrollViewRef = useRef<ScrollViewHandle>(null);
+    // const scrollViewRef = useRef<ScrollViewHandle>(null);
     const mapViewRef = useRef<MapView>(null);
+    let _carousel: any;
     const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
-
-    console.log(scrollViewRef.current)
 
     const startAnimation = () => {
         Animated.timing(animation, {
@@ -47,20 +48,13 @@ const EventMapComponent: React.FC<Props> = ({
             duration: 500,
         }).start();
     };
+
     useEffect(() => {
-        console.log('scroll triggered', isScrollOpen ? 'opened' : 'closed')
         startAnimation()
     }, [isScrollOpen])
 
     const transformStyle = {
         transform: [{ translateY: animation, },],
-    };
-
-    const eventCardPosition = (index: number) => {
-        return {
-            x: index * (width - 34),
-            y: 0, animated: true,
-        };
     };
 
     const animateToLocation = () => {
@@ -82,6 +76,28 @@ const EventMapComponent: React.FC<Props> = ({
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
         );
     };
+
+    const onCarouselItemChange = (currentActiveCardIndex: number) => {
+        let location = items[currentActiveCardIndex].location
+        if (mapViewRef.current) {
+            mapViewRef.current.animateToRegion(
+                {
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    latitudeDelta: 0.002,
+                    longitudeDelta: 0.002,
+                },
+                1000,
+            );
+        }
+    }
+
+    const onMapMarkerClick = (item: EventItem, index: number) => {
+        onSelectEvent(item);
+        setScrollOpen(true);
+        startAnimation();
+        _carousel.snapToItem(index)
+    }
 
     return (
         <View style={styles.container}>
@@ -111,17 +127,13 @@ const EventMapComponent: React.FC<Props> = ({
                 {items.map((item, index) => (
                     <EventMarker
                         key={item.id}
-                        onPress={() => {
-                            onSelectEvent(item);
-                            setScrollOpen(true);
-                            startAnimation();
-                            scrollViewRef.current && scrollViewRef.current.scrollTo(eventCardPosition(index));
-                        }}
+                        onPress={() => onMapMarkerClick(item, index)}
                         isSelected={item.isSelected}
                         coordinates={item.location}
                     />
                 ))}
             </MapView>
+
             <Animated.View style={[styles.eventsContainer, transformStyle]}>
                 <View style={styles.buttonsContainer}>
                     <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
@@ -133,12 +145,26 @@ const EventMapComponent: React.FC<Props> = ({
                         startAnimation()
                     }} style={styles.helperButton} />
                 </View>
-                <EventScroll
-                    items={items}
-                    onFavourite={item => onFavourite(item)}
-                    onNavigate={item => onNavigate(item)}
-                    ref={scrollViewRef}
-                    onReadMore={(item: EventItem) => onReadMore(item)}
+
+                <Carousel
+                    ref={(c: any) => _carousel = c}
+                    data={items}
+                    renderItem={({ item, index }) =>
+                        <EventCard
+                            item={item}
+                            onFavourite={() => onFavourite(item)}
+                            onNavigate={() => onNavigate(item)}
+                            onReadMore={() => onReadMore(item)}
+                            itemIndex={index + 1}
+                            totalItems={items.length}
+                            backgroundColor={colors.findColorByIndex(index)}
+                        />}
+                    onSnapToItem={(cardIndex) => onCarouselItemChange(cardIndex)}
+
+                    sliderWidth={width}
+                    itemWidth={width - 32}
+                    activeSlideAlignment="center"
+                    removeClippedSubviews={false}
                 />
             </Animated.View>
         </View >
@@ -147,18 +173,10 @@ const EventMapComponent: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
+        ...StyleSheet.absoluteFillObject
     },
     map: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
+        ...StyleSheet.absoluteFillObject
     },
     eventsContainer: {
         position: 'absolute',

@@ -83,14 +83,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     event: {
-        width: width - 50,
-        height: 280,
-        zIndex: 9,
-        marginRight: 16,
+        // // width: width - 50,
+        // height: 300,
+        // zIndex: 9,
+        // // marginRight: 16,
+
         paddingHorizontal: 24,
         paddingVertical: 16,
-        display: 'flex',
-        justifyContent: 'space-between',
+        // display: 'flex',
+        // justifyContent: 'space-between',
     },
     items: {
         textAlign: 'right',

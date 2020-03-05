@@ -15,7 +15,6 @@ type TypeOfLink = 'external' | 'internal';
 const execute = (route: string, typeOfLink: TypeOfLink, navigate: (route: string) => void) => {
     if (typeOfLink === 'internal') {
         navigate(route);
-        console.log('navigating to', route);
     } else {
         Linking.canOpenURL(route)
             .then(supported => {
