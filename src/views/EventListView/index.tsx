@@ -16,7 +16,6 @@ import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { open } from '@domain/share';
 
 const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
-    console.log('route initial', route);
     const [currentSearch, setCurrentSearch] = useState<string>('');
 
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
