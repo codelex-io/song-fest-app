@@ -10,23 +10,24 @@ import { useStoryBook, StoryBookContextProvider } from './src/domain/storybook';
 import { init } from './src/notifications';
 import Navigation from './src/navigation';
 import Storybook from './storybook';
-import { StatusBarWrapper } from './src/components'
-import { hideSplashScreen } from './src/splash'
+import { StatusBarWrapper } from './src/components';
+import { hideSplashScreen } from './src/splash';
 
-const bootstrap = async (isRealDevice: boolean) => Promise.all([
-    initApollo(),
-    initFavourites(),
-    initLanguage(),
-    initSettings(),
-    init(isRealDevice),
-    new Promise(resolve => setTimeout(resolve, 1500))
-]);
+const bootstrap = async (isRealDevice: boolean) =>
+    Promise.all([
+        initApollo(),
+        initFavourites(),
+        initLanguage(),
+        initSettings(),
+        init(isRealDevice),
+        new Promise(resolve => setTimeout(resolve, 1500)),
+    ]);
 
 interface Props {
-    isRealDevice: boolean
+    isRealDevice: boolean;
 }
 
-const App: React.FC<Props> = ({isRealDevice}) => {
+const App: React.FC<Props> = ({ isRealDevice }) => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const { isStoryBookActive } = useStoryBook();
     useEffect(() => {
@@ -58,10 +59,10 @@ const App: React.FC<Props> = ({isRealDevice}) => {
     );
 };
 
-export default () => (
+export default ({ isRealDevice }: Props) => (
     <StoryBookContextProvider>
         <StatusBarWrapper>
-            <App />
+            <App isRealDevice={isRealDevice} />
         </StatusBarWrapper>
     </StoryBookContextProvider>
 );

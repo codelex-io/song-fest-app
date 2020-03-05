@@ -35,7 +35,10 @@ const requestPermission = async () => {
 
 const createNotificationListeners = async () => {
     messaging().onMessage(message => {
-        console.log(message.data);
+        console.log('FCM Message Data:', message.data);
+    });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+        console.log('Message handled in the background!', remoteMessage);
     });
 };
 
