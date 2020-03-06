@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert, LayoutChangeEvent } from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { MyLocation } from './MyLocation';
 import { EventItem } from '../types';
-import { ScrollViewHandle } from './EventScroll';
 import { EventMarker } from './EventMarker';
 import { colors } from '@styles';
 import { LongSearch } from '@components';
@@ -36,26 +35,51 @@ const EventMapComponent: React.FC<Props> = ({
     onResetSearch,
     onReadMore,
 }) => {
-    // const scrollViewRef = useRef<ScrollViewHandle>(null);
     const mapViewRef = useRef<MapView>(null);
     let _carousel: any;
-    const [animation] = useState<Animated.AnimatedValue>(new Animated.Value(0));
+
+    const [parentViewHeight, setParentViewHeight] = useState<number | undefined>(undefined)
+    const [sliderHeight, setSliderHeight] = useState<number | undefined>(undefined)
+    const [buttonsHeight, setButtonsHeight] = useState<number | undefined>(undefined)
+    const [animationHeight, setAnimationHeight] = useState<Animated.AnimatedValue | undefined>(undefined);
+
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
 
+    useEffect(() => {
+        if (parentViewHeight !== undefined &&
+            sliderHeight !== undefined &&
+            buttonsHeight !== undefined) {
+            setAnimationHeight(new Animated.Value(parentViewHeight))
+        }
+    }, [parentViewHeight, sliderHeight, buttonsHeight])
+
+    useEffect(() => {
+        if (parentViewHeight !== undefined &&
+            sliderHeight !== undefined &&
+            buttonsHeight !== undefined &&
+            animationHeight !== undefined) {
+            startAnimation()
+        }
+    }, [animationHeight])
+
     const startAnimation = () => {
-        Animated.timing(animation, {
-            toValue: isScrollOpen ? 0 : 300,
-            duration: 500,
-        }).start();
+        if (parentViewHeight !== undefined &&
+            sliderHeight !== undefined &&
+            buttonsHeight !== undefined &&
+            animationHeight !== undefined) {
+            Animated.timing(animationHeight, {
+                toValue: isScrollOpen ? parentViewHeight - sliderHeight : parentViewHeight - buttonsHeight,
+                duration: 500,
+            }).start()
+        }
     };
 
     useEffect(() => {
         startAnimation()
     }, [isScrollOpen])
 
-    const transformStyle = {
-        transform: [{ translateY: animation, },],
-    };
+    const transformStyle = animationHeight === undefined ?
+        { top: '100%' } : { top: animationHeight }
 
     const animateToLocation = () => {
         Geolocation.getCurrentPosition(
@@ -100,11 +124,17 @@ const EventMapComponent: React.FC<Props> = ({
     }
 
     return (
-        <View style={styles.parentContainer}>
+        <View
+            style={styles.parentContainer}
+            onLayout={(event) => setParentViewHeight(Math.ceil(event.nativeEvent.layout.height))}
+        >
             <View style={styles.container}>
                 <LongSearch
                     backgroundColor={colors.green}
-                    onPress={onSearch}
+                    onPress={() => {
+                        onSearch()
+                        setScrollOpen(false)
+                    }}
                     searchInput={searchInput}
                     onResetSearch={onResetSearch}
                     customStyles={{
@@ -124,6 +154,13 @@ const EventMapComponent: React.FC<Props> = ({
                     showsUserLocation={true}
                     style={styles.map}
                     ref={mapViewRef}
+                    mapPadding={{
+                        top: 0,
+                        right: 0,
+                        bottom: isScrollOpen && parentViewHeight && sliderHeight && buttonsHeight ?
+                            Math.floor((parentViewHeight - sliderHeight) / 2 + buttonsHeight) : 0,
+                        left: 0
+                    }}
                 >
                     {items.map((item, index) => (
                         <EventMarker
@@ -135,12 +172,21 @@ const EventMapComponent: React.FC<Props> = ({
                     ))}
                 </MapView>
 
-                <View style={styles.belowMap}>
+                <Animated.View
+                    style={[
+                        styles.belowMap,
+                        transformStyle
+                    ]}
+                    onLayout={(event: LayoutChangeEvent) => setSliderHeight(Math.ceil(event.nativeEvent.layout.height))}
+                >
                     <Animated.View style={[
                         styles.eventsContainer,
-                        // transformStyle
                     ]}>
-                        <View style={styles.buttonsContainer}>
+                        <View
+                            style={styles.buttonsContainer}
+                            onLayout={(event) => setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16)}
+                        >
+
                             <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
                                 <MyLocation />
                             </TouchableOpacity>
@@ -173,23 +219,20 @@ const EventMapComponent: React.FC<Props> = ({
                             removeClippedSubviews={false}
 
                             containerCustomStyle={{ flex: 1 }}
-                        // slideStyle={{ flex: 1 }}
                         />
                     </Animated.View>
-                </View>
+                </Animated.View>
             </View >
             <View>
                 <Text>nothing</Text>
             </View>
-        </View>
+        </View >
     );
 };
 
 const styles = StyleSheet.create({
     parentContainer: {
         flex: 1,
-        borderColor: 'magenta',
-        borderWidth: 1,
         overflow: 'hidden',
     },
     container: {
@@ -200,22 +243,12 @@ const styles = StyleSheet.create({
     },
     belowMap: {
         position: 'absolute',
-        bottom: 0,
-        // width: '100%',
-        // height: '100%',
-        backgroundColor: 'gray',
-        borderWidth: 1,
-        borderColor: 'lime',
-
     },
     eventsContainer: {
         flex: 1,
-        // position: 'absolute',
-        // bottom: 0,
-        // width: width,
     },
     buttonsContainer: {
-        paddingHorizontal: 16,
+        marginHorizontal: 24,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         marginBottom: 16,

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated, Easing, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 
@@ -9,25 +9,25 @@ interface Props {
 }
 
 export const ArrowButton: React.FC<Props> = ({ open, onPress, style }) => {
-    const spinValue = new Animated.Value(0);
+    const [spinValue] = useState(new Animated.Value(180));
 
     useEffect(() => {
         open
             ? Animated.timing(spinValue, {
-                toValue: 1,
-                duration: 300,
+                toValue: 0,
+                duration: 500,
                 easing: Easing.linear,
             }).start()
             : Animated.timing(spinValue, {
-                toValue: 0,
-                duration: 300,
+                toValue: 180,
+                duration: 500,
                 easing: Easing.linear,
             }).start();
     }, [open])
 
     const spin = spinValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['180deg', '0deg'],
+        inputRange: [0, 180],
+        outputRange: ['0deg', '180deg'],
     });
 
     return (

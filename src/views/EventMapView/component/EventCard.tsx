@@ -58,14 +58,9 @@ export const EventCard: React.FC<EventDescriptionProps> = ({
 
 const styles = StyleSheet.create({
     event: {
-        // // width: width - 50,
-        // height: 300,
-        // zIndex: 9,
-        // // marginRight: 16,
         flex: 1,
-        padding: 16,
-        // display: 'flex',
-        // justifyContent: 'space-between',
+        padding: 12,
+        marginBottom: 8,
     },
     eventTitle: {
         fontSize: 20,
