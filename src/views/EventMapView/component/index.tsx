@@ -55,7 +55,6 @@ const EventMapComponent: React.FC<Props> = ({
     useEffect(() => {
         if (parentViewHeight !== undefined) {
             setAnimationHeight(new Animated.Value(parentViewHeight));
-            console.log('triggering setAnimationHeight', parentViewHeight);
         }
     }, [parentViewHeight]);
 
@@ -67,7 +66,6 @@ const EventMapComponent: React.FC<Props> = ({
             animationHeight !== undefined
         ) {
             startAnimation();
-            console.log('triggering startAnimation 2.');
         }
     }, [animationHeight]);
 
@@ -96,7 +94,6 @@ const EventMapComponent: React.FC<Props> = ({
                 },
                 1000,
             );
-            console.log('triggering animate to initial region 3');
         }
     }, [initialCoordinates]);
 
@@ -106,7 +103,6 @@ const EventMapComponent: React.FC<Props> = ({
 
     useEffect(() => {
         startAnimation();
-        console.log('triggering isScrollOpen 4', isScrollOpen);
     }, [isScrollOpen]);
 
     const transformStyle = animationHeight === undefined ? { top: '100%' } : { top: animationHeight };
@@ -160,7 +156,6 @@ const EventMapComponent: React.FC<Props> = ({
             style={styles.parentContainer}
             onLayout={event => {
                 setParentViewHeight(Math.ceil(event.nativeEvent.layout.height));
-                console.log('setting parent height');
             }}
         >
             <View style={styles.container}>
@@ -181,7 +176,6 @@ const EventMapComponent: React.FC<Props> = ({
                 <MapView
                     onLayout={() => {
                         setMapLayoutLoaded(true);
-                        console.log('setting map layout');
                     }}
                     initialRegion={initialCoordinates}
                     showsUserLocation={true}
@@ -211,7 +205,6 @@ const EventMapComponent: React.FC<Props> = ({
                     style={[styles.belowMap, transformStyle]}
                     onLayout={(event: LayoutChangeEvent) => {
                         setSliderHeight(Math.ceil(event.nativeEvent.layout.height));
-                        console.log('setting slider height');
                     }}
                 >
                     <Animated.View style={[styles.eventsContainer]}>
@@ -219,7 +212,6 @@ const EventMapComponent: React.FC<Props> = ({
                             style={styles.buttonsContainer}
                             onLayout={event => {
                                 setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
-                                console.log('setting buttons height');
                             }}
                         >
                             <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>

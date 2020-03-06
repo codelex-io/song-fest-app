@@ -9,20 +9,14 @@ interface Props {
 }
 
 export const ArrowButton: React.FC<Props> = ({ open, onPress, style }) => {
-    const [spinValue] = useState(new Animated.Value(180));
+    const [spinValue] = useState(new Animated.Value(0));
 
     useEffect(() => {
-        open
-            ? Animated.timing(spinValue, {
-                  toValue: 0,
-                  duration: 500,
-                  easing: Easing.linear,
-              }).start()
-            : Animated.timing(spinValue, {
-                  toValue: 180,
-                  duration: 500,
-                  easing: Easing.linear,
-              }).start();
+        Animated.timing(spinValue, {
+            toValue: open ? 180 : 0,
+            duration: 500,
+            easing: Easing.linear,
+        }).start();
     }, [open]);
 
     const spin = spinValue.interpolate({
@@ -33,7 +27,7 @@ export const ArrowButton: React.FC<Props> = ({ open, onPress, style }) => {
     return (
         <TouchableOpacity activeOpacity={1} style={style} onPress={onPress}>
             <Animated.View style={{ transform: [{ rotate: spin }] }}>
-                <Icon type={IconType.MenuDown} fill={'black'} />
+                <Icon type={IconType.MenuUp} fill={'black'} />
             </Animated.View>
         </TouchableOpacity>
     );

@@ -37,7 +37,6 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
 
     useEffect(() => {
         if (!loading && data?.items.length) {
-            console.log('setting items', data);
             const mapped = data.items.map(it => toItem(it, isFavourite));
             setItems([...mapped]);
             setInitialCoordinates({
