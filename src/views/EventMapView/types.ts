@@ -12,6 +12,5 @@ export interface EventItem {
     };
     currentItem?: number;
     totalItems?: number;
-    isSelected: boolean;
     isFavourite: boolean;
 }

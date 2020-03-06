@@ -19,7 +19,7 @@ const EmptyView: React.FC<Props> = ({ activeKey, searchInput }) => {
                 onPress={() => null}
                 searchInput={searchInput}
                 onResetSearch={() => null}
-                styles={styles.longSearch}
+                customStyles={styles.longSearch}
             />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn

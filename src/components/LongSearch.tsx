@@ -8,7 +8,7 @@ interface LongSearchProps {
     onPress?: () => void;
     searchInput?: string;
     onResetSearch?: () => void;
-    customStyles?: any
+    customStyles?: { [key: string]: string | number };
 }
 
 export const LongSearch: React.FC<LongSearchProps> = ({
@@ -18,28 +18,28 @@ export const LongSearch: React.FC<LongSearchProps> = ({
     onResetSearch,
     customStyles,
 }) => (
-        <TouchableOpacity
-            style={[styles.searchContainer, { backgroundColor }, { ...customStyles }]}
-            onPress={onPress}
-            activeOpacity={opacity.opacity8}
-        >
-            <View style={styles.iconContainer}>
-                <Icon size={20} type={IconType.Search} fill={colors.white} />
-            </View>
-            {searchInput ? (
-                <Fragment>
-                    <Text style={styles.text}>rezultāti: {searchInput}</Text>
-                    <TouchableOpacity onPress={onResetSearch} activeOpacity={opacity.opacity8}>
-                        <Text style={styles.text}>Nodzēst</Text>
-                    </TouchableOpacity>
-                </Fragment>
-            ) : (
-                    <Text style={styles.text}>Meklēt pēc nosaukuma, vietas uc.</Text>
-                )}
-        </TouchableOpacity>
-    );
+    <TouchableOpacity
+        style={[styles.searchContainer, { backgroundColor }, { ...customStyles }]}
+        onPress={onPress}
+        activeOpacity={opacity.opacity8}
+    >
+        <View style={styles.iconContainer}>
+            <Icon size={20} type={IconType.Search} fill={colors.white} />
+        </View>
+        {searchInput ? (
+            <Fragment>
+                <Text style={styles.text}>rezultāti: {searchInput}</Text>
+                <TouchableOpacity onPress={onResetSearch} activeOpacity={opacity.opacity8}>
+                    <Text style={styles.text}>Nodzēst</Text>
+                </TouchableOpacity>
+            </Fragment>
+        ) : (
+            <Text style={styles.text}>Meklēt pēc nosaukuma, vietas uc.</Text>
+        )}
+    </TouchableOpacity>
+);
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
     searchContainer: {
         alignItems: 'center',
         flexDirection: 'row',

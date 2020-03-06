@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
 import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
-
-const width = Dimensions.get('window').width;
 
 interface EventDescriptionProps {
     item: EventItem;
@@ -15,21 +13,21 @@ interface EventDescriptionProps {
     itemIndex: number;
     totalItems: number;
     backgroundColor: string;
-    onReadMore: () => void
+    onReadMore: () => void;
 }
 
-export const EventCard: React.FC<EventDescriptionProps> = ({
+export const EventCard = ({
     item,
     onNavigate,
     backgroundColor,
     onFavourite,
     itemIndex,
     totalItems,
-    onReadMore
-}) => {
+    onReadMore,
+}: EventDescriptionProps) => {
     return (
         <View style={[styles.event, { backgroundColor }]}>
-            <TouchableOpacity onPress={onReadMore} >
+            <TouchableOpacity onPress={onReadMore}>
                 <Text style={styles.eventTitle}>{item.title}</Text>
                 <Text style={styles.eventLocation}>{item.locationTitle}</Text>
                 <View>

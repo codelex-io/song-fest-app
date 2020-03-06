@@ -49,7 +49,7 @@ const EventListComponent: React.FC<Props> = ({
                 onPress={onSearch}
                 searchInput={searchInput}
                 onResetSearch={onResetSearch}
-                styles={styles.longSearch}
+                customStyles={styles.longSearch}
             />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
