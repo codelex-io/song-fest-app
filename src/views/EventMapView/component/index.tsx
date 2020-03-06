@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert } from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { MyLocation } from './MyLocation';
@@ -44,7 +44,7 @@ const EventMapComponent: React.FC<Props> = ({
 
     const startAnimation = () => {
         Animated.timing(animation, {
-            toValue: isScrollOpen ? 0 : 290,
+            toValue: isScrollOpen ? 0 : 300,
             duration: 500,
         }).start();
     };
@@ -100,88 +100,119 @@ const EventMapComponent: React.FC<Props> = ({
     }
 
     return (
-        <View style={styles.container}>
-            <LongSearch
-                backgroundColor={colors.green}
-                onPress={onSearch}
-                searchInput={searchInput}
-                onResetSearch={onResetSearch}
-                customStyles={{
-                    position: 'absolute',
-                    right: 0,
-                    left: 0,
-                    zIndex: 1,
-                }}
-            />
-            <MapView
-                initialRegion={{
-                    latitude: 56.951637,
-                    longitude: 24.113347,
-                    latitudeDelta: 0.0008,
-                    longitudeDelta: 0.00921,
-                }}
-                showsUserLocation={true}
-                style={styles.map}
-                ref={mapViewRef}
-            >
-                {items.map((item, index) => (
-                    <EventMarker
-                        key={item.id}
-                        onPress={() => onMapMarkerClick(item, index)}
-                        isSelected={item.isSelected}
-                        coordinates={item.location}
-                    />
-                ))}
-            </MapView>
-
-            <Animated.View style={[styles.eventsContainer, transformStyle]}>
-                <View style={styles.buttonsContainer}>
-                    <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
-                        <MyLocation />
-                    </TouchableOpacity>
-
-                    <ArrowButton open={isScrollOpen} onPress={() => {
-                        setScrollOpen(!isScrollOpen)
-                        startAnimation()
-                    }} style={styles.helperButton} />
-                </View>
-
-                <Carousel
-                    ref={(c: any) => _carousel = c}
-                    data={items}
-                    renderItem={({ item, index }) =>
-                        <EventCard
-                            item={item}
-                            onFavourite={() => onFavourite(item)}
-                            onNavigate={() => onNavigate(item)}
-                            onReadMore={() => onReadMore(item)}
-                            itemIndex={index + 1}
-                            totalItems={items.length}
-                            backgroundColor={colors.findColorByIndex(index)}
-                        />}
-                    onSnapToItem={(cardIndex) => onCarouselItemChange(cardIndex)}
-
-                    sliderWidth={width}
-                    itemWidth={width - 32}
-                    activeSlideAlignment="center"
-                    removeClippedSubviews={false}
+        <View style={styles.parentContainer}>
+            <View style={styles.container}>
+                <LongSearch
+                    backgroundColor={colors.green}
+                    onPress={onSearch}
+                    searchInput={searchInput}
+                    onResetSearch={onResetSearch}
+                    customStyles={{
+                        position: 'absolute',
+                        right: 0,
+                        left: 0,
+                        zIndex: 1,
+                    }}
                 />
-            </Animated.View>
-        </View >
+                <MapView
+                    initialRegion={{
+                        latitude: 56.951637,
+                        longitude: 24.113347,
+                        latitudeDelta: 0.0008,
+                        longitudeDelta: 0.00921,
+                    }}
+                    showsUserLocation={true}
+                    style={styles.map}
+                    ref={mapViewRef}
+                >
+                    {items.map((item, index) => (
+                        <EventMarker
+                            key={item.id}
+                            onPress={() => onMapMarkerClick(item, index)}
+                            isSelected={item.isSelected}
+                            coordinates={item.location}
+                        />
+                    ))}
+                </MapView>
+
+                <View style={styles.belowMap}>
+                    <Animated.View style={[
+                        styles.eventsContainer,
+                        // transformStyle
+                    ]}>
+                        <View style={styles.buttonsContainer}>
+                            <TouchableOpacity style={styles.helperButton} onPress={animateToLocation}>
+                                <MyLocation />
+                            </TouchableOpacity>
+
+                            <ArrowButton open={isScrollOpen} onPress={() => {
+                                setScrollOpen(!isScrollOpen)
+                                startAnimation()
+                            }} style={styles.helperButton} />
+                        </View>
+
+                        <Carousel
+                            ref={(c: any) => _carousel = c}
+                            data={items}
+                            renderItem={({ item, index }) =>
+                                <EventCard
+                                    item={item}
+                                    onFavourite={() => onFavourite(item)}
+                                    onNavigate={() => onNavigate(item)}
+                                    onReadMore={() => onReadMore(item)}
+                                    itemIndex={index + 1}
+                                    totalItems={items.length}
+                                    backgroundColor={colors.findColorByIndex(index)}
+                                />}
+                            onSnapToItem={(cardIndex) => onCarouselItemChange(cardIndex)}
+
+                            sliderWidth={width}
+                            sliderHeight={500}
+                            itemWidth={width - 48}
+                            activeSlideAlignment="center"
+                            removeClippedSubviews={false}
+
+                            containerCustomStyle={{ flex: 1 }}
+                        // slideStyle={{ flex: 1 }}
+                        />
+                    </Animated.View>
+                </View>
+            </View >
+            <View>
+                <Text>nothing</Text>
+            </View>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
+    parentContainer: {
+        flex: 1,
+        borderColor: 'magenta',
+        borderWidth: 1,
+        overflow: 'hidden',
+    },
     container: {
         ...StyleSheet.absoluteFillObject
     },
     map: {
         ...StyleSheet.absoluteFillObject
     },
-    eventsContainer: {
+    belowMap: {
         position: 'absolute',
         bottom: 0,
-        width: width,
+        // width: '100%',
+        // height: '100%',
+        backgroundColor: 'gray',
+        borderWidth: 1,
+        borderColor: 'lime',
+
+    },
+    eventsContainer: {
+        flex: 1,
+        // position: 'absolute',
+        // bottom: 0,
+        // width: width,
     },
     buttonsContainer: {
         paddingHorizontal: 16,

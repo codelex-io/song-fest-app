@@ -57,6 +57,16 @@ export const EventCard: React.FC<EventDescriptionProps> = ({
 };
 
 const styles = StyleSheet.create({
+    event: {
+        // // width: width - 50,
+        // height: 300,
+        // zIndex: 9,
+        // // marginRight: 16,
+        flex: 1,
+        padding: 16,
+        // display: 'flex',
+        // justifyContent: 'space-between',
+    },
     eventTitle: {
         fontSize: 20,
         color: colors.white,
@@ -81,17 +91,6 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         marginBottom: 10,
-    },
-    event: {
-        // // width: width - 50,
-        // height: 300,
-        // zIndex: 9,
-        // // marginRight: 16,
-
-        paddingHorizontal: 24,
-        paddingVertical: 16,
-        // display: 'flex',
-        // justifyContent: 'space-between',
     },
     items: {
         textAlign: 'right',
