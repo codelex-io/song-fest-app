@@ -1,6 +1,7 @@
 import { IconType } from '@components/Icon';
 import { colors } from '@styles';
 import { Linking } from 'react-native';
+import { errors } from '@utils';
 
 export interface ItemType {
     id: number;
@@ -18,13 +19,11 @@ const execute = (route: string, typeOfLink: TypeOfLink, navigate: (route: string
     } else {
         Linking.canOpenURL(route)
             .then(supported => {
-                if (!supported) {
-                    console.log("Can't handle url: " + route);
-                } else {
+                if (supported) {
                     return Linking.openURL(route);
                 }
             })
-            .catch(err => console.error('An error occurred', err));
+            .catch(errors.onError);
     }
 };
 

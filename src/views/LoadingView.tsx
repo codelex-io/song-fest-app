@@ -7,7 +7,7 @@ import { TextToggleBtn } from '@components/buttons';
 const LoadingView: React.FC = () => {
     return (
         <View style={{ flex: 1, backgroundColor: colors.white }}>
-            <LongSearch backgroundColor={colors.blue} onPress={() => console.log('hello, i like coca cola')} />
+            <LongSearch backgroundColor={colors.blue} onPress={() => null} />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn title="šodien" active={false} onPress={() => null} />
                 <TextToggleBtn title="rīt" active={true} onPress={() => null} />
