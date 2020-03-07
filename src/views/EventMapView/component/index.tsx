@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert, LayoutChangeEvent } from 'react-native';
 import MapView, { Region } from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
+import Carousel from 'react-native-snap-carousel';
 import { MyLocation } from './MyLocation';
 import { EventItem } from '../types';
 import { EventMarker } from './EventMarker';
 import { colors } from '@styles';
 import { LongSearch } from '@components';
 import { ArrowButton } from './ArrowButton';
-import Carousel from 'react-native-snap-carousel';
 import { EventCard } from './EventCard';
+import { getCurrentPosition } from '@domain/location';
 
 const width = Dimensions.get('window').width;
 
@@ -108,23 +108,17 @@ const EventMapComponent: React.FC<Props> = ({
     const transformStyle = animationHeight === undefined ? { top: '100%' } : { top: animationHeight };
 
     const animateToUserLocation = () => {
-        Geolocation.getCurrentPosition(
-            position => {
-                mapViewRef.current?.animateToRegion(
-                    {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        latitudeDelta: 0.09,
-                        longitudeDelta: 0.09,
-                    },
-                    1000,
-                );
-            },
-            error => {
-                showLocationErrorAlert(error.message);
-            },
-            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
-        );
+        getCurrentPosition(msg => showLocationErrorAlert(msg)).then(coordinates => {
+            mapViewRef.current?.animateToRegion(
+                {
+                    latitude: coordinates.latitude,
+                    longitude: coordinates.longitude,
+                    latitudeDelta: 0.09,
+                    longitudeDelta: 0.09,
+                },
+                1000,
+            );
+        });
     };
 
     const onCarouselItemChange = (currentActiveCardIndex: number) => {
@@ -174,9 +168,7 @@ const EventMapComponent: React.FC<Props> = ({
                     }}
                 />
                 <MapView
-                    onLayout={() => {
-                        setMapLayoutLoaded(true);
-                    }}
+                    onLayout={() => setMapLayoutLoaded(true)}
                     initialRegion={initialCoordinates}
                     showsUserLocation={true}
                     style={styles.map}
@@ -234,6 +226,7 @@ const EventMapComponent: React.FC<Props> = ({
                             /* eslint-enable */
                             data={items}
                             renderItem={({ item, index }) => (
+                                //šis jāpieliek https://github.com/archriss/react-native-snap-carousel/blob/master/doc/TIPS_AND_TRICKS.md#margin-between-slides
                                 <EventCard
                                     item={item}
                                     onFavourite={() => onFavourite(item)}
@@ -251,6 +244,8 @@ const EventMapComponent: React.FC<Props> = ({
                             activeSlideAlignment="center"
                             removeClippedSubviews={false}
                             containerCustomStyle={{ flex: 1 }}
+                            inactiveSlideScale={1}
+                            inactiveSlideOpacity={1}
                         />
                     </Animated.View>
                 </Animated.View>
