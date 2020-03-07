@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Icon, IconType } from '@components';
 import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
@@ -26,39 +26,46 @@ export const EventCard = ({
     onReadMore,
 }: EventDescriptionProps) => {
     return (
-        <View style={[styles.event, { backgroundColor }]}>
-            <TouchableOpacity onPress={onReadMore}>
-                <Text style={styles.eventTitle}>{item.title}</Text>
-                <Text style={styles.eventLocation}>{item.locationTitle}</Text>
-                <View>
-                    <View style={styles.eventiconLabel}>
-                        <Icon size={25} type={IconType.Calendar} fill="white" />
-                        <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
+        <View style={[styles.slide, { backgroundColor }]}>
+            <View>
+                <TouchableOpacity onPress={onReadMore}>
+                    <Text style={styles.eventTitle}>{item.title}</Text>
+                    <Text style={styles.eventLocation}>{item.locationTitle}</Text>
+                    <View>
+                        <View style={styles.eventiconLabel}>
+                            <Icon size={25} type={IconType.Calendar} fill="white" />
+                            <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
+                        </View>
+                        <View style={styles.eventiconLabel}>
+                            <Icon size={25} type={IconType.Clock} fill="white" />
+                            <Text style={styles.eventLabelText}>{item.time}</Text>
+                        </View>
                     </View>
-                    <View style={styles.eventiconLabel}>
-                        <Icon size={25} type={IconType.Clock} fill="white" />
-                        <Text style={styles.eventLabelText}>{item.time}</Text>
+                    <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
+                    <View style={styles.row}>
+                        <IconButtons
+                            onShare={() => null}
+                            isFavourite={item.isFavourite}
+                            onFavourite={onFavourite}
+                            onNavigate={onNavigate}
+                        />
                     </View>
-                </View>
-                <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
-                <View style={styles.row}>
-                    <IconButtons
-                        onShare={() => null}
-                        isFavourite={item.isFavourite}
-                        onFavourite={onFavourite}
-                        onNavigate={onNavigate}
-                    />
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    event: {
+    slide: {
         flex: 1,
-        padding: 12,
-        marginBottom: 8,
+        padding: 16,
+        width: Dimensions.get('window').width - 32,
+        marginHorizontal: 8,
+    },
+    slideInnerContainer: {
+        width: Dimensions.get('window').width,
+        flex: 1,
     },
     eventTitle: {
         fontSize: 20,

@@ -11,7 +11,7 @@ import { ArrowButton } from './ArrowButton';
 import { EventCard } from './EventCard';
 import { getCurrentPosition } from '@domain/location';
 
-const width = Dimensions.get('window').width;
+const WIDTH = Dimensions.get('window').width;
 
 interface Props {
     loading: boolean;
@@ -226,7 +226,6 @@ const EventMapComponent: React.FC<Props> = ({
                             /* eslint-enable */
                             data={items}
                             renderItem={({ item, index }) => (
-                                //šis jāpieliek https://github.com/archriss/react-native-snap-carousel/blob/master/doc/TIPS_AND_TRICKS.md#margin-between-slides
                                 <EventCard
                                     item={item}
                                     onFavourite={() => onFavourite(item)}
@@ -238,9 +237,8 @@ const EventMapComponent: React.FC<Props> = ({
                                 />
                             )}
                             onSnapToItem={cardIndex => onCarouselItemChange(cardIndex)}
-                            sliderWidth={width}
-                            sliderHeight={500}
-                            itemWidth={width - 48}
+                            sliderWidth={WIDTH}
+                            itemWidth={WIDTH - 32}
                             activeSlideAlignment="center"
                             removeClippedSubviews={false}
                             containerCustomStyle={{ flex: 1 }}
@@ -270,6 +268,7 @@ const styles = StyleSheet.create({
     },
     eventsContainer: {
         flex: 1,
+        paddingBottom: 8,
     },
     buttonsContainer: {
         marginHorizontal: 24,
