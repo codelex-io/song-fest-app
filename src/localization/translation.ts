@@ -22,7 +22,7 @@ const translations = {
         THIS_WEEK: 'šonedēļ',
         OTHERS: 'Cits',
         SEARCH: 'Meklējiet pēc nosaukuma, vietas uc.',
-        SPONSONRS: 'Sponsoru Piedāvājums',
+        SPONSORS: 'Sponsoru Piedāvājums',
         IMPORTANT_TO_KNOW: 'Svarīgi \n zināt',
         QUESTIONS: 'Biežākie jautājumi',
         TRANSPORTATION: 'Transports pasākumā',
