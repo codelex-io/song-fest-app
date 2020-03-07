@@ -14,12 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
     bridge = RCTBridge.init(delegate: self, launchOptions: launchOptions)
     self.window = UIWindow(frame: UIScreen.main.bounds)
     self.showLoading()
-    
-    let isRealDevice = true;
-    #if TARGET_IPHONE_SIMULATOR
-      isRealDevice = true;
+  
+    #if targetEnvironment(simulator)
+      let isRealDevice = false;
+    #else
+      let isRealDevice = true;
     #endif
-    
     AppDelegate.reactView = RCTRootView(
       bundleURL: sourceURL(for: self.bridge),
       moduleName: "SongFestApp",
