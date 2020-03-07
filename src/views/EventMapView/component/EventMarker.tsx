@@ -10,7 +10,7 @@ interface Props {
     coordinates: LatLng;
 }
 
-export const EventMarker: React.FC<Props> = ({ isSelected, onPress, coordinates }) => {
+export const EventMarker = ({ isSelected, onPress, coordinates }: Props) => {
     return (
         <Marker coordinate={coordinates} onPress={onPress}>
             <View style={isSelected ? styles.clickedMarker : styles.clearMarker}>

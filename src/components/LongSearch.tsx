@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { typography, colors, opacity } from '@styles';
 
@@ -8,11 +8,18 @@ interface LongSearchProps {
     onPress?: () => void;
     searchInput?: string;
     onResetSearch?: () => void;
+    customStyles?: { [key: string]: string | number };
 }
 
-export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor, onPress, searchInput, onResetSearch }) => (
+export const LongSearch: React.FC<LongSearchProps> = ({
+    backgroundColor,
+    onPress,
+    searchInput,
+    onResetSearch,
+    customStyles,
+}) => (
     <TouchableOpacity
-        style={[styles.searchContainer, { backgroundColor }]}
+        style={[styles.searchContainer, { backgroundColor }, { ...customStyles }]}
         onPress={onPress}
         activeOpacity={opacity.opacity8}
     >
@@ -27,33 +34,29 @@ export const LongSearch: React.FC<LongSearchProps> = ({ backgroundColor, onPress
                 </TouchableOpacity>
             </Fragment>
         ) : (
-            <Text style={styles.searchText}>Meklēt pēc nosaukuma, vietas uc.</Text>
+            <Text style={styles.text}>Meklēt pēc nosaukuma, vietas uc.</Text>
         )}
     </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
     searchContainer: {
-        height: 44,
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'center',
+        paddingVertical: 10,
+        paddingHorizontal: 12,
         marginTop: 8,
-        marginBottom: 16,
         marginHorizontal: 16,
+        marginBottom: 16,
     },
-    iconContainer: {
-        paddingRight: 11.25,
-    },
-    searchText: {
+    iconContainer: {},
+    text: {
         color: colors.white,
         textAlign: 'center',
         textTransform: 'uppercase',
         fontFamily: typography.bold,
         fontSize: 14,
         lineHeight: 18,
-    },
-    text: {
-        color: colors.white,
+        marginLeft: 8,
     },
 });

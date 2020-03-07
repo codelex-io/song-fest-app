@@ -1,8 +1,8 @@
 import { gql } from 'apollo-boost';
 
 export const FETCH_EVENT_ITEMS = gql`
-    query {
-        items: eventsItems {
+    query($searchBy: String) {
+        items: eventsItems(where: { _search: $searchBy }) {
             id
             title
             type

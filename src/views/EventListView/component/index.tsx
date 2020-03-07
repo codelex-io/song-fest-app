@@ -49,6 +49,7 @@ const EventListComponent: React.FC<Props> = ({
                 onPress={onSearch}
                 searchInput={searchInput}
                 onResetSearch={onResetSearch}
+                customStyles={styles.longSearch}
             />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
@@ -108,6 +109,11 @@ const EventListComponent: React.FC<Props> = ({
 const styles = StyleSheet.create({
     viewContainer: {
         flex: 1,
+    },
+    longSearch: {
+        marginHorizontal: 16,
+        marginTop: 8,
+        marginBottom: 16,
     },
     searchContainerButton: {
         flexDirection: 'row',

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon, IconType } from '@components';
-import { colors, opacity } from '@styles';
+import { View, StyleSheet } from 'react-native';
+import { IconType } from '@components';
+import { colors } from '@styles';
+import { IconBtn40 } from '@components/buttons';
 
 interface Props {
     onShare: () => void;
@@ -10,25 +11,29 @@ interface Props {
     onNavigate: () => void;
 }
 
-const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: string }> = ({
-    onPress,
-    iconType,
-    fill,
-}) => (
-    <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={opacity.opacity8}>
-        <Icon type={iconType} fill={fill} />
-    </TouchableOpacity>
-);
-
 export const IconButtons: React.FC<Props> = ({ onShare, isFavourite, onFavourite, onNavigate }) => (
     <View style={styles.container}>
-        <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.blue} />
-        <SingleButton
-            onPress={onFavourite}
-            iconType={isFavourite ? IconType.HeartFilled : IconType.Heart}
-            fill={colors.orange}
+        <IconBtn40
+            onPress={onShare}
+            icon={IconType.Share}
+            color={colors.blue}
+            bgColor={colors.white}
+            style={styles.button}
         />
-        <SingleButton onPress={onNavigate} iconType={IconType.Navigation} fill={colors.green} />
+        <IconBtn40
+            onPress={onFavourite}
+            icon={isFavourite ? IconType.HeartFilled : IconType.Heart}
+            color={colors.orange}
+            bgColor={colors.white}
+            style={styles.button}
+        />
+        <IconBtn40
+            onPress={onNavigate}
+            icon={IconType.Navigation}
+            color={colors.green}
+            bgColor={colors.white}
+            style={styles.button}
+        />
     </View>
 );
 
@@ -37,8 +42,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     button: {
-        padding: 8,
-        backgroundColor: colors.white,
         marginRight: 16,
     },
 });

@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Icon, IconType } from '@components';
 import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
 import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
-
-const width = Dimensions.get('window').width;
 
 interface EventDescriptionProps {
     item: EventItem;
@@ -15,44 +13,60 @@ interface EventDescriptionProps {
     itemIndex: number;
     totalItems: number;
     backgroundColor: string;
+    onReadMore: () => void;
 }
 
-export const EventCard: React.FC<EventDescriptionProps> = ({
+export const EventCard = ({
     item,
     onNavigate,
     backgroundColor,
     onFavourite,
     itemIndex,
     totalItems,
-}) => {
+    onReadMore,
+}: EventDescriptionProps) => {
     return (
-        <View style={[styles.event, { backgroundColor }]}>
-            <Text style={styles.eventTitle}>{item.title}</Text>
-            <Text style={styles.eventLocation}>{item.locationTitle}</Text>
+        <View style={[styles.slide, { backgroundColor }]}>
             <View>
-                <View style={styles.eventiconLabel}>
-                    <Icon size={25} type={IconType.Calendar} fill="white" />
-                    <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
-                </View>
-                <View style={styles.eventiconLabel}>
-                    <Icon size={25} type={IconType.Clock} fill="white" />
-                    <Text style={styles.eventLabelText}>{item.time}</Text>
-                </View>
-            </View>
-            <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
-            <View style={styles.row}>
-                <IconButtons
-                    onShare={() => null}
-                    isFavourite={item.isFavourite}
-                    onFavourite={onFavourite}
-                    onNavigate={onNavigate}
-                />
+                <TouchableOpacity onPress={onReadMore}>
+                    <Text style={styles.eventTitle}>{item.title}</Text>
+                    <Text style={styles.eventLocation}>{item.locationTitle}</Text>
+                    <View>
+                        <View style={styles.eventiconLabel}>
+                            <Icon size={25} type={IconType.Calendar} fill="white" />
+                            <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
+                        </View>
+                        <View style={styles.eventiconLabel}>
+                            <Icon size={25} type={IconType.Clock} fill="white" />
+                            <Text style={styles.eventLabelText}>{item.time}</Text>
+                        </View>
+                    </View>
+                    <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
+                    <View style={styles.row}>
+                        <IconButtons
+                            onShare={() => null}
+                            isFavourite={item.isFavourite}
+                            onFavourite={onFavourite}
+                            onNavigate={onNavigate}
+                        />
+                    </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    slide: {
+        flex: 1,
+        padding: 16,
+        width: Dimensions.get('window').width - 32,
+        marginHorizontal: 8,
+    },
+    slideInnerContainer: {
+        width: Dimensions.get('window').width,
+        flex: 1,
+    },
     eventTitle: {
         fontSize: 20,
         color: colors.white,
@@ -77,17 +91,6 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         marginBottom: 10,
-    },
-    event: {
-        backgroundColor: colors.blue,
-        width: width - 50,
-        height: 280,
-        zIndex: 9,
-        marginRight: 16,
-        paddingHorizontal: 24,
-        paddingVertical: 16,
-        display: 'flex',
-        justifyContent: 'space-between',
     },
     items: {
         textAlign: 'right',

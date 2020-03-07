@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { SimpleHeader, Header } from '@components';
-import { FavoriteListView, MarkdownEvent, SearchView, EventListView, VideoView, EmptyView } from '@views';
+import { FavoriteListView, MarkdownEvent, SearchView, EventListView, VideoView, EmptyView, EventMapView } from '@views';
 import SearchHeader from '@components/headers/SearchHeader';
 import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { NewsListViewIndex } from '@views/NewsListView';
-import { EventMapView } from '@views';
 import { LocalizationContext } from '../../localization/LocalizationContext';
 
 export type SharedStackParamsList = {

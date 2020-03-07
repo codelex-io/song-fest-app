@@ -5,9 +5,10 @@ import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { UserCategoryView } from '@views';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
-import { MoreStack, SharedStack } from './stacks';
 import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
+import SharedStack from './stacks/SharedStack';
+import MoreStack from './stacks/MoreStack';
 
 type AppTabsParamList = {
     NEWS: undefined;

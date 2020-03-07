@@ -19,6 +19,7 @@ export enum IconType {
     Navigation = 'Navigation',
     CrosshairsGPS = 'CrosshairsGPS',
     MenuDown = 'MenuDown',
+    MenuUp = 'MenuUp',
     Gift = 'Gift',
     Alert = 'Alert',
     HelpCircle = 'HelpCircle',
