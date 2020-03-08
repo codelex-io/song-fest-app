@@ -29,10 +29,14 @@ export const EventCard = ({
         <View style={[styles.slide, { backgroundColor }]}>
             <View>
                 <TouchableOpacity onPress={onReadMore}>
-                    <Text style={styles.eventTitle}>{item.title}</Text>
-                    <Text style={styles.eventLocation}>{item.locationTitle}</Text>
-                    <View>
-                        <View style={styles.eventiconLabel}>
+                    <Text style={styles.eventTitle} numberOfLines={3} ellipsizeMode="tail">
+                        {item.title}
+                    </Text>
+                    <Text style={styles.eventLocation} numberOfLines={2} ellipsizeMode="tail">
+                        {item.locationTitle}
+                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+                        <View style={[styles.eventiconLabel, { marginRight: 16 }]}>
                             <Icon size={25} type={IconType.Calendar} fill="white" />
                             <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
                         </View>
@@ -88,7 +92,6 @@ const styles = StyleSheet.create({
     eventiconLabel: {
         display: 'flex',
         flexDirection: 'row',
-        width: '100%',
         alignItems: 'center',
         marginBottom: 10,
     },
