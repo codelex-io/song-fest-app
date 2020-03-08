@@ -66,14 +66,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignSelf: 'center',
-        width: Dimensions.get('window').width,
+        width: '100%',
         paddingHorizontal: 4,
     },
     slideInnerContainer: {
-        width: Dimensions.get('window').width,
         paddingVertical: 16,
         paddingHorizontal: 16,
-        marginHorizontal: 8,
         flex: 1,
     },
     eventTitle: {

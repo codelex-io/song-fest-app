@@ -209,7 +209,7 @@ const EventMapComponent: React.FC<Props> = ({
                         <View
                             style={styles.buttonsContainer}
                             onLayout={event => {
-                                setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
+                                setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 11);
                             }}
                         >
                             <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>
@@ -244,7 +244,7 @@ const EventMapComponent: React.FC<Props> = ({
                             )}
                             onSnapToItem={cardIndex => onCarouselItemChange(cardIndex)}
                             sliderWidth={WIDTH}
-                            itemWidth={WIDTH - 16}
+                            itemWidth={WIDTH - 22}
                             removeClippedSubviews={false}
                             containerCustomStyle={{ flex: 1 }}
                             inactiveSlideScale={1}
@@ -276,10 +276,10 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
     buttonsContainer: {
-        marginHorizontal: 12,
+        marginHorizontal: 16,
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        marginBottom: 16,
+        marginBottom: 8,
     },
     helperButton: {
         marginRight: 8,
