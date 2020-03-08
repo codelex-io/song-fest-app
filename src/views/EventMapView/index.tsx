@@ -28,7 +28,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
 
     if (error) {
-        console.log(error)
+        console.log(error);
     }
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
 
     if (!items.length && currentSearch !== '') {
         //TODO implement 'nothing found after search'
-        setCurrentSearch('')
+        setCurrentSearch('');
     }
 
     if (loading || !items.length) {
@@ -63,8 +63,8 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
             onSearch={() => navigation.navigate('Search')}
             searchInput={currentSearch}
             onResetSearch={() => {
-                setCurrentSearch('')
-                refetch()
+                setCurrentSearch('');
+                refetch();
             }}
             onReadMore={(item: EventItem) => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
         />

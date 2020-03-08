@@ -44,7 +44,7 @@ const EventMapComponent: React.FC<Props> = ({
     const [buttonsHeight, setButtonsHeight] = useState<number | undefined>(undefined);
     const [animationHeight, setAnimationHeight] = useState<Animated.AnimatedValue | undefined>(undefined);
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
-    const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false)
+    const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         if (parentViewHeight !== undefined) {
@@ -83,10 +83,10 @@ const EventMapComponent: React.FC<Props> = ({
 
     useLayoutEffect(() => {
         if (isMapLoaded) {
-            animateToItemLocation(items[0])
+            animateToItemLocation(items[0]);
             setSelectedId(items[0].id);
         }
-    }, [searchInput, isMapLoaded])
+    }, [searchInput, isMapLoaded]);
 
     useEffect(() => {
         startAnimation();
@@ -118,7 +118,7 @@ const EventMapComponent: React.FC<Props> = ({
             },
             1000,
         );
-    }
+    };
 
     const onCarouselItemChange = (currentActiveCardIndex: number) => {
         const location = items[currentActiveCardIndex].location;
@@ -167,8 +167,8 @@ const EventMapComponent: React.FC<Props> = ({
                 />
                 <MapView
                     onLayout={() => {
-                        animateToItemLocation(items[0])
-                        setIsMapLoaded(true)
+                        animateToItemLocation(items[0]);
+                        setIsMapLoaded(true);
                     }}
                     initialRegion={{
                         latitude: 56.951637,
