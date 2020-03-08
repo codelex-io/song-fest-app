@@ -244,8 +244,7 @@ const EventMapComponent: React.FC<Props> = ({
                             )}
                             onSnapToItem={cardIndex => onCarouselItemChange(cardIndex)}
                             sliderWidth={WIDTH}
-                            itemWidth={WIDTH - 32}
-                            activeSlideAlignment="center"
+                            itemWidth={WIDTH - 16}
                             removeClippedSubviews={false}
                             containerCustomStyle={{ flex: 1 }}
                             inactiveSlideScale={1}
@@ -277,7 +276,7 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
     buttonsContainer: {
-        marginHorizontal: 24,
+        marginHorizontal: 12,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         marginBottom: 16,
