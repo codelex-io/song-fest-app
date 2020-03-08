@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
@@ -26,7 +26,7 @@ export const EventCard = ({
     onReadMore,
 }: EventDescriptionProps) => {
     return (
-        <View style={[styles.slide,]}>
+        <View style={[styles.slide]}>
             <View style={[styles.slideInnerContainer, { backgroundColor }]}>
                 <TouchableOpacity onPress={onReadMore}>
                     <Text style={styles.eventTitle} numberOfLines={3} ellipsizeMode="tail">
