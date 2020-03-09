@@ -19,36 +19,17 @@ const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean
 const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
     const [currentSearch, setCurrentSearch] = useState<string>('');
 
-    const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
+    const { loading, data, error, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
         variables: { searchBy: currentSearch },
     });
 
     const { toggleFavourite, isFavourite } = useFavourites();
-    const [selectedItemId, setSelectedItemId] = useState<string | undefined>(undefined);
 
-    const [items, setItems] = useState<EventItem[]>([]);
+    const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
 
-    const [initialCoordinates, setInitialCoordinates] = useState({
-        latitude: 56.951637,
-        longitude: 24.113347,
-        latitudeDelta: 0.009,
-        longitudeDelta: 0.009,
-    });
-
-    useEffect(() => {
-        if (!loading && data?.items.length) {
-            const mapped = data.items.map(it => toItem(it, isFavourite));
-            setItems([...mapped]);
-            setInitialCoordinates({
-                ...initialCoordinates,
-                latitude: mapped[0].location.latitude,
-                longitude: mapped[0].location.longitude,
-            });
-            setSelectedItemId(mapped[0].id);
-        } else if (!loading && !data) {
-            setCurrentSearch('');
-        }
-    }, [loading, data]);
+    if (error) {
+        console.log(error);
+    }
 
     useEffect(() => {
         if (route.params) {
@@ -60,7 +41,12 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
         refetch();
     }, [currentSearch]);
 
-    if (loading || items.length === 0) {
+    if (!items.length && currentSearch !== '') {
+        //TODO implement 'nothing found after search'
+        setCurrentSearch('');
+    }
+
+    if (loading || !items.length) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
                 <Loading />
@@ -72,14 +58,14 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
         <EventMapComponent
             loading={loading}
             items={items}
-            initialCoordinates={initialCoordinates}
             onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
-            selectedItemId={selectedItemId ? selectedItemId : items[0].id}
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
-            onSelectEvent={item => setSelectedItemId(item.id)}
             onSearch={() => navigation.navigate('Search')}
             searchInput={currentSearch}
-            onResetSearch={() => setCurrentSearch('')}
+            onResetSearch={() => {
+                setCurrentSearch('');
+                refetch();
+            }}
             onReadMore={(item: EventItem) => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
         />
     );

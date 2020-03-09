@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
@@ -26,13 +26,17 @@ export const EventCard = ({
     onReadMore,
 }: EventDescriptionProps) => {
     return (
-        <View style={[styles.slide, { backgroundColor }]}>
-            <View>
+        <View style={[styles.slide]}>
+            <View style={[styles.slideInnerContainer, { backgroundColor }]}>
                 <TouchableOpacity onPress={onReadMore}>
-                    <Text style={styles.eventTitle}>{item.title}</Text>
-                    <Text style={styles.eventLocation}>{item.locationTitle}</Text>
-                    <View>
-                        <View style={styles.eventiconLabel}>
+                    <Text style={styles.eventTitle} numberOfLines={3} ellipsizeMode="tail">
+                        {item.title}
+                    </Text>
+                    <Text style={styles.eventLocation} numberOfLines={2} ellipsizeMode="tail">
+                        {item.locationTitle}
+                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+                        <View style={[styles.eventiconLabel, { marginRight: 16 }]}>
                             <Icon size={25} type={IconType.Calendar} fill="white" />
                             <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
                         </View>
@@ -59,12 +63,15 @@ export const EventCard = ({
 const styles = StyleSheet.create({
     slide: {
         flex: 1,
-        padding: 16,
-        width: Dimensions.get('window').width - 32,
-        marginHorizontal: 8,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        width: '100%',
+        paddingHorizontal: 4,
     },
     slideInnerContainer: {
-        width: Dimensions.get('window').width,
+        paddingVertical: 16,
+        paddingHorizontal: 16,
         flex: 1,
     },
     eventTitle: {
@@ -88,7 +95,6 @@ const styles = StyleSheet.create({
     eventiconLabel: {
         display: 'flex',
         flexDirection: 'row',
-        width: '100%',
         alignItems: 'center',
         marginBottom: 10,
     },

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert, LayoutChangeEvent } from 'react-native';
-import MapView, { Region } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
 import { MyLocation } from './MyLocation';
 import { EventItem } from '../types';
@@ -16,41 +16,35 @@ const WIDTH = Dimensions.get('window').width;
 interface Props {
     loading: boolean;
     items: EventItem[];
-    onSelectEvent: (event: EventItem) => void;
     onFavourite: (item: EventItem) => void;
-    selectedItemId: string;
     onNavigate: (item: EventItem) => void;
     onSearch: () => void;
     searchInput: string;
     onResetSearch: () => void;
     onReadMore: (item: EventItem) => void;
-    initialCoordinates: Region;
 }
 
 const EventMapComponent: React.FC<Props> = ({
     items,
-    onSelectEvent,
     onFavourite,
-    selectedItemId,
     onNavigate,
     onSearch,
     searchInput,
     onResetSearch,
     onReadMore,
-    initialCoordinates,
 }) => {
     const mapViewRef = useRef<MapView>(null);
     /* eslint-disable */
     let carousel: any
     /* eslint-enable */
 
-    const [selectedId, setSelectedId] = useState<string>(selectedItemId);
+    const [selectedId, setSelectedId] = useState<string>('');
     const [parentViewHeight, setParentViewHeight] = useState<number | undefined>(undefined);
     const [sliderHeight, setSliderHeight] = useState<number | undefined>(undefined);
     const [buttonsHeight, setButtonsHeight] = useState<number | undefined>(undefined);
     const [animationHeight, setAnimationHeight] = useState<Animated.AnimatedValue | undefined>(undefined);
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
-    const [mapLayoutLoaded, setMapLayoutLoaded] = useState<boolean>(false);
+    const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         if (parentViewHeight !== undefined) {
@@ -84,22 +78,15 @@ const EventMapComponent: React.FC<Props> = ({
     };
 
     useEffect(() => {
-        if (mapLayoutLoaded) {
-            mapViewRef.current?.animateToRegion(
-                {
-                    latitude: items[0].location.latitude,
-                    longitude: items[0].location.longitude,
-                    latitudeDelta: 0.009,
-                    longitudeDelta: 0.009,
-                },
-                1000,
-            );
-        }
-    }, [initialCoordinates]);
+        setSelectedId(items[0].id);
+    }, []);
 
-    useEffect(() => {
-        setSelectedId(selectedItemId);
-    }, [selectedItemId]);
+    useLayoutEffect(() => {
+        if (isMapLoaded) {
+            animateToItemLocation(items[0]);
+            setSelectedId(items[0].id);
+        }
+    }, [searchInput, isMapLoaded]);
 
     useEffect(() => {
         startAnimation();
@@ -121,6 +108,18 @@ const EventMapComponent: React.FC<Props> = ({
         });
     };
 
+    const animateToItemLocation = (item: EventItem) => {
+        mapViewRef.current?.animateToRegion(
+            {
+                latitude: item.location.latitude,
+                longitude: item.location.longitude,
+                latitudeDelta: 0.009,
+                longitudeDelta: 0.009,
+            },
+            1000,
+        );
+    };
+
     const onCarouselItemChange = (currentActiveCardIndex: number) => {
         const location = items[currentActiveCardIndex].location;
         setSelectedId(items[currentActiveCardIndex].id);
@@ -138,7 +137,6 @@ const EventMapComponent: React.FC<Props> = ({
     };
 
     const onMapMarkerClick = (item: EventItem, index: number) => {
-        onSelectEvent(item);
         setScrollOpen(true);
         startAnimation();
         carousel.snapToItem(index);
@@ -168,8 +166,16 @@ const EventMapComponent: React.FC<Props> = ({
                     }}
                 />
                 <MapView
-                    onLayout={() => setMapLayoutLoaded(true)}
-                    initialRegion={initialCoordinates}
+                    onLayout={() => {
+                        animateToItemLocation(items[0]);
+                        setIsMapLoaded(true);
+                    }}
+                    initialRegion={{
+                        latitude: 56.951637,
+                        longitude: 24.113347,
+                        latitudeDelta: 0.009,
+                        longitudeDelta: 0.009,
+                    }}
                     showsUserLocation={true}
                     style={styles.map}
                     ref={mapViewRef}
@@ -203,7 +209,7 @@ const EventMapComponent: React.FC<Props> = ({
                         <View
                             style={styles.buttonsContainer}
                             onLayout={event => {
-                                setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
+                                setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 11);
                             }}
                         >
                             <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>
@@ -238,8 +244,7 @@ const EventMapComponent: React.FC<Props> = ({
                             )}
                             onSnapToItem={cardIndex => onCarouselItemChange(cardIndex)}
                             sliderWidth={WIDTH}
-                            itemWidth={WIDTH - 32}
-                            activeSlideAlignment="center"
+                            itemWidth={WIDTH - 22}
                             removeClippedSubviews={false}
                             containerCustomStyle={{ flex: 1 }}
                             inactiveSlideScale={1}
@@ -271,10 +276,10 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
     buttonsContainer: {
-        marginHorizontal: 24,
+        marginHorizontal: 16,
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        marginBottom: 16,
+        marginBottom: 8,
     },
     helperButton: {
         marginRight: 8,
