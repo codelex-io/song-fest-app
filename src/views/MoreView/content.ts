@@ -84,7 +84,7 @@ export const Items: ItemType[] = [
     },
     {
         id: 7,
-        title: 'INFORMTION_CONTACTS',
+        title: 'INFORMATION_CONTACTS',
         icon: IconType.Phone,
         backgroundColor: colors.lightBlue,
         onOpen: (navigate: (route: string) => void) => execute('News', 'internal', navigate),
