@@ -1,25 +1,27 @@
 import React, { createContext, useState } from 'react';
-import translations from './translation';
+import translations from './translations';
 import { LocalizedStrings } from 'react-native-localization';
 import { errors } from '@utils';
-import { language } from './index';
+import { getLanguage } from './index';
 import { storeLanguage } from './storage';
+import { Language } from './types';
 
 type ContextType = {
     translations: LocalizedStrings<{}>;
-    setAppLanguage: (language: string) => void;
+    setAppLanguage: (language: Language) => void;
     appLanguage: string;
 };
 
 export const LocalizationContext = createContext<ContextType>({
     translations,
     setAppLanguage: () => null,
-    appLanguage: language,
+    appLanguage: getLanguage(),
 });
-export const LocalizationContextProvider: React.FC = ({ children }) => {
-    const [appLanguage, setAppLanguage] = useState(language);
 
-    const setLanguage = (language: string) => {
+export const LocalizationContextProvider: React.FC = ({ children }) => {
+    const [appLanguage, setAppLanguage] = useState<Language>(getLanguage());
+
+    const setLanguage = (language: Language) => {
         translations.setLanguage(language);
         setAppLanguage(language);
         storeLanguage(language).catch(errors.onError);
