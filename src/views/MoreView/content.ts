@@ -9,6 +9,7 @@ export interface ItemType {
     icon: IconType;
     backgroundColor: string;
     onOpen: (navigate: (route: string) => void) => void;
+    disabled: boolean;
 }
 
 type TypeOfLink = 'external' | 'internal';
@@ -39,6 +40,7 @@ export const Items: ItemType[] = [
                 'external',
                 navigate,
             ),
+        disabled: true,
     },
     {
         id: 1,
@@ -46,6 +48,7 @@ export const Items: ItemType[] = [
         icon: IconType.Alert,
         backgroundColor: colors.blue,
         onOpen: (navigate: (route: string) => void) => execute('Events', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 2,
@@ -53,6 +56,7 @@ export const Items: ItemType[] = [
         icon: IconType.HelpCircle,
         backgroundColor: colors.lightBlue,
         onOpen: (navigate: (route: string) => void) => execute('Map', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 3,
@@ -60,6 +64,7 @@ export const Items: ItemType[] = [
         icon: IconType.Bus,
         backgroundColor: colors.yellow,
         onOpen: (navigate: (route: string) => void) => execute('Video', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 4,
@@ -67,6 +72,7 @@ export const Items: ItemType[] = [
         icon: IconType.Information,
         backgroundColor: colors.orange,
         onOpen: (navigate: (route: string) => void) => execute('More', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 5,
@@ -74,6 +80,7 @@ export const Items: ItemType[] = [
         icon: IconType.PineTreeBox,
         backgroundColor: colors.green,
         onOpen: (navigate: (route: string) => void) => execute('Favorites', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 6,
@@ -81,6 +88,7 @@ export const Items: ItemType[] = [
         icon: IconType.FileDocumentBox,
         backgroundColor: colors.blue,
         onOpen: (navigate: (route: string) => void) => execute('News', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 7,
@@ -88,6 +96,7 @@ export const Items: ItemType[] = [
         icon: IconType.Phone,
         backgroundColor: colors.lightBlue,
         onOpen: (navigate: (route: string) => void) => execute('News', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 8,
@@ -95,6 +104,7 @@ export const Items: ItemType[] = [
         icon: IconType.Settings,
         backgroundColor: colors.yellow,
         onOpen: (navigate: (route: string) => void) => execute('UserCategory', 'internal', navigate),
+        disabled: false,
     },
     {
         id: 9,
@@ -102,6 +112,7 @@ export const Items: ItemType[] = [
         icon: IconType.Parent,
         backgroundColor: colors.green,
         onOpen: (navigate: (route: string) => void) => execute('Language', 'internal', navigate),
+        disabled: true,
     },
     {
         id: 10,
@@ -109,5 +120,6 @@ export const Items: ItemType[] = [
         icon: IconType.Settings,
         backgroundColor: colors.blue,
         onOpen: (navigate: (route: string) => void) => execute('Language', 'internal', navigate),
+        disabled: false,
     },
 ];

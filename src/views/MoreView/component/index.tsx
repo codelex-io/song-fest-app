@@ -33,6 +33,7 @@ const MoreView: React.FC<Props> = ({ navigate }) => {
                         icon={item.icon}
                         backgroundColor={item.backgroundColor}
                         onOpen={() => item.onOpen(navigate)}
+                        disabled={item.disabled}
                     />
                 ))}
             </View>

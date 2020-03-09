@@ -54,6 +54,15 @@ export const TabBarIcon: React.FC<Props> = ({ route, focused }) => {
     const { color, icon } = findTab(route);
     const fill = focused ? colors.white : color;
     const backgroundColor = focused ? color : colors.white;
+
+    if (route === 'VIDEO') {
+        return (
+            <View style={[styles.container, { backgroundColor: colors.extrLighgrey6E }]}>
+                <Icon type={icon} fill={'gray'} />
+            </View>
+        );
+    }
+
     return (
         <View style={[styles.container, { backgroundColor }]}>
             <Icon type={icon} fill={fill} />
