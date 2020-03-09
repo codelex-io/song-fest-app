@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { typography, colors, opacity } from '@styles';
+import { LocalizationContext } from '../localization/LocalizationContext';
 
 interface LongSearchProps {
     backgroundColor: string;
@@ -17,27 +18,38 @@ export const LongSearch: React.FC<LongSearchProps> = ({
     searchInput,
     onResetSearch,
     customStyles,
-}) => (
-    <TouchableOpacity
-        style={[styles.searchContainer, { backgroundColor }, { ...customStyles }]}
-        onPress={onPress}
-        activeOpacity={opacity.opacity8}
-    >
-        <View style={styles.iconContainer}>
-            <Icon size={20} type={IconType.Search} fill={colors.white} />
-        </View>
-        {searchInput ? (
-            <Fragment>
-                <Text style={styles.text}>rezultāti: {searchInput}</Text>
-                <TouchableOpacity onPress={onResetSearch} activeOpacity={opacity.opacity8}>
-                    <Text style={styles.text}>Nodzēst</Text>
+}) => {
+    const { translations } = useContext(LocalizationContext);
+    return (
+        <TouchableOpacity
+            style={[styles.searchContainer, { backgroundColor }, { ...customStyles }]}
+            onPress={onPress}
+            activeOpacity={opacity.opacity8}
+        >
+            <View style={styles.iconContainer}>
+                <Icon size={20} type={IconType.Search} fill={colors.white} />
+            </View>
+            <View style={styles.textContainer}>
+                <Text style={styles.text}>
+                    {searchInput
+                        ? `${translations.getString('RESULTS')}: ${searchInput}`
+                        : `${translations.getString('SEARCH')}`}
+                </Text>
+            </View>
+            {searchInput ? (
+                <TouchableOpacity
+                    style={styles.resetSearchBtn}
+                    onPress={onResetSearch}
+                    activeOpacity={opacity.opacity8}
+                >
+                    <Text style={styles.x}>+</Text>
                 </TouchableOpacity>
-            </Fragment>
-        ) : (
-            <Text style={styles.text}>Meklēt pēc nosaukuma, vietas uc.</Text>
-        )}
-    </TouchableOpacity>
-);
+            ) : (
+                <View style={styles.resetSearchBtn}></View>
+            )}
+        </TouchableOpacity>
+    );
+};
 
 const styles = StyleSheet.create({
     searchContainer: {
@@ -49,14 +61,33 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginBottom: 16,
     },
-    iconContainer: {},
+    iconContainer: {
+        marginRight: 8,
+    },
+    textContainer: {
+        flex: 1,
+        alignItems: 'center',
+        marginRight: 8,
+    },
     text: {
         color: colors.white,
-        textAlign: 'center',
         textTransform: 'uppercase',
         fontFamily: typography.bold,
         fontSize: 14,
         lineHeight: 18,
-        marginLeft: 8,
+    },
+    resetSearchBtn: {
+        width: 24,
+        height: 24,
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        transform: [{ rotate: '45deg' }],
+    },
+    x: {
+        fontSize: 24,
+        textAlign: 'center',
+        color: colors.white,
     },
 });

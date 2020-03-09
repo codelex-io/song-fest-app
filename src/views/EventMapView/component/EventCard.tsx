@@ -35,17 +35,20 @@ export const EventCard = ({
                     <Text style={styles.eventLocation} numberOfLines={2} ellipsizeMode="tail">
                         {item.locationTitle}
                     </Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
-                        <View style={[styles.eventiconLabel, { marginRight: 16 }]}>
-                            <Icon size={25} type={IconType.Calendar} fill="white" />
-                            <Text style={styles.eventLabelText}>{dateTimeUtils.formatDate(item.date)}</Text>
-                        </View>
-                        <View style={styles.eventiconLabel}>
-                            <Icon size={25} type={IconType.Clock} fill="white" />
-                            <Text style={styles.eventLabelText}>{item.time}</Text>
-                        </View>
+
+                    <View style={[styles.eventiconLabel, { marginRight: 16 }]}>
+                        <Icon size={25} type={IconType.Calendar} fill="white" />
+                        <Text style={styles.eventLabelText}>
+                            {/*eslint-disable*/}
+                            {dateTimeUtils.formatDateDay(item.date as any)}
+                            {/*eslint-enable*/}
+                        </Text>
                     </View>
-                    <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
+                    <View style={[styles.eventiconLabel, { marginBottom: 12 }]}>
+                        <Icon size={25} type={IconType.Clock} fill="white" />
+                        <Text style={styles.eventLabelText}>{item.time}</Text>
+                    </View>
+
                     <View style={styles.row}>
                         <IconButtons
                             onShare={() => null}
@@ -53,6 +56,7 @@ export const EventCard = ({
                             onFavourite={onFavourite}
                             onNavigate={onNavigate}
                         />
+                        <Text style={styles.items}>{`${itemIndex}/${totalItems}`}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -75,19 +79,27 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     eventTitle: {
-        fontSize: 20,
+        fontSize: 16,
+        lineHeight: 21,
         color: colors.white,
-        fontWeight: 'bold',
+        fontFamily: typography.bold,
+        marginBottom: 12,
     },
     row: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
     },
     eventLocation: {
-        fontSize: 16,
+        fontFamily: typography.normal,
+        fontSize: 14,
+        lineHeight: 18,
         color: colors.white,
+        marginBottom: 12,
     },
     eventLabelText: {
-        fontSize: 16,
+        fontSize: 14,
+        lineHeight: 18,
         color: colors.white,
         marginLeft: 10,
         fontFamily: typography.normal,
@@ -99,11 +111,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     items: {
-        textAlign: 'right',
-        color: 'white',
+        color: colors.white,
+        fontFamily: typography.bold,
         fontSize: 14,
-        position: 'absolute',
-        bottom: 16,
-        right: 16,
+        lineHeight: 18,
     },
 });
