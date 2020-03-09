@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { VideoData } from './types';
 import { typography } from '@styles';
+import { Image } from '@components';
 
 interface CardProps {
     item: VideoData;
@@ -13,7 +14,7 @@ export class Card extends React.Component<CardProps> {
         return (
             <View style={styles.container}>
                 <View style={styles.videoContainer}>
-                    <Image style={styles.video} source={{ uri: item.video }} resizeMode="cover" />
+                    <Image height={180} source={{ uri: item.video }} style={styles.image} />
                 </View>
                 <View>
                     <Text style={styles.title}>{item.title}</Text>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
         height: 180,
         marginVertical: 16,
     },
-    video: {
+    image: {
         width: '100%',
         height: 180,
     },

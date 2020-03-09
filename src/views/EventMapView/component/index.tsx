@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect, useContext } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert, LayoutChangeEvent } from 'react-native';
 import MapView from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
@@ -10,6 +10,9 @@ import { LongSearch } from '@components';
 import { ArrowButton } from './ArrowButton';
 import { EventCard } from './EventCard';
 import { getCurrentPosition } from '@domain/location';
+import { useNavigation } from '@react-navigation/native';
+import { LocalizationContext } from '../../../localization/LocalizationContext';
+import HeaderForView from '@components/headers/HeaderForView';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -45,6 +48,8 @@ const EventMapComponent: React.FC<Props> = ({
     const [animationHeight, setAnimationHeight] = useState<Animated.AnimatedValue | undefined>(undefined);
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
     const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false);
+    const navigation = useNavigation();
+    const { translations } = useContext(LocalizationContext);
 
     useEffect(() => {
         if (parentViewHeight !== undefined) {
@@ -151,20 +156,17 @@ const EventMapComponent: React.FC<Props> = ({
             }}
         >
             <View style={styles.container}>
-                <LongSearch
-                    backgroundColor={colors.green}
-                    onPress={() => {
-                        onSearch();
-                    }}
-                    searchInput={searchInput}
-                    onResetSearch={onResetSearch}
-                    customStyles={{
-                        position: 'absolute',
-                        right: 0,
-                        left: 0,
-                        zIndex: 1,
-                    }}
-                />
+                <View style={styles.header}>
+                    <HeaderForView title={translations.getString('MAP')} navigate={navigation.navigate} />
+                    <LongSearch
+                        backgroundColor={colors.green}
+                        onPress={() => {
+                            onSearch();
+                        }}
+                        searchInput={searchInput}
+                        onResetSearch={onResetSearch}
+                    />
+                </View>
                 <MapView
                     onLayout={() => {
                         animateToItemLocation(items[0]);
@@ -184,7 +186,7 @@ const EventMapComponent: React.FC<Props> = ({
                         right: 0,
                         bottom:
                             isScrollOpen && parentViewHeight && sliderHeight && buttonsHeight
-                                ? Math.floor((parentViewHeight - sliderHeight) / 2 + buttonsHeight)
+                                ? Math.floor((parentViewHeight - sliderHeight) / 2)
                                 : 0,
                         left: 0,
                     }}
@@ -269,12 +271,20 @@ const styles = StyleSheet.create({
     map: {
         ...StyleSheet.absoluteFillObject,
     },
+    header: {
+        position: 'absolute',
+        width: '100%',
+        top: 0,
+        left: 0,
+        zIndex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    },
     belowMap: {
         position: 'absolute',
     },
     eventsContainer: {
         flex: 1,
-        paddingBottom: 8,
+        paddingBottom: 16,
     },
     buttonsContainer: {
         marginHorizontal: 16,

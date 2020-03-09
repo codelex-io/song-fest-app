@@ -8,6 +8,7 @@ import { RouteProp } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { NewsListViewIndex } from '@views/NewsListView';
 import { LocalizationContext } from '../../localization/LocalizationContext';
+import NoHeader from '@components/headers/NoHeader';
 
 export type SharedStackParamsList = {
     Feed: { payload: string };
@@ -51,7 +52,12 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
             <Stack.Screen
                 name="Feed"
                 options={({ navigation }) => ({
-                    header: () => <Header title={translations.getString(title)} navigate={navigation.navigate} />,
+                    header: () =>
+                        route.name !== 'MAP' ? (
+                            <Header title={translations.getString(title)} navigate={navigation.navigate} />
+                        ) : (
+                            <NoHeader />
+                        ),
                 })}
                 component={feedComponent}
             />
