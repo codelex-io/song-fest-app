@@ -41,14 +41,16 @@ const MoreView: React.FC<Props> = ({ navigate }) => {
 };
 
 const screenWidth = Math.floor(Dimensions.get('window').width);
+const MEDIA_BREAK = 360;
 const cardWidth = (screenWidth - 64) / 3;
+
 export const moreViewStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.white,
     },
     inner:
-        screenWidth > 360
+        screenWidth > MEDIA_BREAK
             ? {
                   flexDirection: 'row',
                   flexWrap: 'wrap',
@@ -60,7 +62,7 @@ export const moreViewStyles = StyleSheet.create({
                   paddingHorizontal: 16,
               },
     card:
-        screenWidth > 360
+        screenWidth > MEDIA_BREAK
             ? {
                   width: cardWidth,
                   marginHorizontal: 8,
@@ -72,7 +74,7 @@ export const moreViewStyles = StyleSheet.create({
                   flexDirection: 'row',
               },
     button:
-        screenWidth > 360
+        screenWidth > MEDIA_BREAK
             ? {
                   alignItems: 'center',
               }
@@ -81,7 +83,7 @@ export const moreViewStyles = StyleSheet.create({
                   alignItems: 'center',
               },
     icon:
-        screenWidth > 360
+        screenWidth > MEDIA_BREAK
             ? {
                   padding: 10,
               }
@@ -90,7 +92,7 @@ export const moreViewStyles = StyleSheet.create({
                   marginRight: 16,
               },
     text:
-        screenWidth > 360
+        screenWidth > MEDIA_BREAK
             ? {
                   textAlign: 'center',
                   letterSpacing: 0.1,
