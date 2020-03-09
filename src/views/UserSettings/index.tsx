@@ -8,9 +8,9 @@ export default class UserSettings extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Lietotāja veids</Text>
-                <Card active={true} title={'Dalībnieks'} />
-                <Card active={false} title={'DALĪBNIEKA VECĀKS'} />
-                <Card active={false} title={'Apmeklētājam'} />
+                <Card active={true} title={'PARTICIPANT'} />
+                <Card active={false} title={'PARENT'} />
+                <Card active={false} title={'VISITOR'} />
             </View>
         );
     }
