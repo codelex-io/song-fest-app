@@ -1,9 +1,7 @@
 import React from 'react';
 import Markdown from 'react-native-markdown-display';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
-import { IconType } from '@components';
+import { View, Text, StyleSheet, ScrollView, Image, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { typography, colors } from '@styles';
-import { Label } from './Label';
 import BackButton from './BackButton';
 import { IconButtons } from './IconButtons';
 import { NewsItem } from '../types';
@@ -20,6 +18,7 @@ interface State {
     currentHeight: number;
     buttonUp: boolean;
     scrollEnabled: boolean;
+    currentPosition: number;
 }
 
 export default class MarkdownEvent extends React.PureComponent<Props, State> {
@@ -29,6 +28,7 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
             currentHeight: 0,
             buttonUp: false,
             scrollEnabled: false,
+            currentPosition: 0,
         };
     }
     scroll = React.createRef<ScrollView>();
@@ -36,11 +36,14 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
         this.scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
     };
 
-    updateButton() {
+    updateScroll() {
         if (this.state.currentHeight > 500) {
-            this.setState({ buttonUp: true });
             this.setState({ scrollEnabled: true });
         }
+    }
+
+    updatePosition(event: NativeSyntheticEvent<NativeScrollEvent>) {
+        this.setState({ currentPosition: event.nativeEvent.contentOffset.y });
     }
 
     updateHeight(height: number) {
@@ -49,13 +52,22 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
 
     componentDidUpdate(prevProps: Props, prevState: State): void {
         if (prevState.currentHeight !== this.state.currentHeight) {
-            this.updateButton();
+            this.updateScroll();
+        }
+
+        if (this.state.currentPosition > 100) {
+            this.setState({ buttonUp: true });
+            console.log('button ' + this.state.currentPosition);
+        } else {
+            this.setState({ buttonUp: false });
+            console.log('here');
         }
     }
+
     render() {
         const { item, onFavourite, onShare } = this.props;
         return (
-            <View style={{ backgroundColor: colors.white }}>
+            <View style={{ backgroundColor: colors.white, flex: 1, justifyContent: 'flex-end', marginBottom: 20 }}>
                 <ScrollView
                     ref={this.scroll}
                     style={{ paddingHorizontal: 16 }}
@@ -63,6 +75,9 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
                         this.updateHeight(height);
                     }}
                     scrollEnabled={this.state.scrollEnabled}
+                    onScroll={event => {
+                        this.updatePosition(event);
+                    }}
                 >
                     <View style={styles.imageContainer}>
                         <Image style={styles.image} source={{ uri: item.image?.url }} resizeMode="cover" />
@@ -70,46 +85,35 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
                     <View>
                         <Text style={styles.title}>{item.title}</Text>
                     </View>
-                    <View style={styles.timeDateContainer}>
-                        <Label iconType={IconType.Calendar} title={dateTimeUtils.formatDateOpen(item.date)} />
+                    <View style={styles.dateContainer}>
+                        <Text style={styles.date}>Ievietots {dateTimeUtils.formatDate(item.date)} </Text>
                     </View>
                     <View style={styles.row}>
-                        <IconButtons
-                            onShare={() => onShare(item)}
-                            onFavourite={() => onFavourite(item)}
-                            onNavigate={() => null}
-                        />
+                        <IconButtons onShare={() => onShare(item)} onFavourite={() => onFavourite(item)} />
                     </View>
-                    <View style={styles.markdownContainer}>
+                    <View style={{ marginBottom: 64 }}>
                         <Markdown style={markdownstyles}>{item.content}</Markdown>
                     </View>
-                    {this.state.buttonUp ? <BackButton onPress={this.scrollTo} /> : null}
                 </ScrollView>
+                {this.state.buttonUp ? <BackButton onPress={this.scrollTo} /> : null}
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        height: 56,
-        justifyContent: 'flex-start',
-        textAlign: 'left',
-        flexDirection: 'column',
-        backgroundColor: colors.white,
-    },
-    timeDateContainer: {
-        flexDirection: 'row',
+    dateContainer: {
+        paddingBottom: 12,
+        paddingTop: 8,
     },
     title: {
         fontSize: 20,
         fontFamily: typography.bold,
+        paddingTop: 16,
     },
     place: {
         color: colors.mediumGrey4D,
     },
-    timeDate: {},
     imageContainer: {
         height: 180,
     },
@@ -117,9 +121,12 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 180,
     },
-    markdownContainer: {},
     row: {
         flexDirection: 'row',
+    },
+    date: {
+        fontSize: 14,
+        color: colors.mediumGrey4D,
     },
 });
 
@@ -127,5 +134,6 @@ const markdownstyles = StyleSheet.create({
     text: {
         fontFamily: typography.normal,
         fontSize: 16,
+        lineHeight: 18,
     },
 });

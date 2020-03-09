@@ -34,6 +34,7 @@ export enum IconType {
     RadioBoxBlank = 'RadioBoxBlank',
     RadioBoxMarked = 'RadioBoxMarked',
     Filter = 'Filter',
+    Face = 'Face',
 }
 
 interface IconProps {

@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
         paddingVertical: 13,
         backgroundColor: colors.yellow,
         marginBottom: 64,
+        position: 'absolute',
+        alignSelf: 'flex-start',
+        marginLeft: 16,
     },
     filterText: {
         fontSize: 14,
