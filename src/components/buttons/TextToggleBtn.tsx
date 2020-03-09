@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { typography, colors, opacity } from '@styles';
 
 interface Props {
@@ -37,14 +37,23 @@ const TextToggleBtn: React.FC<Props> = ({
     );
 };
 
+const PHONE_WIDTH = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
-    container: {
-        paddingVertical: 11,
-        paddingHorizontal: 12,
-        borderWidth: 1,
-        marginRight: 8,
-        marginBottom: 8,
-    },
+    container:
+        PHONE_WIDTH > 400
+            ? {
+                  paddingVertical: 11,
+                  paddingHorizontal: 12,
+                  borderWidth: 1,
+              }
+            : {
+                  paddingVertical: 11,
+                  paddingHorizontal: 4,
+                  borderWidth: 1,
+                  flexShrink: 1,
+                  marginHorizontal: 4,
+              },
     text: {
         fontFamily: typography.bold,
         fontSize: 14,
