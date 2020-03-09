@@ -209,7 +209,7 @@ const EventMapComponent: React.FC<Props> = ({
                         <View
                             style={styles.buttonsContainer}
                             onLayout={event => {
-                                setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 11);
+                                setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
                             }}
                         >
                             <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        marginBottom: 8,
+        marginBottom: 16,
     },
     helperButton: {
         marginRight: 8,
