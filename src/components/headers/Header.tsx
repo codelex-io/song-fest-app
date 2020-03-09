@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
                         </TouchableWithoutFeedback>
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity style={styles.containerBox1}>
-                                <Icon type={IconType.Parent} fill={colors.white} />
+                                <Icon type={IconType.Face} fill={colors.white} />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.containerBox}
