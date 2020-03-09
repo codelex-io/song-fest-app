@@ -17,6 +17,7 @@ interface Props {
 const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare, loading, onRefresh }) => {
     return (
         <FlatList<NewsItem>
+            style={{ backgroundColor: colors.white }}
             refreshControl={
                 <RefreshControl
                     onRefresh={onRefresh}

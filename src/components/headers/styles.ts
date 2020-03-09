@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 
 export const styles = StyleSheet.create({
+    insetsContainer: {
+        backgroundColor: colors.white,
+    },
     header: {
         marginVertical: 8,
         marginHorizontal: 16,
@@ -10,7 +13,7 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.blue,
+        backgroundColor: colors.white,
     },
     simpleHeader: {
         paddingHorizontal: 16,

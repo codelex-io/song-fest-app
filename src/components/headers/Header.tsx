@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
     return (
         <SafeAreaConsumer>
             {insets => (
-                <View style={{ paddingTop: Platform.OS === 'ios' ? insets?.top : 0 }}>
+                <View style={[{ paddingTop: Platform.OS === 'ios' ? insets?.top : 0 }, styles.insetsContainer]}>
                     <View style={styles.container}>
                         <TouchableWithoutFeedback onLongPress={() => onLongPressTitle && onLongPressTitle()}>
                             <Text style={styles.text}>{title}</Text>
@@ -40,6 +40,9 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
 };
 
 const styles = StyleSheet.create({
+    insetsContainer: {
+        backgroundColor: colors.white,
+    },
     container: {
         paddingVertical: 8,
         paddingHorizontal: 16,

@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
     parentContainer: {
         flex: 1,
         overflow: 'hidden',
+        backgroundColor: colors.white,
     },
     container: {
         ...StyleSheet.absoluteFillObject,
