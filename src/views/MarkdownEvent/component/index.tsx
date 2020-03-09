@@ -1,11 +1,12 @@
 import React from 'react';
 import Markdown from 'react-native-markdown-display';
-import { View, Text, StyleSheet, ScrollView, Image, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { typography, colors } from '@styles';
 import BackButton from './BackButton';
 import { IconButtons } from './IconButtons';
 import { NewsItem } from '../types';
 import { dateTimeUtils } from '@utils';
+import { Image } from '@components';
 
 interface Props {
     loading: boolean;
@@ -22,6 +23,8 @@ interface State {
 }
 
 export default class MarkdownEvent extends React.PureComponent<Props, State> {
+    scroll = React.createRef<ScrollView>();
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -31,7 +34,7 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
             currentPosition: 0,
         };
     }
-    scroll = React.createRef<ScrollView>();
+
     scrollTo = () => {
         this.scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
     };
@@ -78,7 +81,7 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
                     }}
                 >
                     <View style={styles.imageContainer}>
-                        <Image style={styles.image} source={{ uri: item.image?.url }} resizeMode="cover" />
+                        <Image height={180} source={{ uri: item.image?.url }} style={styles.image} />
                     </View>
                     <View>
                         <Text style={styles.title}>{item.title}</Text>

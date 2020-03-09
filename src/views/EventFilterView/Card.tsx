@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { EventItem } from '../EventListView/types';
 import { Label } from './Label';
 import { colors, typography } from '../../styles';
 import { SquareBox } from './SquareBox';
-import { IconType } from '@components';
+import { IconType, Image } from '@components';
 
 interface CardProps {
     event: EventItem;
@@ -15,7 +15,7 @@ export const Card: React.FC<CardProps> = ({ event }) => (
         <View style={styles.column}>
             {event.image && (
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={{ uri: event.image.url }} resizeMode="cover" />
+                    <Image height={180} source={{ uri: event.image.url }} style={styles.image} />
                 </View>
             )}
             <View style={styles.row}>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { IconType } from '@components';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { IconType, Image } from '@components';
 import { Label } from './Label';
 import { colors, typography, opacity } from '@styles';
 import { IconButtons } from './IconButtons';
@@ -22,7 +22,7 @@ export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, 
             <TouchableOpacity style={styles.container} onPress={onReadMore} activeOpacity={opacity.opacity8}>
                 {item.image && item.image.url && (
                     <View>
-                        <Image style={styles.image} source={{ uri: item.image.url }} resizeMode="cover" />
+                        <Image height={180} source={{ uri: item.image.url }} style={styles.image} />
                     </View>
                 )}
                 <View style={[styles.bottomContainer, { backgroundColor }]}>
