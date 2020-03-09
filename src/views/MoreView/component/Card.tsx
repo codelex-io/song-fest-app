@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { IconType, Icon } from '@components';
-import { typography, colors, opacity } from '@styles';
+import { colors, opacity } from '@styles';
 import { moreViewStyles } from './index';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
 
@@ -25,4 +25,3 @@ export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen
         </View>
     );
 };
-
