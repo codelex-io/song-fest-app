@@ -8,6 +8,7 @@ import { LongSearch } from './LongSearch';
 import Loading from './Loading';
 import Empty from './Empty';
 import { StatusBarWrapper } from './StatusBarWrapper';
+import { Image } from './Image';
 
 export {
     Header,
@@ -21,4 +22,5 @@ export {
     Loading,
     Empty,
     StatusBarWrapper,
+    Image,
 };

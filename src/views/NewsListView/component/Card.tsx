@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, opacity } from '@styles';
 import { dateTimeUtils } from '@utils';
+import { Image } from '@components';
 import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
 
@@ -18,7 +19,7 @@ const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavour
         <TouchableOpacity style={styles.container} onPress={onNavigate} activeOpacity={opacity.opacity8}>
             {item.image?.url && (
                 <View style={styles.pictureContainer}>
-                    <Image style={styles.picture} source={{ uri: item.image?.url }} resizeMode="cover" />
+                    <Image height={180} source={{ uri: item.image?.url }} style={styles.image} />
                 </View>
             )}
             <View style={[styles.lowerContainer, { backgroundColor }]}>
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     pictureContainer: {
         backgroundColor: 'grey',
     },
-    picture: {
+    image: {
         height: 180,
     },
     lowerContainer: {
