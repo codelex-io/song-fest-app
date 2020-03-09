@@ -16,7 +16,7 @@ export const Image: React.FC<ImageProps> = props => {
             height={props.height}
             width={props.width}
             source={props.source}
-            style={{ height: 180, width: '100%' }}
+            style={props.style}
             indicator
             indicatorColor={colors.randomColor()}
             indicatorSize="small"
