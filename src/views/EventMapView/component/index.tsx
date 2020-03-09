@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         zIndex: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0.0)',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
     },
     belowMap: {
         position: 'absolute',
