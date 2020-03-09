@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
     },
     searchContainerButton: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: 16,
-        paddingBottom: 8,
+        paddingLeft: 16,
+        paddingRight: 8,
+        paddingBottom: 16,
     },
 });
 

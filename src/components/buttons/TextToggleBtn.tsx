@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { typography, colors, opacity } from '@styles';
+import { LocalizationContext } from '../../localization/LocalizationContext';
 
 interface Props {
     title: string;
@@ -19,11 +20,13 @@ const TextToggleBtn: React.FC<Props> = ({
     secondaryColor = colors.green,
     style,
 }) => {
+    const { appLanguage } = useContext(LocalizationContext);
+
     return (
         <TouchableOpacity
             activeOpacity={opacity.opacity8}
             style={[
-                styles.container,
+                appLanguage === 'lv' ? styles.containerLV : styles.containerEN,
                 { ...style },
                 {
                     backgroundColor: active ? secondaryColor : primaryColor,
@@ -38,21 +41,29 @@ const TextToggleBtn: React.FC<Props> = ({
 };
 
 const PHONE_WIDTH = Dimensions.get('window').width;
+const MEDIA_BREAK = 360;
 
 const styles = StyleSheet.create({
-    container:
-        PHONE_WIDTH > 400
+    containerLV: {
+        paddingVertical: 11,
+        paddingHorizontal: 12,
+        borderWidth: 1,
+        marginRight: 8,
+    },
+    containerEN:
+        PHONE_WIDTH > MEDIA_BREAK
             ? {
                   paddingVertical: 11,
-                  paddingHorizontal: 12,
+                  paddingHorizontal: 8,
                   borderWidth: 1,
+                  marginRight: 8,
               }
             : {
                   paddingVertical: 11,
-                  paddingHorizontal: 4,
+                  paddingHorizontal: 6,
                   borderWidth: 1,
                   flexShrink: 1,
-                  marginHorizontal: 4,
+                  marginRight: 8,
               },
     text: {
         fontFamily: typography.bold,
