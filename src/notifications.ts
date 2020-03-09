@@ -35,9 +35,11 @@ const requestPermission = async () => {
 
 const createNotificationListeners = async () => {
     messaging().onMessage(message => {
+        // eslint-disable-next-line no-console
         console.log('FCM Message Data:', message.data);
     });
     messaging().setBackgroundMessageHandler(async remoteMessage => {
+        // eslint-disable-next-line no-console
         console.log('Message handled in the background!', remoteMessage);
     });
 };

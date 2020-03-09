@@ -57,10 +57,8 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
 
         if (this.state.currentPosition > 100) {
             this.setState({ buttonUp: true });
-            console.log('button ' + this.state.currentPosition);
         } else {
             this.setState({ buttonUp: false });
-            console.log('here');
         }
     }
 

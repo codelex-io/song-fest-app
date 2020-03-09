@@ -18,18 +18,11 @@ const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean
 
 const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
     const [currentSearch, setCurrentSearch] = useState<string>('');
-
-    const { loading, data, error, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
+    const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
         variables: { searchBy: currentSearch },
     });
-
     const { toggleFavourite, isFavourite } = useFavourites();
-
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
-
-    if (error) {
-        console.log(error);
-    }
 
     useEffect(() => {
         if (route.params) {
