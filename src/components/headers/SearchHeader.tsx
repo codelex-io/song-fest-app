@@ -19,15 +19,9 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) =>
     return (
         <SafeAreaConsumer>
             {insets => (
-                <View style={[
-                    { paddingTop: Platform.OS === 'ios' ? insets?.top : 0 },
-                    styles.insetsContainer,
-                ]}>
+                <View style={[{ paddingTop: Platform.OS === 'ios' ? insets?.top : 0 }, styles.insetsContainer]}>
                     <ScrollView keyboardDismissMode="interactive">
-                        <View style={[
-                            styles.header,
-                            { backgroundColor: colors.blue }
-                        ]}>
+                        <View style={[styles.header, { backgroundColor: colors.blue }]}>
                             <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
                                 <Icon type={IconType.ChevronLeft} fill={colors.white} />
                             </TouchableOpacity>

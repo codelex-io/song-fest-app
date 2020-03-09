@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
 
 const styles = StyleSheet.create({
     insetsContainer: {
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
     container: {
         paddingVertical: 8,

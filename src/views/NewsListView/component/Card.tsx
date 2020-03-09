@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: 8,
         marginHorizontal: 16,
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
     pictureContainer: {
         backgroundColor: 'grey',
