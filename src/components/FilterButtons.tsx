@@ -37,14 +37,14 @@ export const FilterButtons: React.FC<FilterButtonsProps> = ({
             <TouchableOpacity
                 activeOpacity={opacity.opacity8}
                 onPress={() => handleToggle('first')}
-                style={[styles.containerLeft, isFirstActive ? styles.containerActive : styles.containeInactive]}
+                style={[styles.button, isFirstActive ? styles.containerActive : styles.containerInactive]}
             >
                 <Text style={[styles.text, isFirstActive ? styles.textActive : false]}>{firstTitle}</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 activeOpacity={opacity.opacity8}
                 onPress={() => handleToggle('second')}
-                style={[styles.containerRight, !isFirstActive ? styles.containerActive : styles.containeInactive]}
+                style={[styles.button, !isFirstActive ? styles.containerActive : styles.containerInactive]}
             >
                 <Text style={[styles.text, !isFirstActive ? styles.textActive : false]}>{secondTitle}</Text>
             </TouchableOpacity>
@@ -54,30 +54,25 @@ export const FilterButtons: React.FC<FilterButtonsProps> = ({
 
 const styles = StyleSheet.create({
     container: {
-        height: 44,
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 8,
-        marginBottom: 8,
+        marginBottom: 16,
         marginHorizontal: 16,
     },
     containerActive: {
         backgroundColor: colors.blue,
     },
-    containeInactive: {
+    containerInactive: {
         backgroundColor: colors.white,
         borderWidth: 1,
         borderColor: colors.blue,
     },
-    containerLeft: {
+    button: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    containerRight: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        paddingVertical: 13,
     },
     text: {
         fontFamily: typography.bold,
@@ -85,6 +80,7 @@ const styles = StyleSheet.create({
         color: colors.blue,
         textAlign: 'center',
         letterSpacing: 1.15,
+        textTransform: 'uppercase',
     },
     textActive: {
         color: colors.white,
