@@ -10,13 +10,19 @@ interface ImageProps {
     width?: number;
 }
 
-export const Image: React.FC<ImageProps> = props => {
+export const Image: React.FC<ImageProps> = ({ style, source, height, width }) => {
     return (
         <FitImage
-            height={props.height}
-            width={props.width}
-            source={props.source}
-            style={{ height: 180, width: '100%' }}
+            height={height}
+            width={width}
+            source={source}
+            style={[
+                {
+                    height,
+                    width: width ? width : '100%',
+                },
+                style,
+            ]}
             indicator
             indicatorColor={colors.randomColor()}
             indicatorSize="small"
