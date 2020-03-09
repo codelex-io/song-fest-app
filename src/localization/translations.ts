@@ -1,6 +1,6 @@
 import LocalizedStrings from 'react-native-localization';
 
-const translations = {
+const translations = new LocalizedStrings({
     lv: {
         EVENTS: 'Pasākumi',
         MAP: 'Karte',
@@ -8,18 +8,18 @@ const translations = {
         NEWS: 'Jaunumi',
         VIDEO: 'video',
         BACK: 'Atpakaļ',
-        LANGUAGE: ' Valoda',
-        FAVORITE: 'Mani favorīti',
+        LANGUAGE: 'Valoda',
+        FAVORITE: 'Mani Favorīti',
         CURRENT: 'Aktuālie',
         ALL: 'Visi',
-        PARTICIPANT: 'Dalībiekam',
-        PARENT: 'Dalībnieka vecākam',
+        PARTICIPANT: 'Dalībniekam',
+        PARENT: 'Dalībnieka Vecākam',
         VISITOR: 'Apmeklētājam',
         FAVORITES_HERE: 'Šeit varēsi atrast savus favorītus',
         FAVORITE_INFO: 'Favorītiem var pievienot pasākumus, jaunumus un video, ko vēlies ātri atrast',
         TODAY: 'Šodien',
         TOMORROW: 'Rīt',
-        THIS_WEEK: 'šonedēļ',
+        THIS_WEEK: 'Šonedēļ',
         OTHERS: 'Cits',
         SEARCH: 'Meklējiet pēc nosaukuma, vietas uc.',
         SPONSORS: 'Sponsoru Piedāvājums',
@@ -40,7 +40,7 @@ const translations = {
         NEWS: 'News',
         VIDEO: 'Video',
         BACK: 'Back',
-        LANGUAGE: ' Language',
+        LANGUAGE: 'Language',
         FAVORITE: 'Favorite',
         CURRENT: 'Current',
         ALL: 'All',
@@ -65,6 +65,6 @@ const translations = {
         USER_SETTINGS: 'User settings',
         FOR_PARENTS: 'Content for parents',
     },
-};
+});
 
-export default new LocalizedStrings(translations);
+export default translations;

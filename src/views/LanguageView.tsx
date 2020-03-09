@@ -2,12 +2,10 @@ import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { LocalizationContext } from '../localization/LocalizationContext';
 import { opacity, colors } from '@styles';
+import { Language } from '@localization/types';
 
 export const LanguageView: React.FC = () => {
     const { translations, appLanguage, setAppLanguage } = useContext(LocalizationContext);
-    const handleSetLanguage = async (language: string) => {
-        setAppLanguage(language);
-    };
 
     return (
         <View style={{ flex: 1, paddingHorizontal: 20, backgroundColor: colors.white }}>
@@ -19,7 +17,7 @@ export const LanguageView: React.FC = () => {
                             flexDirection: 'row',
                             alignItems: 'center',
                         }}
-                        onPress={() => handleSetLanguage(item)}
+                        onPress={() => setAppLanguage(item as Language)}
                         activeOpacity={opacity.opacity8}
                     >
                         <Text style={{ fontSize: 16 }}>{item}</Text>
