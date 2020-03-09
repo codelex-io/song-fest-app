@@ -39,7 +39,6 @@ const Navigation: React.FC = () => {
     if (userType === null) {
         return <UserCategoryView onSelect={setUserType} />;
     }
-
     return (
         <NavigationContainer theme={NavigationTheme}>
             <Tab.Navigator
@@ -51,14 +50,55 @@ const Navigation: React.FC = () => {
                     tabBarLabel: () => false,
                 })}
             >
-                <Tab.Screen name="NEWS" component={SharedStack} />
-                <Tab.Screen name="EVENTS" component={SharedStack} />
-                <Tab.Screen name="MAP" component={SharedStack} />
-                <Tab.Screen name="VIDEO" component={SharedStack} />
-                <Tab.Screen name="MORE" component={MoreStack} />
+                <Tab.Screen
+                    options={({ route }) => {
+                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                    }}
+                    name="NEWS"
+                    component={SharedStack}
+                />
+                <Tab.Screen
+                    options={({ route }) => {
+                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                    }}
+                    name="EVENTS"
+                    component={SharedStack}
+                />
+                <Tab.Screen
+                    options={({ route }) => {
+                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                    }}
+                    name="MAP"
+                    component={SharedStack}
+                />
+                <Tab.Screen
+                    options={({ route }) => {
+                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                    }}
+                    name="VIDEO"
+                    component={SharedStack}
+                />
+                <Tab.Screen
+                    options={({ route }) => {
+                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                    }}
+                    name="MORE"
+                    component={MoreStack}
+                />
             </Tab.Navigator>
         </NavigationContainer>
     );
 };
 
 export default Navigation;
+
+// hide tabs on User Settings View
+/*eslint-disable*/
+const hideOnUserCategoryView = (route: any): boolean => {
+    /*eslint-enable*/
+    let lastRoute = '';
+    if (route.state) {
+        lastRoute = route.state.routes[route.state.routes.length - 1].name;
+    }
+    return lastRoute !== 'UserCategory';
+};
