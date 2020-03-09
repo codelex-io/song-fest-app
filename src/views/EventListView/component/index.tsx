@@ -109,6 +109,7 @@ const EventListComponent: React.FC<Props> = ({
 const styles = StyleSheet.create({
     viewContainer: {
         flex: 1,
+        backgroundColor: colors.white,
     },
     longSearch: {
         marginHorizontal: 16,

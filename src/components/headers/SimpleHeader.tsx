@@ -17,7 +17,9 @@ export const SimpleHeader: React.FC<HeaderProps> = ({ title, goBack }) => (
             <View
                 style={[
                     styles.header,
-                    { marginTop: Platform.OS === 'ios' ? insets?.top : 0, backgroundColor: colors.white },
+                    {
+                        marginTop: Platform.OS === 'ios' ? insets?.top : 0,
+                    },
                 ]}
             >
                 <IconBtn44

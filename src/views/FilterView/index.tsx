@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         paddingLeft: 16,
+        backgroundColor: colors.white,
     },
     header: {
         flex: 1,

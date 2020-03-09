@@ -55,7 +55,7 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
     render() {
         const { item, onFavourite, onShare } = this.props;
         return (
-            <View>
+            <View style={{ backgroundColor: colors.white }}>
                 <ScrollView
                     ref={this.scroll}
                     style={{ paddingHorizontal: 16 }}
