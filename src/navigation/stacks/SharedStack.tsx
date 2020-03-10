@@ -1,7 +1,16 @@
 import React, { useContext } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { SimpleHeader, Header } from '@components';
-import { FavoriteListView, MarkdownEvent, SearchView, EventListView, VideoView, EmptyView, EventMapView } from '@views';
+import {
+    FavoriteListView,
+    MarkdownEvent,
+    SearchView,
+    EventListView,
+    VideoView,
+    EmptyView,
+    EventMapView,
+    UserSettings,
+} from '@views';
 import SearchHeader from '@components/headers/SearchHeader';
 import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
@@ -15,6 +24,7 @@ export type SharedStackParamsList = {
     Favorites: undefined;
     Article: { itemId: string; group: FavouriteGroupKey };
     Search: undefined;
+    UserCategory: undefined;
 };
 
 export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
@@ -83,6 +93,15 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
                     header: () => <SearchHeader navigation={navigation} route={route} />,
                 })}
                 component={SearchView}
+            />
+            <Stack.Screen
+                name="UserCategory"
+                options={({ navigation }) => ({
+                    header: () => (
+                        <SimpleHeader title={translations.getString('USER_SETTINGS')} goBack={navigation.goBack} />
+                    ),
+                })}
+                component={UserSettings}
             />
         </Stack.Navigator>
     );

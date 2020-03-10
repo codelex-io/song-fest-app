@@ -21,9 +21,14 @@ export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitl
                             <Text style={styles.text}>{title}</Text>
                         </TouchableWithoutFeedback>
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity style={styles.containerBox1}>
+                            <TouchableOpacity
+                                style={styles.containerBox1}
+                                onPress={() => navigate('UserCategory')}
+                                activeOpacity={opacity.opacity8}
+                            >
                                 <Icon type={IconType.Face} fill={colors.white} />
                             </TouchableOpacity>
+
                             <TouchableOpacity
                                 style={styles.containerBox}
                                 onPress={() => navigate('Favorites')}

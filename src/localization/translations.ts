@@ -33,6 +33,9 @@ const translations = new LocalizedStrings({
         INFORMATION_CONTACTS: 'Informācija par kontaktiem',
         USER_SETTINGS: 'Lietotāja iestatījumi',
         FOR_PARENTS: 'Saturs\n vecākiem',
+        USER_TYPE: 'Lietotāja veids',
+        CANCEL: 'Atcelt',
+        SAVE: 'Saglabāt',
     },
     en: {
         EVENTS: 'Events',
@@ -66,6 +69,9 @@ const translations = new LocalizedStrings({
         INFORMATION_CONTACTS: 'Contact information',
         USER_SETTINGS: 'User settings',
         FOR_PARENTS: 'Content for parents',
+        USER_TYPE: 'Type of user',
+        CANCEL: 'Cancel',
+        SAVE: 'Save',
     },
 });
 

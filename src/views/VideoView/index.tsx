@@ -4,7 +4,6 @@ import { colors } from '@styles';
 import { LongSearch } from '@components';
 import { VideoData } from './types';
 import { Card } from './Card';
-import { useNavigation } from '@react-navigation/native';
 import { TextToggleBtn } from '@components/buttons';
 
 const ITEMS = [
@@ -23,14 +22,10 @@ const ITEMS = [
 ];
 
 export const VideoView: React.FC = () => {
-    const navigation = useNavigation();
     const items = ITEMS;
     return (
         <View style={styles.container}>
-            <LongSearch
-                backgroundColor={colors.orange}
-                onPress={() => navigation.navigate('Search', { group: 'VIDEO' })}
-            />
+            <LongSearch backgroundColor={colors.orange} />
             <View style={styles.searchContainerButton}>
                 <TextToggleBtn
                     title="tiešsaitē"
