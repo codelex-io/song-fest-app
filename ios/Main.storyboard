@@ -17,42 +17,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="codelex-logo" image="codelex-logo" translatesAutoresizingMaskIntoConstraints="NO" id="f2s-dl-wx9">
-                                <rect key="frame" x="234" y="823" width="124" height="39"/>
+                                <rect key="frame" x="226.5" y="802" width="95.5" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="codelex-logo">
                                     <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="ORa-qK-Q5S"/>
+                                    <constraint firstAttribute="height" constant="30" id="ORa-qK-Q5S"/>
                                     <constraint firstAttribute="width" secondItem="f2s-dl-wx9" secondAttribute="height" multiplier="156:49" id="py7-6J-tdO"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="accurat-logo" image="accurat-logo" translatesAutoresizingMaskIntoConstraints="NO" id="6XK-So-b39">
-                                <rect key="frame" x="56" y="823" width="124" height="39"/>
+                                <rect key="frame" x="92" y="802" width="95.5" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="accurat-logo">
                                     <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="JZk-nL-lde"/>
+                                    <constraint firstAttribute="height" constant="30" id="JZk-nL-lde"/>
                                     <constraint firstAttribute="width" secondItem="6XK-So-b39" secondAttribute="height" multiplier="156:49" id="h3I-9o-e5g"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&amp;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsR-0o-Ubi">
-                                <rect key="frame" x="200" y="830.5" width="14" height="24"/>
+                                <rect key="frame" x="202.5" y="809" width="9" height="16.5"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="creator-lbl" text="Mobilo aplikāciju veidoja" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFF-vB-1I3">
-                                <rect key="frame" x="101" y="784" width="212" height="24"/>
+                                <rect key="frame" x="140" y="770.5" width="134.5" height="16.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="creator-lbl" label="Created by">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -65,10 +65,10 @@
                             <constraint firstItem="wsR-0o-Ubi" firstAttribute="centerY" secondItem="f2s-dl-wx9" secondAttribute="centerY" id="bUl-6L-0hC"/>
                             <constraint firstItem="f2s-dl-wx9" firstAttribute="height" secondItem="6XK-So-b39" secondAttribute="height" id="h73-KM-p9C"/>
                             <constraint firstItem="wsR-0o-Ubi" firstAttribute="centerX" secondItem="1tG-ld-A32" secondAttribute="centerX" id="iNl-xS-A7z"/>
-                            <constraint firstItem="wsR-0o-Ubi" firstAttribute="leading" secondItem="6XK-So-b39" secondAttribute="trailing" constant="20" id="lXB-4A-Xto"/>
-                            <constraint firstAttribute="bottom" secondItem="6XK-So-b39" secondAttribute="bottom" constant="34" id="sD8-WX-MWz"/>
-                            <constraint firstAttribute="bottom" secondItem="f2s-dl-wx9" secondAttribute="bottom" constant="34" id="u9u-Ux-3IH"/>
-                            <constraint firstItem="f2s-dl-wx9" firstAttribute="leading" secondItem="wsR-0o-Ubi" secondAttribute="trailing" constant="20" id="wHv-7G-0QF"/>
+                            <constraint firstItem="wsR-0o-Ubi" firstAttribute="leading" secondItem="6XK-So-b39" secondAttribute="trailing" constant="15" id="lXB-4A-Xto"/>
+                            <constraint firstAttribute="bottom" secondItem="6XK-So-b39" secondAttribute="bottom" constant="64" id="sD8-WX-MWz"/>
+                            <constraint firstAttribute="bottom" secondItem="f2s-dl-wx9" secondAttribute="bottom" constant="64" id="u9u-Ux-3IH"/>
+                            <constraint firstItem="f2s-dl-wx9" firstAttribute="leading" secondItem="wsR-0o-Ubi" secondAttribute="trailing" constant="15" id="wHv-7G-0QF"/>
                             <constraint firstItem="f2s-dl-wx9" firstAttribute="width" secondItem="6XK-So-b39" secondAttribute="width" id="wMl-HP-vyH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hCU-ST-7u7"/>
