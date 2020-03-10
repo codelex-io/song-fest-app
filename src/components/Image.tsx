@@ -20,6 +20,7 @@ export const Image: React.FC<ImageProps> = ({ style, source, height, width }) =>
                 {
                     height,
                     width: width ? width : '100%',
+                    backgroundColor: colors.white,
                 },
                 style,
             ]}
