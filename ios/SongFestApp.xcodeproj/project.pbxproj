@@ -11,9 +11,9 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		222D5477240E8DF5006707DF /* AppViewControllerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 222D5476240E8DF5006707DF /* AppViewControllerBridge.m */; };
 		222D547C24100CDE006707DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 222D547B24100CDE006707DF /* GoogleService-Info.plist */; };
+		227DD3E62418306200C12B5D /* splash-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 227DD3E52418306200C12B5D /* splash-animation.gif */; };
 		227E54E624093F5B00A1AC78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227E54E524093F5B00A1AC78 /* Main.storyboard */; };
 		227E54E9240940A200A1AC78 /* PostLaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E54E8240940A200A1AC78 /* PostLaunchController.swift */; };
-		227E54EB2409433400A1AC78 /* songfest-launch.gif in Resources */ = {isa = PBXBuildFile; fileRef = 227E54EA2409433400A1AC78 /* songfest-launch.gif */; };
 		227E54EF2409597500A1AC78 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227E54EE2409597500A1AC78 /* Launch Screen.storyboard */; };
 		22EFA9C8240D8F0300C29222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EFA9C7240D8F0300C29222 /* AppDelegate.swift */; };
 		428E7C00A1DF1C1A2C1140EE /* libPods-SongFestAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E943675B55A190041D9BC6 /* libPods-SongFestAppTests.a */; };
@@ -60,10 +60,10 @@
 		222D5476240E8DF5006707DF /* AppViewControllerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppViewControllerBridge.m; sourceTree = "<group>"; };
 		222D547A240FF5E7006707DF /* SongFestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SongFestApp.entitlements; path = SongFestApp/SongFestApp.entitlements; sourceTree = "<group>"; };
 		222D547B24100CDE006707DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		227DD3E52418306200C12B5D /* splash-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "splash-animation.gif"; sourceTree = "<group>"; };
 		227E54E524093F5B00A1AC78 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		227E54E7240940A100A1AC78 /* SongFestApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SongFestApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		227E54E8240940A200A1AC78 /* PostLaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLaunchController.swift; sourceTree = "<group>"; };
-		227E54EA2409433400A1AC78 /* songfest-launch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "songfest-launch.gif"; sourceTree = "<group>"; };
 		227E54EE2409597500A1AC78 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		22EFA9C7240D8F0300C29222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34E943675B55A190041D9BC6 /* libPods-SongFestAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SongFestAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,11 +139,11 @@
 		13B07FAE1A68108700A75B9A /* SongFestApp */ = {
 			isa = PBXGroup;
 			children = (
+				227DD3E52418306200C12B5D /* splash-animation.gif */,
 				222D547B24100CDE006707DF /* GoogleService-Info.plist */,
 				222D547A240FF5E7006707DF /* SongFestApp.entitlements */,
 				93D2C50F240EF838007EE557 /* accurat-svg.svg */,
 				93D2C510240EF838007EE557 /* codelex-svg.svg */,
-				227E54EA2409433400A1AC78 /* songfest-launch.gif */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -369,8 +369,8 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				8562BD6712C349009BA0F297 /* DINPro-Black.ttf in Resources */,
 				50B9DA17EAEA4A31AA2830CE /* DINPro-Bold.ttf in Resources */,
+				227DD3E62418306200C12B5D /* splash-animation.gif in Resources */,
 				5EA56BF423FF196500877F7A /* icon.png in Resources */,
-				227E54EB2409433400A1AC78 /* songfest-launch.gif in Resources */,
 				227E54EF2409597500A1AC78 /* Launch Screen.storyboard in Resources */,
 				8B24B07A32C34997B4CBE618 /* DINPro-Light.ttf in Resources */,
 				93D2C512240EF838007EE557 /* codelex-svg.svg in Resources */,

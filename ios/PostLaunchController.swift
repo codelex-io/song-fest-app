@@ -8,7 +8,7 @@ class PostLaunchController: UIViewController {
   lazy var loadinggif: GIFImageView = {
     let view = GIFImageView()
     view.contentMode = .scaleAspectFit
-    view.animate(withGIFNamed: "songfest-launch")
+    view.animate(withGIFNamed: "splash-animation")
     view.alpha = 0.0
     return view
   }()
