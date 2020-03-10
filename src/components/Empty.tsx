@@ -18,5 +18,6 @@ const styles = StyleSheet.create({
         fontFamily: typography.normal,
         fontSize: 16,
         lineHeight: 21,
+        letterSpacing: 0.5,
     },
 });
