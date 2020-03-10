@@ -20,7 +20,7 @@ const bootstrap = async (isRealDevice: boolean) =>
         initLanguage(),
         initSettings(),
         init(isRealDevice),
-        new Promise(resolve => setTimeout(resolve, 1500)),
+        new Promise(resolve => setTimeout(resolve, 3000)),
     ]);
 
 interface Props {
