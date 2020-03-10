@@ -18,7 +18,7 @@ class PostLaunchController: UIViewController {
     
     view.addSubview(loadinggif)
     loadinggif.centerInSuperview()
-    loadinggif.width(view.frame.width * 0.9)
+    loadinggif.width(view.frame.width - 60, relation: .equal, priority: .required, isActive: true)
 
     // fade in/out animation for gif
     UIView.animate(
