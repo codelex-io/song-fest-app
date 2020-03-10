@@ -9,7 +9,7 @@ class PostLaunchController: UIViewController {
     let view = GIFImageView()
     view.contentMode = .scaleAspectFit
     view.animate(withGIFNamed: "splash-animation")
-    view.alpha = 0.0
+//    view.alpha = 0.0
     return view
   }()
 
@@ -21,14 +21,14 @@ class PostLaunchController: UIViewController {
     loadinggif.width(view.frame.width - 60, relation: .equal, priority: .required, isActive: true)
 
     // fade in/out animation for gif
-    UIView.animate(
-      withDuration: 1.55,
-      delay: 0.8,
-      options: [.curveEaseOut],
-      animations: {
-        self.loadinggif.alpha = 1.0
-      },
-      completion: nil
-    )
+//    UIView.animate(
+//      withDuration: 1.55,
+//      delay: 0.8,
+//      options: [.curveEaseOut],
+//      animations: {
+//        self.loadinggif.alpha = 1.0
+//      },
+//      completion: nil
+//    )
   }
 }
