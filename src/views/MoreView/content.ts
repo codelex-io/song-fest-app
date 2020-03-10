@@ -28,7 +28,7 @@ const execute = (route: string, typeOfLink: TypeOfLink, navigate: (route: string
     }
 };
 
-export const Items: ItemType[] = [
+export const items: ItemType[] = [
     {
         id: 0,
         title: 'SPONSORS',

@@ -9,7 +9,7 @@ export const white = '#FFFFFF';
 export const darkGrey1A = '#1A1A1A';
 export const mediumGrey4D = '#4D4D4D';
 export const lightGrey3A = '#A3A3A3';
-export const extrLighgrey6E = '#E6E6E6';
+export const extrLightgrey6E = '#E6E6E6';
 
 const mainColors = [green, orange, blue, purple];
 

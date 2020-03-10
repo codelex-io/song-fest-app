@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.orange,
     },
     containeInactive: {
-        backgroundColor: colors.extrLighgrey6E,
+        backgroundColor: colors.extrLightgrey6E,
     },
     text: {
         fontFamily: typography.bold,

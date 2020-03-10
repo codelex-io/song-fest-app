@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     cancelButton: {
         width: 81,
         height: 44,
-        backgroundColor: colors.extrLighgrey6E,
+        backgroundColor: colors.extrLightgrey6E,
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 12,
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         padding: 16,
-        borderTopColor: colors.extrLighgrey6E,
+        borderTopColor: colors.extrLightgrey6E,
         borderTopWidth: 1,
         alignItems: 'stretch',
     },

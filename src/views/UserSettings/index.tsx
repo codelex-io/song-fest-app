@@ -39,7 +39,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserCategory'>> = ({ navigation
             <View style={userSettingStyles.bottomBtnsContainer}>
                 <TextColorFilledBtn
                     style={{
-                        backgroundColor: colors.extrLighgrey6E,
+                        backgroundColor: colors.extrLightgrey6E,
                         marginRight: 12,
                     }}
                     onPress={() => navigation.goBack()}
