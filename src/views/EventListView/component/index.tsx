@@ -33,7 +33,7 @@ interface Props {
     refreshing: () => boolean;
     navigation: StackNavigationProp<
         SharedStackParamsList,
-        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserCategory'
+        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserSettings'
     >;
 }
 

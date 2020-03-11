@@ -1,70 +1,53 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import { colors, typography } from '@styles';
 import { Card } from './Card';
 import { useSettings } from '@domain/settings';
 import { UserType } from '@domain/settings';
-import { LocalizationContext } from '../../localization/LocalizationContext';
-import TextColorFilledBtn from '@components/buttons/TextColorFilledBtn';
+import { useLanguageSettings } from '../../localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
-
+import { Language } from '@localization/types';
+import { LanguageCard } from './LanguageCard';
+import { SimpleHeader } from '@components';
 const userTypes: UserType[] = ['participant', 'parent', 'visitor'];
+const language: Language[] = ['lv', 'en'];
 
-const UserSettings: React.FC<SharedStackNavList<'UserCategory'>> = ({ navigation }) => {
+const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation }) => {
     const { userType, setUserType } = useSettings();
-    const [currentChoice, setCurrentChoice] = useState<UserType | null>(null);
-    const { translations } = useContext(LocalizationContext);
-
-    useEffect(() => {
-        setCurrentChoice(userType);
-    }, [userType]);
-
-    const handleSaveChoice = () => {
-        if (currentChoice !== null) {
-            setUserType(currentChoice);
-            navigation.goBack();
-        }
-    };
+    const { translations, appLanguage, setAppLanguage } = useLanguageSettings();
 
     return (
         <View style={userSettingStyles.container}>
-            <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
-
-            <View style={userSettingStyles.radioBtnsContainer}>
-                {userTypes.map((user: UserType) => (
-                    <Card key={user} selectedUser={currentChoice} title={user} onPress={() => setCurrentChoice(user)} />
-                ))}
+            <View>
+                <StatusBar />
+                <SimpleHeader title={translations.getString('USER_SETTINGS')} navigation={navigation} />
             </View>
 
-            <View style={userSettingStyles.bottomBtnsContainer}>
-                <TextColorFilledBtn
-                    style={{
-                        backgroundColor: colors.extrLightgrey6E,
-                        marginRight: 12,
-                    }}
-                    onPress={() => navigation.goBack()}
-                >
-                    {translations.getString('CANCEL')}
-                </TextColorFilledBtn>
-
-                <TextColorFilledBtn style={{ backgroundColor: colors.yellow }} onPress={handleSaveChoice}>
-                    {translations.getString('SAVE')}
-                </TextColorFilledBtn>
+            <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
+            <View style={{ marginBottom: 16 }}>
+                {userTypes.map((user: UserType) => (
+                    <Card key={user} selectedUser={userType} title={user} onPress={() => setUserType(user)} />
+                ))}
+            </View>
+            <Text style={userSettingStyles.title}>{translations.getString('LANGUAGE')}</Text>
+            <View>
+                {language.map((language: Language) => (
+                    <LanguageCard
+                        key={language}
+                        selectedLanguage={appLanguage}
+                        title={language}
+                        onPress={() => setAppLanguage(language)}
+                    />
+                ))}
             </View>
         </View>
     );
 };
-
 export const userSettingStyles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        padding: 16,
-        justifyContent: 'flex-start',
         backgroundColor: colors.white,
-    },
-    radioBtnsContainer: {
-        flex: 1,
     },
     bottomBtnsContainer: {
         flexDirection: 'row',
@@ -76,10 +59,13 @@ export const userSettingStyles = StyleSheet.create({
         fontSize: 14,
         marginBottom: 11,
         lineHeight: 18,
+        marginHorizontal: 16,
     },
     cardContainer: {
         flexDirection: 'row',
         paddingVertical: 10,
+        marginHorizontal: 16,
+        alignItems: 'center',
     },
     cardIcon: {
         paddingRight: 14,
@@ -90,6 +76,12 @@ export const userSettingStyles = StyleSheet.create({
         fontSize: 14,
         textTransform: 'uppercase',
     },
+    cardExtraText: {
+        color: colors.darkGrey1A,
+        fontFamily: typography.normal,
+        fontSize: 14,
+        lineHeight: 18,
+        letterSpacing: 0.25,
+    },
 });
-
 export default UserSettings;

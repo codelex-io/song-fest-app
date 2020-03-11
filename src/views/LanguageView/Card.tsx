@@ -1,16 +1,16 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors, typography, opacity } from '@styles';
 
 interface CardProps {
-    icon: IconType;
+    image: ImageSourcePropType;
     title: string;
     backgroundColor: string;
     onPress: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor, onPress }) => {
+export const Card: React.FC<CardProps> = ({ image, title, backgroundColor, onPress }) => {
     return (
         <TouchableOpacity
             style={[styles.columnContainer, { backgroundColor }]}
@@ -18,12 +18,10 @@ export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor, onPres
             activeOpacity={opacity.opacity8}
         >
             <View style={styles.containerBox}>
-                <Icon size={24} type={icon} fill={backgroundColor} />
+                <Image source={image} style={{ width: 28, height: 20 }} />
             </View>
             <Text style={styles.text}>{title}</Text>
-            <View style={styles.chevronRight}>
-                <Icon size={24} type={IconType.ChevronRight} fill={colors.white} />
-            </View>
+            <Icon size={24} type={IconType.ChevronRight} fill={colors.white} />
         </TouchableOpacity>
     );
 };
@@ -41,21 +39,10 @@ const styles = StyleSheet.create({
         marginRight: 16,
     },
     text: {
+        flex: 1,
         color: colors.white,
         fontFamily: typography.bold,
         fontSize: 20,
         letterSpacing: 0.75,
-    },
-    cardExtraText: {
-        color: colors.white,
-        fontFamily: typography.normal,
-        fontSize: 14,
-        lineHeight: 18,
-        letterSpacing: 0.25,
-    },
-    chevronRight: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end',
     },
 });

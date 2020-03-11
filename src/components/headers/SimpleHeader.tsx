@@ -10,7 +10,7 @@ interface HeaderProps {
     title: string;
     navigation: StackNavigationProp<
         SharedStackParamsList,
-        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserCategory'
+        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserSettings'
     >;
 }
 

@@ -10,7 +10,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 interface Props {
     navigation: StackNavigationProp<
         SharedStackParamsList,
-        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserCategory'
+        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserSettings'
     >;
 }
 

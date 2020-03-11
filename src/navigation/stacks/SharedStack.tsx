@@ -20,7 +20,7 @@ export type SharedStackParamsList = {
     Favorites: undefined;
     Article: { itemId: string; group: FavouriteGroupKey };
     Search: undefined;
-    UserCategory: undefined;
+    UserSettings: undefined;
 };
 
 export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
@@ -30,9 +30,9 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
-    /* eslint-disable */
+    /*eslint-disable*/
     let feedComponent: React.FC<any> = EmptyView;
-    /* eslint-enable */
+    /*eslint-enable*/
 
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;
@@ -54,7 +54,7 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
             <Stack.Screen name="Favorites" component={FavoriteListView} />
             <Stack.Screen name="Article" component={MarkdownEvent} />
             <Stack.Screen name="Search" component={SearchView} />
-            <Stack.Screen name="UserCategory" component={UserSettings} />
+            <Stack.Screen name="UserSettings" component={UserSettings} />
         </Stack.Navigator>
     );
 };

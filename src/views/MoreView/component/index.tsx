@@ -10,7 +10,7 @@ import { MoreViewStackParamsList } from 'src/navigation/stacks/MoreStack';
 import { useStoryBook } from '@domain/storybook';
 
 interface Props {
-    navigation: StackNavigationProp<MoreViewStackParamsList, 'Feed' | 'Favorites' | 'Language' | 'UserCategory'>;
+    navigation: StackNavigationProp<MoreViewStackParamsList, 'Feed' | 'Favorites' | 'Language' | 'UserSettings'>;
 }
 
 const MoreView: React.FC<Props> = ({ navigation }) => {

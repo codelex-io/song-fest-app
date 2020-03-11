@@ -103,7 +103,7 @@ export const items: ItemType[] = [
         title: 'USER_SETTINGS',
         icon: IconType.Settings,
         backgroundColor: colors.yellow,
-        onOpen: (navigate: (route: string) => void) => execute('UserCategory', 'internal', navigate),
+        onOpen: (navigate: (route: string) => void) => execute('UserSettings', 'internal', navigate),
         disabled: false,
     },
     {
@@ -113,13 +113,5 @@ export const items: ItemType[] = [
         backgroundColor: colors.green,
         onOpen: (navigate: (route: string) => void) => execute('Language', 'internal', navigate),
         disabled: true,
-    },
-    {
-        id: 10,
-        title: 'LANGUAGE',
-        icon: IconType.Settings,
-        backgroundColor: colors.blue,
-        onOpen: (navigate: (route: string) => void) => execute('Language', 'internal', navigate),
-        disabled: false,
     },
 ];

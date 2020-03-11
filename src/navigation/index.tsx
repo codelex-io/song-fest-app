@@ -2,13 +2,13 @@ import React from 'react';
 import { useSettings } from '@domain/settings';
 import { NavigationContainer, DefaultTheme, RouteProp } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
-import { UserCategoryView } from '@views';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
 import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
+import InitialUserSettingsStack from './stacks/InitialUserSettingsStack';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -34,9 +34,10 @@ const NavigationTheme: Theme = {
 };
 
 const Navigation: React.FC = () => {
-    const { userType, setUserType } = useSettings();
+    const { userType } = useSettings();
+
     if (userType === null) {
-        return <UserCategoryView onSelect={setUserType} />;
+        return <InitialUserSettingsStack />;
     }
     return (
         <NavigationContainer theme={NavigationTheme}>

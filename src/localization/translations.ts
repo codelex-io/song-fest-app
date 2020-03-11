@@ -39,6 +39,8 @@ const translations = new LocalizedStrings({
         SAVE: 'Saglabāt',
         POPULAR: 'Populārākie',
         LATEST: 'Jaunākie',
+        LV: 'LATVISKI',
+        EN: 'ENGLISH',
     },
     en: {
         EVENTS: 'Events',
@@ -78,6 +80,8 @@ const translations = new LocalizedStrings({
         ONLINE: 'Online',
         POPULAR: 'Popular',
         LATEST: 'Latest',
+        LV: 'LATVISKI',
+        EN: 'ENGLISH',
     },
 });
 
