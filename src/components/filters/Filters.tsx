@@ -4,7 +4,7 @@ import { TextToggleBtn } from '@components/buttons';
 import { LocalizationContext } from '../../localization/LocalizationContext';
 import { colors } from '@styles';
 
-interface FiltersProps {
+interface FilterProps {
     activeKey: string;
     onPress: (key: string) => void;
     options: ViewsHeaderFilterOption[];
@@ -14,7 +14,7 @@ export interface ViewsHeaderFilterOption {
     key: string;
     title: string;
 }
-const ViewsHeaderFilter: React.FC<FiltersProps> = ({ activeKey, onPress, options }) => {
+const ViewsHeaderFilter: React.FC<FilterProps> = ({ activeKey, onPress, options }) => {
     const { translations } = useContext(LocalizationContext);
     return (
         <View style={styles.searchContainerButton}>

@@ -21,7 +21,7 @@ const translations = new LocalizedStrings({
         TOMORROW: 'Rīt',
         THIS_WEEK: 'Šonedēļ',
         OTHERS: 'Cits',
-        ONLINE: 'Tiešaitē',
+        ONLINE: 'Tiešsaitē',
         SEARCH: 'Meklējiet pēc nosaukuma, vietas uc.',
         RESULTS: 'Rezultāti',
         SPONSORS: 'Sponsoru Piedāvājums',

@@ -14,6 +14,7 @@ import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { NewsListViewIndex } from '@views/NewsListView';
+import { AnyType } from '@domain/AnyType';
 
 export type SharedStackParamsList = {
     Feed: { payload: string };
@@ -30,9 +31,7 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
-    /*eslint-disable*/
-    let feedComponent: React.FC<any> = EmptyView;
-    /*eslint-enable*/
+    let feedComponent: React.FC<AnyType> = EmptyView;
 
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;

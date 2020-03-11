@@ -14,6 +14,7 @@ import { LocalizationContext } from '../../../localization/LocalizationContext';
 import StatusBar from '@components/headers/StatusBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
+import { AnyType } from '@domain/AnyType';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -40,9 +41,7 @@ const EventMapComponent: React.FC<Props> = ({
     navigation,
 }) => {
     const mapViewRef = useRef<MapView>(null);
-    /* eslint-disable */
-    let carousel: any
-    /* eslint-enable */
+    let carousel: AnyType;
 
     const [selectedId, setSelectedId] = useState<string>('');
     const [parentViewHeight, setParentViewHeight] = useState<number | undefined>(undefined);
@@ -232,9 +231,7 @@ const EventMapComponent: React.FC<Props> = ({
                         </View>
 
                         <Carousel
-                            /* eslint-disable */
-                            ref={(c: any) => (carousel = c)}
-                            /* eslint-enable */
+                            ref={(c: AnyType) => (carousel = c)}
                             data={items}
                             renderItem={({ item, index }) => (
                                 <EventCard

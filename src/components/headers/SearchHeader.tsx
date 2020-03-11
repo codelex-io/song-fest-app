@@ -8,10 +8,7 @@ import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 interface Props {
-    navigation: StackNavigationProp<
-        SharedStackParamsList,
-        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserSettings'
-    >;
+    navigation: StackNavigationProp<SharedStackParamsList, 'Search'>;
 }
 
 const SearchHeader: React.FC<Props> = ({ navigation }) => {

@@ -9,6 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
 import InitialUserSettingsStack from './stacks/InitialUserSettingsStack';
+import { AnyType } from '@domain/AnyType';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -94,12 +95,10 @@ const Navigation: React.FC = () => {
 
 export default Navigation;
 
-/*eslint-disable*/
-const hideOnUserCategoryView = (route: any): boolean => {
-    /*eslint-enable*/
+const hideOnUserCategoryView = (route: AnyType): boolean => {
     let lastRoute = '';
     if (route.state) {
         lastRoute = route.state.routes[route.state.routes.length - 1].name;
     }
-    return lastRoute !== 'UserCategory';
+    return lastRoute !== 'UserSettings';
 };

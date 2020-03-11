@@ -8,10 +8,7 @@ import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 
 interface HeaderProps {
     title: string;
-    navigation: StackNavigationProp<
-        SharedStackParamsList,
-        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserSettings'
-    >;
+    navigation: StackNavigationProp<SharedStackParamsList, 'Favorites' | 'Article' | 'UserSettings'>;
 }
 
 export const SimpleHeader: React.FC<HeaderProps> = ({ title, navigation }) => (

@@ -3,14 +3,13 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors, opacity } from '@styles';
 import Icon, { IconType } from '../Icon';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { AnyType } from '@domain/AnyType';
 
 interface HeaderProps {
     title: string;
     onLongPressTitle?: () => void;
     containerStyle?: { [key: string]: string | number };
-    /*eslint-disable*/
-    navigation: any;
-    /*eslint-enable*/
+    navigation: AnyType;
 }
 
 export const Header: React.FC<HeaderProps> = ({ title, onLongPressTitle, containerStyle, navigation }) => {
