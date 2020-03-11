@@ -7,8 +7,8 @@ import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { open } from '@domain/share';
-import { Loading } from '@components';
-import { View } from 'react-native';
+import { Loading, SimpleHeader } from '@components';
+import { View, StatusBar, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
@@ -16,7 +16,7 @@ const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean)
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
 };
 
-const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route }) => {
+const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
     const {
         params: { itemId, group },
     } = route;
@@ -36,13 +36,26 @@ const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route }) => {
     const item = toItem(data.item, isFavourite);
 
     return (
-        <MarkdownEvent
-            loading={loading}
-            item={item}
-            onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: group })}
-            onShare={item => open(item.link)}
-        />
+        <View style={styles.container}>
+            <View>
+                <StatusBar />
+                <SimpleHeader title={''} navigation={navigation} />
+            </View>
+
+            <MarkdownEvent
+                loading={loading}
+                item={item}
+                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: group })}
+                onShare={item => open(item.link)}
+            />
+        </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
 
 export default SingleView;

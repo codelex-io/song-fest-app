@@ -1,6 +1,5 @@
 import NewsListView from './NewsListView/component';
 import FavoriteListView from './FavoriteListView';
-import { EmptyFavorite } from './FavoriteListView/component/EmptyFavorite';
 import MoreView from './MoreView';
 import FilterView from './FilterView';
 import EventFilterView from './EventFilterView';
@@ -22,7 +21,6 @@ export {
     NewsListView,
     EventListView,
     EventMapView,
-    EmptyFavorite,
     MoreView,
     FilterView,
     EventFilterView,

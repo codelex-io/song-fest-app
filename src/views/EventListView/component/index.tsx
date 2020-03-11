@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
-import { FlatList, View, StyleSheet, RefreshControl } from 'react-native';
+import { FlatList, View, StyleSheet, RefreshControl, StatusBar } from 'react-native';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, Loading } from '@components';
-import { TextToggleBtn } from '@components/buttons';
+import { LongSearch, Loading, Header } from '@components';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
+import Filters from './Filters';
 
 interface Props {
     loading: boolean;
@@ -22,6 +24,10 @@ interface Props {
     onShare: (item: EventItem) => void;
     onRefresh: () => void;
     refreshing: () => boolean;
+    navigation: StackNavigationProp<
+        SharedStackParamsList,
+        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserCategory'
+    >;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -37,6 +43,7 @@ const EventListComponent: React.FC<Props> = ({
     onReadMore,
     onShare,
     onRefresh,
+    navigation,
 }) => {
     const { translations } = useContext(LocalizationContext);
     if (loading) {
@@ -44,43 +51,19 @@ const EventListComponent: React.FC<Props> = ({
     }
     return (
         <View style={styles.viewContainer}>
-            <LongSearch
-                backgroundColor={colors.blue}
-                onPress={onSearch}
-                searchInput={searchInput}
-                onResetSearch={onResetSearch}
-                customStyles={styles.longSearch}
-            />
-            <View style={styles.searchContainerButton}>
-                <TextToggleBtn
-                    title={translations.getString('TODAY')}
-                    active={activeKey === 'today'}
-                    onPress={() => onPress('today')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
+            <View>
+                <StatusBar />
+                <Header title={translations.getString('EVENTS')} navigation={navigation} />
+                <LongSearch
+                    backgroundColor={colors.blue}
+                    onPress={onSearch}
+                    searchInput={searchInput}
+                    onResetSearch={onResetSearch}
+                    customStyles={styles.longSearch}
                 />
-                <TextToggleBtn
-                    title={translations.getString('TOMORROW')}
-                    active={activeKey === 'tomorrow'}
-                    onPress={() => onPress('tomorrow')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
-                />
-                <TextToggleBtn
-                    title={translations.getString('THIS_WEEK')}
-                    active={activeKey === 'this-week'}
-                    onPress={() => onPress('this-week')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
-                />
-                <TextToggleBtn
-                    title={translations.getString('OTHERS')}
-                    active={activeKey === 'all'}
-                    onPress={() => onPress('all')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
-                />
+                <Filters activeKey={activeKey} onPress={onPress} />
             </View>
+
             <FlatList<EventItem>
                 refreshControl={
                     <RefreshControl
@@ -115,12 +98,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginTop: 8,
         marginBottom: 16,
-    },
-    searchContainerButton: {
-        flexDirection: 'row',
-        paddingLeft: 16,
-        paddingRight: 8,
-        paddingBottom: 16,
     },
 });
 

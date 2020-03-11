@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
-import { SafeAreaConsumer } from 'react-native-safe-area-context';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import { TouchableOpacity, ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';
 import { styles } from './styles';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) => {
+interface Props {
+    navigation: StackNavigationProp<
+        SharedStackParamsList,
+        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserCategory'
+    >;
+}
+
+const SearchHeader: React.FC<Props> = ({ navigation }) => {
     const [input, setInput] = useState('');
 
     const handleSubmit = () => {
@@ -17,31 +24,27 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) =>
 
     const inputAccessoryViewID = 'searchHeaderInput';
     return (
-        <SafeAreaConsumer>
-            {insets => (
-                <View style={[{ paddingTop: Platform.OS === 'ios' ? insets?.top : 0 }, styles.insetsContainer]}>
-                    <ScrollView keyboardDismissMode="interactive">
-                        <View style={[styles.header, { backgroundColor: colors.blue }]}>
-                            <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
-                                <Icon type={IconType.ChevronLeft} fill={colors.white} />
-                            </TouchableOpacity>
+        <View style={styles.insetsContainer}>
+            <ScrollView keyboardDismissMode="interactive">
+                <View style={[styles.header, { backgroundColor: colors.blue }]}>
+                    <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
+                        <Icon type={IconType.ChevronLeft} fill={colors.white} />
+                    </TouchableOpacity>
 
-                            <TextInput
-                                autoFocus
-                                keyboardType="ascii-capable"
-                                maxLength={200}
-                                style={styles.text}
-                                inputAccessoryViewID={inputAccessoryViewID}
-                                onChangeText={text => setInput(text)}
-                                value={input}
-                                onSubmitEditing={handleSubmit}
-                                selectionColor={colors.white}
-                            />
-                        </View>
-                    </ScrollView>
+                    <TextInput
+                        autoFocus
+                        keyboardType="ascii-capable"
+                        maxLength={200}
+                        style={styles.text}
+                        inputAccessoryViewID={inputAccessoryViewID}
+                        onChangeText={text => setInput(text)}
+                        value={input}
+                        onSubmitEditing={handleSubmit}
+                        selectionColor={colors.white}
+                    />
                 </View>
-            )}
-        </SafeAreaConsumer>
+            </ScrollView>
+        </View>
     );
 };
 

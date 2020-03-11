@@ -68,6 +68,7 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
                 refetch();
             }}
             onShare={item => open(item.link)}
+            navigation={navigation}
         />
     );
 };

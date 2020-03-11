@@ -6,13 +6,14 @@ import { MyLocation } from './MyLocation';
 import { EventItem } from '../types';
 import { EventMarker } from './EventMarker';
 import { colors } from '@styles';
-import { LongSearch } from '@components';
+import { LongSearch, Header } from '@components';
 import { ArrowButton } from './ArrowButton';
 import { EventCard } from './EventCard';
 import { getCurrentPosition } from '@domain/location';
-import { useNavigation } from '@react-navigation/native';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
-import HeaderForView from '@components/headers/HeaderForView';
+import StatusBar from '@components/headers/StatusBar';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -25,6 +26,7 @@ interface Props {
     searchInput: string;
     onResetSearch: () => void;
     onReadMore: (item: EventItem) => void;
+    navigation: StackNavigationProp<SharedStackParamsList, 'Feed'>;
 }
 
 const EventMapComponent: React.FC<Props> = ({
@@ -35,6 +37,7 @@ const EventMapComponent: React.FC<Props> = ({
     searchInput,
     onResetSearch,
     onReadMore,
+    navigation,
 }) => {
     const mapViewRef = useRef<MapView>(null);
     /* eslint-disable */
@@ -48,7 +51,6 @@ const EventMapComponent: React.FC<Props> = ({
     const [animationHeight, setAnimationHeight] = useState<Animated.AnimatedValue | undefined>(undefined);
     const [isScrollOpen, setScrollOpen] = useState<boolean>(false);
     const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false);
-    const navigation = useNavigation();
     const { translations } = useContext(LocalizationContext);
 
     useEffect(() => {
@@ -157,7 +159,8 @@ const EventMapComponent: React.FC<Props> = ({
         >
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <HeaderForView title={translations.getString('MAP')} navigate={navigation.navigate} />
+                    <StatusBar />
+                    <Header title={translations.getString('MAP')} navigation={navigation} />
                     <LongSearch
                         backgroundColor={colors.green}
                         onPress={() => {

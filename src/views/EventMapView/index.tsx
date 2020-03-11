@@ -60,6 +60,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
                 refetch();
             }}
             onReadMore={(item: EventItem) => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
+            navigation={navigation}
         />
     );
 };

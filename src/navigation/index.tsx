@@ -80,7 +80,15 @@ const Navigation: React.FC = () => {
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),
                             tabBarButton: () => (
-                                <TouchableOpacity onPress={onPress} style={{ flex: 1 }}>
+                                <TouchableOpacity
+                                    onPress={onPress}
+                                    style={{
+                                        flex: 1,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        backgroundColor: colors.extrLighgrey6E,
+                                    }}
+                                >
                                     <TabBarIcon route={'VIDEO'} focused={false} />
                                 </TouchableOpacity>
                             ),
@@ -103,7 +111,6 @@ const Navigation: React.FC = () => {
 
 export default Navigation;
 
-// hide tabs on User Settings View
 /*eslint-disable*/
 const hideOnUserCategoryView = (route: any): boolean => {
     /*eslint-enable*/

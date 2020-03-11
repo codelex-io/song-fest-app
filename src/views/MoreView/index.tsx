@@ -1,10 +1,9 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import MoreViewComponent from './component';
+import { MoreViewStackNavProps } from 'src/navigation/stacks/MoreStack';
 
-const MoreView: React.FC = () => {
-    const navigation = useNavigation();
-    return <MoreViewComponent navigate={navigation.navigate} />;
+const MoreView: React.FC<MoreViewStackNavProps<'Feed'>> = ({ navigation }) => {
+    return <MoreViewComponent navigation={navigation} />;
 };
 
 export default MoreView;

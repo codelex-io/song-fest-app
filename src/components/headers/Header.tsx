@@ -1,53 +1,48 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors, opacity } from '@styles';
 import Icon, { IconType } from '../Icon';
-import { SafeAreaConsumer } from 'react-native-safe-area-context';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 interface HeaderProps {
     title: string;
-    navigate: (route: string) => void;
     onLongPressTitle?: () => void;
+    containerStyle?: { [key: string]: string | number };
+    /*eslint-disable*/
+    navigation: any;
+    /*eslint-enable*/
 }
 
-export const Header: React.FC<HeaderProps> = ({ title, navigate, onLongPressTitle }) => {
+export const Header: React.FC<HeaderProps> = ({ title, onLongPressTitle, containerStyle, navigation }) => {
     return (
-        <SafeAreaConsumer>
-            {insets => (
-                <View style={[{ paddingTop: Platform.OS === 'ios' ? insets?.top : 0 }, styles.insetsContainer]}>
-                    <View style={styles.container}>
-                        <TouchableWithoutFeedback onLongPress={() => onLongPressTitle && onLongPressTitle()}>
-                            <Text style={styles.text}>{title}</Text>
-                        </TouchableWithoutFeedback>
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={styles.containerBox1}
-                                onPress={() => navigate('UserCategory')}
-                                activeOpacity={opacity.opacity8}
-                            >
-                                <Icon type={IconType.Face} fill={colors.white} />
-                            </TouchableOpacity>
+        <View style={{ ...containerStyle }}>
+            <View style={styles.container}>
+                <TouchableWithoutFeedback onLongPress={() => onLongPressTitle && onLongPressTitle()}>
+                    <Text style={styles.text}>{title}</Text>
+                </TouchableWithoutFeedback>
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity
+                        style={styles.containerBox1}
+                        onPress={() => navigation.navigate('UserCategory')}
+                        activeOpacity={opacity.opacity8}
+                    >
+                        <Icon type={IconType.Face} fill={colors.white} />
+                    </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={styles.containerBox}
-                                onPress={() => navigate('Favorites')}
-                                activeOpacity={opacity.opacity8}
-                            >
-                                <Icon type={IconType.HeartFilled} fill={colors.white} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    <TouchableOpacity
+                        style={styles.containerBox}
+                        onPress={() => navigation.navigate('Favorites')}
+                        activeOpacity={opacity.opacity8}
+                    >
+                        <Icon type={IconType.HeartFilled} fill={colors.white} />
+                    </TouchableOpacity>
                 </View>
-            )}
-        </SafeAreaConsumer>
+            </View>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    insetsContainer: {
-        backgroundColor: colors.white,
-    },
     container: {
         paddingVertical: 8,
         paddingHorizontal: 16,
