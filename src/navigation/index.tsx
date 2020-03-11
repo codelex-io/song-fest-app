@@ -9,7 +9,6 @@ import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -75,18 +74,6 @@ const Navigation: React.FC = () => {
                     options={({ route }) => {
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),
-                            tabBarButton: () => (
-                                <TouchableOpacity
-                                    style={{
-                                        flex: 1,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: colors.lightGrey3A,
-                                    }}
-                                >
-                                    <TabBarIcon route={'VIDEO'} focused={false} />
-                                </TouchableOpacity>
-                            ),
                         };
                     }}
                     name="VIDEO"

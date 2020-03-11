@@ -8,7 +8,14 @@ import { LongSearch, Loading, Empty, Header } from '@components';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
-import Filters from './Filters';
+import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '../../../components/filters/Filters';
+
+const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
+    { key: 'today', title: 'TODAY' },
+    { key: 'tomorrow', title: 'TOMORROW' },
+    { key: 'this-week', title: 'THIS_WEEK' },
+    { key: 'all', title: 'OTHERS' },
+];
 
 interface Props {
     loading: boolean;
@@ -17,7 +24,7 @@ interface Props {
     onFavourite: (item: EventItem) => void;
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
-    onPress: (key: TimeSelector) => void;
+    onPress: (key: string) => void;
     onSearch: () => void;
     searchInput: string;
     onResetSearch: () => void;
@@ -61,7 +68,7 @@ const EventListComponent: React.FC<Props> = ({
                     onResetSearch={onResetSearch}
                     customStyles={styles.longSearch}
                 />
-                <Filters activeKey={activeKey} onPress={onPress} />
+                <ViewsHeaderFilter activeKey={activeKey} onPress={onPress} options={FILTER_OPTIONS} />
             </View>
             {items.length === 0 ? (
                 <View style={styles.container}>

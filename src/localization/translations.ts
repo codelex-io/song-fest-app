@@ -21,6 +21,7 @@ const translations = new LocalizedStrings({
         TOMORROW: 'Rīt',
         THIS_WEEK: 'Šonedēļ',
         OTHERS: 'Cits',
+        ONLINE: 'Tiešaitē',
         SEARCH: 'Meklējiet pēc nosaukuma, vietas uc.',
         RESULTS: 'Rezultāti',
         SPONSORS: 'Sponsoru Piedāvājums',
@@ -36,6 +37,8 @@ const translations = new LocalizedStrings({
         USER_TYPE: 'Lietotāja veids',
         CANCEL: 'Atcelt',
         SAVE: 'Saglabāt',
+        POPULAR: 'Populārākie',
+        LATEST: 'Jaunākie',
     },
     en: {
         EVENTS: 'Events',
@@ -72,6 +75,9 @@ const translations = new LocalizedStrings({
         USER_TYPE: 'Type of user',
         CANCEL: 'Cancel',
         SAVE: 'Save',
+        ONLINE: 'Online',
+        POPULAR: 'Popular',
+        LATEST: 'Latest',
     },
 });
 
