@@ -15,6 +15,7 @@ export const FavouritesContext = createContext<ContextType>({
     favourites: [],
     hasAnyItems: () => false,
 });
+
 export const useFavourites = () => useContext<ContextType>(FavouritesContext);
 
 export const FavouritesContextProvider: React.FC = ({ children }) => {

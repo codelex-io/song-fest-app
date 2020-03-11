@@ -2,6 +2,8 @@ import { errors } from '@utils';
 import { Favourite, GroupOfFavourites } from './types';
 import { useFavourites, FavouritesContextProvider } from './context';
 import { fetchFavourites, storeFavourites } from './storage';
+import { toast } from '../../toast';
+import translations from '../../localization/translations';
 
 let groups: GroupOfFavourites[] = [];
 
@@ -20,6 +22,7 @@ export const addFavourite = (fav: Favourite) => {
     }
     group.items.push(fav);
     storeFavourites(groups).catch(errors.onError);
+    toast(translations.getString('ADDED_TO_FAVOURITES'));
 };
 
 export const getFavourites = (): GroupOfFavourites[] => {
