@@ -18,7 +18,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
 
     return (
         <View style={userSettingStyles.container}>
-            <View>
+            <View style={userSettingStyles.header}>
                 <StatusBar />
                 <SimpleHeader title={translations.getString('USER_SETTINGS')} navigation={navigation} />
             </View>
@@ -29,6 +29,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
                     <Card key={user} selectedUser={userType} title={user} onPress={() => setUserType(user)} />
                 ))}
             </View>
+
             <Text style={userSettingStyles.title}>{translations.getString('LANGUAGE')}</Text>
             <View>
                 {language.map((language: Language) => (
@@ -49,9 +50,8 @@ export const userSettingStyles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: colors.white,
     },
-    bottomBtnsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
+    header: {
+        marginBottom: 16,
     },
     title: {
         fontFamily: typography.bold,
@@ -60,6 +60,10 @@ export const userSettingStyles = StyleSheet.create({
         marginBottom: 11,
         lineHeight: 18,
         marginHorizontal: 16,
+    },
+    bottomBtnsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     },
     cardContainer: {
         flexDirection: 'row',
