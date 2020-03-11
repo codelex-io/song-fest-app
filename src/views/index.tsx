@@ -10,12 +10,12 @@ import AllIcons from './AllIcons';
 import MarkdownEvent from './MarkdownEvent';
 import UserSettingsView from './UserSettings';
 import { VideoView } from './VideoView';
-import { LanguageView } from './LanguageView';
 import EventMapView from './EventMapView';
 import LoadingView from './LoadingView';
 import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
 import UserSettings from './UserSettings';
+import { LanguageView } from './LanguageView';
 
 export {
     FavoriteListView,

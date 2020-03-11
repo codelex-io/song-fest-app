@@ -34,9 +34,7 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
-    /* eslint-disable */
     let feedComponent: React.FC<any> = EmptyView;
-    /* eslint-enable */
     let title: string;
     const { translations } = useContext(LocalizationContext);
     if (route.name === 'NEWS') {

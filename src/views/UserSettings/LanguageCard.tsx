@@ -3,19 +3,19 @@ import { Text, View } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';
 import { LocalizationContext } from '../../localization/LocalizationContext';
-import { UserType } from '@domain/settings';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { userSettingStyles } from '.';
+import { Language } from '@localization/types';
 
 interface CardProps {
     title: string;
-    selectedUser: UserType | null;
+    selectedLanguage: Language | null;
     onPress: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ title, selectedUser, onPress }) => {
+export const LanguageCard: React.FC<CardProps> = ({ title, selectedLanguage, onPress }) => {
     const { translations } = useContext(LocalizationContext);
-    const active = selectedUser === title;
+    const active = selectedLanguage === title;
     return (
         <TouchableOpacity style={userSettingStyles.cardContainer} onPress={onPress}>
             <View style={userSettingStyles.cardIcon}>
@@ -25,14 +25,7 @@ export const Card: React.FC<CardProps> = ({ title, selectedUser, onPress }) => {
                     <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
                 )}
             </View>
-            {title === 'visitor' ? (
-                <View>
-                    <Text style={userSettingStyles.cardText}>{translations.getString(title.toUpperCase())}</Text>
-                    <Text style={userSettingStyles.cardExtraText}>Available also in English</Text>
-                </View>
-            ) : (
-                <Text style={userSettingStyles.cardText}>{translations.getString(title.toUpperCase())}</Text>
-            )}
+            <Text style={userSettingStyles.cardText}>{translations.getString(title.toUpperCase())}</Text>
         </TouchableOpacity>
     );
 };

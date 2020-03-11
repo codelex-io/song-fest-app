@@ -15,9 +15,9 @@ export const UserCategoryView: React.FC<Props> = ({ onSelect }) => {
     return (
         <View style={styles.container}>
             <Card
-                icon={IconType.Yoga}
+                icon={IconType.Start}
                 title={translations.getString('PARTICIPANT')}
-                backgroundColor={colors.orange}
+                backgroundColor={colors.blue}
                 onPress={() => onSelect('participant')}
             />
             <Card
@@ -29,7 +29,7 @@ export const UserCategoryView: React.FC<Props> = ({ onSelect }) => {
             <Card
                 icon={IconType.Eye}
                 title={translations.getString('VISITOR')}
-                backgroundColor={colors.blue}
+                backgroundColor={colors.orange}
                 onPress={() => onSelect('visitor')}
             />
         </View>

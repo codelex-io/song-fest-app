@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
-import { MoreView, LanguageView, UserSettings, FavoriteListView } from '@views';
+import { MoreView, UserSettings, FavoriteListView } from '@views';
 import { Header, SimpleHeader } from '@components';
 import { useStoryBook } from '@domain/storybook';
 import { LocalizationContext } from '../../localization/LocalizationContext';
@@ -55,15 +55,6 @@ const MoreStack: React.FC<AppTabsNavParams<'MORE'>> = () => {
                     ),
                 })}
                 component={FavoriteListView}
-            />
-            <Stack.Screen
-                name="Language"
-                options={({ navigation }) => ({
-                    header: () => (
-                        <SimpleHeader title={translations.getString('LANGUAGE')} goBack={navigation.goBack} />
-                    ),
-                })}
-                component={LanguageView}
             />
             <Stack.Screen
                 name="UserCategory"
