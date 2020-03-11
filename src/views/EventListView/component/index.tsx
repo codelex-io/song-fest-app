@@ -68,28 +68,28 @@ const EventListComponent: React.FC<Props> = ({
                     <Empty />
                 </View>
             ) : (
-                    <FlatList<EventItem>
-                        refreshControl={
-                            <RefreshControl
-                                onRefresh={onRefresh}
-                                refreshing={loading}
-                                colors={[colors.randomColor()]}
-                                tintColor={colors.randomColor()}
-                            />
-                        }
-                        data={items}
-                        renderItem={({ item, index }): React.ReactElement => (
-                            <Card
-                                item={item}
-                                backgroundColor={colors.findColorByIndex(index)}
-                                onFavourite={() => onFavourite(item)}
-                                onNavigate={() => onNavigate(item)}
-                                onReadMore={() => onReadMore(item)}
-                                onShare={() => onShare(item)}
-                            />
-                        )}
-                    />
-                )}
+                <FlatList<EventItem>
+                    refreshControl={
+                        <RefreshControl
+                            onRefresh={onRefresh}
+                            refreshing={loading}
+                            colors={[colors.randomColor()]}
+                            tintColor={colors.randomColor()}
+                        />
+                    }
+                    data={items}
+                    renderItem={({ item, index }): React.ReactElement => (
+                        <Card
+                            item={item}
+                            backgroundColor={colors.findColorByIndex(index)}
+                            onFavourite={() => onFavourite(item)}
+                            onNavigate={() => onNavigate(item)}
+                            onReadMore={() => onReadMore(item)}
+                            onShare={() => onShare(item)}
+                        />
+                    )}
+                />
+            )}
         </View>
     );
 };

@@ -73,17 +73,15 @@ const Navigation: React.FC = () => {
                 />
                 <Tab.Screen
                     options={({ route }) => {
-                        const onPress = () => { }
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),
                             tabBarButton: () => (
                                 <TouchableOpacity
-                                    onPress={onPress}
                                     style={{
                                         flex: 1,
                                         justifyContent: 'center',
                                         alignItems: 'center',
-                                        backgroundColor: colors.lightGrey3A
+                                        backgroundColor: colors.lightGrey3A,
                                     }}
                                 >
                                     <TabBarIcon route={'VIDEO'} focused={false} />

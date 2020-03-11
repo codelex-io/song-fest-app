@@ -13,7 +13,6 @@ export type MoreViewStackParamsList = {
     Article: { itemId: string; group: FavouriteGroupKey };
 };
 
-
 export type MoreViewStackNavProps<T extends keyof MoreViewStackParamsList> = {
     navigation: StackNavigationProp<MoreViewStackParamsList, T>;
     route: RouteProp<MoreViewStackParamsList, T>;

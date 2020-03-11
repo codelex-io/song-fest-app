@@ -74,15 +74,15 @@ export const moreViewStyles = StyleSheet.create({
     inner:
         screenWidth > MEDIA_BREAK
             ? {
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                paddingTop: 4,
-                paddingHorizontal: 8,
-            }
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  paddingTop: 4,
+                  paddingHorizontal: 8,
+              }
             : {
-                paddingTop: 16,
-                paddingHorizontal: 16,
-            },
+                  paddingTop: 16,
+                  paddingHorizontal: 16,
+              },
 });
 
 export default MoreView;
