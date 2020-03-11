@@ -17,4 +17,4 @@ import './views/VideoView.stories';
 import './views/EventMapView.stories';
 import './views/LoadingView.stories';
 import './views/EmptyView.stories';
-import './views/LanguageViewStart';
+import './views/LanguageView.stories';
