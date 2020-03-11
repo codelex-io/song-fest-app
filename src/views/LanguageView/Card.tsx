@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors, typography, opacity } from '@styles';
 
 interface CardProps {
-    image: ImageSourcePropType;
+    image: Element;
     title: string;
     backgroundColor: string;
     onPress: () => void;
@@ -17,9 +17,7 @@ export const Card: React.FC<CardProps> = ({ image, title, backgroundColor, onPre
             onPress={onPress}
             activeOpacity={opacity.opacity8}
         >
-            <View style={styles.containerBox}>
-                <Image source={image} style={{ width: 28, height: 20 }} />
-            </View>
+            <View style={styles.containerBox}>{image}</View>
             <Text style={styles.text}>{title}</Text>
             <Icon size={24} type={IconType.ChevronRight} fill={colors.white} />
         </TouchableOpacity>
