@@ -38,6 +38,7 @@ const translations = new LocalizedStrings({
         SAVE: 'Saglabāt',
         LV: 'LATVISKI',
         EN: 'ENGLISH',
+        ADDED_TO_FAVOURITES: 'Pievienots favorītiem',
     },
     en: {
         EVENTS: 'Events',
@@ -76,6 +77,7 @@ const translations = new LocalizedStrings({
         SAVE: 'Save',
         LV: 'LATVISKI',
         EN: 'ENGLISH',
+        ADDED_TO_FAVOURITES: 'Added to favourites',
     },
 });
 
