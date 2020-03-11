@@ -10,19 +10,30 @@ interface CardProps {
     onPress: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor, onPress }) => (
-    <TouchableOpacity
-        style={[styles.columnContainer, { backgroundColor }]}
-        onPress={onPress}
-        activeOpacity={opacity.opacity8}
-    >
-        <View style={styles.containerBox}>
-            <Icon size={24} type={icon} fill={backgroundColor} />
-        </View>
-        <Text style={styles.text}>{title}</Text>
-        <Icon size={24} type={IconType.ChevronRight} fill={colors.white} />
-    </TouchableOpacity>
-);
+export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor, onPress }) => {
+    return (
+        <TouchableOpacity
+            style={[styles.columnContainer, { backgroundColor }]}
+            onPress={onPress}
+            activeOpacity={opacity.opacity8}
+        >
+            <View style={styles.containerBox}>
+                <Icon size={24} type={icon} fill={backgroundColor} />
+            </View>
+            {title === 'Apmeklētājs' ? (
+                <View>
+                    <Text style={styles.text}>{title}</Text>
+                    <Text style={styles.cardExtraText}>Available also in English</Text>
+                </View>
+            ) : (
+                <Text style={styles.text}>{title}</Text>
+            )}
+            <View style={styles.chevronRight}>
+                <Icon size={24} type={IconType.ChevronRight} fill={colors.white} />
+            </View>
+        </TouchableOpacity>
+    );
+};
 
 const styles = StyleSheet.create({
     columnContainer: {
@@ -37,10 +48,21 @@ const styles = StyleSheet.create({
         marginRight: 16,
     },
     text: {
-        flex: 1,
         color: colors.white,
         fontFamily: typography.bold,
         fontSize: 20,
         letterSpacing: 0.75,
+    },
+    cardExtraText: {
+        color: colors.white,
+        fontFamily: typography.normal,
+        fontSize: 14,
+        lineHeight: 18,
+        letterSpacing: 0.25,
+    },
+    chevronRight: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
     },
 });

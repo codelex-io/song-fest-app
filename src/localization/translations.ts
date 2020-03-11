@@ -36,6 +36,8 @@ const translations = new LocalizedStrings({
         USER_TYPE: 'Lietotāja veids',
         CANCEL: 'Atcelt',
         SAVE: 'Saglabāt',
+        LV: 'LATVISKI',
+        EN: 'ENGLISH',
     },
     en: {
         EVENTS: 'Events',
@@ -72,6 +74,8 @@ const translations = new LocalizedStrings({
         USER_TYPE: 'Type of user',
         CANCEL: 'Cancel',
         SAVE: 'Save',
+        LV: 'LATVISKI',
+        EN: 'ENGLISH',
     },
 });
 

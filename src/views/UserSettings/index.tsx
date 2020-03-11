@@ -1,27 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 import { Card } from './Card';
 import { useSettings } from '@domain/settings';
 import { UserType } from '@domain/settings';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { useLanguageSettings } from '../../localization/LocalizationContext';
 import TextColorFilledBtn from '@components/buttons/TextColorFilledBtn';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import { Language } from '@localization/types';
+import { LanguageCard } from './LanguageCard';
 
 const userTypes: UserType[] = ['participant', 'parent', 'visitor'];
+const language: Language[] = ['lv', 'en'];
 
 const UserSettings: React.FC<SharedStackNavList<'UserCategory'>> = ({ navigation }) => {
     const { userType, setUserType } = useSettings();
     const [currentChoice, setCurrentChoice] = useState<UserType | null>(null);
-    const { translations } = useContext(LocalizationContext);
+    const { translations, appLanguage, setAppLanguage } = useLanguageSettings();
+    const [currentLanguage, setCurrentLanguage] = useState<Language | null>(null);
 
     useEffect(() => {
         setCurrentChoice(userType);
-    }, [userType]);
+        setCurrentLanguage(appLanguage);
+    }, [userType, appLanguage]);
 
     const handleSaveChoice = () => {
         if (currentChoice !== null) {
             setUserType(currentChoice);
+            navigation.goBack();
+        }
+        if (currentLanguage !== null) {
+            setAppLanguage(currentLanguage);
             navigation.goBack();
         }
     };
@@ -33,6 +42,18 @@ const UserSettings: React.FC<SharedStackNavList<'UserCategory'>> = ({ navigation
             <View style={userSettingStyles.radioBtnsContainer}>
                 {userTypes.map((user: UserType) => (
                     <Card key={user} selectedUser={currentChoice} title={user} onPress={() => setCurrentChoice(user)} />
+                ))}
+            </View>
+
+            <Text style={userSettingStyles.title}>{translations.getString('LANGUAGE')}</Text>
+            <View style={userSettingStyles.radioBtnsContainer}>
+                {language.map((language: Language) => (
+                    <LanguageCard
+                        key={language}
+                        selectedLanguage={currentLanguage}
+                        title={language}
+                        onPress={() => setCurrentLanguage(language)}
+                    />
                 ))}
             </View>
 
@@ -90,6 +111,14 @@ export const userSettingStyles = StyleSheet.create({
         fontSize: 14,
         textTransform: 'uppercase',
     },
+    cardExtraText: {
+        color: colors.darkGrey1A,
+        fontFamily: typography.normal,
+        fontSize: 14,
+        lineHeight: 18,
+        letterSpacing: 0.25,
+    },
+    language: {},
 });
 
 export default UserSettings;

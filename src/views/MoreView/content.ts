@@ -114,12 +114,4 @@ export const items: ItemType[] = [
         onOpen: (navigate: (route: string) => void) => execute('Language', 'internal', navigate),
         disabled: true,
     },
-    {
-        id: 10,
-        title: 'LANGUAGE',
-        icon: IconType.Settings,
-        backgroundColor: colors.blue,
-        onOpen: (navigate: (route: string) => void) => execute('Language', 'internal', navigate),
-        disabled: false,
-    },
 ];
