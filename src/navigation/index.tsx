@@ -9,7 +9,7 @@ import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -36,7 +36,6 @@ const NavigationTheme: Theme = {
 
 const Navigation: React.FC = () => {
     const { userType, setUserType } = useSettings();
-
     if (userType === null) {
         return <UserCategoryView onSelect={setUserType} />;
     }
@@ -74,9 +73,7 @@ const Navigation: React.FC = () => {
                 />
                 <Tab.Screen
                     options={({ route }) => {
-                        /*eslint-disable*/
-                        const onPress = () => { };
-                        /*eslint-enable*/
+                        const onPress = () => { }
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),
                             tabBarButton: () => (
@@ -86,7 +83,7 @@ const Navigation: React.FC = () => {
                                         flex: 1,
                                         justifyContent: 'center',
                                         alignItems: 'center',
-                                        backgroundColor: colors.extrLighgrey6E,
+                                        backgroundColor: colors.lightGrey3A
                                     }}
                                 >
                                     <TabBarIcon route={'VIDEO'} focused={false} />

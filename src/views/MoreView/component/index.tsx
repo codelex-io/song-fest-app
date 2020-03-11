@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions, StatusBar } from 'react-native';
 import { Card } from './Card';
-import { colors, typography } from '@styles';
-import { Items, ItemType } from '../content';
+import { colors } from '@styles';
+import { items, ItemType } from '../content';
 import { Header } from '@components';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -48,7 +48,7 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
                 />
             </View>
             <View style={moreViewStyles.inner} onLayout={event => setInnerHeight(event.nativeEvent.layout.height)}>
-                {Items.map((item: ItemType) => (
+                {items.map((item: ItemType) => (
                     <Card
                         key={item.id}
                         title={item.title}
@@ -65,7 +65,6 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
 
 const screenWidth = Math.floor(Dimensions.get('window').width);
 const MEDIA_BREAK = 360;
-const cardWidth = (screenWidth - 64) / 3;
 
 export const moreViewStyles = StyleSheet.create({
     container: {
@@ -75,61 +74,15 @@ export const moreViewStyles = StyleSheet.create({
     inner:
         screenWidth > MEDIA_BREAK
             ? {
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  paddingTop: 4,
-                  paddingHorizontal: 8,
-              }
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                paddingTop: 4,
+                paddingHorizontal: 8,
+            }
             : {
-                  paddingTop: 16,
-                  paddingHorizontal: 16,
-              },
-    card:
-        screenWidth > MEDIA_BREAK
-            ? {
-                  width: cardWidth,
-                  marginHorizontal: 8,
-                  alignItems: 'center',
-                  marginVertical: 12,
-              }
-            : {
-                  marginBottom: 12,
-                  flexDirection: 'row',
-              },
-    button:
-        screenWidth > MEDIA_BREAK
-            ? {
-                  alignItems: 'center',
-              }
-            : {
-                  flexDirection: 'row',
-                  alignItems: 'center',
-              },
-    icon:
-        screenWidth > MEDIA_BREAK
-            ? {
-                  padding: 10,
-              }
-            : {
-                  padding: 10,
-                  marginRight: 16,
-              },
-    text:
-        screenWidth > MEDIA_BREAK
-            ? {
-                  textAlign: 'center',
-                  letterSpacing: 0.1,
-                  paddingTop: 8,
-                  fontSize: 14,
-                  fontFamily: typography.bold,
-              }
-            : {
-                  textAlign: 'center',
-                  letterSpacing: 0.1,
-                  fontSize: 14,
-                  fontFamily: typography.bold,
-                  textTransform: 'uppercase',
-              },
+                paddingTop: 16,
+                paddingHorizontal: 16,
+            },
 });
 
 export default MoreView;

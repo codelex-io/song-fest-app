@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Dimensions } from 'react-native';
 import { IconType, Icon } from '@components';
-import { colors, opacity } from '@styles';
-import { moreViewStyles } from './index';
+import { colors, opacity, typography } from '@styles';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
+
+const screenWidth = Math.floor(Dimensions.get('window').width);
+const MEDIA_BREAK = 360;
+const cardWidth = (screenWidth - 64) / 3;
 
 interface CardProps {
     title: string;
@@ -15,25 +18,70 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen, disabled }) => {
     const { translations } = useContext(LocalizationContext);
-
-    /*eslint-disable*/
-    const disabledOnPress = () => { };
-    /*eslint-enable*/
     const disabledIconFill = colors.lightGrey3A;
-    const disabledBgColor = colors.extrLighgrey6E;
-
+    const disabledBgColor = colors.extrLightgrey6E;
     return (
-        <View style={moreViewStyles.card}>
+        <View style={styles.card}>
             <TouchableOpacity
-                style={moreViewStyles.button}
-                onPress={disabled ? disabledOnPress : onOpen}
+                style={styles.button}
                 activeOpacity={opacity.opacity8}
+                disabled={disabled}
+                onPress={onOpen}
             >
-                <View style={[moreViewStyles.icon, { backgroundColor: disabled ? disabledBgColor : backgroundColor }]}>
+                <View style={[styles.icon, { backgroundColor: disabled ? disabledBgColor : backgroundColor }]}>
                     <Icon type={icon} fill={disabled ? disabledIconFill : colors.white} />
                 </View>
-                <Text style={[moreViewStyles.text]}>{translations.getString(title)}</Text>
+                <Text style={styles.text}>{translations.getString(title)}</Text>
             </TouchableOpacity>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    icon:
+        screenWidth > MEDIA_BREAK
+            ? {
+                  padding: 10,
+              }
+            : {
+                  padding: 10,
+                  marginRight: 16,
+              },
+    card:
+        screenWidth > MEDIA_BREAK
+            ? {
+                  width: cardWidth,
+                  marginHorizontal: 8,
+                  alignItems: 'center',
+                  marginVertical: 12,
+              }
+            : {
+                  marginBottom: 12,
+                  flexDirection: 'row',
+              },
+    button:
+        screenWidth > MEDIA_BREAK
+            ? {
+                  alignItems: 'center',
+              }
+            : {
+                  flexDirection: 'row',
+                  alignItems: 'center',
+              },
+    text:
+        screenWidth > MEDIA_BREAK
+            ? {
+                  textAlign: 'center',
+                  letterSpacing: 0.1,
+                  paddingTop: 8,
+                  fontSize: 14,
+                  fontFamily: typography.bold,
+              }
+            : {
+                  textAlign: 'center',
+                  letterSpacing: 0.1,
+                  fontSize: 14,
+                  fontFamily: typography.bold,
+                  textTransform: 'uppercase',
+              },
+});

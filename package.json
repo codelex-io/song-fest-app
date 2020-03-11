@@ -26,6 +26,7 @@
     "@types/react-native-snap-carousel": "^3.7.4",
     "apollo-boost": "^0.4.7",
     "apollo-cache-persist": "^0.1.1",
+    "bugsnag-react-native": "^2.23.6",
     "graphql": "^14.6.0",
     "moment": "^2.24.0",
     "react": "16.9.0",

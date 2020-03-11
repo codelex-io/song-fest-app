@@ -4,7 +4,7 @@ import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, Loading, Header } from '@components';
+import { LongSearch, Loading, Empty, Header } from '@components';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
@@ -63,28 +63,33 @@ const EventListComponent: React.FC<Props> = ({
                 />
                 <Filters activeKey={activeKey} onPress={onPress} />
             </View>
-
-            <FlatList<EventItem>
-                refreshControl={
-                    <RefreshControl
-                        onRefresh={onRefresh}
-                        refreshing={loading}
-                        colors={[colors.randomColor()]}
-                        tintColor={colors.randomColor()}
-                    />
-                }
-                data={items}
-                renderItem={({ item, index }): React.ReactElement => (
-                    <Card
-                        item={item}
-                        backgroundColor={colors.findColorByIndex(index)}
-                        onFavourite={() => onFavourite(item)}
-                        onNavigate={() => onNavigate(item)}
-                        onReadMore={() => onReadMore(item)}
-                        onShare={() => onShare(item)}
+            {items.length === 0 ? (
+                <View style={styles.container}>
+                    <Empty />
+                </View>
+            ) : (
+                    <FlatList<EventItem>
+                        refreshControl={
+                            <RefreshControl
+                                onRefresh={onRefresh}
+                                refreshing={loading}
+                                colors={[colors.randomColor()]}
+                                tintColor={colors.randomColor()}
+                            />
+                        }
+                        data={items}
+                        renderItem={({ item, index }): React.ReactElement => (
+                            <Card
+                                item={item}
+                                backgroundColor={colors.findColorByIndex(index)}
+                                onFavourite={() => onFavourite(item)}
+                                onNavigate={() => onNavigate(item)}
+                                onReadMore={() => onReadMore(item)}
+                                onShare={() => onShare(item)}
+                            />
+                        )}
                     />
                 )}
-            />
         </View>
     );
 };
@@ -98,6 +103,18 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginTop: 8,
         marginBottom: 16,
+    },
+    searchContainerButton: {
+        flexDirection: 'row',
+        paddingLeft: 16,
+        paddingRight: 8,
+        paddingBottom: 16,
+    },
+    container: {
+        backgroundColor: colors.white,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 
