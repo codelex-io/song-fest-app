@@ -45,6 +45,7 @@ const MarkdownEvent: React.FC<Props> = ({ item, onFavourite, onShare }) => {
     return (
         <View style={styles.parentContainer}>
             <ScrollView
+                scrollEventThrottle={0}
                 style={styles.scrollContainer}
                 ref={scroll}
                 onLayout={event => setParentHeight(event.nativeEvent.layout.height)}
