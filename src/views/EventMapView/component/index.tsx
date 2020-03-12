@@ -173,7 +173,7 @@ const EventMapComponent: React.FC<Props> = ({
                     />
                 </View>
                 {items.length === 0 && searchInput.isActive ? (
-                    <View style={styles.EmptyContainer}>
+                    <View style={styles.emptyContainer}>
                         <Empty />
                     </View>
                 ) : (
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.yellow,
         padding: 10,
     },
-    EmptyContainer: {
+    emptyContainer: {
         top: 100,
         flex: 1,
         justifyContent: 'center',
