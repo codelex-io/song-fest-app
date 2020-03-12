@@ -1,17 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
-import { MoreView, UserSettings, FavoriteListView } from '@views';
-import { Header, SimpleHeader } from '@components';
-import { useStoryBook } from '@domain/storybook';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { MoreView, UserSettings, FavoriteListView, MarkdownEvent } from '@views';
 import { AppTabsNavParams } from '..';
+import { FavouriteGroupKey } from '@domain/favourites/types';
 
 export type MoreViewStackParamsList = {
     Feed: undefined;
     Favorites: undefined;
     Language: undefined;
-    UserCategory: undefined;
+    UserSettings: undefined;
+    Article: { itemId: string; group: FavouriteGroupKey };
 };
 
 export type MoreViewStackNavProps<T extends keyof MoreViewStackParamsList> = {
@@ -22,49 +21,12 @@ export type MoreViewStackNavProps<T extends keyof MoreViewStackParamsList> = {
 const Stack = createStackNavigator();
 
 const MoreStack: React.FC<AppTabsNavParams<'MORE'>> = () => {
-    const [devPressCount, setDevPressCount] = useState<number>(0);
-    const { setStoryBookActive } = useStoryBook();
-    const { translations } = useContext(LocalizationContext);
-
     return (
-        <Stack.Navigator initialRouteName="Feed">
-            <Stack.Screen
-                name="Feed"
-                options={({ navigation }) => ({
-                    header: () => (
-                        <Header
-                            title={translations.getString('MORE')}
-                            navigate={navigation.navigate}
-                            onLongPressTitle={() => {
-                                if (devPressCount < 2) {
-                                    setDevPressCount(devPressCount + 1);
-                                    return;
-                                }
-                                setStoryBookActive(true);
-                            }}
-                        />
-                    ),
-                })}
-                component={MoreView}
-            />
-            <Stack.Screen
-                name="Favorites"
-                options={({ navigation }) => ({
-                    header: () => (
-                        <SimpleHeader title={translations.getString('FAVORITE')} goBack={navigation.goBack} />
-                    ),
-                })}
-                component={FavoriteListView}
-            />
-            <Stack.Screen
-                name="UserCategory"
-                options={({ navigation }) => ({
-                    header: () => (
-                        <SimpleHeader title={translations.getString('USER_SETTINGS')} goBack={navigation.goBack} />
-                    ),
-                })}
-                component={UserSettings}
-            />
+        <Stack.Navigator initialRouteName="Feed" headerMode="none">
+            <Stack.Screen name="Feed" component={MoreView} />
+            <Stack.Screen name="Favorites" component={FavoriteListView} />
+            <Stack.Screen name="UserSettings" component={UserSettings} />
+            <Stack.Screen name="Article" component={MarkdownEvent} />
         </Stack.Navigator>
     );
 };

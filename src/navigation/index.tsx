@@ -2,13 +2,14 @@ import React from 'react';
 import { useSettings } from '@domain/settings';
 import { NavigationContainer, DefaultTheme, RouteProp } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
-import { UserCategoryView } from '@views';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
 import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
+import InitialUserSettingsStack from './stacks/InitialUserSettingsStack';
+import { AnyType } from '@domain/AnyType';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -34,9 +35,10 @@ const NavigationTheme: Theme = {
 };
 
 const Navigation: React.FC = () => {
-    const { userType, setUserType } = useSettings();
+    const { userType } = useSettings();
+
     if (userType === null) {
-        return <UserCategoryView onSelect={setUserType} />;
+        return <InitialUserSettingsStack />;
     }
     return (
         <NavigationContainer theme={NavigationTheme}>
@@ -93,13 +95,10 @@ const Navigation: React.FC = () => {
 
 export default Navigation;
 
-// hide tabs on User Settings View
-/*eslint-disable*/
-const hideOnUserCategoryView = (route: any): boolean => {
-    /*eslint-enable*/
+const hideOnUserCategoryView = (route: AnyType): boolean => {
     let lastRoute = '';
     if (route.state) {
         lastRoute = route.state.routes[route.state.routes.length - 1].name;
     }
-    return lastRoute !== 'UserCategory';
+    return lastRoute !== 'UserSettings';
 };

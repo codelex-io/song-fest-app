@@ -27,7 +27,7 @@ const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare
                 />
             }
             data={items}
-            renderItem={({ item, index }): React.ReactElement => (
+            renderItem={({ item, index }: { item: NewsItem; index: number }): React.ReactElement => (
                 <Card
                     item={item}
                     backgroundColor={colors.findColorByIndex(index)}

@@ -103,7 +103,7 @@ export const items: ItemType[] = [
         title: 'USER_SETTINGS',
         icon: IconType.Settings,
         backgroundColor: colors.yellow,
-        onOpen: (navigate: (route: string) => void) => execute('UserCategory', 'internal', navigate),
+        onOpen: (navigate: (route: string) => void) => execute('UserSettings', 'internal', navigate),
         disabled: false,
     },
     {

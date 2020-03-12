@@ -34,13 +34,6 @@ export const styles = StyleSheet.create({
         color: colors.white,
         letterSpacing: 0.125,
     },
-    simpleText: {
-        fontSize: 20,
-        fontFamily: typography.bold,
-        lineHeight: 26,
-        color: colors.darkGrey1A,
-        letterSpacing: 0.15,
-    },
     textContainer: {
         padding: 15,
     },
