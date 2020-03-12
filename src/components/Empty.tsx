@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     text: {
-
         textAlign: 'center',
         color: colors.darkGrey1A,
         fontFamily: typography.normal,
