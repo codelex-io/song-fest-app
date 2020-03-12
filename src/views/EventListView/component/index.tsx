@@ -9,6 +9,7 @@ import { LocalizationContext } from '../../../localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '../../../components/filters/Filters';
+import { SearchInterface } from '@components/headers/SearchHeader';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
     { key: 'today', title: 'TODAY' },
@@ -25,8 +26,8 @@ interface Props {
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
     onPress: (key: string) => void;
-    onSearch: () => void;
-    searchInput: string;
+    onSearch: (color: string) => void;
+    searchInput: SearchInterface;
     onResetSearch: () => void;
     onShare: (item: EventItem) => void;
     onRefresh: () => void;
@@ -63,14 +64,15 @@ const EventListComponent: React.FC<Props> = ({
                 <Header title={translations.getString('EVENTS')} navigation={navigation} />
                 <LongSearch
                     backgroundColor={colors.blue}
-                    onPress={onSearch}
-                    searchInput={searchInput}
+                    onPress={() => onSearch(colors.blue)}
+                    searchInput={searchInput.payload}
                     onResetSearch={onResetSearch}
                     customStyles={styles.longSearch}
                 />
                 <ViewsHeaderFilter activeKey={activeKey} onPress={onPress} options={FILTER_OPTIONS} />
             </View>
-            {items.length === 0 ? (
+
+            {items.length === 0 && searchInput.isActive ? (
                 <View style={styles.container}>
                     <Empty />
                 </View>

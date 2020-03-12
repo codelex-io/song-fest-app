@@ -30,11 +30,10 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
                 <StatusBar />
                 <Header title={translations.getString('VIDEO')} navigation={navigation} />
                 <LongSearch
-                    backgroundColor={colors.blue}
-                    onPress={() => navigation.navigate('Search')}
+                    backgroundColor={colors.orange}
+                    onPress={() => navigation.navigate('Search', { color: colors.orange })}
                     searchInput={currentSearch}
                     onResetSearch={() => setCurrentSearch('')}
-                    customStyles={{ backgroundColor: colors.orange }}
                 />
                 <ViewsHeaderFilter
                     activeKey={activeKey}

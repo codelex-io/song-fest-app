@@ -11,22 +11,23 @@ import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { View } from 'react-native';
 import { colors } from '@styles';
 import Loading from '@components/Loading';
+import { SearchInterface } from '@components/headers/SearchHeader';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }) };
 };
 
 const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
-    const [currentSearch, setCurrentSearch] = useState<string>('');
+    const [currentSearch, setCurrentSearch] = useState<SearchInterface>({ payload: '', isActive: false });
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
-        variables: { searchBy: currentSearch },
+        variables: { searchBy: currentSearch.payload },
     });
     const { toggleFavourite, isFavourite } = useFavourites();
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
 
     useEffect(() => {
         if (route.params) {
-            setCurrentSearch(route.params.payload);
+            setCurrentSearch({ payload: route.params.payload, isActive: true });
         }
     }, [route]);
 
@@ -34,12 +35,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
         refetch();
     }, [currentSearch]);
 
-    if (!items.length && currentSearch !== '') {
-        //TODO implement 'nothing found after search'
-        setCurrentSearch('');
-    }
-
-    if (loading || !items.length) {
+    if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
                 <Loading />
@@ -53,10 +49,10 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
             items={items}
             onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
-            onSearch={() => navigation.navigate('Search')}
+            onSearch={(color: string) => navigation.navigate('Search', { color: color })}
             searchInput={currentSearch}
             onResetSearch={() => {
-                setCurrentSearch('');
+                setCurrentSearch({ payload: '', isActive: false });
                 refetch();
             }}
             onReadMore={(item: EventItem) => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}

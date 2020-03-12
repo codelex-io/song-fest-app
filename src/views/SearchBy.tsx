@@ -6,14 +6,14 @@ import StatusBar from '@components/headers/StatusBar';
 import SearchHeader from '@components/headers/SearchHeader';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
-const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) => {
+const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation }) => {
     const { translations } = useContext(LocalizationContext);
 
     return (
         <View style={styles.container}>
             <View>
                 <StatusBar />
-                <SearchHeader navigation={navigation} />
+                <SearchHeader navigation={navigation} route={route} />
             </View>
 
             <View style={styles.contentContainer}>

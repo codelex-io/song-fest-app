@@ -1,36 +1,60 @@
-import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { typography, colors, opacity } from '@styles';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Animated, Easing } from 'react-native';
+import { colors } from '@styles';
+import TextColorFilledBtn from '@components/buttons/TextColorFilledBtn';
 
 interface Props {
     onPress: () => void;
+    isVisible: boolean;
+    parentHeight: number | undefined;
 }
 
-const BackButton: React.FC<Props> = ({ onPress }) => {
+const BackButton: React.FC<Props> = ({ onPress, isVisible, parentHeight }) => {
+    const [btnHeightAnimation] = useState(new Animated.Value(Math.floor(parentHeight ? parentHeight : 1000)));
+    const [opacityAnimation] = useState(new Animated.Value(0));
+    const animationDuration = 500;
+
+    const animate = () => {
+        if (parentHeight !== undefined) {
+            Animated.parallel([
+                Animated.timing(btnHeightAnimation, {
+                    toValue: isVisible ? parentHeight - 64 : parentHeight + 64,
+                    duration: animationDuration,
+                    easing: Easing.linear,
+                }),
+                Animated.timing(opacityAnimation, {
+                    toValue: isVisible ? 1 : 0,
+                    duration: animationDuration,
+                    easing: Easing.linear,
+                }),
+            ]).start();
+        }
+    };
+
+    useEffect(() => {
+        animate();
+    }, [isVisible]);
+
+    const opacity = opacityAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+    });
+    const animationHeight = { top: btnHeightAnimation };
+    const animationOpacity = { opacity: opacity };
+
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={opacity.opacity8}>
-            <Text style={styles.filterText}>Atpakaļ uz augšu</Text>
-        </TouchableOpacity>
+        <Animated.View style={[styles.animatedBtnContainer, animationHeight, animationOpacity]}>
+            <TextColorFilledBtn style={{ backgroundColor: colors.yellow }} onPress={onPress}>
+                Atpakaļ uz Augšu
+            </TextColorFilledBtn>
+        </Animated.View>
     );
 };
 export default BackButton;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: '50%',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        paddingVertical: 13,
-        backgroundColor: colors.yellow,
-        marginBottom: 64,
+    animatedBtnContainer: {
         position: 'absolute',
-        alignSelf: 'flex-start',
-        marginLeft: 16,
-    },
-    filterText: {
-        fontSize: 14,
-        fontFamily: typography.bold,
-        justifyContent: 'center',
+        left: 16,
     },
 });
