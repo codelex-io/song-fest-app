@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { IconType } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import { useSettings } from '@domain/settings';
 
 export const UserCategoryView = () => {

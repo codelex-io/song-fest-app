@@ -9,7 +9,7 @@ import { colors } from '@styles';
 import { LongSearch, Header, Empty } from '@components';
 import { EventCard } from './EventCard';
 import { getCurrentPosition } from '@domain/location';
-import { LocalizationContext } from '../../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import StatusBar from '@components/headers/StatusBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';

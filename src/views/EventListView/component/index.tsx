@@ -5,10 +5,10 @@ import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
 import { LongSearch, Loading, Empty, Header } from '@components';
-import { LocalizationContext } from '../../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
-import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '../../../components/filters/Filters';
+import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { SearchInterface } from '@components/headers/SearchHeader';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextToggleBtn } from '@components/buttons';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import { colors } from '@styles';
 
 interface FilterProps {

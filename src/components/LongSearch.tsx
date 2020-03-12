@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon, IconType } from '@components';
 import { typography, colors, opacity } from '@styles';
-import { LocalizationContext } from '../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 
 interface LongSearchProps {
     backgroundColor: string;

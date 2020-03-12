@@ -3,7 +3,7 @@ import { useFavourites } from '@domain/favourites';
 import FavoriteListViewComponent from './component';
 import { View, StyleSheet, Text } from 'react-native';
 import { SimpleHeader, Icon, IconType } from '@components';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import StatusBar from '@components/headers/StatusBar';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { colors } from '@styles';

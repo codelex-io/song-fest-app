@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { typography, colors, opacity } from '@styles';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 
 interface Props {
     title: string;

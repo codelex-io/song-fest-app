@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { Card } from './Card';
-import { useLanguageSettings } from '../../localization/LocalizationContext';
+import { useLanguageSettings } from '@localization/LocalizationContext';
 import { InitialUserSettingsStackNavParams } from 'src/navigation/stacks/InitialUserSettingsStack';
 import { Language } from '@localization/types';
 import LV from './LV.svg';

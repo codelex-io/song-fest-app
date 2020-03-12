@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
-import { useLanguageSettings } from '../localization/LocalizationContext';
+import { useLanguageSettings } from '@localization/LocalizationContext';
 
 const Empty = () => {
     const { translations } = useLanguageSettings();

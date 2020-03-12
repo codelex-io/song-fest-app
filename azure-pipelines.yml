@@ -1,7 +1,7 @@
 pool:
-  vmImage: 'Ubuntu-16.04'
+    vmImage: 'Ubuntu-16.04'
 steps:
-  - script: |
-      npm install
-      npm run build:ci
-    displayName: 'Build'
+    - script: |
+          npm install
+          npm run build:ci
+      displayName: 'Build'

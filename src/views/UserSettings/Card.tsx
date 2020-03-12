@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import { UserType } from '@domain/settings';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { userSettingStyles } from '.';

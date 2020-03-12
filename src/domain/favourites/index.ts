@@ -3,7 +3,7 @@ import { Favourite, GroupOfFavourites } from './types';
 import { useFavourites, FavouritesContextProvider } from './context';
 import { fetchFavourites, storeFavourites } from './storage';
 import { toast } from '../../toast';
-import translations from '../../localization/translations';
+import translations from '@localization/translations';
 
 let groups: GroupOfFavourites[] = [];
 

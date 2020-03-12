@@ -10,7 +10,7 @@ import { View, StyleSheet } from 'react-native';
 import { open } from '@domain/share';
 import { FilterButtons, Loading, Header } from '@components';
 import { colors } from '@styles';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import StatusBar from '@components/headers/StatusBar';
 

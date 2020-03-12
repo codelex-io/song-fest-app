@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, opacity } from '@styles';
 import { Icon, IconType } from '@components';
 import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
-import { LocalizationContext } from '../../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 
 interface CardProps {
     group: GroupOfFavourites;

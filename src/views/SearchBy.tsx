@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
-import { LocalizationContext } from '../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import StatusBar from '@components/headers/StatusBar';
 import SearchHeader from '@components/headers/SearchHeader';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';

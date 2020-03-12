@@ -4,7 +4,7 @@ import { colors, typography } from '@styles';
 import { Card } from './Card';
 import { useSettings } from '@domain/settings';
 import { UserType } from '@domain/settings';
-import { useLanguageSettings } from '../../localization/LocalizationContext';
+import { useLanguageSettings } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { Language } from '@localization/types';
 import { LanguageCard } from './LanguageCard';

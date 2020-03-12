@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Text, TouchableOpacity, View, StyleSheet, Dimensions } from 'react-native';
 import { IconType, Icon } from '@components';
 import { colors, opacity, typography } from '@styles';
-import { LocalizationContext } from '../../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 
 const screenWidth = Math.floor(Dimensions.get('window').width);
 const MEDIA_BREAK = 360;

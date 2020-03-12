@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 import { colors } from '@styles';
 import { Header, LongSearch, Empty } from '@components';
-import { LocalizationContext } from '../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { VideoSelector } from '@domain';

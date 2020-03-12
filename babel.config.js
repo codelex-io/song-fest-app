@@ -22,6 +22,7 @@ module.exports = {
                     '@views': './src/views',
                     '@utils': './src/utils',
                     '@domain': './src/domain',
+                    '@localization': './src/localization',
                 },
             },
         ],

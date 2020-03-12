@@ -4,7 +4,7 @@ import { Card } from './Card';
 import { colors } from '@styles';
 import { items, ItemType } from '../content';
 import { Header } from '@components';
-import { LocalizationContext } from '../../../localization/LocalizationContext';
+import { LocalizationContext } from '@localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { MoreViewStackParamsList } from 'src/navigation/stacks/MoreStack';
 import { useStoryBook } from '@domain/storybook';

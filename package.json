@@ -8,8 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "test:w": "jest --watch",
-    "lint:format": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\" --quiet --fix",
-    "lint:check": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\"",
+    "lint:format": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\" --quiet --fix && prettier --write \"**/*\"",
+    "lint:check": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\" && prettier -c \"**/*\"",
     "build:ci": "npm run lint:check"
   },
   "dependencies": {
@@ -68,6 +68,7 @@
     "@typescript-eslint/parser": "^2.17.0",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
+    "check-prettier": "^1.0.3",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
@@ -75,7 +76,7 @@
     "metro-react-native-babel-preset": "0.54.1",
     "prettier": "^1.19.1",
     "react-test-renderer": "16.9.0",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.5"
   },
   "jest": {
     "preset": "react-native",
