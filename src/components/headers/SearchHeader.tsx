@@ -14,7 +14,7 @@ export interface SearchInterface {
 const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation }) => {
     const [input, setInput] = useState('');
 
-    const bgColor = route.params ? route.params.color : colors.blue
+    const bgColor = route.params ? route.params.color : colors.blue;
 
     const handleSubmit = () => {
         setInput('');
