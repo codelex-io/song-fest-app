@@ -25,14 +25,7 @@ export const Card: React.FC<CardProps> = ({ title, selectedUser, onPress }) => {
                     <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
                 )}
             </View>
-            {title === 'visitor' ? (
-                <View>
-                    <Text style={userSettingStyles.cardText}>{translations.getString(title.toUpperCase())}</Text>
-                    <Text style={userSettingStyles.cardExtraText}>Available also in English</Text>
-                </View>
-            ) : (
-                <Text style={userSettingStyles.cardText}>{translations.getString(title.toUpperCase())}</Text>
-            )}
+            <Text style={userSettingStyles.cardText}>{translations.getString(title.toUpperCase())}</Text>
         </TouchableOpacity>
     );
 };

@@ -2,12 +2,23 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 import { LocalizationContext } from '../localization/LocalizationContext';
+import StatusBar from '@components/headers/StatusBar';
+import SearchHeader from '@components/headers/SearchHeader';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
-const SearchView = () => {
+const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ navigation }) => {
     const { translations } = useContext(LocalizationContext);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{translations.getString('SEARCH')}</Text>
+            <View>
+                <StatusBar />
+                <SearchHeader navigation={navigation} />
+            </View>
+
+            <View style={styles.contentContainer}>
+                <Text style={styles.text}>{translations.getString('SEARCH')}</Text>
+            </View>
         </View>
     );
 };
@@ -16,10 +27,13 @@ export default SearchView;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.white,
         flex: 1,
-        justifyContent: 'center',
+        backgroundColor: colors.white,
+    },
+    contentContainer: {
+        flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
     },
     text: {
         fontFamily: typography.normal,

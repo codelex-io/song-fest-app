@@ -35,10 +35,6 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
         refetch();
     }, [currentSearch]);
 
-    const handleFilterToggle = (it: TimeSelector) => {
-        setActiveTime(it);
-    };
-
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
@@ -56,7 +52,7 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
             onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
             activeKey={activeTime}
-            onPress={it => handleFilterToggle(it)}
+            onPress={key => setActiveTime(key as TimeSelector)}
             onSearch={() => navigation.navigate('Search')}
             searchInput={currentSearch}
             onResetSearch={() => {
@@ -64,6 +60,7 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
                 refetch();
             }}
             onShare={item => open(item.link)}
+            navigation={navigation}
         />
     );
 };

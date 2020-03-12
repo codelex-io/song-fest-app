@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaConsumer } from 'react-native-safe-area-context';
 import { View, Platform, StyleSheet } from 'react-native';
 
-const NoHeader = () => {
+const StatusBar = () => {
     return (
         <SafeAreaConsumer>
             {insets => (
@@ -12,10 +12,10 @@ const NoHeader = () => {
     );
 };
 
-export default NoHeader;
+export default StatusBar;
 
 const styles = StyleSheet.create({
     insetsContainer: {
-        backgroundColor: 'pink',
+        backgroundColor: 'magenta',
     },
 });

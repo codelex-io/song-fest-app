@@ -8,10 +8,11 @@ import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { View, StyleSheet } from 'react-native';
 import { open } from '@domain/share';
-import { FilterButtons, Loading } from '@components';
+import { FilterButtons, Loading, Header } from '@components';
 import { colors } from '@styles';
-import { useNavigation } from '@react-navigation/native';
 import { LocalizationContext } from '../../localization/LocalizationContext';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import StatusBar from '@components/headers/StatusBar';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
@@ -21,7 +22,7 @@ export interface Variables {
     first: number;
 }
 
-export const NewsListViewIndex: React.FC = () => {
+export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ navigation }) => {
     const [query, setQuery] = useState(FETCH_NEWS_ITEMS);
     const [isFirstActive, setIsFirstActive] = useState(true);
 
@@ -44,17 +45,20 @@ export const NewsListViewIndex: React.FC = () => {
     }, [isFirstActive]);
 
     const { toggleFavourite, isFavourite } = useFavourites();
-    const navigation = useNavigation();
     const { translations } = useContext(LocalizationContext);
 
     return (
         <View style={styles.container}>
-            <FilterButtons
-                firstTitle={translations.getString('CURRENT')}
-                secondTitle={translations.getString('ALL')}
-                currentActive={isFirstActive}
-                triggerToggle={handleCurrentFilter}
-            />
+            <View>
+                <StatusBar />
+                <Header title={translations.getString('NEWS')} navigation={navigation} />
+                <FilterButtons
+                    firstTitle={translations.getString('CURRENT')}
+                    secondTitle={translations.getString('ALL')}
+                    currentActive={isFirstActive}
+                    triggerToggle={handleCurrentFilter}
+                />
+            </View>
             {loading || !data ? (
                 <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
                     <Loading />

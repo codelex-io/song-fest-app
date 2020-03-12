@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import { colors, typography } from '@styles';
 import { Card } from './Card';
 import { useSettings } from '@domain/settings';
@@ -8,36 +8,34 @@ import { useLanguageSettings } from '../../localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { Language } from '@localization/types';
 import { LanguageCard } from './LanguageCard';
-
+import { SimpleHeader } from '@components';
 const userTypes: UserType[] = ['participant', 'parent', 'visitor'];
 const language: Language[] = ['lv', 'en'];
 
-const UserSettings: React.FC<SharedStackNavList<'UserCategory'>> = () => {
+const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation }) => {
     const { userType, setUserType } = useSettings();
-    const [currentChoice, setCurrentChoice] = useState<UserType | null>(null);
     const { translations, appLanguage, setAppLanguage } = useLanguageSettings();
-    const [currentLanguage, setCurrentLanguage] = useState<Language | null>(null);
-
-    useEffect(() => {
-        setCurrentChoice(userType);
-        setCurrentLanguage(appLanguage);
-    }, [userType, appLanguage]);
 
     return (
         <View style={userSettingStyles.container}>
-            <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
+            <View style={userSettingStyles.header}>
+                <StatusBar />
+                <SimpleHeader title={translations.getString('USER_SETTINGS')} navigation={navigation} />
+            </View>
 
-            <View>
+            <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
+            <View style={{ marginBottom: 16 }}>
                 {userTypes.map((user: UserType) => (
-                    <Card key={user} selectedUser={currentChoice} title={user} onPress={() => setUserType(user)} />
+                    <Card key={user} selectedUser={userType} title={user} onPress={() => setUserType(user)} />
                 ))}
             </View>
+
             <Text style={userSettingStyles.title}>{translations.getString('LANGUAGE')}</Text>
             <View>
                 {language.map((language: Language) => (
                     <LanguageCard
                         key={language}
-                        selectedLanguage={currentLanguage}
+                        selectedLanguage={appLanguage}
                         title={language}
                         onPress={() => setAppLanguage(language)}
                     />
@@ -46,17 +44,14 @@ const UserSettings: React.FC<SharedStackNavList<'UserCategory'>> = () => {
         </View>
     );
 };
-
 export const userSettingStyles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        padding: 16,
         backgroundColor: colors.white,
     },
-    bottomBtnsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
+    header: {
+        marginBottom: 16,
     },
     title: {
         fontFamily: typography.bold,
@@ -64,10 +59,17 @@ export const userSettingStyles = StyleSheet.create({
         fontSize: 14,
         marginBottom: 11,
         lineHeight: 18,
+        marginHorizontal: 16,
+    },
+    bottomBtnsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     },
     cardContainer: {
         flexDirection: 'row',
         paddingVertical: 10,
+        marginHorizontal: 16,
+        alignItems: 'center',
     },
     cardIcon: {
         paddingRight: 14,
@@ -86,5 +88,4 @@ export const userSettingStyles = StyleSheet.create({
         letterSpacing: 0.25,
     },
 });
-
 export default UserSettings;

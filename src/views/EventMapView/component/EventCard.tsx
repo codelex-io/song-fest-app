@@ -5,6 +5,7 @@ import { EventItem } from '../types';
 import { IconButtons } from './IconButtons';
 import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
+import { AnyType } from '@domain/AnyType';
 
 interface EventDescriptionProps {
     item: EventItem;
@@ -38,11 +39,7 @@ export const EventCard = ({
 
                     <View style={[styles.eventiconLabel, { marginRight: 16 }]}>
                         <Icon size={25} type={IconType.Calendar} fill="white" />
-                        <Text style={styles.eventLabelText}>
-                            {/*eslint-disable*/}
-                            {dateTimeUtils.formatDateDay(item.date as any)}
-                            {/*eslint-enable*/}
-                        </Text>
+                        <Text style={styles.eventLabelText}>{dateTimeUtils.formatDateDay(item.date as AnyType)}</Text>
                     </View>
                     <View style={[styles.eventiconLabel, { marginBottom: 12 }]}>
                         <Icon size={25} type={IconType.Clock} fill="white" />

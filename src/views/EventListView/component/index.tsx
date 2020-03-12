@@ -1,12 +1,21 @@
 import React, { useContext } from 'react';
-import { FlatList, View, StyleSheet, RefreshControl } from 'react-native';
+import { FlatList, View, StyleSheet, RefreshControl, StatusBar } from 'react-native';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, Loading, Empty } from '@components';
-import { TextToggleBtn } from '@components/buttons';
+import { LongSearch, Loading, Empty, Header } from '@components';
 import { LocalizationContext } from '../../../localization/LocalizationContext';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
+import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '../../../components/filters/Filters';
+
+const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
+    { key: 'today', title: 'TODAY' },
+    { key: 'tomorrow', title: 'TOMORROW' },
+    { key: 'this-week', title: 'THIS_WEEK' },
+    { key: 'all', title: 'OTHERS' },
+];
 
 interface Props {
     loading: boolean;
@@ -15,13 +24,17 @@ interface Props {
     onFavourite: (item: EventItem) => void;
     onNavigate: (item: EventItem) => void;
     activeKey: TimeSelector;
-    onPress: (key: TimeSelector) => void;
+    onPress: (key: string) => void;
     onSearch: () => void;
     searchInput: string;
     onResetSearch: () => void;
     onShare: (item: EventItem) => void;
     onRefresh: () => void;
     refreshing: () => boolean;
+    navigation: StackNavigationProp<
+        SharedStackParamsList,
+        'Feed' | 'Favorites' | 'Article' | 'Search' | 'UserSettings'
+    >;
 }
 
 const EventListComponent: React.FC<Props> = ({
@@ -37,6 +50,7 @@ const EventListComponent: React.FC<Props> = ({
     onReadMore,
     onShare,
     onRefresh,
+    navigation,
 }) => {
     const { translations } = useContext(LocalizationContext);
     if (loading) {
@@ -44,42 +58,17 @@ const EventListComponent: React.FC<Props> = ({
     }
     return (
         <View style={styles.viewContainer}>
-            <LongSearch
-                backgroundColor={colors.blue}
-                onPress={onSearch}
-                searchInput={searchInput}
-                onResetSearch={onResetSearch}
-                customStyles={styles.longSearch}
-            />
-            <View style={styles.searchContainerButton}>
-                <TextToggleBtn
-                    title={translations.getString('TODAY')}
-                    active={activeKey === 'today'}
-                    onPress={() => onPress('today')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
+            <View>
+                <StatusBar />
+                <Header title={translations.getString('EVENTS')} navigation={navigation} />
+                <LongSearch
+                    backgroundColor={colors.blue}
+                    onPress={onSearch}
+                    searchInput={searchInput}
+                    onResetSearch={onResetSearch}
+                    customStyles={styles.longSearch}
                 />
-                <TextToggleBtn
-                    title={translations.getString('TOMORROW')}
-                    active={activeKey === 'tomorrow'}
-                    onPress={() => onPress('tomorrow')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
-                />
-                <TextToggleBtn
-                    title={translations.getString('THIS_WEEK')}
-                    active={activeKey === 'this-week'}
-                    onPress={() => onPress('this-week')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
-                />
-                <TextToggleBtn
-                    title={translations.getString('OTHERS')}
-                    active={activeKey === 'all'}
-                    onPress={() => onPress('all')}
-                    primaryColor={colors.white}
-                    secondaryColor={colors.green}
-                />
+                <ViewsHeaderFilter activeKey={activeKey} onPress={onPress} options={FILTER_OPTIONS} />
             </View>
             {items.length === 0 ? (
                 <View style={styles.container}>

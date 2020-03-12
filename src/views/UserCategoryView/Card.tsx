@@ -20,14 +20,7 @@ export const Card: React.FC<CardProps> = ({ icon, title, backgroundColor, onPres
             <View style={styles.containerBox}>
                 <Icon size={24} type={icon} fill={backgroundColor} />
             </View>
-            {title === 'Apmeklētājs' ? (
-                <View>
-                    <Text style={styles.text}>{title}</Text>
-                    <Text style={styles.cardExtraText}>Available also in English</Text>
-                </View>
-            ) : (
-                <Text style={styles.text}>{title}</Text>
-            )}
+            <Text style={styles.text}>{title}</Text>
             <View style={styles.chevronRight}>
                 <Icon size={24} type={IconType.ChevronRight} fill={colors.white} />
             </View>

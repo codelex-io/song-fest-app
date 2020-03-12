@@ -2,10 +2,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { CachePersistor } from 'apollo-cache-persist';
 import { persistCache } from 'apollo-cache-persist';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { AnyType } from '@domain/AnyType';
 
 // https://github.com/apollographql/apollo-cache-persist/issues/75
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const storage = AsyncStorage as any;
+const storage = AsyncStorage as AnyType;
 
 const cache = new InMemoryCache();
 

@@ -1,67 +1,51 @@
-import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import { colors } from '@styles';
-import { LongSearch } from '@components';
-import { VideoData } from './types';
-import { Card } from './Card';
-import { TextToggleBtn } from '@components/buttons';
+import { Header, LongSearch, Empty } from '@components';
+import { LocalizationContext } from '../../localization/LocalizationContext';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
+import { VideoSelector } from '@domain';
 
-const ITEMS = [
-    {
-        id: '1',
-        video: 'https://via.placeholder.com/360x184?text=Placeholder',
-        title: '„Augstāk par zemi” un finālkonkurss',
-        statistics: 'Skatījumi: 4 349, ievietots 5. maijā',
-    },
-    {
-        id: '2',
-        video: 'https://via.placeholder.com/360x184?text=Placeholder',
-        title: 'XII Latvijas Skolu jaunatnes dziesmu un deju svētku ieskaņas pasākums Kuldīgas novadā',
-        statistics: 'Skatījumi: 4 349, ievietots 5. maijā',
-    },
+const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
+    { key: 'online', title: 'ONLINE' },
+    { key: 'popular', title: 'POPULAR' },
+    { key: 'latest', title: 'LATEST' },
 ];
 
-export const VideoView: React.FC = () => {
-    const items = ITEMS;
+export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
+    const { translations } = useContext(LocalizationContext);
+    const [activeKey, setActiveKey] = useState<VideoSelector>('latest');
+
+    const [currentSearch, setCurrentSearch] = useState<string>('');
+    useEffect(() => {
+        if (route.params) {
+            setCurrentSearch(route.params.payload);
+        }
+    }, [route]);
+
     return (
         <View style={styles.container}>
-            <LongSearch backgroundColor={colors.orange} />
-            <View style={styles.searchContainerButton}>
-                <TextToggleBtn
-                    title="tiešsaitē"
-                    active={true}
-                    onPress={() => null}
-                    primaryColor={colors.green}
-                    secondaryColor={colors.white}
-                    style={{ marginRight: 16 }}
+            <View>
+                <StatusBar />
+                <Header title={translations.getString('VIDEO')} navigation={navigation} />
+                <LongSearch
+                    backgroundColor={colors.blue}
+                    onPress={() => navigation.navigate('Search')}
+                    searchInput={currentSearch}
+                    onResetSearch={() => setCurrentSearch('')}
+                    customStyles={{ backgroundColor: colors.orange }}
                 />
-                <TextToggleBtn
-                    title="pēdējie"
-                    active={false}
-                    onPress={() => null}
-                    primaryColor={colors.green}
-                    secondaryColor={colors.white}
-                    style={{ marginRight: 16 }}
-                />
-                <TextToggleBtn
-                    title="populārakie"
-                    active={false}
-                    onPress={() => null}
-                    primaryColor={colors.green}
-                    secondaryColor={colors.white}
-                    style={{ marginRight: 16 }}
+                <ViewsHeaderFilter
+                    activeKey={activeKey}
+                    onPress={key => setActiveKey(key as VideoSelector)}
+                    options={FILTER_OPTIONS}
                 />
             </View>
 
-            <FlatList<VideoData>
-                data={items}
-                renderItem={({ item }): React.ReactElement => (
-                    <View style={{ marginHorizontal: 16 }}>
-                        <Card item={item} />
-                    </View>
-                )}
-                ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
-            />
+            <View style={styles.contentContainer}>
+                <Empty />
+            </View>
         </View>
     );
 };
@@ -76,5 +60,10 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         flexWrap: 'wrap',
         marginHorizontal: 16,
+    },
+    contentContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
