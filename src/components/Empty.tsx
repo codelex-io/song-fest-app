@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
+import { useLanguageSettings } from '../localization/LocalizationContext';
 
-export default class Empty extends Component {
-    render() {
-        return (
-            <View style={{ backgroundColor: colors.white }}>
-                <Text style={styles.text}>Diemžēl nekas netika atrasts.</Text>
-            </View>
-        );
-    }
-}
+const Empty = () => {
+    const { translations } = useLanguageSettings();
+    return (
+        <View style={{ backgroundColor: colors.white }}>
+            <Text style={styles.text}>{translations.getString('NOTHING_FOUND')}</Text>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     text: {
@@ -21,3 +21,5 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
     },
 });
+
+export default Empty;

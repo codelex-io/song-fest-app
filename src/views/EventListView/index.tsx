@@ -6,19 +6,17 @@ import { FETCH_EVENT_ITEMS } from './graphql/queries';
 import { Data, EventItem as GraphQLEventItem, Variables } from './graphql/types';
 import { EventItem } from './types';
 import { Favourite } from '@domain/favourites/types';
-import { View } from 'react-native';
 import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
-import { colors } from '@styles';
 import { TimeSelector, filterByDate } from '@domain';
-import { Loading } from '@components';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { open } from '@domain/share';
+import { SearchInterface } from '@components/headers/SearchHeader';
 
 const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
-    const [currentSearch, setCurrentSearch] = useState<string>('');
+    const [currentSearch, setCurrentSearch] = useState<SearchInterface>({ payload: '', isActive: false });
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
-        variables: { searchBy: currentSearch },
+        variables: { searchBy: currentSearch.payload },
     });
     const { toggleFavourite, isFavourite } = useFavourites();
     const [activeTime, setActiveTime] = useState<TimeSelector>('all');
@@ -27,21 +25,14 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
 
     useEffect(() => {
         if (route.params) {
-            setCurrentSearch(route.params.payload);
+            setCurrentSearch({ payload: route.params.payload, isActive: true });
         }
     }, [route]);
 
     useEffect(() => {
         refetch();
-    }, [currentSearch]);
+    }, [currentSearch.payload]);
 
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
-                <Loading />
-            </View>
-        );
-    }
     return (
         <EventListComponent
             onRefresh={() => refetch()}
@@ -53,10 +44,13 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
             onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
             activeKey={activeTime}
             onPress={key => setActiveTime(key as TimeSelector)}
-            onSearch={() => navigation.navigate('Search')}
+            onSearch={color => navigation.navigate('Search', { color: color })}
             searchInput={currentSearch}
             onResetSearch={() => {
-                setCurrentSearch('');
+                setCurrentSearch({
+                    payload: '',
+                    isActive: false,
+                });
                 refetch();
             }}
             onShare={item => open(item.link)}

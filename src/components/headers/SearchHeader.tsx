@@ -7,6 +7,11 @@ import { styles } from './styles';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import { StackNavigationProp } from '@react-navigation/stack';
 
+export interface SearchInterface {
+    payload: string;
+    isActive: boolean;
+}
+
 interface Props {
     navigation: StackNavigationProp<SharedStackParamsList, 'Search'>;
 }

@@ -20,7 +20,7 @@ export type SharedStackParamsList = {
     Feed: { payload: string };
     Favorites: undefined;
     Article: { itemId: string; group: FavouriteGroupKey };
-    Search: undefined;
+    Search: { color: string };
     UserSettings: undefined;
 };
 

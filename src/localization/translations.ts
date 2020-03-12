@@ -41,6 +41,7 @@ const translations = new LocalizedStrings({
         LATEST: 'Jaunākie',
         LV: 'LATVISKI',
         EN: 'ENGLISH',
+        NOTHING_FOUND: 'Diemžēl nekas netika atrasts',
     },
     en: {
         EVENTS: 'Events',
@@ -82,6 +83,7 @@ const translations = new LocalizedStrings({
         LATEST: 'Latest',
         LV: 'LATVISKI',
         EN: 'ENGLISH',
+        NOTHING_FOUND: 'Unfortunately nothing was found',
     },
 });
 
