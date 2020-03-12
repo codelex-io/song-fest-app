@@ -41,6 +41,7 @@ const translations = new LocalizedStrings({
         LATEST: 'Jaunākie',
         LV: 'LATVISKI',
         EN: 'ENGLISH',
+        ADDED_TO_FAVOURITES: 'Pievienots favorītiem',
         NOTHING_FOUND: 'Diemžēl nekas netika atrasts',
     },
     en: {
@@ -83,6 +84,7 @@ const translations = new LocalizedStrings({
         LATEST: 'Latest',
         LV: 'LATVISKI',
         EN: 'ENGLISH',
+        ADDED_TO_FAVOURITES: 'Added to favourites',
         NOTHING_FOUND: 'Unfortunately nothing was found',
     },
 });
