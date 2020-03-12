@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { typography, colors } from '@styles';
+import { opacity8 } from '@styles/opacity';
 
 interface TextColorFilledBtnProps {
     style: { [key: string]: string | number };
@@ -9,7 +10,7 @@ interface TextColorFilledBtnProps {
 }
 const TextColorFilledBtn: React.FC<TextColorFilledBtnProps> = ({ style, children, onPress }) => {
     return (
-        <TouchableOpacity style={[{ ...style }, btnStyles.container]} onPress={onPress}>
+        <TouchableOpacity activeOpacity={opacity8} style={[{ ...style }, btnStyles.container]} onPress={onPress}>
             <Text style={btnStyles.text}>{children}</Text>
         </TouchableOpacity>
     );

@@ -100,5 +100,5 @@ const hideOnUserCategoryView = (route: AnyType): boolean => {
     if (route.state) {
         lastRoute = route.state.routes[route.state.routes.length - 1].name;
     }
-    return lastRoute !== 'UserSettings';
+    return lastRoute !== 'UserSettings' && lastRoute !== 'Article';
 };

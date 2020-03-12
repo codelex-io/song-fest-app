@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Markdown from 'react-native-markdown-display';
-import { View, Text, StyleSheet, ScrollView, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { typography, colors } from '@styles';
 import BackButton from './BackButton';
 import { IconButtons } from './IconButtons';
@@ -9,100 +9,83 @@ import { dateTimeUtils } from '@utils';
 import { Image } from '@components';
 
 interface Props {
-    loading: boolean;
     item: NewsItem;
     onFavourite: (item: NewsItem) => void;
     onShare: (item: NewsItem) => void;
 }
 
-interface State {
-    currentHeight: number;
-    buttonUp: boolean;
-    scrollEnabled: boolean;
-    currentPosition: number;
-}
+const MarkdownEvent: React.FC<Props> = ({ item, onFavourite, onShare }) => {
+    const scroll = useRef<ScrollView>(null);
+    const [scrollEnabled, setScrollEnabled] = useState(true);
+    const [parentHeight, setParentHeight] = useState<number | undefined>(undefined);
+    const [contentHeight, setContentHeight] = useState<number | undefined>(undefined);
 
-export default class MarkdownEvent extends React.PureComponent<Props, State> {
-    scroll = React.createRef<ScrollView>();
+    const [showButtonUp, setShowButtonUp] = useState(false);
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            currentHeight: 0,
-            buttonUp: false,
-            scrollEnabled: false,
-            currentPosition: 0,
-        };
-    }
+    useEffect(() => {
+        if (contentHeight && parentHeight) {
+            if (parentHeight >= contentHeight) {
+                setScrollEnabled(false);
+            }
+        }
+    }, [parentHeight, contentHeight]);
 
-    scrollTo = () => {
-        this.scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
+    const handleOnScroll = (scrollYPosition: number) => {
+        if (scrollYPosition >= 150) {
+            setShowButtonUp(true);
+        } else {
+            setShowButtonUp(false);
+        }
     };
 
-    updateScroll() {
-        if (this.state.currentHeight > 500) {
-            this.setState({ scrollEnabled: true });
-        }
-    }
+    const scrollTop = () => {
+        scroll.current?.scrollTo({ x: 0, y: 0, animated: true });
+    };
 
-    updatePosition(event: NativeSyntheticEvent<NativeScrollEvent>) {
-        this.setState({ currentPosition: event.nativeEvent.contentOffset.y });
-    }
-
-    updateHeight(height: number) {
-        this.setState({ currentHeight: height });
-    }
-
-    componentDidUpdate(prevProps: Props, prevState: State): void {
-        if (prevState.currentHeight !== this.state.currentHeight) {
-            this.updateScroll();
-        }
-
-        if (this.state.currentPosition > 100) {
-            this.setState({ buttonUp: true });
-        } else {
-            this.setState({ buttonUp: false });
-        }
-    }
-
-    render() {
-        const { item, onFavourite, onShare } = this.props;
-        return (
-            <View style={{ backgroundColor: colors.white, flex: 1, justifyContent: 'flex-end', marginBottom: 20 }}>
-                <ScrollView
-                    ref={this.scroll}
-                    style={{ paddingHorizontal: 16 }}
-                    onContentSizeChange={(width, height) => {
-                        this.updateHeight(height);
-                    }}
-                    scrollEnabled={this.state.scrollEnabled}
-                    onScroll={event => {
-                        this.updatePosition(event);
-                    }}
-                >
+    return (
+        <View style={styles.parentContainer}>
+            <ScrollView
+                ref={scroll}
+                onLayout={event => setParentHeight(event.nativeEvent.layout.height)}
+                scrollEnabled={scrollEnabled}
+                onScroll={event => handleOnScroll(event.nativeEvent.contentOffset.y)}
+            >
+                <View style={styles.content} onLayout={event => setContentHeight(event.nativeEvent.layout.height)}>
                     <View style={styles.imageContainer}>
                         <Image height={180} source={{ uri: item.image?.url }} style={styles.image} />
                     </View>
+
                     <View>
                         <Text style={styles.title}>{item.title}</Text>
                     </View>
+
                     <View style={styles.dateContainer}>
                         <Text style={styles.date}>Ievietots {dateTimeUtils.formatDate(item.date)} </Text>
                     </View>
+
                     <View style={styles.row}>
                         <IconButtons onShare={() => onShare(item)} onFavourite={() => onFavourite(item)} />
                     </View>
-                    <View style={{ marginBottom: 64 }}>
+
+                    <View>
                         <Markdown style={markdownstyles}>{item.content}</Markdown>
                     </View>
-                </ScrollView>
-                {this.state.buttonUp ? <BackButton onPress={this.scrollTo} /> : null}
-            </View>
-        );
-    }
-}
+                </View>
+            </ScrollView>
+
+            <BackButton onPress={scrollTop} isVisible={showButtonUp} parentHeight={parentHeight} />
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
+    parentContainer: {
+        flex: 1,
+    },
+    content: {
+        paddingBottom: 76,
+        paddingHorizontal: 16,
+    },
     dateContainer: {
         paddingBottom: 12,
         paddingTop: 8,
@@ -138,3 +121,5 @@ const markdownstyles = StyleSheet.create({
         lineHeight: 18,
     },
 });
+
+export default MarkdownEvent;

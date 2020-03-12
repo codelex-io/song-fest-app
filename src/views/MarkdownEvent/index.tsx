@@ -43,7 +43,6 @@ const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation
             </View>
 
             <MarkdownEvent
-                loading={loading}
                 item={item}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: group })}
                 onShare={item => open(item.link)}
