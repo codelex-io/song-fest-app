@@ -90,7 +90,11 @@ export default class MarkdownEvent extends React.PureComponent<Props, State> {
                         <Text style={styles.date}>Ievietots {dateTimeUtils.formatDate(item.date)} </Text>
                     </View>
                     <View style={styles.row}>
-                        <IconButtons onShare={() => onShare(item)} onFavourite={() => onFavourite(item)} />
+                        <IconButtons
+                            onShare={() => onShare(item)}
+                            isFavourite={item.isFavourite}
+                            onFavourite={() => onFavourite(item)}
+                        />
                     </View>
                     <View style={{ marginBottom: 64 }}>
                         <Markdown style={markdownstyles}>{item.content}</Markdown>
