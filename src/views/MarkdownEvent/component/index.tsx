@@ -45,6 +45,7 @@ const MarkdownEvent: React.FC<Props> = ({ item, onFavourite, onShare }) => {
     return (
         <View style={styles.parentContainer}>
             <ScrollView
+                style={styles.scrollContainer}
                 ref={scroll}
                 onLayout={event => setParentHeight(event.nativeEvent.layout.height)}
                 scrollEnabled={scrollEnabled}
@@ -81,10 +82,14 @@ const MarkdownEvent: React.FC<Props> = ({ item, onFavourite, onShare }) => {
 const styles = StyleSheet.create({
     parentContainer: {
         flex: 1,
+        width: '100%',
+    },
+    scrollContainer: {
+        width: '100%',
     },
     content: {
         paddingBottom: 76,
-        paddingHorizontal: 16,
+        marginHorizontal: 16,
     },
     dateContainer: {
         paddingBottom: 12,
