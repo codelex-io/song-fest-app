@@ -6,6 +6,7 @@ import { colors, opacity } from '@styles';
 interface Props {
     onShare: () => void;
     onFavourite: () => void;
+    isFavourite: boolean;
 }
 
 const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: string }> = ({
@@ -18,13 +19,17 @@ const SingleButton: React.FC<{ onPress: () => void; iconType: IconType; fill: st
     </TouchableOpacity>
 );
 
-export const IconButtons: React.FC<Props> = ({ onShare, onFavourite }) => (
+export const IconButtons: React.FC<Props> = ({ onShare, onFavourite, isFavourite }) => (
     <View style={styles.container}>
         <View style={[styles.otherButtons, { backgroundColor: colors.blue }]}>
             <SingleButton onPress={onShare} iconType={IconType.Share} fill={colors.white} />
         </View>
         <View style={[styles.otherButtons, { backgroundColor: colors.orange }]}>
-            <SingleButton onPress={onFavourite} iconType={IconType.Heart} fill={colors.white} />
+            <SingleButton
+                onPress={onFavourite}
+                iconType={isFavourite ? IconType.Heart : IconType.HeartFilled}
+                fill={colors.white}
+            />
         </View>
     </View>
 );
