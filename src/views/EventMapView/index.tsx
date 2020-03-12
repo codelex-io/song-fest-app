@@ -33,7 +33,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
 
     useEffect(() => {
         refetch();
-    }, [currentSearch.payload]);
+    }, [currentSearch]);
 
     if (loading) {
         return (

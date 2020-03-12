@@ -6,14 +6,26 @@ import { useLanguageSettings } from '../localization/LocalizationContext';
 const Empty = () => {
     const { translations } = useLanguageSettings();
     return (
-        <View style={{ backgroundColor: colors.white }}>
-            <Text style={styles.text}>{translations.getString('NOTHING_FOUND')}</Text>
+        <View style={styles.container}>
+            <View style={styles.contentContainer}>
+                <Text style={styles.text}>{translations.getString('NOTHING_FOUND')}</Text>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingHorizontal: 32,
+    },
+    contentContainer: {
+        height: '33.33%',
+        justifyContent: 'flex-end',
+    },
     text: {
+
+        textAlign: 'center',
         color: colors.darkGrey1A,
         fontFamily: typography.normal,
         fontSize: 16,

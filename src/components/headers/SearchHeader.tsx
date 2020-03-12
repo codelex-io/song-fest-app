@@ -4,20 +4,17 @@ import { TouchableOpacity, ScrollView, TextInput } from 'react-native-gesture-ha
 import { Icon, IconType } from '@components';
 import { colors } from '@styles';
 import { styles } from './styles';
-import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
 export interface SearchInterface {
     payload: string;
     isActive: boolean;
 }
 
-interface Props {
-    navigation: StackNavigationProp<SharedStackParamsList, 'Search'>;
-}
-
-const SearchHeader: React.FC<Props> = ({ navigation }) => {
+const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation }) => {
     const [input, setInput] = useState('');
+
+    const bgColor = route.params ? route.params.color : colors.blue
 
     const handleSubmit = () => {
         setInput('');
@@ -28,7 +25,7 @@ const SearchHeader: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.insetsContainer}>
             <ScrollView keyboardDismissMode="interactive">
-                <View style={[styles.header, { backgroundColor: colors.blue }]}>
+                <View style={[styles.header, { backgroundColor: bgColor }]}>
                     <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
                         <Icon type={IconType.ChevronLeft} fill={colors.white} />
                     </TouchableOpacity>
