@@ -72,7 +72,7 @@ const EventListComponent: React.FC<Props> = ({
                 <ViewsHeaderFilter activeKey={activeKey} onPress={onPress} options={FILTER_OPTIONS} />
             </View>
 
-            {items.length === 0 && searchInput.isActive ? (
+            {items.length === 0 || searchInput.isActive ? (
                 <View style={styles.container}>
                     <Empty />
                 </View>
