@@ -5,15 +5,19 @@ import { FETCH_TARGET_NEWS_ITEM, FETCH_TARGET_EVENTS_ITEM } from './graphql/quer
 import { Data, NewsItem as GraphQLNewsItem, Variables } from './graphql/types';
 import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
-import { Favourite } from '@domain/favourites/types';
+import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
 import { open } from '@domain/share';
 import { Loading, SimpleHeader } from '@components';
 import { View, StatusBar, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 
-const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
-    return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
+const toItem = (
+    item: GraphQLNewsItem,
+    isFavourite: (fav: Favourite) => boolean,
+    group: FavouriteGroupKey,
+): NewsItem => {
+    return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: group }) };
 };
 
 const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
@@ -33,7 +37,7 @@ const SingleView: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation
         );
     }
 
-    const item = toItem(data.item, isFavourite);
+    const item = toItem(data.item, isFavourite, group);
 
     return (
         <View style={styles.container}>

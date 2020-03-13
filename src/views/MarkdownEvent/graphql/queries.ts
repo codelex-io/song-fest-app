@@ -23,6 +23,7 @@ export const FETCH_TARGET_EVENTS_ITEM = gql`
             image {
                 url
             }
+            link
         }
     }
 `;

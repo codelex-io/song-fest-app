@@ -30,7 +30,7 @@ export const LongSearch: React.FC<LongSearchProps> = ({
                 <Icon size={20} type={IconType.Search} fill={colors.white} />
             </View>
             <View style={styles.textContainer}>
-                <Text style={styles.text}>
+                <Text numberOfLines={1} style={styles.text}>
                     {searchInput
                         ? `${translations.getString('RESULTS')}: ${searchInput}`
                         : `${translations.getString('SEARCH')}`}
@@ -42,7 +42,9 @@ export const LongSearch: React.FC<LongSearchProps> = ({
                     onPress={onResetSearch}
                     activeOpacity={opacity.opacity8}
                 >
-                    <Text style={styles.x}>+</Text>
+                    <Text numberOfLines={1} style={styles.x}>
+                        +
+                    </Text>
                 </TouchableOpacity>
             ) : (
                 <View style={styles.resetSearchBtn}></View>

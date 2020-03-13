@@ -7,9 +7,7 @@ const Empty = () => {
     const { translations } = useLanguageSettings();
     return (
         <View style={styles.container}>
-            <View style={styles.contentContainer}>
-                <Text style={styles.text}>{translations.getString('NOTHING_FOUND')}</Text>
-            </View>
+            <Text style={styles.text}>{translations.getString('NOTHING_FOUND')}</Text>
         </View>
     );
 };
@@ -18,10 +16,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 32,
-    },
-    contentContainer: {
-        height: '33.33%',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
     },
     text: {
         textAlign: 'center',
