@@ -73,9 +73,11 @@ const MarkdownEvent: React.FC<Props> = ({ item, onFavourite, onShare }) => {
                         />
                     </View>
 
-                    <View>
-                        <Markdown style={markdownstyles}>{item.content}</Markdown>
-                    </View>
+                    {item.content && (
+                        <View>
+                            <Markdown style={markdownstyles}>{item.content}</Markdown>
+                        </View>
+                    )}
                 </View>
             </ScrollView>
 
