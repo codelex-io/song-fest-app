@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>52</string>
+	<string>55</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -41,6 +41,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>There is a map with current events around you, location is needed to show you the nearest events.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used for notifying about events around you and in case of emergency.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DINPro-Black.ttf</string>
@@ -70,6 +72,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>UIUserInterfaceStyle</key>
-    <string>Light</string>
+	<string>Light</string>
 </dict>
 </plist>
