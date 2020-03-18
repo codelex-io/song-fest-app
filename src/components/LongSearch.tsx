@@ -37,18 +37,13 @@ export const LongSearch: React.FC<LongSearchProps> = ({
                 </Text>
             </View>
             {searchInput ? (
-                <TouchableOpacity
-                    style={styles.resetSearchBtn}
-                    onPress={onResetSearch}
-                    activeOpacity={opacity.opacity8}
-                >
-                    <Text numberOfLines={1} style={styles.x}>
-                        +
-                    </Text>
+
+                <TouchableOpacity onPress={onResetSearch}>
+                    <Icon type={IconType.Close} fill={colors.white} />
                 </TouchableOpacity>
             ) : (
-                <View style={styles.resetSearchBtn}></View>
-            )}
+                    <View style={styles.resetSearchBtn}></View>
+                )}
         </TouchableOpacity>
     );
 };
@@ -87,9 +82,5 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         transform: [{ rotate: '45deg' }],
     },
-    x: {
-        fontSize: 24,
-        textAlign: 'center',
-        color: colors.white,
-    },
+
 });

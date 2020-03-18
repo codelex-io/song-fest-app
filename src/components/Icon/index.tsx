@@ -36,6 +36,7 @@ export enum IconType {
     Filter = 'Filter',
     Face = 'Face',
     Start = 'Star',
+    Close = 'Close',
 }
 
 interface IconProps {

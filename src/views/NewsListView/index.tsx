@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
 import { FETCH_NEWS_ITEMS, FETCH_NEWS_ALL_ITEMS } from './graphql/queries';
@@ -6,7 +7,6 @@ import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
-import { View, StyleSheet } from 'react-native';
 import { open } from '@domain/share';
 import { FilterButtons, Loading, Header } from '@components';
 import { colors } from '@styles';
@@ -47,6 +47,14 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
     const { toggleFavourite, isFavourite } = useFavourites();
     const { translations } = useContext(LocalizationContext);
 
+    const width = Dimensions.get("screen").width
+    const height = Dimensions.get("screen").height
+    const windowWidth = Dimensions.get('window').width
+    const windowHeight = Dimensions.get('window').height
+
+    console.log('SCREEN - width', width, 'height', height)
+    console.log('WINDOW - windowWidth', windowWidth, 'winHeight', windowHeight)
+
     return (
         <View style={styles.container}>
             <View>
@@ -64,16 +72,16 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
                     <Loading />
                 </View>
             ) : (
-                <NewsListViewComponent
-                    loading={loading}
-                    items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
-                    onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
-                    onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
-                    onShare={item => open(item.link)}
-                    onRefresh={() => refetch()}
-                    refreshing={() => !loading}
-                />
-            )}
+                    <NewsListViewComponent
+                        loading={loading}
+                        items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                        onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
+                        onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
+                        onShare={item => open(item.link)}
+                        onRefresh={() => refetch()}
+                        refreshing={() => !loading}
+                    />
+                )}
         </View>
     );
 };
