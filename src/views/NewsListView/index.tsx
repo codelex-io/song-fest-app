@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View } from 'react-native';
-import Animated from 'react-native-reanimated'
+import Animated from 'react-native-reanimated';
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
 import { FETCH_NEWS_ITEMS, FETCH_NEWS_ALL_ITEMS } from './graphql/queries';
@@ -47,7 +47,7 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
     const { toggleFavourite, isFavourite } = useFavourites();
     const { translations } = useContext(LocalizationContext);
 
-    const animatedScrollOffset = new Animated.Value(0)
+    const animatedScrollOffset = new Animated.Value(0);
 
     return (
         <FeedLayout
@@ -75,6 +75,6 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
                 refreshing={() => !loading}
                 animatedScrollOffset={animatedScrollOffset}
             />
-        </FeedLayout >
+        </FeedLayout>
     );
 };
