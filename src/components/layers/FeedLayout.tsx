@@ -1,78 +1,83 @@
-import React, { ReactNode, useState } from 'react';
-import { StyleSheet, StatusBar, LayoutChangeEvent } from 'react-native';
+import React, { ReactNode, useState, useEffect } from 'react';
+import { StyleSheet, StatusBar, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Loading } from '@components';
+import { colors } from '@styles';
 
 interface FeedLayerProps {
-   header: ReactNode;
-   children: ReactNode | ReactNode[];
-   animatedScrollOffset: Animated.Value<0>;
-   loading: boolean;
+    header: ReactNode;
+    children: ReactNode | ReactNode[];
+    animatedScrollOffset: Animated.Value<0>;
+    loading: boolean;
+    headerHeightMeasure: number | undefined;
 }
 
-const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, animatedScrollOffset, loading }) => {
-   const [headerHeight, setHeaderHeight] = useState<number | undefined>(undefined);
+const FeedLayout: React.FC<FeedLayerProps> = ({
+    header,
+    children,
+    animatedScrollOffset,
+    loading,
+    headerHeightMeasure,
+}) => {
+    const [headerHeight, setHeaderHeight] = useState<number>(126);
 
-   const diffClampScrollY = Animated.diffClamp(animatedScrollOffset, 0, headerHeight ? headerHeight : 126);
+    useEffect(() => {
+        if (headerHeightMeasure) {
+            setHeaderHeight(headerHeightMeasure);
+        }
+    }, [headerHeightMeasure]);
 
-   const headerInterpolation = Animated.interpolate(diffClampScrollY, {
-      inputRange: [0, headerHeight ? headerHeight : 126],
-      outputRange: [0, headerHeight ? -headerHeight : -126],
-   });
+    const diffClampScrollY = Animated.diffClamp(animatedScrollOffset, 0, headerHeight);
 
-   const contentInterpolation = Animated.interpolate(diffClampScrollY, {
-      inputRange: [0, headerHeight ? headerHeight : 126],
-      outputRange: [headerHeight ? headerHeight : 126, 0],
-   });
+    const headerInterpolation = Animated.interpolate(diffClampScrollY, {
+        inputRange: [0, headerHeight],
+        outputRange: [0, -headerHeight],
+    });
 
-   const animatedHeaderStyles = {
-      transform: [{ translateY: headerInterpolation }],
-   };
+    const opacityInterpolation = Animated.interpolate(diffClampScrollY, {
+        inputRange: [0, headerHeight],
+        outputRange: [1, 0.5],
+    });
 
-   const animatedContentStyles = {
-      transform: [{ translateY: contentInterpolation }],
-   };
+    const animatedHeaderStyles = {
+        transform: [{ translateY: headerInterpolation }],
+        opacity: opacityInterpolation,
+    };
 
-   const measureHeader = (event: LayoutChangeEvent) => {
-      const { height } = event.nativeEvent.layout;
-      setHeaderHeight(height);
-   };
+    return (
+        <View style={styles.container}>
+            <StatusBar />
 
-   return (
-      <Animated.View style={[styles.container]}>
-         <StatusBar />
-
-         <Animated.View onLayout={event => measureHeader(event)} style={[styles.header, animatedHeaderStyles]}>
-            {header}
-         </Animated.View>
-
-         {loading ? (
-            <Loading />
-         ) : (
-               <Animated.View style={[styles.content, animatedContentStyles]}>{children}</Animated.View>
+            {loading ? (
+                <View style={[styles.content, { paddingTop: headerHeight }]}>
+                    <Loading />
+                </View>
+            ) : (
+                <View style={styles.content}>{children}</View>
             )}
-      </Animated.View>
-   );
+
+            <Animated.View style={[styles.header, animatedHeaderStyles]}>{header}</Animated.View>
+        </View>
+    );
 };
 
 export default FeedLayout;
 
 const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      overflow: 'hidden',
-   },
-   header: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 1,
-      backgroundColor: '#fff',
-   },
-   content: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-   },
+    container: {
+        flex: 1,
+    },
+    header: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1,
+        backgroundColor: colors.white,
+    },
+    content: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });

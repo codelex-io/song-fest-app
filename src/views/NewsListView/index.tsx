@@ -48,11 +48,12 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
     const { translations } = useContext(LocalizationContext);
 
     const animatedScrollOffset = new Animated.Value(0);
+    const [headerHeightMeasure, setHeaderHeightMeasure] = useState<number | undefined>(undefined);
 
     return (
         <FeedLayout
             header={
-                <View>
+                <View onLayout={event => setHeaderHeightMeasure(event.nativeEvent.layout.height)}>
                     <Header title={translations.getString('NEWS')} navigation={navigation} />
                     <FilterButtons
                         firstTitle={translations.getString('CURRENT')}
@@ -64,6 +65,7 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
             }
             animatedScrollOffset={animatedScrollOffset}
             loading={loading || !data}
+            headerHeightMeasure={headerHeightMeasure}
         >
             <NewsListViewComponent
                 loading={loading}
@@ -74,6 +76,7 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
                 onRefresh={() => refetch()}
                 refreshing={() => !loading}
                 animatedScrollOffset={animatedScrollOffset}
+                headerHeightMeasure={headerHeightMeasure}
             />
         </FeedLayout>
     );
