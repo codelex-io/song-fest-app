@@ -47,7 +47,7 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
     const { toggleFavourite, isFavourite } = useFavourites();
     const { translations } = useContext(LocalizationContext);
 
-    const animatedScrollOffset = new Animated.Value(0);
+    const [animatedScrollOffset] = useState(new Animated.Value(0));
     const [headerHeightMeasure, setHeaderHeightMeasure] = useState<number | undefined>(undefined);
 
     return (
