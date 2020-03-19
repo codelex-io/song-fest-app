@@ -1,8 +1,11 @@
 import React from 'react';
 import { NewsItem } from '../types';
 import { FlatList, RefreshControl } from 'react-native';
+import Animated from 'react-native-reanimated'
 import { colors } from '@styles';
 import Card from './Card';
+
+const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList)
 
 interface Props {
     loading: boolean;
@@ -12,12 +15,29 @@ interface Props {
     onShare: (item: NewsItem) => void;
     onRefresh: () => void;
     refreshing: () => boolean;
+    animatedScrollOffset: Animated.Value<0>;
 }
 
-const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare, loading, onRefresh }) => {
-    return (
-        <FlatList<NewsItem>
-            style={{ backgroundColor: colors.white }}
+const NewsListView: React.FC<Props> = ({ items,
+    onNavigate,
+    onFavourite,
+    onShare,
+    loading,
+    onRefresh,
+    animatedScrollOffset
+}) => (
+        <AnimatedFlatlist<NewsItem>
+            scrollEventThrottle={16}
+            onScroll={Animated.event(
+                [{
+                    nativeEvent: {
+                        contentOffset: {
+                            y: animatedScrollOffset
+                        }
+                    }
+                }],
+                { useNativeDriver: true }
+            )}
             refreshControl={
                 <RefreshControl
                     onRefresh={onRefresh}
@@ -38,6 +58,5 @@ const NewsListView: React.FC<Props> = ({ items, onNavigate, onFavourite, onShare
             )}
         />
     );
-};
 
 export default NewsListView;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import Animated from 'react-native-reanimated'
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
 import { FETCH_NEWS_ITEMS, FETCH_NEWS_ALL_ITEMS } from './graphql/queries';
@@ -8,11 +9,10 @@ import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';
 import { open } from '@domain/share';
-import { FilterButtons, Loading, Header } from '@components';
-import { colors } from '@styles';
+import { FilterButtons, Header } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
-import StatusBar from '@components/headers/StatusBar';
+import FeedLayout from '@components/layers/FeedLayout';
 
 const toItem = (item: GraphQLNewsItem, isFavourite: (fav: Favourite) => boolean): NewsItem => {
     return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: 'NEWS' }) };
@@ -47,40 +47,34 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
     const { toggleFavourite, isFavourite } = useFavourites();
     const { translations } = useContext(LocalizationContext);
 
+    const animatedScrollOffset = new Animated.Value(0)
+
     return (
-        <View style={styles.container}>
-            <View>
-                <StatusBar />
-                <Header title={translations.getString('NEWS')} navigation={navigation} />
-                <FilterButtons
-                    firstTitle={translations.getString('CURRENT')}
-                    secondTitle={translations.getString('ALL')}
-                    currentActive={isFirstActive}
-                    triggerToggle={handleCurrentFilter}
-                />
-            </View>
-            {loading || !data ? (
-                <View style={{ flex: 1, justifyContent: 'center', backgroundColor: colors.white }}>
-                    <Loading />
+        <FeedLayout
+            header={
+                <View>
+                    <Header title={translations.getString('NEWS')} navigation={navigation} />
+                    <FilterButtons
+                        firstTitle={translations.getString('CURRENT')}
+                        secondTitle={translations.getString('ALL')}
+                        currentActive={isFirstActive}
+                        triggerToggle={handleCurrentFilter}
+                    />
                 </View>
-            ) : (
-                <NewsListViewComponent
-                    loading={loading}
-                    items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
-                    onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
-                    onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
-                    onShare={item => open(item.link)}
-                    onRefresh={() => refetch()}
-                    refreshing={() => !loading}
-                />
-            )}
-        </View>
+            }
+            animatedScrollOffset={animatedScrollOffset}
+            loading={loading || !data}
+        >
+            <NewsListViewComponent
+                loading={loading}
+                items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
+                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
+                onShare={item => open(item.link)}
+                onRefresh={() => refetch()}
+                refreshing={() => !loading}
+                animatedScrollOffset={animatedScrollOffset}
+            />
+        </FeedLayout >
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.white,
-        flex: 1,
-    },
-});
