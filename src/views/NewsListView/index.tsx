@@ -42,6 +42,7 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
 
     useEffect(() => {
         refetch();
+        resetHeader();
     }, [isFirstActive]);
 
     const { toggleFavourite, isFavourite } = useFavourites();
@@ -49,6 +50,9 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
 
     const [animatedScrollOffset] = useState(new Animated.Value(0));
     const [headerHeightMeasure, setHeaderHeightMeasure] = useState<number | undefined>(undefined);
+    const resetHeader = () => {
+        animatedScrollOffset.setValue(0);
+    };
 
     return (
         <FeedLayout
@@ -73,7 +77,10 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
                 onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
                 onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
                 onShare={item => open(item.link)}
-                onRefresh={() => refetch()}
+                onRefresh={() => {
+                    refetch();
+                    resetHeader();
+                }}
                 refreshing={() => !loading}
                 animatedScrollOffset={animatedScrollOffset}
                 headerHeightMeasure={headerHeightMeasure}
