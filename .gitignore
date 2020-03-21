@@ -1,10 +1,11 @@
+build/
+
 # OSX
 #
 .DS_Store
 
 # Xcode
 #
-build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -24,7 +25,6 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
 .idea
 .gradle
 local.properties
@@ -33,6 +33,7 @@ gen/
 *.android.bundle
 .project
 .classpath
+**/res/**/node_modules_*
 
 # Visual Studio Code
 #
