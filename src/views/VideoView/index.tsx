@@ -36,7 +36,7 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
     }, []);
     return (
         <FeedLayout
-            header={
+            header={() => (
                 <View onLayout={event => setHeaderHeightMeasure(event.nativeEvent.layout.height)}>
                     <Header title={translations.getString('VIDEO')} navigation={navigation} />
                     <LongSearch
@@ -51,14 +51,14 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
                         options={FILTER_OPTIONS}
                     />
                 </View>
-            }
+            )}
             loading={loading}
-            animatedScrollOffset={animatedScrollOffset}
-            headerHeightMeasure={headerHeightMeasure}
         >
-            <View style={[styles.contentContainer, { paddingTop: headerHeightMeasure }]}>
-                <Empty />
-            </View>
+            {() => (
+                <View style={[styles.contentContainer, { paddingTop: headerHeightMeasure }]}>
+                    <Empty />
+                </View>
+            )}
         </FeedLayout>
     );
 };

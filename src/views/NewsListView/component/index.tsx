@@ -4,6 +4,7 @@ import { FlatList, RefreshControl } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { colors } from '@styles';
 import Card from './Card';
+import { StyleType } from '@domain/AnyType';
 
 const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
 
@@ -15,7 +16,7 @@ interface Props {
     onShare: (item: NewsItem) => void;
     onRefresh: () => void;
     refreshing: () => boolean;
-    animatedScrollOffset: Animated.Value<0>;
+    animatedScrollOffset: Animated.Value<number>;
     headerHeightMeasure: number | undefined;
 }
 
@@ -39,7 +40,7 @@ const NewsListView: React.FC<Props> = ({
 
     return (
         <AnimatedFlatlist<NewsItem>
-            style={{ paddingTop: headerHeight }}
+            style={{ paddingTop: headerHeight, paddingBottom: 50 }}
             alwaysBounce={false}
             alwaysBounceVertical={false}
             bounces={false}
@@ -66,15 +67,23 @@ const NewsListView: React.FC<Props> = ({
                 />
             }
             data={items}
-            renderItem={({ item, index }: { item: NewsItem; index: number }): React.ReactElement => (
-                <Card
-                    item={item}
-                    backgroundColor={colors.findColorByIndex(index)}
-                    onNavigate={() => onNavigate(item)}
-                    onFavourite={() => onFavourite(item)}
-                    onShare={() => onShare(item)}
-                />
-            )}
+            renderItem={({ item, index }: { item: NewsItem; index: number }): React.ReactElement => {
+                let lastCardAddedPadding: StyleType | undefined = undefined;
+                if (index === items.length - 1) {
+                    lastCardAddedPadding = { paddingBottom: headerHeight };
+                }
+
+                return (
+                    <Card
+                        item={item}
+                        backgroundColor={colors.findColorByIndex(index)}
+                        onNavigate={() => onNavigate(item)}
+                        onFavourite={() => onFavourite(item)}
+                        onShare={() => onShare(item)}
+                        propStyles={lastCardAddedPadding}
+                    />
+                );
+            }}
         />
     );
 };

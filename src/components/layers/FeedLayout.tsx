@@ -1,31 +1,26 @@
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, StatusBar, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Loading } from '@components';
 import { colors } from '@styles';
 
 interface FeedLayerProps {
-    header: ReactNode;
-    children: ReactNode | ReactNode[];
-    animatedScrollOffset: Animated.Value<0>;
+    header: (resetHeader: () => void) => JSX.Element | null;
+    children: (
+        resetHeader: () => void,
+        headerHeight: number,
+        animatedScrollOffset: Animated.Value<number>,
+    ) => JSX.Element | null;
     loading: boolean;
-    headerHeightMeasure: number | undefined;
 }
 
-const FeedLayout: React.FC<FeedLayerProps> = ({
-    header,
-    children,
-    animatedScrollOffset,
-    loading,
-    headerHeightMeasure,
-}) => {
-    const [headerHeight, setHeaderHeight] = useState<number>(126);
+const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading }) => {
+    const [headerHeight, setHeaderHeight] = useState<number>(0);
+    const [animatedScrollOffset] = useState(new Animated.Value(0));
 
-    useEffect(() => {
-        if (headerHeightMeasure) {
-            setHeaderHeight(headerHeightMeasure);
-        }
-    }, [headerHeightMeasure]);
+    const resetHeader = () => {
+        animatedScrollOffset.setValue(0);
+    };
 
     const diffClampScrollY = Animated.diffClamp(animatedScrollOffset, 0, headerHeight);
 
@@ -34,14 +29,8 @@ const FeedLayout: React.FC<FeedLayerProps> = ({
         outputRange: [0, -headerHeight],
     });
 
-    const opacityInterpolation = Animated.interpolate(diffClampScrollY, {
-        inputRange: [0, headerHeight],
-        outputRange: [1, 0.5],
-    });
-
     const animatedHeaderStyles = {
         transform: [{ translateY: headerInterpolation }],
-        opacity: opacityInterpolation,
     };
 
     return (
@@ -53,10 +42,15 @@ const FeedLayout: React.FC<FeedLayerProps> = ({
                     <Loading />
                 </View>
             ) : (
-                <View style={styles.content}>{children}</View>
+                <View style={styles.content}>{children(resetHeader, headerHeight, animatedScrollOffset)}</View>
             )}
 
-            <Animated.View style={[styles.header, animatedHeaderStyles]}>{header}</Animated.View>
+            <Animated.View
+                onLayout={event => setHeaderHeight(event.nativeEvent.layout.height)}
+                style={[styles.header, animatedHeaderStyles]}
+            >
+                {header(resetHeader)}
+            </Animated.View>
         </View>
     );
 };

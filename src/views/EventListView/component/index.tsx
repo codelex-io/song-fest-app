@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { FlatList, View, StyleSheet, RefreshControl } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { colors } from '@styles';
@@ -12,6 +12,7 @@ import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { SearchInterface } from '@components/headers/SearchHeader';
 import FeedLayout from '@components/layers/FeedLayout';
+import { StyleType } from '@domain/AnyType';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
     { key: 'today', title: 'TODAY' },
@@ -58,77 +59,88 @@ const EventListComponent: React.FC<Props> = ({
     navigation,
 }) => {
     const { translations } = useContext(LocalizationContext);
-
-    const [animatedScrollOffset] = useState(new Animated.Value(0));
-    const [headerHeightMeasure, setHeaderHeightMeasure] = useState<number>(182.09524536132812);
-
-    useEffect(() => {
-        animatedScrollOffset.setValue(0);
-    }, []);
-
     return (
         <FeedLayout
-            header={
-                <View onLayout={event => setHeaderHeightMeasure(event.nativeEvent.layout.height)}>
+            header={resetHeader => (
+                <View>
                     <Header title={translations.getString('EVENTS')} navigation={navigation} />
                     <LongSearch
                         backgroundColor={colors.blue}
-                        onPress={() => onSearch(colors.blue)}
+                        onPress={() => {
+                            onSearch(colors.blue);
+                            resetHeader();
+                        }}
                         searchInput={searchInput.payload}
-                        onResetSearch={() => onResetSearch()}
+                        onResetSearch={onResetSearch}
                         customStyles={styles.longSearch}
                     />
-                    <ViewsHeaderFilter activeKey={activeKey} onPress={onPress} options={FILTER_OPTIONS} />
+                    <ViewsHeaderFilter
+                        activeKey={activeKey}
+                        onPress={key => {
+                            onPress(key);
+                            resetHeader();
+                        }}
+                        options={FILTER_OPTIONS}
+                    />
                 </View>
-            }
+            )}
             loading={loading}
-            animatedScrollOffset={animatedScrollOffset}
-            headerHeightMeasure={headerHeightMeasure}
         >
-            {items.length === 0 && searchInput.isActive ? (
-                <View style={[styles.container, { paddingTop: headerHeightMeasure }]}>
-                    <Empty />
-                </View>
-            ) : (
-                <AnimatedFlatlist<EventItem>
-                    style={{ paddingTop: headerHeightMeasure }}
-                    alwaysBounce={false}
-                    alwaysBounceVertical={false}
-                    bounces={false}
-                    scrollEventThrottle={16}
-                    onScroll={Animated.event(
-                        [
-                            {
-                                nativeEvent: {
-                                    contentOffset: {
-                                        y: animatedScrollOffset,
+            {(_resetHeader, headerHeight, animatedScrollOffset) => (
+                <>
+                    {items.length === 0 && searchInput.isActive ? (
+                        <View style={[styles.container, { paddingTop: headerHeight }]}>
+                            <Empty />
+                        </View>
+                    ) : (
+                        <AnimatedFlatlist<EventItem>
+                            style={{ paddingTop: headerHeight }}
+                            alwaysBounce={false}
+                            alwaysBounceVertical={false}
+                            bounces={false}
+                            scrollEventThrottle={16}
+                            onScroll={Animated.event(
+                                [
+                                    {
+                                        nativeEvent: {
+                                            contentOffset: {
+                                                y: animatedScrollOffset,
+                                            },
+                                        },
                                     },
-                                },
-                            },
-                        ],
-                        { useNativeDriver: true },
-                    )}
-                    refreshControl={
-                        <RefreshControl
-                            onRefresh={onRefresh}
-                            refreshing={loading}
-                            colors={[colors.randomColor()]}
-                            tintColor={colors.randomColor()}
-                            progressViewOffset={headerHeightMeasure}
+                                ],
+                                { useNativeDriver: true },
+                            )}
+                            refreshControl={
+                                <RefreshControl
+                                    onRefresh={onRefresh}
+                                    refreshing={loading}
+                                    colors={[colors.randomColor()]}
+                                    tintColor={colors.randomColor()}
+                                    progressViewOffset={headerHeight}
+                                />
+                            }
+                            data={items}
+                            renderItem={({ item, index }: { item: EventItem; index: number }): React.ReactElement => {
+                                let lastCardAddedPadding: StyleType | undefined = undefined;
+                                if (index === items.length - 1) {
+                                    lastCardAddedPadding = { paddingBottom: headerHeight };
+                                }
+                                return (
+                                    <Card
+                                        item={item}
+                                        backgroundColor={colors.findColorByIndex(index)}
+                                        onFavourite={() => onFavourite(item)}
+                                        onNavigate={() => onNavigate(item)}
+                                        onReadMore={() => onReadMore(item)}
+                                        onShare={() => onShare(item)}
+                                        propStyles={lastCardAddedPadding}
+                                    />
+                                );
+                            }}
                         />
-                    }
-                    data={items}
-                    renderItem={({ item, index }: { item: EventItem; index: number }): React.ReactElement => (
-                        <Card
-                            item={item}
-                            backgroundColor={colors.findColorByIndex(index)}
-                            onFavourite={() => onFavourite(item)}
-                            onNavigate={() => onNavigate(item)}
-                            onReadMore={() => onReadMore(item)}
-                            onShare={() => onShare(item)}
-                        />
                     )}
-                />
+                </>
             )}
         </FeedLayout>
     );

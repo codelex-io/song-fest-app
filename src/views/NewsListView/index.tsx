@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View } from 'react-native';
-import Animated from 'react-native-reanimated';
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
 import { FETCH_NEWS_ITEMS, FETCH_NEWS_ALL_ITEMS } from './graphql/queries';
@@ -42,49 +41,45 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ naviga
 
     useEffect(() => {
         refetch();
-        resetHeader();
     }, [isFirstActive]);
 
     const { toggleFavourite, isFavourite } = useFavourites();
     const { translations } = useContext(LocalizationContext);
 
-    const [animatedScrollOffset] = useState(new Animated.Value(0));
-    const [headerHeightMeasure, setHeaderHeightMeasure] = useState<number | undefined>(undefined);
-    const resetHeader = () => {
-        animatedScrollOffset.setValue(0);
-    };
-
     return (
         <FeedLayout
-            header={
-                <View onLayout={event => setHeaderHeightMeasure(event.nativeEvent.layout.height)}>
+            header={resetHeader => (
+                <View>
                     <Header title={translations.getString('NEWS')} navigation={navigation} />
                     <FilterButtons
                         firstTitle={translations.getString('CURRENT')}
                         secondTitle={translations.getString('ALL')}
                         currentActive={isFirstActive}
-                        triggerToggle={handleCurrentFilter}
+                        triggerToggle={(choice: boolean) => {
+                            handleCurrentFilter(choice);
+                            resetHeader();
+                        }}
                     />
                 </View>
-            }
-            animatedScrollOffset={animatedScrollOffset}
+            )}
             loading={loading || !data}
-            headerHeightMeasure={headerHeightMeasure}
         >
-            <NewsListViewComponent
-                loading={loading}
-                items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
-                onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
-                onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
-                onShare={item => open(item.link)}
-                onRefresh={() => {
-                    refetch();
-                    resetHeader();
-                }}
-                refreshing={() => !loading}
-                animatedScrollOffset={animatedScrollOffset}
-                headerHeightMeasure={headerHeightMeasure}
-            />
+            {(resetHeader, headerHeight, animatedScrollOffset) => (
+                <NewsListViewComponent
+                    loading={loading}
+                    items={loading || !data ? [] : data.items.map(it => toItem(it, isFavourite))}
+                    onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
+                    onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
+                    onShare={item => open(item.link)}
+                    onRefresh={() => {
+                        refetch();
+                        resetHeader();
+                    }}
+                    refreshing={() => !loading}
+                    animatedScrollOffset={animatedScrollOffset}
+                    headerHeightMeasure={headerHeight}
+                />
+            )}
         </FeedLayout>
     );
 };
