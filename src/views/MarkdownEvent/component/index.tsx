@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
 
 const markdownstyles = StyleSheet.create({
     text: {
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
         fontSize: 16,
         lineHeight: 18,
     },

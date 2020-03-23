@@ -82,7 +82,7 @@ export const userSettingStyles = StyleSheet.create({
     },
     cardExtraText: {
         color: colors.darkGrey1A,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
         fontSize: 14,
         lineHeight: 18,
         letterSpacing: 0.25,

@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 18,
         color: colors.white,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
     },
 });
