@@ -6,6 +6,7 @@ import { colors, typography, opacity } from '@styles';
 import { IconButtons } from './IconButtons';
 import { EventItem } from '../types';
 import { dateTimeUtils } from '@utils';
+import { StyleType } from '@domain/AnyType';
 import CardTitle from '@components/typography/CardTitle';
 
 interface CardProps {
@@ -15,11 +16,20 @@ interface CardProps {
     onNavigate: () => void;
     onReadMore: () => void;
     onShare: () => void;
+    propStyles: StyleType | undefined;
 }
 
-export const Card: React.FC<CardProps> = ({ item, backgroundColor, onFavourite, onNavigate, onReadMore, onShare }) => {
+export const Card: React.FC<CardProps> = ({
+    propStyles,
+    item,
+    backgroundColor,
+    onFavourite,
+    onNavigate,
+    onReadMore,
+    onShare,
+}) => {
     return (
-        <View style={{ paddingHorizontal: 16 }}>
+        <View style={[{ paddingHorizontal: 16 }, propStyles]}>
             <TouchableOpacity style={styles.container} onPress={onReadMore} activeOpacity={opacity.opacity8}>
                 {item.image && item.image.url && (
                     <View>
