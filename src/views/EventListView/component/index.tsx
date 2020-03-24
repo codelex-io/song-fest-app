@@ -93,53 +93,53 @@ const EventListComponent: React.FC<Props> = ({
                             <Empty />
                         </View>
                     ) : (
-                            <AnimatedFlatlist<EventItem>
-                                style={{ paddingTop: headerHeight }}
-                                alwaysBounce={false}
-                                alwaysBounceVertical={false}
-                                bounces={false}
-                                scrollEventThrottle={16}
-                                onScroll={Animated.event(
-                                    [
-                                        {
-                                            nativeEvent: {
-                                                contentOffset: {
-                                                    y: animatedScrollOffset,
-                                                },
+                        <AnimatedFlatlist<EventItem>
+                            style={{ paddingTop: headerHeight }}
+                            alwaysBounce={false}
+                            alwaysBounceVertical={false}
+                            bounces={false}
+                            scrollEventThrottle={16}
+                            onScroll={Animated.event(
+                                [
+                                    {
+                                        nativeEvent: {
+                                            contentOffset: {
+                                                y: animatedScrollOffset,
                                             },
                                         },
-                                    ],
-                                    { useNativeDriver: true },
-                                )}
-                                refreshControl={
-                                    <RefreshControl
-                                        onRefresh={onRefresh}
-                                        refreshing={loading}
-                                        colors={[colors.randomColor()]}
-                                        tintColor={colors.randomColor()}
-                                        progressViewOffset={headerHeight}
-                                    />
+                                    },
+                                ],
+                                { useNativeDriver: true },
+                            )}
+                            refreshControl={
+                                <RefreshControl
+                                    onRefresh={onRefresh}
+                                    refreshing={loading}
+                                    colors={[colors.randomColor()]}
+                                    tintColor={colors.randomColor()}
+                                    progressViewOffset={headerHeight}
+                                />
+                            }
+                            data={items}
+                            renderItem={({ item, index }: { item: EventItem; index: number }): React.ReactElement => {
+                                let lastCardAddedPadding: StyleType | undefined = undefined;
+                                if (index === items.length - 1) {
+                                    lastCardAddedPadding = { paddingBottom: headerHeight };
                                 }
-                                data={items}
-                                renderItem={({ item, index }: { item: EventItem; index: number }): React.ReactElement => {
-                                    let lastCardAddedPadding: StyleType | undefined = undefined;
-                                    if (index === items.length - 1) {
-                                        lastCardAddedPadding = { paddingBottom: headerHeight };
-                                    }
-                                    return (
-                                        <Card
-                                            item={item}
-                                            backgroundColor={colors.findColorByIndex(index)}
-                                            onFavourite={() => onFavourite(item)}
-                                            onNavigate={() => onNavigate(item)}
-                                            onReadMore={() => onReadMore(item)}
-                                            onShare={() => onShare(item)}
-                                            propStyles={lastCardAddedPadding}
-                                        />
-                                    );
-                                }}
-                            />
-                        )}
+                                return (
+                                    <Card
+                                        item={item}
+                                        backgroundColor={colors.findColorByIndex(index)}
+                                        onFavourite={() => onFavourite(item)}
+                                        onNavigate={() => onNavigate(item)}
+                                        onReadMore={() => onReadMore(item)}
+                                        onShare={() => onShare(item)}
+                                        propStyles={lastCardAddedPadding}
+                                    />
+                                );
+                            }}
+                        />
+                    )}
                 </>
             )}
         </FeedLayout>
