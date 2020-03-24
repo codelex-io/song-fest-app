@@ -13,5 +13,6 @@ export interface NewsItem {
 }
 
 export interface Variables {
+    searchBy: string;
     first: number;
 }

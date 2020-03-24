@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, StatusBar, View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { Loading } from '@components';
+import { Loading, Empty } from '@components';
 import { colors } from '@styles';
 
 interface FeedLayerProps {
@@ -12,9 +12,10 @@ interface FeedLayerProps {
         animatedScrollOffset: Animated.Value<number>,
     ) => JSX.Element | null;
     loading: boolean;
+    empty?: boolean;
 }
 
-const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading }) => {
+const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, empty }) => {
     const [headerHeight, setHeaderHeight] = useState<number>(0);
     const [animatedScrollOffset] = useState(new Animated.Value(0));
 
@@ -33,17 +34,28 @@ const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading }) => 
         transform: [{ translateY: headerInterpolation }],
     };
 
+    let viewState = <View style={styles.content}>{children(resetHeader, headerHeight, animatedScrollOffset)}</View>;
+
+    if (loading) {
+        viewState = (
+            <View style={[styles.content, { paddingTop: headerHeight }]}>
+                <Loading />
+            </View>
+        );
+    }
+    if (!loading && empty) {
+        viewState = (
+            <View style={[styles.content, { paddingTop: headerHeight }]}>
+                <Empty />
+            </View>
+        );
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar />
 
-            {loading ? (
-                <View style={[styles.content, { paddingTop: headerHeight }]}>
-                    <Loading />
-                </View>
-            ) : (
-                <View style={styles.content}>{children(resetHeader, headerHeight, animatedScrollOffset)}</View>
-            )}
+            {viewState}
 
             <Animated.View
                 onLayout={event => setHeaderHeight(event.nativeEvent.layout.height)}

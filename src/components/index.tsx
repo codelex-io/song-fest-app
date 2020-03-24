@@ -1,5 +1,4 @@
 import { Header } from './headers/Header';
-import { FilterButtons } from './FilterButtons';
 import Icon, { IconType } from './Icon';
 import { TabBarIcon } from './TabBarIcon';
 import FilterButtonIcon from './FilterButtonIcon';
@@ -12,7 +11,6 @@ import { Image } from './Image';
 
 export {
     Header,
-    FilterButtons,
     Icon,
     IconType,
     TabBarIcon,
