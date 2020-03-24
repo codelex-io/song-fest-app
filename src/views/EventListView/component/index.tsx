@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
-import { FlatList, View, StyleSheet, RefreshControl, StatusBar } from 'react-native';
+import { FlatList, View, RefreshControl } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, Loading, Empty, Header } from '@components';
+import { LongSearch, Empty, Header } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { SearchInterface } from '@components/headers/SearchHeader';
+import FeedLayout from '@components/layers/FeedLayout';
+import { StyleType } from '@domain/AnyType';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
     { key: 'today', title: 'TODAY' },
@@ -38,6 +41,8 @@ interface Props {
     >;
 }
 
+const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
+
 const EventListComponent: React.FC<Props> = ({
     loading,
     items,
@@ -54,52 +59,90 @@ const EventListComponent: React.FC<Props> = ({
     navigation,
 }) => {
     const { translations } = useContext(LocalizationContext);
-    if (loading) {
-        return <Loading />;
-    }
     return (
-        <View style={styles.viewContainer}>
-            <View>
-                <StatusBar />
-                <Header title={translations.getString('EVENTS')} navigation={navigation} />
-                <LongSearch
-                    backgroundColor={colors.blue}
-                    onPress={() => onSearch(colors.blue)}
-                    searchInput={searchInput.payload}
-                    onResetSearch={onResetSearch}
-                    customStyles={styles.longSearch}
-                />
-                <ViewsHeaderFilter activeKey={activeKey} onPress={onPress} options={FILTER_OPTIONS} />
-            </View>
-
-            {items.length === 0 || searchInput.isActive ? (
-                <View style={styles.container}>
-                    <Empty />
+        <FeedLayout
+            header={resetHeader => (
+                <View>
+                    <Header title={translations.getString('EVENTS')} navigation={navigation} />
+                    <LongSearch
+                        backgroundColor={colors.blue}
+                        onPress={() => {
+                            onSearch(colors.blue);
+                            resetHeader();
+                        }}
+                        searchInput={searchInput.payload}
+                        onResetSearch={onResetSearch}
+                        customStyles={styles.longSearch}
+                    />
+                    <ViewsHeaderFilter
+                        activeKey={activeKey}
+                        onPress={key => {
+                            onPress(key);
+                            resetHeader();
+                        }}
+                        options={FILTER_OPTIONS}
+                    />
                 </View>
-            ) : (
-                <FlatList<EventItem>
-                    refreshControl={
-                        <RefreshControl
-                            onRefresh={onRefresh}
-                            refreshing={loading}
-                            colors={[colors.randomColor()]}
-                            tintColor={colors.randomColor()}
-                        />
-                    }
-                    data={items}
-                    renderItem={({ item, index }): React.ReactElement => (
-                        <Card
-                            item={item}
-                            backgroundColor={colors.findColorByIndex(index)}
-                            onFavourite={() => onFavourite(item)}
-                            onNavigate={() => onNavigate(item)}
-                            onReadMore={() => onReadMore(item)}
-                            onShare={() => onShare(item)}
-                        />
-                    )}
-                />
             )}
-        </View>
+            loading={loading}
+        >
+            {(_resetHeader, headerHeight, animatedScrollOffset) => (
+                <>
+                    {items.length === 0 && searchInput.isActive ? (
+                        <View style={[styles.container, { paddingTop: headerHeight }]}>
+                            <Empty />
+                        </View>
+                    ) : (
+                            <AnimatedFlatlist<EventItem>
+                                style={{ paddingTop: headerHeight }}
+                                alwaysBounce={false}
+                                alwaysBounceVertical={false}
+                                bounces={false}
+                                scrollEventThrottle={16}
+                                onScroll={Animated.event(
+                                    [
+                                        {
+                                            nativeEvent: {
+                                                contentOffset: {
+                                                    y: animatedScrollOffset,
+                                                },
+                                            },
+                                        },
+                                    ],
+                                    { useNativeDriver: true },
+                                )}
+                                refreshControl={
+                                    <RefreshControl
+                                        onRefresh={onRefresh}
+                                        refreshing={loading}
+                                        colors={[colors.randomColor()]}
+                                        tintColor={colors.randomColor()}
+                                        progressViewOffset={headerHeight}
+                                    />
+                                }
+                                data={items}
+                                renderItem={({ item, index }: { item: EventItem; index: number }): React.ReactElement => {
+                                    let lastCardAddedPadding: StyleType | undefined = undefined;
+                                    if (index === items.length - 1) {
+                                        lastCardAddedPadding = { paddingBottom: headerHeight };
+                                    }
+                                    return (
+                                        <Card
+                                            item={item}
+                                            backgroundColor={colors.findColorByIndex(index)}
+                                            onFavourite={() => onFavourite(item)}
+                                            onNavigate={() => onNavigate(item)}
+                                            onReadMore={() => onReadMore(item)}
+                                            onShare={() => onShare(item)}
+                                            propStyles={lastCardAddedPadding}
+                                        />
+                                    );
+                                }}
+                            />
+                        )}
+                </>
+            )}
+        </FeedLayout>
     );
 };
 

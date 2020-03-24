@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { Header, LongSearch, Empty } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { VideoSelector } from '@domain';
+import FeedLayout from '@components/layers/FeedLayout';
+import Animated from 'react-native-reanimated';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
     { key: 'online', title: 'ONLINE' },
@@ -24,28 +26,40 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
         }
     }, [route]);
 
-    return (
-        <View style={styles.container}>
-            <View>
-                <StatusBar />
-                <Header title={translations.getString('VIDEO')} navigation={navigation} />
-                <LongSearch
-                    backgroundColor={colors.orange}
-                    onPress={() => navigation.navigate('Search', { color: colors.orange })}
-                    searchInput={currentSearch}
-                    onResetSearch={() => setCurrentSearch('')}
-                />
-                <ViewsHeaderFilter
-                    activeKey={activeKey}
-                    onPress={key => setActiveKey(key as VideoSelector)}
-                    options={FILTER_OPTIONS}
-                />
-            </View>
+    const loading = false;
 
-            <View style={styles.contentContainer}>
-                <Empty />
-            </View>
-        </View>
+    const [animatedScrollOffset] = useState(new Animated.Value(0));
+    const [headerHeightMeasure, setHeaderHeightMeasure] = useState<number>(182.09524536132812);
+
+    useEffect(() => {
+        animatedScrollOffset.setValue(0);
+    }, []);
+    return (
+        <FeedLayout
+            header={() => (
+                <View onLayout={event => setHeaderHeightMeasure(event.nativeEvent.layout.height)}>
+                    <Header title={translations.getString('VIDEO')} navigation={navigation} />
+                    <LongSearch
+                        backgroundColor={colors.orange}
+                        onPress={() => navigation.navigate('Search', { color: colors.orange })}
+                        searchInput={currentSearch}
+                        onResetSearch={() => setCurrentSearch('')}
+                    />
+                    <ViewsHeaderFilter
+                        activeKey={activeKey}
+                        onPress={key => setActiveKey(key as VideoSelector)}
+                        options={FILTER_OPTIONS}
+                    />
+                </View>
+            )}
+            loading={loading}
+        >
+            {() => (
+                <View style={[styles.contentContainer, { paddingTop: headerHeightMeasure }]}>
+                    <Empty />
+                </View>
+            )}
+        </FeedLayout>
     );
 };
 
