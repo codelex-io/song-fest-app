@@ -4,6 +4,8 @@ import { errors } from '@utils';
 import { Platform } from 'react-native';
 import { ANDROID_CHANNEL, FCM_TOKEN } from './constants';
 import { scheduleNotification, cancelNotification } from './scheduling';
+import { NotificationOpen, Notification } from 'react-native-firebase/notifications';
+import { fromNotificationData } from '@navigation';
 
 const handleToken = async (): Promise<void> => {
     let fcmToken = await AsyncStorage.getItem(FCM_TOKEN);
@@ -32,11 +34,32 @@ const requestPermission = async () => {
     }
 };
 
+const onOpen = (notification: Notification) => {
+    if (!notification) {
+        return;
+    }
+    const location = fromNotificationData(notification.data);
+    if (!location) {
+        return;
+    }
+};
+
 const createNotificationListeners = async () => {
     firebase.notifications().onNotification(async notification => {
         notification.android.setChannelId(ANDROID_CHANNEL);
         await firebase.notifications().displayNotification(notification);
     });
+    firebase.notifications().onNotificationOpened((notificationOpen: NotificationOpen) => {
+        onOpen(notificationOpen.notification);
+    });
+    firebase
+        .notifications()
+        .getInitialNotification()
+        .then((notificationOpen: NotificationOpen) => {
+            if (notificationOpen) {
+                onOpen(notificationOpen.notification);
+            }
+        });
 };
 
 const postLaunch = (isRealDevice: boolean) => {

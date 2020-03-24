@@ -18,4 +18,5 @@ export interface EventItem {
         latitude: number;
         longitude: number;
     };
+    notificationTime?: string;
 }

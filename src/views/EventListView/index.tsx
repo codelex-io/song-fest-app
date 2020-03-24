@@ -39,7 +39,14 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
             refreshing={() => !loading}
             loading={loading}
             items={filterByDate(now, items, activeTime)}
-            onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'EVENTS' })}
+            onFavourite={item =>
+                toggleFavourite({
+                    id: item.id,
+                    title: item.title,
+                    group: 'EVENTS',
+                    notificationTime: item.notificationTime,
+                })
+            }
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
             onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
             activeKey={activeTime}
@@ -64,6 +71,7 @@ const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean
         ...item,
         date: moment(item.date),
         isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }),
+        notificationTime: item.notificationTime ? moment(item.notificationTime) : undefined,
     };
 };
 

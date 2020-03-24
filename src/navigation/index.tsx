@@ -10,6 +10,7 @@ import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
 import InitialUserSettingsStack from './stacks/InitialUserSettingsStack';
 import { AnyType } from '@domain/AnyType';
+import { fromNotificationData } from './location';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -93,8 +94,6 @@ const Navigation: React.FC = () => {
     );
 };
 
-export default Navigation;
-
 const hideOnUserCategoryView = (route: AnyType): boolean => {
     let lastRoute = '';
     if (route.state) {
@@ -102,3 +101,7 @@ const hideOnUserCategoryView = (route: AnyType): boolean => {
     }
     return lastRoute !== 'UserSettings' && lastRoute !== 'Article';
 };
+
+export { fromNotificationData };
+
+export default Navigation;
