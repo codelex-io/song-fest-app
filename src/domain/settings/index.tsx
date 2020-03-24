@@ -15,6 +15,8 @@ export const storeUserType = (source: UserType) => {
     AsyncStorage.setItem('userType', currentUserType).catch(errors.onError);
 };
 
+export const getCurrentUserType = () => currentUserType;
+
 type SettingsType = {
     setUserType: (userType: UserType) => void;
     userType: UserType | null;

@@ -34,6 +34,8 @@ target 'SongFestApp' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+  pod 'Firebase/Core', '~> 6.19.0'
+  pod 'Firebase/Messaging', '~> 6.19.0'
 
   pod 'TinyConstraints'
   pod 'Gifu'
@@ -44,4 +46,5 @@ target 'SongFestApp' do
   end
 
   use_native_modules!
+  use_frameworks!
 end

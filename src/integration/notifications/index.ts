@@ -39,7 +39,7 @@ const createNotificationListeners = async () => {
     });
 };
 
-const init = async (isRealDevice: boolean) => {
+const postLaunch = (isRealDevice: boolean) => {
     if (Platform.OS === 'ios' && !isRealDevice) {
         return;
     }
@@ -51,7 +51,7 @@ const init = async (isRealDevice: boolean) => {
         ).setDescription('Used for all notifications');
         firebase.notifications().android.createChannel(channel);
     }
-    await checkPermission();
+    new Promise(resolve => setTimeout(resolve, 3000)).then(checkPermission).catch(errors.onError);
 };
 
-export { init, scheduleNotification, cancelNotification };
+export { postLaunch, scheduleNotification, cancelNotification };
