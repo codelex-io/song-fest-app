@@ -7,7 +7,7 @@ import { LocalizationContextProvider } from './src/localization/LocalizationCont
 import { initLanguage } from './src/localization';
 import { initSettings, SettingsContextProvider } from './src/domain/settings';
 import { useStoryBook, StoryBookContextProvider } from './src/domain/storybook';
-import { init } from './src/notifications';
+import { init } from './src/integration/notifications';
 import Navigation from './src/navigation';
 import Storybook from './storybook';
 import { StatusBarWrapper } from './src/components';
