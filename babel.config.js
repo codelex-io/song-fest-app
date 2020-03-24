@@ -23,6 +23,7 @@ module.exports = {
                     '@utils': './src/utils',
                     '@domain': './src/domain',
                     '@localization': './src/localization',
+                    '@integration': './src/integration',
                 },
             },
         ],

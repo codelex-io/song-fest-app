@@ -4,10 +4,19 @@ import { errors } from '@utils';
 import { Platform } from 'react-native';
 import { ANDROID_CHANNEL, FCM_TOKEN } from './constants';
 import { scheduleNotification, cancelNotification } from './scheduling';
-import moment from 'moment';
+import { Notification } from 'react-native-firebase/notifications';
+
+interface NotificationPredicate {
+    shouldDisplay: (notification: Notification) => boolean;
+}
+
+let predicate: NotificationPredicate | null = null;
+
+const setPredicate = (p: (notification: Notification) => boolean) => (predicate = { shouldDisplay: p });
 
 const handleToken = async (): Promise<void> => {
     let fcmToken = await AsyncStorage.getItem(FCM_TOKEN);
+    console.log(fcmToken);
     if (!fcmToken) {
         fcmToken = await firebase.messaging().getToken();
         if (fcmToken) {
@@ -35,15 +44,15 @@ const requestPermission = async () => {
 
 const createNotificationListeners = async () => {
     firebase.notifications().onNotification(async notification => {
-        console.log('=========');
         console.log(notification);
-
         notification.android.setChannelId(ANDROID_CHANNEL);
-        await firebase.notifications().displayNotification(notification);
+        if (predicate && predicate.shouldDisplay(notification)) {
+            await firebase.notifications().displayNotification(notification);
+        }
     });
 };
 
-const init = async (isRealDevice: boolean) => {
+const postLaunch = (isRealDevice: boolean) => {
     if (Platform.OS === 'ios' && !isRealDevice) {
         return;
     }
@@ -55,12 +64,7 @@ const init = async (isRealDevice: boolean) => {
         ).setDescription('Used for all notifications');
         firebase.notifications().android.createChannel(channel);
     }
-    await checkPermission();
-    scheduleNotification({
-        title: 'local',
-        body: 'local',
-        fireDate: moment().add(3, 'minutes'),
-    });
+    new Promise(resolve => setTimeout(resolve, 3000)).then(checkPermission).catch(errors.onError);
 };
 
-export { init, scheduleNotification, cancelNotification };
+export { postLaunch, setPredicate, scheduleNotification, cancelNotification };

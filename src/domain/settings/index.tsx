@@ -8,12 +8,15 @@ let currentUserType: UserType | null = null;
 
 export const initSettings = async () => {
     currentUserType = (await AsyncStorage.getItem('userType')) as UserType;
+    console.log('currentUserType:' + currentUserType);
 };
 
 export const storeUserType = (source: UserType) => {
     currentUserType = source;
     AsyncStorage.setItem('userType', currentUserType).catch(errors.onError);
 };
+
+export const getCurrentUserType = () => currentUserType;
 
 type SettingsType = {
     setUserType: (userType: UserType) => void;

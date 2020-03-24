@@ -3,7 +3,9 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "target": "es5",
-        "lib": ["es2017"],
+        "lib": [
+            "es2017"
+        ],
         "module": "es2015",
         "allowJs": true,
         "skipLibCheck": true,
@@ -16,22 +18,58 @@
         "noEmit": true,
         "jsx": "react-native",
         "noUnusedLocals": true,
-        "rootDirs": ["src", "stories"],
+        "rootDirs": [
+            "src",
+            "stories"
+        ],
         "baseUrl": "./",
         "paths": {
-            "@styles": ["./src/styles"],
-            "@styles/*": ["./src/styles/*"],
-            "@components": ["./src/components"],
-            "@components/*": ["./src/components/*"],
-            "@views": ["./src/views"],
-            "@views/*": ["./src/views/*"],
-            "@utils": ["./src/utils"],
-            "@utils/*": ["./src/utils/*"],
-            "@domain": ["./src/domain"],
-            "@domain/*": ["./src/domain/*"],
-            "@localization": ["./src/localization"],
-            "@localization/*": ["./src/localization/*"]
+            "@styles": [
+                "./src/styles"
+            ],
+            "@styles/*": [
+                "./src/styles/*"
+            ],
+            "@components": [
+                "./src/components"
+            ],
+            "@components/*": [
+                "./src/components/*"
+            ],
+            "@views": [
+                "./src/views"
+            ],
+            "@views/*": [
+                "./src/views/*"
+            ],
+            "@utils": [
+                "./src/utils"
+            ],
+            "@utils/*": [
+                "./src/utils/*"
+            ],
+            "@domain": [
+                "./src/domain"
+            ],
+            "@domain/*": [
+                "./src/domain/*"
+            ],
+            "@localization": [
+                "./src/localization"
+            ],
+            "@localization/*": [
+                "./src/localization/*"
+            ],
+            "@integration": [
+                "./src/integration"
+            ],
+            "@integration/*": [
+                "./src/integration/*"
+            ]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx"]
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx"
+    ]
 }
