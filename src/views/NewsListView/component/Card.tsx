@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors, opacity } from '@styles';
+import { colors, opacity, typography } from '@styles';
 import { dateTimeUtils } from '@utils';
 import { Image } from '@components';
 import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
 import { StyleType } from '@domain/AnyType';
+import CardTitle from '@components/typography/CardTitle';
 
 interface CardProps {
     item: NewsItem;
@@ -26,7 +27,7 @@ const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavour
             )}
             <View style={[styles.lowerContainer, { backgroundColor }]}>
                 <Text style={styles.dateText}>{dateTimeUtils.formatDate(item.date)}</Text>
-                <Text style={styles.titleText}>{item.title}</Text>
+                <CardTitle styleProps={{ marginBottom: 16 }}>{item.title}</CardTitle>
                 <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
             </View>
         </TouchableOpacity>
@@ -61,14 +62,8 @@ const styles = StyleSheet.create({
     },
     dateText: {
         color: colors.white,
-        fontWeight: '500',
+        fontFamily: typography.medium,
         fontSize: 14,
         marginBottom: 8,
-    },
-    titleText: {
-        color: colors.white,
-        fontWeight: '500',
-        fontSize: 16,
-        marginBottom: 16,
     },
 });

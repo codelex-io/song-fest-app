@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     },
     cardExtraText: {
         color: colors.white,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
         fontSize: 14,
         lineHeight: 18,
         letterSpacing: 0.25,

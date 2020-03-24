@@ -6,6 +6,7 @@ import { IconButtons } from './IconButtons';
 import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
 import { AnyType } from '@domain/AnyType';
+import CardTitle from '@components/typography/CardTitle';
 
 interface EventDescriptionProps {
     item: EventItem;
@@ -30,9 +31,10 @@ export const EventCard = ({
         <View style={[styles.slide]}>
             <View style={[styles.slideInnerContainer, { backgroundColor }]}>
                 <TouchableOpacity onPress={onReadMore}>
-                    <Text style={styles.eventTitle} numberOfLines={3} ellipsizeMode="tail">
+                    <CardTitle styleProps={{ marginBottom: 12 }} numberOfLines={3} ellipsizeMode="tail">
                         {item.title}
-                    </Text>
+                    </CardTitle>
+
                     <Text style={styles.eventLocation} numberOfLines={2} ellipsizeMode="tail">
                         {item.locationTitle}
                     </Text>
@@ -75,20 +77,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         flex: 1,
     },
-    eventTitle: {
-        fontSize: 16,
-        lineHeight: 21,
-        color: colors.white,
-        fontFamily: typography.bold,
-        marginBottom: 12,
-    },
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
     },
     eventLocation: {
-        fontFamily: typography.normal,
+        fontFamily: typography.regular,
         fontSize: 14,
         lineHeight: 18,
         color: colors.white,
@@ -99,7 +94,7 @@ const styles = StyleSheet.create({
         lineHeight: 18,
         color: colors.white,
         marginLeft: 10,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
     },
     eventiconLabel: {
         display: 'flex',

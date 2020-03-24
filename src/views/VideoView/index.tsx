@@ -10,9 +10,9 @@ import FeedLayout from '@components/layers/FeedLayout';
 import Animated from 'react-native-reanimated';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
-    { key: 'online', title: 'ONLINE' },
-    { key: 'popular', title: 'POPULAR' },
     { key: 'latest', title: 'LATEST' },
+    { key: 'popular', title: 'POPULAR' },
+    { key: 'online', title: 'ONLINE' },
 ];
 
 export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {

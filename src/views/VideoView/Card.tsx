@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { VideoData } from './types';
 import { typography } from '@styles';
 import { Image } from '@components';
+import CardTitle from '@components/typography/CardTitle';
 
 interface CardProps {
     item: VideoData;
@@ -16,9 +17,7 @@ export class Card extends React.Component<CardProps> {
                 <View style={styles.videoContainer}>
                     <Image height={180} source={{ uri: item.video }} style={styles.image} />
                 </View>
-                <View>
-                    <Text style={styles.title}>{item.title}</Text>
-                </View>
+                <CardTitle styleProps={{ paddingVertical: 12 }}>{item.title}</CardTitle>
                 <View>
                     <Text style={styles.statistics}>{item.statistics}</Text>
                 </View>
@@ -39,13 +38,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 180,
     },
-    title: {
-        fontSize: 16,
-        fontFamily: typography.bold,
-        paddingVertical: 12,
-    },
     statistics: {
         fontSize: 14,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
     },
 });
