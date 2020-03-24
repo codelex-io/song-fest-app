@@ -28,11 +28,7 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
     }, [innerHeight, viewHeight]);
 
     return (
-        <ScrollView
-            style={moreViewStyles.container}
-            scrollEnabled={scrollEnabled}
-            onLayout={event => setViewHeight(event.nativeEvent.layout.height)}
-        >
+        <>
             <View>
                 <StatusBar />
                 <Header
@@ -47,19 +43,26 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
                     }}
                 />
             </View>
-            <View style={moreViewStyles.inner} onLayout={event => setInnerHeight(event.nativeEvent.layout.height)}>
-                {items.map((item: ItemType) => (
-                    <Card
-                        key={item.id}
-                        title={item.title}
-                        icon={item.icon}
-                        backgroundColor={item.backgroundColor}
-                        onOpen={() => item.onOpen(navigation.navigate)}
-                        disabled={item.disabled}
-                    />
-                ))}
-            </View>
-        </ScrollView>
+            <ScrollView
+                style={moreViewStyles.container}
+                scrollEnabled={scrollEnabled}
+                onLayout={event => setViewHeight(event.nativeEvent.layout.height)}
+            >
+
+                <View style={moreViewStyles.inner} onLayout={event => setInnerHeight(event.nativeEvent.layout.height)}>
+                    {items.map((item: ItemType) => (
+                        <Card
+                            key={item.id}
+                            title={item.title}
+                            icon={item.icon}
+                            backgroundColor={item.backgroundColor}
+                            onOpen={() => item.onOpen(navigation.navigate)}
+                            disabled={item.disabled}
+                        />
+                    ))}
+                </View>
+            </ScrollView>
+        </>
     );
 };
 
@@ -74,15 +77,15 @@ export const moreViewStyles = StyleSheet.create({
     inner:
         screenWidth > MEDIA_BREAK
             ? {
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  paddingTop: 4,
-                  paddingHorizontal: 8,
-              }
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                paddingTop: 4,
+                paddingHorizontal: 8,
+            }
             : {
-                  paddingTop: 16,
-                  paddingHorizontal: 16,
-              },
+                paddingTop: 16,
+                paddingHorizontal: 16,
+            },
 });
 
 export default MoreView;
