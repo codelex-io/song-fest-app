@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
     bridge = RCTBridge.init(delegate: self, launchOptions: launchOptions)
     self.window = UIWindow(frame: UIScreen.main.bounds)
     self.showLoading()
+    
+    FirebaseApp.configure()
+    RNFirebaseNotifications.configure();
   
     #if targetEnvironment(simulator)
       let isRealDevice = false;
@@ -27,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
       launchOptions: nil
     )
     AppDelegate.reactView.backgroundColor = UIColor.white
-    FirebaseApp.configure()
     
     return true
   }
@@ -57,5 +59,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCTBridgeDelegate {
   
   @objc static func requiresMainQueueSetup() -> Bool {
       return false
+  }
+  
+  @objc(application:didReceiveLocalNotification:)
+  func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+    RNFirebaseNotifications.instance().didReceive(notification)
+  }
+  
+  func application(_ application: UIApplication,
+                   didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    RNFirebaseNotifications.instance().didReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler);
+  }
+  
+  @objc(application:didRegisterUserNotificationSettings:)
+  func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+    RNFirebaseMessaging.instance().didRegister(notificationSettings);
+  }
+  
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              willPresent notification: UNNotification,
+                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+      completionHandler([.alert, .badge, .sound])
   }
 }

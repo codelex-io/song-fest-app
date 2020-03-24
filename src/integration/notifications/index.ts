@@ -4,6 +4,7 @@ import { errors } from '@utils';
 import { Platform } from 'react-native';
 import { ANDROID_CHANNEL, FCM_TOKEN } from './constants';
 import { scheduleNotification, cancelNotification } from './scheduling';
+import moment from 'moment';
 
 const handleToken = async (): Promise<void> => {
     let fcmToken = await AsyncStorage.getItem(FCM_TOKEN);
@@ -34,6 +35,9 @@ const requestPermission = async () => {
 
 const createNotificationListeners = async () => {
     firebase.notifications().onNotification(async notification => {
+        console.log('=========');
+        console.log(notification);
+
         notification.android.setChannelId(ANDROID_CHANNEL);
         await firebase.notifications().displayNotification(notification);
     });
@@ -52,6 +56,11 @@ const init = async (isRealDevice: boolean) => {
         firebase.notifications().android.createChannel(channel);
     }
     await checkPermission();
+    scheduleNotification({
+        title: 'local',
+        body: 'local',
+        fireDate: moment().add(3, 'minutes'),
+    });
 };
 
 export { init, scheduleNotification, cancelNotification };
