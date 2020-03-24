@@ -7,6 +7,7 @@ import { IconButtons } from './IconButtons';
 import { EventItem } from '../types';
 import { dateTimeUtils } from '@utils';
 import { StyleType } from '@domain/AnyType';
+import CardTitle from '@components/typography/CardTitle';
 
 interface CardProps {
     item: EventItem;
@@ -36,7 +37,7 @@ export const Card: React.FC<CardProps> = ({
                     </View>
                 )}
                 <View style={[styles.bottomContainer, { backgroundColor }]}>
-                    <Text style={styles.title}>{item.title}</Text>
+                    <CardTitle styleProps={{ marginBottom: 12 }}>{item.title} </CardTitle>
                     <Text style={styles.location}>{item.locationTitle}</Text>
                     <View style={styles.labels}>
                         <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
@@ -66,16 +67,8 @@ const styles = StyleSheet.create({
     bottomContainer: {
         padding: 16,
     },
-    title: {
-        color: colors.white,
-        fontFamily: typography.normal,
-        fontWeight: '500',
-        fontSize: 16,
-        lineHeight: 21,
-        marginBottom: 12,
-    },
     location: {
-        fontFamily: typography.normal,
+        fontFamily: typography.regular,
         fontSize: 14,
         lineHeight: 18,
         color: colors.white,
