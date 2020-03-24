@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         zIndex: 1,
-        backgroundColor: colors.purple,
+        backgroundColor: colors.white,
     },
     content: {
         flex: 1,
