@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { FlatList, View, RefreshControl } from 'react-native';
+import { FlatList, View, RefreshControl, StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
 import { Card } from './Card';
 import { EventItem } from '../types';
-import { LongSearch, Empty, Header } from '@components';
+import { LongSearch, Header } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
@@ -85,88 +85,65 @@ const EventListComponent: React.FC<Props> = ({
                 </View>
             )}
             loading={loading}
+            empty={items.length === 0 && searchInput.isActive}
         >
             {(_resetHeader, headerHeight, animatedScrollOffset) => (
-                <>
-                    {items.length === 0 && searchInput.isActive ? (
-                        <View style={[styles.container, { paddingTop: headerHeight }]}>
-                            <Empty />
-                        </View>
-                    ) : (
-                            <AnimatedFlatlist<EventItem>
-                                style={{ paddingTop: headerHeight }}
-                                alwaysBounce={false}
-                                alwaysBounceVertical={false}
-                                bounces={false}
-                                scrollEventThrottle={16}
-                                onScroll={Animated.event(
-                                    [
-                                        {
-                                            nativeEvent: {
-                                                contentOffset: {
-                                                    y: animatedScrollOffset,
-                                                },
-                                            },
-                                        },
-                                    ],
-                                    { useNativeDriver: true },
-                                )}
-                                refreshControl={
-                                    <RefreshControl
-                                        onRefresh={onRefresh}
-                                        refreshing={loading}
-                                        colors={[colors.randomColor()]}
-                                        tintColor={colors.randomColor()}
-                                        progressViewOffset={headerHeight}
-                                    />
-                                }
-                                data={items}
-                                renderItem={({ item, index }: { item: EventItem; index: number }): React.ReactElement => {
-                                    let lastCardAddedPadding: StyleType | undefined = undefined;
-                                    if (index === items.length - 1) {
-                                        lastCardAddedPadding = { paddingBottom: headerHeight };
-                                    }
-                                    return (
-                                        <Card
-                                            item={item}
-                                            backgroundColor={colors.findColorByIndex(index)}
-                                            onFavourite={() => onFavourite(item)}
-                                            onNavigate={() => onNavigate(item)}
-                                            onReadMore={() => onReadMore(item)}
-                                            onShare={() => onShare(item)}
-                                            propStyles={lastCardAddedPadding}
-                                        />
-                                    );
-                                }}
+                <AnimatedFlatlist<EventItem>
+                    style={{ paddingTop: headerHeight }}
+                    alwaysBounce={false}
+                    alwaysBounceVertical={false}
+                    bounces={false}
+                    scrollEventThrottle={16}
+                    onScroll={Animated.event(
+                        [
+                            {
+                                nativeEvent: {
+                                    contentOffset: {
+                                        y: animatedScrollOffset,
+                                    },
+                                },
+                            },
+                        ],
+                        { useNativeDriver: true },
+                    )}
+                    refreshControl={
+                        <RefreshControl
+                            onRefresh={onRefresh}
+                            refreshing={loading}
+                            colors={[colors.randomColor()]}
+                            tintColor={colors.randomColor()}
+                            progressViewOffset={headerHeight}
+                        />
+                    }
+                    data={items}
+                    renderItem={({ item, index }: { item: EventItem; index: number }): React.ReactElement => {
+                        let lastCardAddedPadding: StyleType | undefined = undefined;
+                        if (index === items.length - 1) {
+                            lastCardAddedPadding = { paddingBottom: headerHeight };
+                        }
+                        return (
+                            <Card
+                                item={item}
+                                backgroundColor={colors.findColorByIndex(index)}
+                                onFavourite={() => onFavourite(item)}
+                                onNavigate={() => onNavigate(item)}
+                                onReadMore={() => onReadMore(item)}
+                                onShare={() => onShare(item)}
+                                propStyles={lastCardAddedPadding}
                             />
-                        )}
-                </>
+                        );
+                    }}
+                />
             )}
         </FeedLayout>
     );
 };
 
 const styles = StyleSheet.create({
-    viewContainer: {
-        flex: 1,
-        backgroundColor: colors.white,
-    },
     longSearch: {
         marginHorizontal: 16,
         marginTop: 8,
         marginBottom: 16,
-    },
-    searchContainerButton: {
-        flexDirection: 'row',
-        paddingLeft: 16,
-        paddingRight: 8,
-        paddingBottom: 16,
-    },
-    container: {
-        backgroundColor: colors.white,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });
 
