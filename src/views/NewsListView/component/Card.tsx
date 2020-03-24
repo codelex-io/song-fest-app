@@ -5,6 +5,7 @@ import { dateTimeUtils } from '@utils';
 import { Image } from '@components';
 import { NewsItem } from '../types';
 import { IconButtons } from './IconButtons';
+import { StyleType } from '@domain/AnyType';
 
 interface CardProps {
     item: NewsItem;
@@ -12,11 +13,12 @@ interface CardProps {
     onNavigate: () => void;
     onFavourite: () => void;
     onShare: () => void;
+    propStyles?: StyleType;
 }
 
-const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavourite, onShare }) => {
+const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavourite, onShare, propStyles }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={onNavigate} activeOpacity={opacity.opacity8}>
+        <TouchableOpacity style={[styles.container, propStyles]} onPress={onNavigate} activeOpacity={opacity.opacity8}>
             {item.image?.url && (
                 <View style={styles.pictureContainer}>
                     <Image height={180} source={{ uri: item.image?.url }} style={styles.image} />

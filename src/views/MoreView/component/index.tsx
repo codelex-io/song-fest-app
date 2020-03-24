@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions, StatusBar } from 'react-native';
+import { View, StyleSheet, Dimensions, StatusBar, ScrollView } from 'react-native';
 import { Card } from './Card';
 import { colors } from '@styles';
 import { items, ItemType } from '../content';
@@ -72,6 +72,7 @@ const MEDIA_BREAK = 360;
 export const moreViewStyles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%',
         backgroundColor: colors.white,
     },
     inner:
