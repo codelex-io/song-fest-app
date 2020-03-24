@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { colors } from '@styles';
-import { Header, LongSearch, Empty } from '@components';
+import { Header, LongSearch } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
@@ -26,10 +26,7 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
         }
     }, [route]);
 
-    const loading = false;
-
     const [animatedScrollOffset] = useState(new Animated.Value(0));
-    const [headerHeightMeasure, setHeaderHeightMeasure] = useState<number>(182.09524536132812);
 
     useEffect(() => {
         animatedScrollOffset.setValue(0);
@@ -37,7 +34,7 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
     return (
         <FeedLayout
             header={() => (
-                <View onLayout={event => setHeaderHeightMeasure(event.nativeEvent.layout.height)}>
+                <View>
                     <Header title={translations.getString('VIDEO')} navigation={navigation} />
                     <LongSearch
                         backgroundColor={colors.orange}
@@ -52,31 +49,10 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
                     />
                 </View>
             )}
-            loading={loading}
+            loading={false}
+            empty={true}
         >
-            {() => (
-                <View style={[styles.contentContainer, { paddingTop: headerHeightMeasure }]}>
-                    <Empty />
-                </View>
-            )}
+            {() => null}
         </FeedLayout>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colors.white,
-    },
-    searchContainerButton: {
-        flexDirection: 'row',
-        marginBottom: 16,
-        flexWrap: 'wrap',
-        marginHorizontal: 16,
-    },
-    contentContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
