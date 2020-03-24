@@ -72,13 +72,13 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         width: '90%',
         color: colors.white,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
     },
     location: {
         fontSize: 14,
         lineHeight: 18,
         color: colors.white,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
     },
     bottom: {
         flexDirection: 'column',

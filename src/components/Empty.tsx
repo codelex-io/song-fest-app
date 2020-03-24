@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         color: colors.darkGrey1A,
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
         fontSize: 16,
         lineHeight: 21,
         letterSpacing: 0.5,

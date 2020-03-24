@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontFamily: typography.normal,
+        fontFamily: typography.medium,
         fontSize: 16,
         lineHeight: 21,
         color: colors.darkGrey1A,
