@@ -8,9 +8,9 @@ import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/
 import { VideoSelector } from '@domain';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
-    { key: 'online', title: 'ONLINE' },
-    { key: 'popular', title: 'POPULAR' },
     { key: 'latest', title: 'LATEST' },
+    { key: 'popular', title: 'POPULAR' },
+    { key: 'online', title: 'ONLINE' },
 ];
 
 export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
