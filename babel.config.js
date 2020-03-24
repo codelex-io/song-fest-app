@@ -24,6 +24,7 @@ module.exports = {
                     '@domain': './src/domain',
                     '@localization': './src/localization',
                     '@integration': './src/integration',
+                    '@navigation': './src/navigation',
                 },
             },
         ],

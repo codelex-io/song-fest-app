@@ -3,21 +3,23 @@ import firebase from 'react-native-firebase';
 import { Moment } from 'moment';
 import { ANDROID_CHANNEL } from './constants';
 import { randomString } from '@utils';
+import { Location } from 'src/navigation/location';
 
 interface Notification {
-    title: string;
-    body: string;
+    content: string;
     fireDate: Moment;
+    location?: Location;
 }
 
 export const scheduleNotification = async (source: Notification): Promise<string> => {
     const notificationId = randomString();
-    const title = Platform.OS === 'android' ? source.title : '';
+    const title = Platform.OS === 'android' ? 'Nāc Gavilēt' : '';
     const notification = new firebase.notifications.Notification()
         .setNotificationId(notificationId)
         .setTitle(title)
-        .setBody(source.body)
+        .setBody(source.content)
         .setSound('default')
+        .setData(source.location)
         .android.setPriority(firebase.notifications.Android.Priority.High)
         .android.setChannelId(ANDROID_CHANNEL)
         .android.setAutoCancel(true);

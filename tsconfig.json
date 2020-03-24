@@ -32,7 +32,9 @@
             "@localization": ["./src/localization"],
             "@localization/*": ["./src/localization/*"],
             "@integration": ["./src/integration"],
-            "@integration/*": ["./src/integration/*"]
+            "@integration/*": ["./src/integration/*"],
+            "@navigation": ["./src/navigation"],
+            "@navigation/*": ["./src/navigation/*"]
         }
     },
     "include": ["src/**/*.ts", "src/**/*.tsx"]

@@ -1,3 +1,5 @@
+import { Moment } from 'moment';
+
 export interface EventItem {
     id: string;
     title: string;
@@ -13,4 +15,5 @@ export interface EventItem {
     currentItem?: number;
     totalItems?: number;
     isFavourite: boolean;
+    notificationTime?: Moment;
 }

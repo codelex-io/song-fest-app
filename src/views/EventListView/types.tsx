@@ -15,4 +15,5 @@ export interface EventItem {
         longitude: number;
     };
     link: string;
+    notificationTime?: Moment;
 }
