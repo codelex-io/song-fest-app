@@ -43,6 +43,7 @@ const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, empty
             </View>
         );
     }
+
     if (!loading && empty) {
         viewState = (
             <View style={[styles.content, { paddingTop: headerHeight }]}>
@@ -72,6 +73,7 @@ export default FeedLayout;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%',
     },
     header: {
         position: 'absolute',
@@ -79,10 +81,11 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         zIndex: 1,
-        backgroundColor: colors.white,
+        backgroundColor: colors.purple,
     },
     content: {
         flex: 1,
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },

@@ -29,36 +29,35 @@ export const Card: React.FC<CardProps> = ({
     onShare,
 }) => {
     return (
-        <View style={[{ paddingHorizontal: 16 }, propStyles]}>
-            <TouchableOpacity style={styles.container} onPress={onReadMore} activeOpacity={opacity.opacity8}>
-                {item.image && item.image.url && (
-                    <View>
-                        <Image height={180} source={{ uri: item.image.url }} style={styles.image} />
-                    </View>
-                )}
-                <View style={[styles.bottomContainer, { backgroundColor }]}>
-                    <CardTitle styleProps={{ marginBottom: 12 }}>{item.title} </CardTitle>
-                    <Text style={styles.location}>{item.locationTitle}</Text>
-                    <View style={styles.labels}>
-                        <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
-                        <Label title={item.time} iconType={IconType.Clock} />
-                    </View>
-                    <IconButtons
-                        onShare={onShare}
-                        isFavourite={item.isFavourite}
-                        onFavourite={onFavourite}
-                        onNavigate={onNavigate}
-                    />
+        <TouchableOpacity style={[styles.container, propStyles]} onPress={onReadMore} activeOpacity={opacity.opacity8}>
+            {item.image && item.image.url && (
+                <View>
+                    <Image height={180} source={{ uri: item.image.url }} style={styles.image} />
                 </View>
-            </TouchableOpacity>
-        </View>
+            )}
+            <View style={[styles.bottomContainer, { backgroundColor }]}>
+                <CardTitle styleProps={{ marginBottom: 12 }}>{item.title} </CardTitle>
+                <Text style={styles.location}>{item.locationTitle}</Text>
+                <View style={styles.labels}>
+                    <Label title={dateTimeUtils.formatDateDay(item.date)} iconType={IconType.Calendar} />
+                    <Label title={item.time} iconType={IconType.Clock} />
+                </View>
+                <IconButtons
+                    onShare={onShare}
+                    isFavourite={item.isFavourite}
+                    onFavourite={onFavourite}
+                    onNavigate={onNavigate}
+                />
+            </View>
+        </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginBottom: 8,
+        marginBottom: 16,
+        marginHorizontal: 16,
+        backgroundColor: colors.white,
     },
     image: {
         width: '100%',
