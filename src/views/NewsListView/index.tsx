@@ -79,7 +79,7 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ route,
                     }}
                     refreshing={() => !loading}
                     animatedScrollOffset={animatedScrollOffset}
-                    headerHeightMeasure={headerHeight}
+                    headerHeight={headerHeight}
                 />
             )}
         </FeedLayout>

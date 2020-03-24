@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FlatList, View, RefreshControl, StyleSheet } from 'react-native';
+import { FlatList, View, RefreshControl } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
@@ -72,7 +72,6 @@ const EventListComponent: React.FC<Props> = ({
                         }}
                         searchInput={searchInput.payload}
                         onResetSearch={onResetSearch}
-                        customStyles={styles.longSearch}
                     />
                     <ViewsHeaderFilter
                         activeKey={activeKey}
@@ -138,13 +137,5 @@ const EventListComponent: React.FC<Props> = ({
         </FeedLayout>
     );
 };
-
-const styles = StyleSheet.create({
-    longSearch: {
-        marginHorizontal: 16,
-        marginTop: 8,
-        marginBottom: 16,
-    },
-});
 
 export default EventListComponent;
