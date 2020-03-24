@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const FETCH_NEWS_ITEMS = gql`
-    query ($searchBy: String, $first: Int) {
+    query($searchBy: String, $first: Int) {
         items: newsItems(where: { _search: $searchBy }, orderBy: date_ASC, first: $first) {
             title
             id
