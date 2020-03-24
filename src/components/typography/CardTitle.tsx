@@ -19,7 +19,7 @@ const CardTitle: React.FC<TitleProps> = ({
     children,
     fontSize = 16,
     fonts = 'medium',
-    textTransform = 'uppercase',
+    textTransform = 'none',
     textColor = 'white',
     styleProps,
     numberOfLines,
