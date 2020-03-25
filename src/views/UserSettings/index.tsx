@@ -8,7 +8,17 @@ import { useLanguageSettings } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { SimpleHeader } from '@components';
 
-const userTypes: UserType[] = ['participant', 'parent', 'visitor-lv', 'visitor-en'];
+interface User {
+    type: UserType;
+    title: string;
+}
+
+const userTypes: User[] = [
+    { type: 'participant', title: 'Dalībnieks' },
+    { type: 'parent', title: 'Dalībnieka Vecāks' },
+    { type: 'visitor-lv', title: 'Apmeklētājs' },
+    { type: 'visitor-en', title: 'Visitor - English' },
+];
 
 const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation }) => {
     const { userType, setUserType } = useSettings();
@@ -23,20 +33,13 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
 
             <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
 
-            {userTypes.map((user: UserType) => {
-                let title = user as string;
-                if (user === 'visitor-en') {
-                    title = 'VISITOR_EN';
-                } else if (user === 'visitor-lv') {
-                    title = 'VISITOR_LV';
-                }
-
+            {userTypes.map(({ type, title }: User) => {
                 return (
                     <RadioButton
-                        key={user}
-                        active={userType === user}
+                        key={type}
+                        active={userType === type}
                         label={title}
-                        onPress={() => setUserType(user)}
+                        onPress={() => setUserType(type)}
                         propStyles={{ marginBottom: 16 }}
                     />
                 );

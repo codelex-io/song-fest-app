@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Text, View, StyleSheet, ViewStyle } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors, typography } from '@styles';
-import { LocalizationContext } from '@localization/LocalizationContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface CardProps {
@@ -13,7 +12,6 @@ interface CardProps {
 }
 
 export const RadioButton: React.FC<CardProps> = ({ label, active, onPress, propStyles }) => {
-    const { translations } = useContext(LocalizationContext);
     return (
         <TouchableOpacity style={[styles.cardContainer, propStyles]} onPress={onPress}>
             <View style={styles.cardIcon}>
@@ -23,7 +21,7 @@ export const RadioButton: React.FC<CardProps> = ({ label, active, onPress, propS
                     <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
                 )}
             </View>
-            <Text style={styles.cardText}>{translations.getString(label.toUpperCase())}</Text>
+            <Text style={styles.cardText}>{label}</Text>
         </TouchableOpacity>
     );
 };
