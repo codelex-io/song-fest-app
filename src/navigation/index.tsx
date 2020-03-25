@@ -8,9 +8,9 @@ import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
-import InitialUserSettingsStack from './stacks/InitialUserSettingsStack';
 import { AnyType } from '@domain/AnyType';
 import { fromNotificationData } from './location';
+import { UserCategoryView } from '@views';
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -39,7 +39,7 @@ const Navigation: React.FC = () => {
     const { userType } = useSettings();
 
     if (userType === null) {
-        return <InitialUserSettingsStack />;
+        return <UserCategoryView />;
     }
     return (
         <NavigationContainer theme={NavigationTheme}>
