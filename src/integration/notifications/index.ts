@@ -46,8 +46,15 @@ const onOpen = (notification: Notification) => {
 
 const createNotificationListeners = async () => {
     firebase.notifications().onNotification(async notification => {
-        notification.android.setChannelId(ANDROID_CHANNEL);
-        await firebase.notifications().displayNotification(notification);
+        notification.setSound('default');
+        if (Platform.OS === 'android') {
+            notification.android.setChannelId(ANDROID_CHANNEL);
+        }
+        try {
+            await firebase.notifications().displayNotification(notification);
+        } catch (e) {
+            errors.onError(e);
+        }
     });
     firebase.notifications().onNotificationOpened((notificationOpen: NotificationOpen) => {
         onOpen(notificationOpen.notification);
