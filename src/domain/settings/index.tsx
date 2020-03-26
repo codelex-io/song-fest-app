@@ -2,7 +2,7 @@ import React, { useContext, createContext, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { errors } from '@utils';
 
-export type UserType = 'participant' | 'parent' | 'visitor';
+export type UserType = 'participant' | 'parent' | 'visitor-lv' | 'visitor-en';
 
 let currentUserType: UserType | null = null;
 

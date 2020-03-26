@@ -13,7 +13,6 @@ import LoadingView from './LoadingView';
 import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
 import UserSettings from './UserSettings';
-import { LanguageView } from './LanguageView';
 import Article from './ArticleView';
 
 export {
@@ -28,7 +27,6 @@ export {
     AllIcons,
     UserSettingsView,
     VideoView,
-    LanguageView,
     LoadingView,
     EmptyView,
     SearchView,

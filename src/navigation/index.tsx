@@ -8,9 +8,9 @@ import { colors } from '@styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
-import InitialUserSettingsStack from './stacks/InitialUserSettingsStack';
 import { AnyType } from '@domain/AnyType';
 import { fromNotificationData, Location } from './location';
+import { UserCategoryView } from '@views';
 
 let initialLocation: Location | null = null;
 
@@ -49,7 +49,7 @@ const Navigation: React.FC = () => {
     const { userType } = useSettings();
     console.log(initialLocation);
     if (userType === null) {
-        return <InitialUserSettingsStack />;
+        return <UserCategoryView />;
     }
     return (
         <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
