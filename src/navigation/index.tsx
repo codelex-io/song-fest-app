@@ -15,7 +15,7 @@ import { fromNotificationData } from './location';
 type AppTabsParamList = {
     NEWS: undefined;
     EVENTS: undefined;
-    MAP: undefined;
+    MAP: { item: AnyType };
     VIDEO: undefined;
     MORE: undefined;
 };

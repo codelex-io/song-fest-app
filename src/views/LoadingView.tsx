@@ -23,7 +23,9 @@ const LoadingView: React.FC = () => {
 
 const styles = StyleSheet.create({
     longSearch: {
-        margin: '8 16 16 16',
+        marginTop: 8,
+        marginBottom: 16,
+        marginHorizontal: 16,
     },
     searchContainerButton: {
         flexDirection: 'row',

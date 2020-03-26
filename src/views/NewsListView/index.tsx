@@ -10,7 +10,7 @@ import { Favourite } from '@domain/favourites/types';
 import { open } from '@domain/share';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
-import FeedLayout from '@components/layers/FeedLayout';
+import FeedLayout from '@components/layouts/FeedLayout';
 import { Header, LongSearch } from '@components';
 import { colors } from '@styles';
 import { SearchInterface } from '@components/headers/SearchHeader';

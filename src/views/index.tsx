@@ -6,7 +6,6 @@ import EventFilterView from './EventFilterView';
 import EventListView from './EventListView';
 import { UserCategoryView } from './UserCategoryView';
 import AllIcons from './AllIcons';
-import MarkdownEvent from './MarkdownEvent';
 import UserSettingsView from './UserSettings';
 import { VideoView } from './VideoView';
 import EventMapView from './EventMapView';
@@ -15,6 +14,7 @@ import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
 import UserSettings from './UserSettings';
 import { LanguageView } from './LanguageView';
+import Article from './ArticleView';
 
 export {
     FavoriteListView,
@@ -26,7 +26,6 @@ export {
     EventFilterView,
     UserCategoryView,
     AllIcons,
-    MarkdownEvent,
     UserSettingsView,
     VideoView,
     LanguageView,
@@ -34,4 +33,5 @@ export {
     EmptyView,
     SearchView,
     UserSettings,
+    Article,
 };

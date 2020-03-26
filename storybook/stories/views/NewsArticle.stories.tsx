@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
-import MarkdownEvent from '../../../src/views/MarkdownEvent/component';
+import NewsArticleComponent from '../../../src/views/ArticleView/component/NewsArticleComponent';
 import _ from 'lodash';
 
 const item = {
@@ -22,5 +22,5 @@ Rīko: Krāslavas Bērnu un jauniešu centrs sadarbībā ar izglītības iestād
 };
 
 storiesOf('MarkdownEvent', module).add('list', () => (
-    <MarkdownEvent item={item} loading={false} onFavourite={() => null} onShare={() => null} />
+    <NewsArticleComponent item={item} loading={false} onFavourite={() => null} onShare={() => null} />
 ));

@@ -2,13 +2,13 @@ import React from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import {
     FavoriteListView,
-    MarkdownEvent,
     SearchView,
     EventListView,
     VideoView,
     EmptyView,
     EventMapView,
     UserSettings,
+    Article,
 } from '@views';
 import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
@@ -51,7 +51,7 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
         <Stack.Navigator initialRouteName={'Feed'} headerMode="none">
             <Stack.Screen name="Feed" component={feedComponent} />
             <Stack.Screen name="Favorites" component={FavoriteListView} />
-            <Stack.Screen name="Article" component={MarkdownEvent} />
+            <Stack.Screen name="Article" component={Article} />
             <Stack.Screen name="Search" component={SearchView} />
             <Stack.Screen name="UserSettings" component={UserSettings} />
         </Stack.Navigator>
