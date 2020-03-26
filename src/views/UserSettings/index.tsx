@@ -31,8 +31,8 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
         } else {
             setAppLanguage('lv');
         }
-        setUserType(userType)
-    }
+        setUserType(userType);
+    };
 
     return (
         <View style={userSettingStyles.container}>

@@ -1,7 +1,6 @@
 import React, { useContext, createContext, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { errors } from '@utils';
-import { useLanguageSettings } from '@localization/LocalizationContext';
 
 export type UserType = 'participant' | 'parent' | 'visitor-lv' | 'visitor-en';
 

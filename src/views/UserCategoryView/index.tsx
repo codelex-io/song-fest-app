@@ -6,21 +6,18 @@ import { Card } from './Card';
 import { useSettings, UserType } from '@domain/settings';
 import { useLanguageSettings } from '@localization/LocalizationContext';
 
-
-
 export const UserCategoryView = () => {
     const { setUserType } = useSettings();
     const { setAppLanguage } = useLanguageSettings();
 
     const handleChoice = (userType: UserType) => {
-
         if (userType === 'visitor-en') {
             setAppLanguage('en');
         } else {
             setAppLanguage('lv');
         }
-        setUserType(userType)
-    }
+        setUserType(userType);
+    };
 
     return (
         <View style={styles.container}>
