@@ -23,4 +23,3 @@ export interface EventArticleItem extends ArticleItem {
     time: string;
     date: string;
 }
-

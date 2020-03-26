@@ -6,16 +6,11 @@ import { typography, colors } from '@styles';
 interface LabelProps {
     title: string;
     iconType: IconType;
-    propStyles?: ViewStyle
+    propStyles?: ViewStyle;
 }
 
 export const Label: React.FC<LabelProps> = ({ title, iconType, propStyles }) => (
-    <View
-        style={[
-            styles.container,
-            propStyles,
-        ]}
-    >
+    <View style={[styles.container, propStyles]}>
         <Icon size={24} type={iconType} fill={colors.darkGrey1A} />
         <Text style={styles.title}>{title}</Text>
     </View>

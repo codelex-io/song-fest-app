@@ -16,7 +16,7 @@ const FavoriteListView: React.FC<SharedStackNavList<'Favorites'>> = ({ navigatio
         <View style={hasAnyItems() ? styles.container : styles.EmptyContainer}>
             <View style={hasAnyItems() ? styles.header : styles.EmptyHeader}>
                 <StatusBar />
-                <SimpleHeader title={translations.getString('FAVORITE')} navigation={navigation} />
+                <SimpleHeader title={translations.getString('FAVORITE')} onBack={() => navigation.goBack()} />
             </View>
 
             {hasAnyItems() ? (

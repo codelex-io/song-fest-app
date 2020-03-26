@@ -6,7 +6,7 @@ import { IconBtn44 } from '@components/buttons';
 
 interface HeaderProps {
     title: string;
-    onBack: () => void
+    onBack: () => void;
 }
 
 export const SimpleHeader: React.FC<HeaderProps> = ({ title, onBack }) => (

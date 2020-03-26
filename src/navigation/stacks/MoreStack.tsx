@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
-import { MoreView, UserSettings, FavoriteListView, MarkdownEvent } from '@views';
+import { MoreView, UserSettings, FavoriteListView, Article } from '@views';
 import { AppTabsNavParams } from '..';
 import { FavouriteGroupKey } from '@domain/favourites/types';
 
@@ -26,7 +26,7 @@ const MoreStack: React.FC<AppTabsNavParams<'MORE'>> = () => {
             <Stack.Screen name="Feed" component={MoreView} />
             <Stack.Screen name="Favorites" component={FavoriteListView} />
             <Stack.Screen name="UserSettings" component={UserSettings} />
-            <Stack.Screen name="Article" component={MarkdownEvent} />
+            <Stack.Screen name="Article" component={Article} />
         </Stack.Navigator>
     );
 };

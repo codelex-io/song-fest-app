@@ -8,8 +8,7 @@ import {
     EmptyView,
     EventMapView,
     UserSettings,
-    NewsArticle,
-    EventArticle
+    Article,
 } from '@views';
 import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
@@ -33,15 +32,12 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
     let feedComponent: React.FC<AnyType> = EmptyView;
-    let articleComponent: React.FC<AnyType> = EmptyView;
 
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;
-        articleComponent = NewsArticle
     }
     if (route.name === 'EVENTS') {
         feedComponent = EventListView;
-        articleComponent = EventArticle
     } else if (route.name === 'VIDEO') {
         feedComponent = VideoView;
     } else if (route.name === 'MAP') {
@@ -55,7 +51,7 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
         <Stack.Navigator initialRouteName={'Feed'} headerMode="none">
             <Stack.Screen name="Feed" component={feedComponent} />
             <Stack.Screen name="Favorites" component={FavoriteListView} />
-            <Stack.Screen name="Article" component={articleComponent} />
+            <Stack.Screen name="Article" component={Article} />
             <Stack.Screen name="Search" component={SearchView} />
             <Stack.Screen name="UserSettings" component={UserSettings} />
         </Stack.Navigator>

@@ -11,7 +11,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { SearchInterface } from '@components/headers/SearchHeader';
-import FeedLayout from '@components/layers/FeedLayout';
+import FeedLayout from '@components/layouts/FeedLayout';
 import { StyleType } from '@domain/AnyType';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [

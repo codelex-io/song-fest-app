@@ -20,10 +20,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
         <View style={userSettingStyles.container}>
             <View style={userSettingStyles.header}>
                 <StatusBar />
-                <SimpleHeader
-                    title={translations.getString('USER_SETTINGS')}
-                    onBack={() => navigation.goBack()}
-                />
+                <SimpleHeader title={translations.getString('USER_SETTINGS')} onBack={() => navigation.goBack()} />
             </View>
 
             <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>

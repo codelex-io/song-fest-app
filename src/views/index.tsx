@@ -6,7 +6,6 @@ import EventFilterView from './EventFilterView';
 import EventListView from './EventListView';
 import { UserCategoryView } from './UserCategoryView';
 import AllIcons from './AllIcons';
-import NewsArticle from './ArticleView/NewsArticle';
 import UserSettingsView from './UserSettings';
 import { VideoView } from './VideoView';
 import EventMapView from './EventMapView';
@@ -15,7 +14,7 @@ import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
 import UserSettings from './UserSettings';
 import { LanguageView } from './LanguageView';
-import EventArticle from './ArticleView/EventArticle';
+import Article from './ArticleView';
 
 export {
     FavoriteListView,
@@ -27,7 +26,6 @@ export {
     EventFilterView,
     UserCategoryView,
     AllIcons,
-    NewsArticle,
     UserSettingsView,
     VideoView,
     LanguageView,
@@ -35,5 +33,5 @@ export {
     EmptyView,
     SearchView,
     UserSettings,
-    EventArticle,
+    Article,
 };

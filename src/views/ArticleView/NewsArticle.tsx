@@ -13,61 +13,61 @@ const toItem = (
     item: NewsItem,
     isFavourite: (fav: Favourite) => boolean,
     group: FavouriteGroupKey,
-    buyTicket: () => void
+    buyTicket: () => void,
 ): NewsArticleItem => {
     return {
         ...item,
         isFavourite: isFavourite({
-            id: item.id, title: item.title,
-            group: group
+            id: item.id,
+            title: item.title,
+            group: group,
         }),
-        buyTicket
+        buyTicket,
     };
 };
 
 const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
     const { itemId, group } = route.params;
 
-    const { loading, data } = useQuery<Data<NewsItem>, Variables>(FETCH_TARGET_NEWS_ITEM, { variables: { id: itemId } });
+    const { loading, data } = useQuery<Data<NewsItem>, Variables>(FETCH_TARGET_NEWS_ITEM, {
+        variables: { id: itemId },
+    });
     const { toggleFavourite, isFavourite } = useFavourites();
 
     const onFavourite = () => {
-        toggleFavourite({ id: item.id, group: 'NEWS', title: item.title })
-    }
+        toggleFavourite({ id: item.id, group: 'NEWS', title: item.title });
+    };
 
     const onShare = () => {
-        open(item.link)
-    }
+        open(item.link);
+    };
 
     const onBack = () => {
-        navigation.goBack()
-    }
+        navigation.goBack();
+    };
 
     const buyTicket = () => {
+        // TODO: implement ticket buying
+        open(item.link);
+    };
 
-    }
+    const item =
+        !data || loading
+            ? {
+                  id: '',
+                  title: '',
+                  content: '',
+                  image: {
+                      url: '',
+                  },
+                  isFavourite: false,
+                  link: '',
+                  date: '',
+                  buyTicket,
+              }
+            : toItem(data.item, isFavourite, group, buyTicket);
 
-    const item = !data || loading ? {
-        id: '',
-        title: '',
-        content: '',
-        image: {
-            url: '',
-        },
-        isFavourite: false,
-        link: '',
-        date: '',
-        buyTicket: buyTicket
-    } : toItem(data.item, isFavourite, group, buyTicket);
-
-    return (
-        <NewsArticleComponent
-            {...{ onBack, item, onFavourite, onShare, buyTicket }}
-            loading={loading || !data}
-        />
-    );
+    return <NewsArticleComponent {...{ onBack, item, onFavourite, onShare, buyTicket }} loading={loading || !data} />;
 };
-
-
 
 export default NewsArticle;
