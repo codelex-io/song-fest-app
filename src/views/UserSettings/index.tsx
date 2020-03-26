@@ -1,20 +1,38 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import { colors, typography } from '@styles';
-import { Card } from './Card';
+import { RadioButton } from '../../components/buttons/RadioButton';
 import { useSettings } from '@domain/settings';
 import { UserType } from '@domain/settings';
 import { useLanguageSettings } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
-import { Language } from '@localization/types';
-import { LanguageCard } from './LanguageCard';
 import { SimpleHeader } from '@components';
-const userTypes: UserType[] = ['participant', 'parent', 'visitor'];
-const language: Language[] = ['lv', 'en'];
+
+interface User {
+    type: UserType;
+    title: string;
+}
+
+const userTypes: User[] = [
+    { type: 'participant', title: 'Dalībnieks' },
+    { type: 'parent', title: 'Dalībnieka Vecāks' },
+    { type: 'visitor-lv', title: 'Apmeklētājs' },
+    { type: 'visitor-en', title: 'Visitor - English' },
+];
 
 const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation }) => {
+    const { translations } = useLanguageSettings();
     const { userType, setUserType } = useSettings();
-    const { translations, appLanguage, setAppLanguage } = useLanguageSettings();
+    const { setAppLanguage } = useLanguageSettings();
+
+    const handleChoice = (userType: UserType) => {
+        if (userType === 'visitor-en') {
+            setAppLanguage('en');
+        } else {
+            setAppLanguage('lv');
+        }
+        setUserType(userType);
+    };
 
     return (
         <View style={userSettingStyles.container}>
@@ -24,23 +42,18 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
             </View>
 
             <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
-            <View style={{ marginBottom: 16 }}>
-                {userTypes.map((user: UserType) => (
-                    <Card key={user} selectedUser={userType} title={user} onPress={() => setUserType(user)} />
-                ))}
-            </View>
 
-            <Text style={userSettingStyles.title}>{translations.getString('LANGUAGE')}</Text>
-            <View>
-                {language.map((language: Language) => (
-                    <LanguageCard
-                        key={language}
-                        selectedLanguage={appLanguage}
-                        title={language}
-                        onPress={() => setAppLanguage(language)}
+            {userTypes.map(({ type, title }: User) => {
+                return (
+                    <RadioButton
+                        key={type}
+                        active={userType === type}
+                        label={title}
+                        onPress={() => handleChoice(type)}
+                        propStyles={{ marginBottom: 16 }}
                     />
-                ))}
-            </View>
+                );
+            })}
         </View>
     );
 };
@@ -64,28 +77,6 @@ export const userSettingStyles = StyleSheet.create({
     bottomBtnsContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-    },
-    cardContainer: {
-        flexDirection: 'row',
-        paddingVertical: 10,
-        marginHorizontal: 16,
-        alignItems: 'center',
-    },
-    cardIcon: {
-        paddingRight: 14,
-    },
-    cardText: {
-        color: colors.darkGrey1A,
-        fontFamily: typography.bold,
-        fontSize: 14,
-        textTransform: 'uppercase',
-    },
-    cardExtraText: {
-        color: colors.darkGrey1A,
-        fontFamily: typography.medium,
-        fontSize: 14,
-        lineHeight: 18,
-        letterSpacing: 0.25,
     },
 });
 export default UserSettings;

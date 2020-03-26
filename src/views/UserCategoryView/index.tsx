@@ -1,34 +1,49 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconType } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
-import { LocalizationContext } from '@localization/LocalizationContext';
-import { useSettings } from '@domain/settings';
+import { useSettings, UserType } from '@domain/settings';
+import { useLanguageSettings } from '@localization/LocalizationContext';
 
 export const UserCategoryView = () => {
-    const { translations } = useContext(LocalizationContext);
     const { setUserType } = useSettings();
+    const { setAppLanguage } = useLanguageSettings();
+
+    const handleChoice = (userType: UserType) => {
+        if (userType === 'visitor-en') {
+            setAppLanguage('en');
+        } else {
+            setAppLanguage('lv');
+        }
+        setUserType(userType);
+    };
 
     return (
         <View style={styles.container}>
             <Card
                 icon={IconType.Start}
-                title={translations.getString('PARTICIPANT')}
+                title={'Dalībnieks'}
                 backgroundColor={colors.blue}
-                onPress={() => setUserType('participant')}
+                onPress={() => handleChoice('participant')}
             />
             <Card
                 icon={IconType.Parent}
-                title={translations.getString('PARENT')}
+                title={'Dalībnieka vecāks'}
                 backgroundColor={colors.green}
-                onPress={() => setUserType('parent')}
+                onPress={() => handleChoice('parent')}
             />
             <Card
                 icon={IconType.Eye}
-                title={translations.getString('VISITOR')}
+                title={'Apmeklētājs'}
                 backgroundColor={colors.orange}
-                onPress={() => setUserType('visitor')}
+                onPress={() => handleChoice('visitor-lv')}
+            />
+            <Card
+                icon={IconType.Eye}
+                title={'Visitor - English'}
+                backgroundColor={colors.lightBlue}
+                onPress={() => handleChoice('visitor-en')}
             />
         </View>
     );
