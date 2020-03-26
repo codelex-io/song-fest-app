@@ -43,8 +43,15 @@ const getLocation = (notification: Notification) => {
 
 const createNotificationListeners = (): Promise<void> => {
     firebase.notifications().onNotification(async notification => {
-        notification.android.setChannelId(ANDROID_CHANNEL);
-        await firebase.notifications().displayNotification(notification);
+        notification.setSound('default');
+        if (Platform.OS === 'android') {
+            notification.android.setChannelId(ANDROID_CHANNEL);
+        }
+        try {
+            await firebase.notifications().displayNotification(notification);
+        } catch (e) {
+            errors.onError(e);
+        }
     });
     firebase.notifications().onNotificationOpened((notificationOpen: NotificationOpen) => {
         const location = getLocation(notificationOpen.notification);
