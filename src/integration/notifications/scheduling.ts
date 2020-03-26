@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import firebase from 'react-native-firebase';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { ANDROID_CHANNEL } from './constants';
 import { randomString } from '@utils';
 import { Location } from 'src/navigation/location';
@@ -24,7 +24,9 @@ export const scheduleNotification = async (source: Notification): Promise<string
         .android.setChannelId(ANDROID_CHANNEL)
         .android.setAutoCancel(true);
     const schedule = {
-        fireDate: source.fireDate.valueOf(),
+        fireDate: moment()
+            .add(3, 'seconds')
+            .valueOf(),
         exact: true,
     };
     return firebase

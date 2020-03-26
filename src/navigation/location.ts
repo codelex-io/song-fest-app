@@ -17,7 +17,7 @@ export const fromNotificationData = (data: any): Location | undefined => {
         if (!tab || (tab !== 'NEWS' && tab !== 'EVENTS')) {
             return;
         }
-        const normalizedTab = (tab as string).toLowerCase().trim();
+        const normalizedTab = (tab as string).toUpperCase().trim();
         if (normalizedTab !== 'NEWS' && normalizedTab !== 'EVENTS') {
             return;
         }
