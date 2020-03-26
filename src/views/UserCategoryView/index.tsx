@@ -3,35 +3,50 @@ import { View, StyleSheet } from 'react-native';
 import { IconType } from '@components';
 import { colors } from '@styles';
 import { Card } from './Card';
-import { useSettings } from '@domain/settings';
+import { useSettings, UserType } from '@domain/settings';
+import { useLanguageSettings } from '@localization/LocalizationContext';
+
+
 
 export const UserCategoryView = () => {
     const { setUserType } = useSettings();
+    const { setAppLanguage } = useLanguageSettings();
+
+    const handleChoice = (userType: UserType) => {
+
+        if (userType === 'visitor-en') {
+            setAppLanguage('en');
+        } else {
+            setAppLanguage('lv');
+        }
+        setUserType(userType)
+    }
+
     return (
         <View style={styles.container}>
             <Card
                 icon={IconType.Start}
                 title={'Dalībnieks'}
                 backgroundColor={colors.blue}
-                onPress={() => setUserType('participant')}
+                onPress={() => handleChoice('participant')}
             />
             <Card
                 icon={IconType.Parent}
                 title={'Dalībnieka vecāks'}
                 backgroundColor={colors.green}
-                onPress={() => setUserType('parent')}
+                onPress={() => handleChoice('parent')}
             />
             <Card
                 icon={IconType.Eye}
                 title={'Apmeklētājs'}
                 backgroundColor={colors.orange}
-                onPress={() => setUserType('visitor-lv')}
+                onPress={() => handleChoice('visitor-lv')}
             />
             <Card
                 icon={IconType.Eye}
                 title={'Visitor - English'}
                 backgroundColor={colors.lightBlue}
-                onPress={() => setUserType('visitor-en')}
+                onPress={() => handleChoice('visitor-en')}
             />
         </View>
     );

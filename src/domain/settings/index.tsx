@@ -32,16 +32,10 @@ export const useSettings = () => useContext<SettingsType>(SettingsContext);
 
 export const SettingsContextProvider: React.FC = ({ children }) => {
     const [userType, setUserType] = useState<UserType | null>(currentUserType);
-    const { setAppLanguage } = useLanguageSettings();
     return (
         <SettingsContext.Provider
             value={{
                 setUserType: (userType: UserType) => {
-                    if (userType === 'visitor-en') {
-                        setAppLanguage('en');
-                    } else {
-                        setAppLanguage('lv');
-                    }
                     storeUserType(userType);
                     setUserType(userType);
                 },

@@ -21,8 +21,18 @@ const userTypes: User[] = [
 ];
 
 const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation }) => {
-    const { userType, setUserType } = useSettings();
     const { translations } = useLanguageSettings();
+    const { userType, setUserType } = useSettings();
+    const { setAppLanguage } = useLanguageSettings();
+
+    const handleChoice = (userType: UserType) => {
+        if (userType === 'visitor-en') {
+            setAppLanguage('en');
+        } else {
+            setAppLanguage('lv');
+        }
+        setUserType(userType)
+    }
 
     return (
         <View style={userSettingStyles.container}>
@@ -39,7 +49,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
                         key={type}
                         active={userType === type}
                         label={title}
-                        onPress={() => setUserType(type)}
+                        onPress={() => handleChoice(type)}
                         propStyles={{ marginBottom: 16 }}
                     />
                 );
