@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import firebase from 'react-native-firebase';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { ANDROID_CHANNEL } from './constants';
 import { randomString } from '@utils';
 import { Location } from 'src/navigation/location';
@@ -12,6 +12,9 @@ interface Notification {
 }
 
 export const scheduleNotification = async (source: Notification): Promise<string | undefined> => {
+    if (source.fireDate.isBefore(moment())) {
+        return;
+    }
     const notificationId = randomString();
     const title = Platform.OS === 'android' ? 'Nāc Gavilēt' : '';
     const notification = new firebase.notifications.Notification()

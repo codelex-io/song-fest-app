@@ -8,9 +8,14 @@ export interface Favourite {
     title: string;
     notification?: {
         id?: string;
-        fireDate: Moment;
-        title: string;
+        fireDate?: Moment;
+        title?: string;
     };
+}
+
+export interface FavouriteEvent extends Favourite {
+    date: string;
+    time: string;
 }
 
 export interface GroupOfFavourites {
