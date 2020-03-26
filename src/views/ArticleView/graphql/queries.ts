@@ -20,10 +20,17 @@ export const FETCH_TARGET_EVENTS_ITEM = gql`
             id
             title
             date
+            time
             image {
                 url
             }
+            content
             link
+            locationTitle
+            location {
+                latitude
+                longitude
+            }
         }
     }
 `;

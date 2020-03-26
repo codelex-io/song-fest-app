@@ -3,22 +3,20 @@ import { Text, View, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 import { IconType } from '../Icon';
 import { IconBtn44 } from '@components/buttons';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 
 interface HeaderProps {
     title: string;
-    navigation: StackNavigationProp<SharedStackParamsList, 'Favorites' | 'Article' | 'UserSettings'>;
+    onBack: () => void
 }
 
-export const SimpleHeader: React.FC<HeaderProps> = ({ title, navigation }) => (
+export const SimpleHeader: React.FC<HeaderProps> = ({ title, onBack }) => (
     <View style={styles.header}>
         <IconBtn44
             style={styles.iconBox}
             icon={IconType.ChevronLeft}
             color={colors.darkGrey1A}
             bgColor={colors.white}
-            onPress={() => navigation.goBack()}
+            onPress={onBack}
         />
         <Text style={styles.simpleText}>{title}</Text>
     </View>
