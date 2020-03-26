@@ -12,6 +12,7 @@ import { TimeSelector, filterByDate } from '@domain';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { open } from '@domain/share';
 import { SearchInterface } from '@components/headers/SearchHeader';
+import { toFavourite } from '@domain/events';
 
 const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
     const [currentSearch, setCurrentSearch] = useState<SearchInterface>({ payload: '', isActive: false });
@@ -39,14 +40,7 @@ const EventListView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation
             refreshing={() => !loading}
             loading={loading}
             items={filterByDate(now, items, activeTime)}
-            onFavourite={item =>
-                toggleFavourite({
-                    id: item.id,
-                    title: item.title,
-                    group: 'EVENTS',
-                    notificationTime: item.notificationTime,
-                })
-            }
+            onFavourite={item => toggleFavourite(toFavourite(item))}
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
             onReadMore={item => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
             activeKey={activeTime}
@@ -71,7 +65,6 @@ const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean
         ...item,
         date: moment(item.date),
         isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }),
-        notificationTime: item.notificationTime ? moment(item.notificationTime) : undefined,
     };
 };
 
