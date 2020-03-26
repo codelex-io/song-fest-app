@@ -1,8 +1,7 @@
 import { Moment } from 'moment';
+import { Event } from '@domain/events/types';
 
-export interface EventItem {
-    id: string;
-    title: string;
+export interface EventItem extends Event {
     date: Moment;
     time: string;
     image?: {
@@ -15,5 +14,4 @@ export interface EventItem {
         longitude: number;
     };
     link: string;
-    notificationTime?: Moment;
 }

@@ -11,7 +11,7 @@ interface Notification {
     location?: Location;
 }
 
-export const scheduleNotification = async (source: Notification): Promise<string> => {
+export const scheduleNotification = async (source: Notification): Promise<string | undefined> => {
     const notificationId = randomString();
     const title = Platform.OS === 'android' ? 'Nāc Gavilēt' : '';
     const notification = new firebase.notifications.Notification()

@@ -1,3 +1,5 @@
+import { Event } from '@domain/events/types';
+
 export interface Data<T> {
     item: T;
 }
@@ -13,9 +15,7 @@ export interface NewsItem {
     link: string;
 }
 
-export interface EventItem {
-    id: string;
-    title: string;
+export interface EventItem extends Event {
     time: string;
     date: string;
     image?: {

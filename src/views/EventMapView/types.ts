@@ -1,8 +1,6 @@
-import { Moment } from 'moment';
+import { Event } from '@domain/events/types';
 
-export interface EventItem {
-    id: string;
-    title: string;
+export interface EventItem extends Event {
     type?: string;
     date: string;
     time: string;
@@ -15,5 +13,4 @@ export interface EventItem {
     currentItem?: number;
     totalItems?: number;
     isFavourite: boolean;
-    notificationTime?: Moment;
 }
