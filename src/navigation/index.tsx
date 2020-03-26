@@ -47,7 +47,7 @@ const NavigationTheme: Theme = {
 
 const Navigation: React.FC = () => {
     const { userType } = useSettings();
-    console.log(initialLocation);
+    console.log('init nav location', initialLocation);
     if (userType === null) {
         return <UserCategoryView />;
     }
