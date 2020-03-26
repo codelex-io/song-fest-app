@@ -1,6 +1,6 @@
 import { errors } from '@utils';
 
-type Tab = 'news' | 'events';
+type Tab = 'NEWS' | 'EVENTS';
 
 export interface Location {
     tab: Tab;
@@ -14,11 +14,11 @@ export const fromNotificationData = (data: any): Location | undefined => {
             return;
         }
         const { tab, itemId } = data;
-        if (!tab || (tab !== 'news' && tab !== 'events')) {
+        if (!tab || (tab !== 'NEWS' && tab !== 'EVENTS')) {
             return;
         }
         const normalizedTab = (tab as string).toLowerCase().trim();
-        if (normalizedTab !== 'news' && normalizedTab !== 'events') {
+        if (normalizedTab !== 'NEWS' && normalizedTab !== 'EVENTS') {
             return;
         }
         return {

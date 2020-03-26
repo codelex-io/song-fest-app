@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer, DefaultTheme, RouteProp } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, RouteProp, NavigationContainerRef } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
@@ -10,7 +10,17 @@ import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
 import InitialUserSettingsStack from './stacks/InitialUserSettingsStack';
 import { AnyType } from '@domain/AnyType';
-import { fromNotificationData } from './location';
+import { fromNotificationData, Location } from './location';
+
+let initialLocation: Location | null = null;
+
+const setInitialLocation = (location: Location) => (initialLocation = location);
+
+const navigationRef = React.createRef<NavigationContainerRef>();
+
+const navigate = (location: Location) => {
+    navigationRef.current?.navigate(location.tab, { itemId: location.itemId });
+};
 
 type AppTabsParamList = {
     NEWS: undefined;
@@ -37,12 +47,12 @@ const NavigationTheme: Theme = {
 
 const Navigation: React.FC = () => {
     const { userType } = useSettings();
-
+    console.log(initialLocation);
     if (userType === null) {
         return <InitialUserSettingsStack />;
     }
     return (
-        <NavigationContainer theme={NavigationTheme}>
+        <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused }) => {
@@ -102,6 +112,6 @@ const hideOnUserCategoryView = (route: AnyType): boolean => {
     return lastRoute !== 'UserSettings' && lastRoute !== 'Article';
 };
 
-export { fromNotificationData };
+export { fromNotificationData, setInitialLocation, navigate };
 
 export default Navigation;

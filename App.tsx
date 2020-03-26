@@ -7,18 +7,19 @@ import { LocalizationContextProvider } from './src/localization/LocalizationCont
 import { initLanguage } from './src/localization';
 import { initSettings, SettingsContextProvider } from './src/domain/settings';
 import { useStoryBook, StoryBookContextProvider } from './src/domain/storybook';
-import { postLaunch } from './src/integration/notifications';
+import { initNotifications, postLaunch } from './src/integration/notifications';
 import Navigation from './src/navigation';
 import Storybook from './storybook';
 import { StatusBarWrapper } from './src/components';
 import { hideSplashScreen } from './src/splash';
 
-const bootstrap = async () =>
+const bootstrap = async (isRealDevice: boolean) =>
     Promise.all([
         initApollo(),
         initFavourites(),
         initLanguage(),
         initSettings(),
+        initNotifications(isRealDevice),
         new Promise(resolve => setTimeout(resolve, 3000)),
     ]);
 
@@ -30,10 +31,10 @@ const App: React.FC<Props> = ({ isRealDevice }) => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const { isStoryBookActive } = useStoryBook();
     useEffect(() => {
-        bootstrap().then(() => {
+        bootstrap(isRealDevice).then(() => {
             setLoaded(true);
             hideSplashScreen();
-            postLaunch(isRealDevice);
+            postLaunch();
         });
     }, []);
     if (!isLoaded) {
