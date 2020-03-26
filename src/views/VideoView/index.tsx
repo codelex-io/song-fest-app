@@ -6,7 +6,7 @@ import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { VideoSelector } from '@domain';
-import FeedLayout from '@components/layers/FeedLayout';
+import FeedLayout from '@components/layouts/FeedLayout';
 import Animated from 'react-native-reanimated';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [

@@ -14,16 +14,26 @@ export const FETCH_TARGET_NEWS_ITEM = gql`
         }
     }
 `;
+
 export const FETCH_TARGET_EVENTS_ITEM = gql`
     query($id: ID!) {
         item: eventItem(where: { id: $id }) {
             id
             title
             date
+            time
             image {
                 url
             }
+            content
             link
+            locationTitle
+            location {
+                latitude
+                longitude
+            }
+            notificationTitle
+            notificationTime
         }
     }
 `;

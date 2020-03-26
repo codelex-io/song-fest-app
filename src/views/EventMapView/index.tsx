@@ -12,13 +12,12 @@ import { View } from 'react-native';
 import { colors } from '@styles';
 import Loading from '@components/Loading';
 import { SearchInterface } from '@components/headers/SearchHeader';
-import moment from 'moment';
+import { toFavourite } from '@domain/events';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
     return {
         ...item,
         isFavourite: isFavourite({ id: item.id, title: item.title, group: 'EVENTS' }),
-        notificationTime: item.notificationTime ? moment(item.notificationTime) : undefined,
     };
 };
 
@@ -52,14 +51,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
         <EventMapComponent
             loading={loading}
             items={items}
-            onFavourite={item =>
-                toggleFavourite({
-                    id: item.id,
-                    title: item.title,
-                    group: 'EVENTS',
-                    notificationTime: item.notificationTime,
-                })
-            }
+            onFavourite={item => toggleFavourite(toFavourite(item))}
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
             onSearch={(color: string) => navigation.navigate('Search', { color: color })}
             searchInput={currentSearch}

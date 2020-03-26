@@ -19,7 +19,7 @@ const IconBtn44: React.FC<Props> = ({ onPress, style, icon, color, bgColor }) =>
                     backgroundColor: bgColor,
                     padding: 10,
                 },
-                { ...style },
+                style,
             ]}
             activeOpacity={opacity.opacity8}
         >

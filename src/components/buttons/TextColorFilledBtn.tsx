@@ -10,7 +10,7 @@ interface TextColorFilledBtnProps {
 }
 const TextColorFilledBtn: React.FC<TextColorFilledBtnProps> = ({ style, children, onPress }) => {
     return (
-        <TouchableOpacity activeOpacity={opacity8} style={[{ ...style }, btnStyles.container]} onPress={onPress}>
+        <TouchableOpacity activeOpacity={opacity8} style={[btnStyles.container, style]} onPress={onPress}>
             <Text style={btnStyles.text}>{children}</Text>
         </TouchableOpacity>
     );
@@ -21,7 +21,7 @@ const btnStyles = StyleSheet.create({
         borderRadius: 3,
         paddingVertical: 13,
         paddingHorizontal: 16,
-        alignSelf: 'baseline',
+        overflow: 'hidden',
     },
     text: {
         fontFamily: typography.bold,

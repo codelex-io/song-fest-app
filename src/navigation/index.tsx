@@ -15,7 +15,7 @@ import { UserCategoryView } from '@views';
 type AppTabsParamList = {
     NEWS: undefined;
     EVENTS: undefined;
-    MAP: undefined;
+    MAP: { item: AnyType };
     VIDEO: undefined;
     MORE: undefined;
 };

@@ -16,6 +16,8 @@ export const FETCH_EVENT_ITEMS = gql`
                 longitude
             }
             link
+            notificationTitle
+            notificationTime
         }
     }
 `;
