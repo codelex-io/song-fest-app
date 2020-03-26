@@ -1,3 +1,4 @@
+import mockAsyncStorage from '@utils/mock-async-storage';
 import {
     addFavourite,
     getFavourites,
@@ -8,9 +9,19 @@ import {
     hasAnyItems,
 } from './index';
 
-jest.mock('./storage', () => ({
-    fetchFavourites: async () => [],
-    storeFavourites: async () => null,
+jest.mock('@react-native-community/async-storage', () => mockAsyncStorage);
+
+jest.mock('../../toast', () => ({
+    toast: () => null,
+}));
+
+jest.mock('@localization/translations', () => ({
+    getString: () => 'test',
+}));
+
+jest.mock('@integration/notifications', () => ({
+    scheduleNotification: () => null,
+    cancelNotification: () => null,
 }));
 
 describe('Favourites', () => {

@@ -12,5 +12,9 @@ export const fetchFavourites = async () => {
 };
 
 export const storeFavourites = async (favs: GroupOfFavourites[]) => {
-    AsyncStorage.setItem(key, JSON.stringify(favs));
+    const copy = favs.map(g => ({
+        ...g,
+        items: g.items.map(it => ({ ...it, notification: it.notification ? { id: it.notification.id } : null })),
+    }));
+    AsyncStorage.setItem(key, JSON.stringify(copy));
 };

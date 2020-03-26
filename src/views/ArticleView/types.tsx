@@ -1,3 +1,5 @@
+import { Event } from '@domain/events/types';
+
 export interface ArticleItem {
     id: string;
     title: string;
@@ -14,7 +16,7 @@ export interface NewsArticleItem extends ArticleItem {
     date: string;
 }
 
-export interface EventArticleItem extends ArticleItem {
+export interface EventArticleItem extends ArticleItem, Event {
     locationTitle: string;
     location: {
         latitude: number;

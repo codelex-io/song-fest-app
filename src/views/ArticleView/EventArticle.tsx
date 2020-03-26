@@ -9,6 +9,7 @@ import { open } from '@domain/share';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import EventArticleComponent from './component/EventArticleComponent';
 import { useNavigation } from '@react-navigation/native';
+import { toFavourite } from '@domain/events';
 
 const toItem = (
     item: EventItem,
@@ -35,7 +36,7 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
     const { toggleFavourite, isFavourite } = useFavourites();
 
     const onFavourite = () => {
-        toggleFavourite({ id: item.id, group: 'EVENTS', title: item.title });
+        toggleFavourite(toFavourite(item));
     };
 
     const onShare = () => {

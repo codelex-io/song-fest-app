@@ -1,3 +1,5 @@
+import { Event } from '@domain/events/types';
+
 export interface Data {
     items: EventItem[];
 }
@@ -6,9 +8,7 @@ export interface Variables {
     searchBy: string;
 }
 
-export interface EventItem {
-    id: string;
-    title: string;
+export interface EventItem extends Event {
     date: string;
     time: string;
     image?: {
@@ -20,5 +20,4 @@ export interface EventItem {
         longitude: number;
     };
     link: string;
-    notificationTime?: string;
 }

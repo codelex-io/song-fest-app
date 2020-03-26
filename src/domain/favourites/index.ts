@@ -1,33 +1,15 @@
 import { errors } from '@utils';
-import { scheduleNotification, cancelNotification } from '@integration/notifications';
 import { Favourite, GroupOfFavourites } from './types';
 import { useFavourites, FavouritesContextProvider } from './context';
 import { fetchFavourites, storeFavourites } from './storage';
 import { toast } from '../../toast';
 import translations from '@localization/translations';
-import moment from 'moment';
+import { addNotification, removeNotification } from './notifications';
 
 let groups: GroupOfFavourites[] = [];
 
 export const initFavourites = async () => {
     groups = await fetchFavourites();
-};
-
-const addNotification = async (fav: Favourite) => {
-    if (fav.group === 'EVENTS') {
-        const notificationId = await scheduleNotification({
-            content: fav.title,
-            fireDate: moment().add(5, 'seconds'),
-            location: { tab: 'events', itemId: fav.id },
-        });
-        fav.notificationId = notificationId;
-    }
-};
-
-const removeNotification = async (fav: Favourite) => {
-    if (fav.notificationId) {
-        cancelNotification(fav.notificationId);
-    }
 };
 
 export const addFavourite = async (fav: Favourite) => {

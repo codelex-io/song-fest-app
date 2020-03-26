@@ -6,8 +6,11 @@ export interface Favourite {
     id: string;
     group: FavouriteGroupKey;
     title: string;
-    notificationId?: string;
-    notificationTime?: Moment;
+    notification?: {
+        id?: string;
+        fireDate: Moment;
+        title: string;
+    };
 }
 
 export interface GroupOfFavourites {
