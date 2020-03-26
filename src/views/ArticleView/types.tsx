@@ -7,6 +7,7 @@ export interface ArticleItem {
     };
     isFavourite: boolean;
     link: string;
+    buyTicket: unknown | undefined;
 }
 
 export interface NewsArticleItem extends ArticleItem {
@@ -20,6 +21,6 @@ export interface EventArticleItem extends ArticleItem {
         longitude: number;
     };
     time: string;
-    tickets: unknown | undefined;
+    date: string;
 }
 

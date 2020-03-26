@@ -80,9 +80,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ children, onBack, loading
                            </View>
                         }
 
-                        <View style={styles.row}>
-                           {children}
-                        </View>
+                        {children}
 
                         {content && (
                            <View>
@@ -134,9 +132,7 @@ const styles = StyleSheet.create({
       width: '100%',
       height: 180,
    },
-   row: {
-      flexDirection: 'row',
-   },
+
    date: {
       fontSize: 14,
       color: colors.mediumGrey4D,

@@ -13,8 +13,16 @@ const toItem = (
     item: NewsItem,
     isFavourite: (fav: Favourite) => boolean,
     group: FavouriteGroupKey,
+    buyTicket: () => void
 ): NewsArticleItem => {
-    return { ...item, isFavourite: isFavourite({ id: item.id, title: item.title, group: group }) };
+    return {
+        ...item,
+        isFavourite: isFavourite({
+            id: item.id, title: item.title,
+            group: group
+        }),
+        buyTicket
+    };
 };
 
 const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
@@ -22,18 +30,6 @@ const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigatio
 
     const { loading, data } = useQuery<Data<NewsItem>, Variables>(FETCH_TARGET_NEWS_ITEM, { variables: { id: itemId } });
     const { toggleFavourite, isFavourite } = useFavourites();
-
-    const item = !data || loading ? {
-        id: '',
-        title: '',
-        content: '',
-        image: {
-            url: '',
-        },
-        isFavourite: false,
-        link: '',
-        date: '',
-    } : toItem(data.item, isFavourite, group);
 
     const onFavourite = () => {
         toggleFavourite({ id: item.id, group: 'NEWS', title: item.title })
@@ -47,8 +43,28 @@ const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigatio
         navigation.goBack()
     }
 
+    const buyTicket = () => {
+
+    }
+
+    const item = !data || loading ? {
+        id: '',
+        title: '',
+        content: '',
+        image: {
+            url: '',
+        },
+        isFavourite: false,
+        link: '',
+        date: '',
+        buyTicket: buyTicket
+    } : toItem(data.item, isFavourite, group, buyTicket);
+
     return (
-        <NewsArticleComponent {...{ onBack, item, onFavourite, onShare }} loading={loading || !data} />
+        <NewsArticleComponent
+            {...{ onBack, item, onFavourite, onShare, buyTicket }}
+            loading={loading || !data}
+        />
     );
 };
 
