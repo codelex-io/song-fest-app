@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer, DefaultTheme, RouteProp, NavigationContainerRef, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, RouteProp, NavigationContainerRef } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
@@ -9,7 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import SharedStack from './stacks/SharedStack';
 import MoreStack from './stacks/MoreStack';
 import { AnyType } from '@domain/AnyType';
-import { fromNotificationData, Location } from './location';
+import { fromNotificationData, Location, Tab as TabType } from './location';
 import { UserCategoryView } from '@views';
 
 const Tab = createBottomTabNavigator<AppTabsParamList>();
@@ -21,14 +21,24 @@ const setInitialLocation = (location: Location) => (initialLocation = location);
 const navigationRef = React.createRef<NavigationContainerRef>();
 
 const navigate = (location: Location) => {
-    navigationRef.current?.navigate(location.tab, { itemId: location.itemId });
+    navigationRef.current?.navigate('Article', {
+        itemId: location.itemId,
+        group: location.tab,
+        hasHistory: true,
+    });
+};
+
+export type NotificationProp = {
+    group: TabType;
+    itemId: string | undefined;
+    hasHistory: boolean;
 };
 
 type AppTabsParamList = {
-    NEWS: { itemId: string };
-    EVENTS: { itemId: string };
-    MAP: { item: AnyType, itemId: string };
-    VIDEO: { itemId: string };
+    NEWS: NotificationProp;
+    EVENTS: NotificationProp;
+    MAP: { item: AnyType };
+    VIDEO: NotificationProp;
     MORE: undefined;
 };
 
@@ -47,13 +57,18 @@ const NavigationTheme: Theme = {
 
 const Navigation: React.FC = () => {
     const { userType } = useSettings();
-    console.log('init nav location', initialLocation);
     if (userType === null) {
         return <UserCategoryView />;
     }
 
-    const initialRouteName = initialLocation?.tab
-    const itemId = initialLocation?.itemId
+    const initialRouteName = initialLocation?.tab;
+
+    const notificationItem = {
+        group: initialLocation?.tab,
+        itemId: initialLocation?.itemId,
+        hasHistory: false,
+    };
+
     return (
         <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
             <Tab.Navigator
@@ -67,7 +82,7 @@ const Navigation: React.FC = () => {
                 })}
             >
                 <Tab.Screen
-                    initialParams={{ itemId }}
+                    initialParams={notificationItem}
                     options={({ route }) => {
                         return { tabBarVisible: hideOnUserCategoryView(route) };
                     }}
@@ -75,7 +90,7 @@ const Navigation: React.FC = () => {
                     component={SharedStack}
                 />
                 <Tab.Screen
-                    initialParams={{ itemId }}
+                    initialParams={notificationItem}
                     options={({ route }) => {
                         return { tabBarVisible: hideOnUserCategoryView(route) };
                     }}
@@ -83,7 +98,6 @@ const Navigation: React.FC = () => {
                     component={SharedStack}
                 />
                 <Tab.Screen
-                    initialParams={{ itemId }}
                     options={({ route }) => {
                         return { tabBarVisible: hideOnUserCategoryView(route) };
                     }}
@@ -91,7 +105,7 @@ const Navigation: React.FC = () => {
                     component={SharedStack}
                 />
                 <Tab.Screen
-                    initialParams={{ itemId }}
+                    initialParams={notificationItem}
                     options={({ route }) => {
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),

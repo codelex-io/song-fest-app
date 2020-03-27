@@ -27,7 +27,7 @@ interface Props {
     onSearch: (color: string) => void;
     searchInput: SearchInterface;
     onResetSearch: () => void;
-    onReadMore: (item: EventItem) => void;
+    navigateToArticle: (item: EventItem) => void;
     navigation: StackNavigationProp<SharedStackParamsList, 'Feed'>;
 }
 
@@ -38,7 +38,7 @@ const EventMapComponent: React.FC<Props> = ({
     onSearch,
     searchInput,
     onResetSearch,
-    onReadMore,
+    navigateToArticle,
     navigation,
 }) => {
     const mapViewRef = useRef<MapView>(null);
@@ -249,7 +249,7 @@ const EventMapComponent: React.FC<Props> = ({
                                             item={item}
                                             onFavourite={() => onFavourite(item)}
                                             onNavigate={() => onNavigate(item)}
-                                            onReadMore={() => onReadMore(item)}
+                                            navigateToArticle={() => navigateToArticle(item)}
                                             itemIndex={index + 1}
                                             totalItems={items.length}
                                             backgroundColor={colors.findColorByIndex(index)}

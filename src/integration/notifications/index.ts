@@ -35,7 +35,6 @@ const requestPermission = async () => {
 };
 
 const getLocation = (notification: Notification) => {
-    console.log(notification.data);
     if (!notification) {
         return;
     }

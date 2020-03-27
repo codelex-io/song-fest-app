@@ -7,10 +7,19 @@ import { LocalizationContext } from '@localization/LocalizationContext';
 import StatusBar from '@components/headers/StatusBar';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { colors } from '@styles';
+import { Favourite } from '@domain/favourites/types';
 
 const FavoriteListView: React.FC<SharedStackNavList<'Favorites'>> = ({ navigation }) => {
     const { favourites, hasAnyItems, toggleFavourite } = useFavourites();
     const { translations } = useContext(LocalizationContext);
+
+    const navigateToArticle = (item: Favourite) => {
+        navigation.navigate('Article', {
+            itemId: item.id,
+            group: item.group,
+            hasHistory: true,
+        });
+    };
 
     return (
         <View style={hasAnyItems() ? styles.container : styles.EmptyContainer}>
@@ -22,7 +31,7 @@ const FavoriteListView: React.FC<SharedStackNavList<'Favorites'>> = ({ navigatio
             {hasAnyItems() ? (
                 <FavoriteListViewComponent
                     favourites={favourites}
-                    onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: item.group })}
+                    onNavigate={item => navigateToArticle(item)}
                     onFavourite={item => toggleFavourite(item)}
                 />
             ) : (

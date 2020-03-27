@@ -1,7 +1,7 @@
 import { errors } from '@utils';
 import { AnyType } from '@domain/AnyType';
 
-type Tab = 'NEWS' | 'EVENTS';
+export type Tab = 'NEWS' | 'EVENTS';
 
 export interface Location {
     tab: Tab;
