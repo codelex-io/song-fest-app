@@ -88,10 +88,7 @@ const EventListComponent: React.FC<Props> = ({
         >
             {(_resetHeader, headerHeight, animatedScrollOffset) => (
                 <AnimatedFlatlist<EventItem>
-                    style={[
-                        styles.flatlist,
-                        { paddingTop: headerHeight }
-                    ]}
+                    style={[styles.flatlist, { paddingTop: headerHeight }]}
                     alwaysBounce={false}
                     alwaysBounceVertical={false}
                     bounces={false}
@@ -145,6 +142,6 @@ const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
         width: '100%',
-    }
-})
+    },
+});
 export default EventListComponent;
