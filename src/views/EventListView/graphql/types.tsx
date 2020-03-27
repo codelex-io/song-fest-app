@@ -8,6 +8,10 @@ export interface Variables {
     searchBy: string;
 }
 
+export interface SingleIdVariables {
+    id?: string;
+}
+
 export interface EventItem extends Event {
     date: string;
     time: string;

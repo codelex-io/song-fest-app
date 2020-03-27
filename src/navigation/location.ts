@@ -1,4 +1,5 @@
 import { errors } from '@utils';
+import { AnyType } from '@domain/AnyType';
 
 type Tab = 'NEWS' | 'EVENTS';
 
@@ -7,8 +8,7 @@ export interface Location {
     itemId?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fromNotificationData = (data: any): Location | undefined => {
+export const fromNotificationData = (data: AnyType): Location | undefined => {
     try {
         if (!data) {
             return;

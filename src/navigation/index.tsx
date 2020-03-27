@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer, DefaultTheme, RouteProp, NavigationContainerRef } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, RouteProp, NavigationContainerRef, useNavigation } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@components';
@@ -11,6 +11,8 @@ import MoreStack from './stacks/MoreStack';
 import { AnyType } from '@domain/AnyType';
 import { fromNotificationData, Location } from './location';
 import { UserCategoryView } from '@views';
+
+const Tab = createBottomTabNavigator<AppTabsParamList>();
 
 let initialLocation: Location | null = null;
 
@@ -23,10 +25,10 @@ const navigate = (location: Location) => {
 };
 
 type AppTabsParamList = {
-    NEWS: undefined;
-    EVENTS: undefined;
-    MAP: { item: AnyType };
-    VIDEO: undefined;
+    NEWS: { itemId: string };
+    EVENTS: { itemId: string };
+    MAP: { item: AnyType, itemId: string };
+    VIDEO: { itemId: string };
     MORE: undefined;
 };
 
@@ -34,8 +36,6 @@ export type AppTabsNavParams<T extends keyof AppTabsParamList> = {
     navigation: StackNavigationProp<AppTabsParamList, T>;
     route: RouteProp<AppTabsParamList, T>;
 };
-
-const Tab = createBottomTabNavigator<AppTabsParamList>();
 
 const NavigationTheme: Theme = {
     ...DefaultTheme,
@@ -51,9 +51,13 @@ const Navigation: React.FC = () => {
     if (userType === null) {
         return <UserCategoryView />;
     }
+
+    const initialRouteName = initialLocation?.tab
+    const itemId = initialLocation?.itemId
     return (
         <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
             <Tab.Navigator
+                {...{ initialRouteName }}
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused }) => {
                         const { name } = route;
@@ -63,6 +67,7 @@ const Navigation: React.FC = () => {
                 })}
             >
                 <Tab.Screen
+                    initialParams={{ itemId }}
                     options={({ route }) => {
                         return { tabBarVisible: hideOnUserCategoryView(route) };
                     }}
@@ -70,6 +75,7 @@ const Navigation: React.FC = () => {
                     component={SharedStack}
                 />
                 <Tab.Screen
+                    initialParams={{ itemId }}
                     options={({ route }) => {
                         return { tabBarVisible: hideOnUserCategoryView(route) };
                     }}
@@ -77,6 +83,7 @@ const Navigation: React.FC = () => {
                     component={SharedStack}
                 />
                 <Tab.Screen
+                    initialParams={{ itemId }}
                     options={({ route }) => {
                         return { tabBarVisible: hideOnUserCategoryView(route) };
                     }}
@@ -84,6 +91,7 @@ const Navigation: React.FC = () => {
                     component={SharedStack}
                 />
                 <Tab.Screen
+                    initialParams={{ itemId }}
                     options={({ route }) => {
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),

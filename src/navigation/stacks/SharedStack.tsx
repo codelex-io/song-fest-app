@@ -17,7 +17,7 @@ import { NewsListViewIndex } from '@views/NewsListView';
 import { AnyType } from '@domain/AnyType';
 
 export type SharedStackParamsList = {
-    Feed: { payload: string };
+    Feed: { payload: string, itemId?: string };
     Favorites: undefined;
     Article: { itemId: string; group: FavouriteGroupKey };
     Search: { color: string };
@@ -31,8 +31,8 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
-    let feedComponent: React.FC<AnyType> = EmptyView;
 
+    let feedComponent: React.FC<AnyType> = EmptyView;
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;
     }
@@ -49,7 +49,7 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
     }
     return (
         <Stack.Navigator initialRouteName={'Feed'} headerMode="none">
-            <Stack.Screen name="Feed" component={feedComponent} />
+            <Stack.Screen initialParams={route.params} name="Feed" component={feedComponent} />
             <Stack.Screen name="Favorites" component={FavoriteListView} />
             <Stack.Screen name="Article" component={Article} />
             <Stack.Screen name="Search" component={SearchView} />
