@@ -35,7 +35,7 @@ const EventArticleComponent: React.FC<Props> = ({
 
     return (
         <ArticleLayout {...{ onBack, loading, title, image, content, secondaryTitle }}>
-            <View style={styles.row}>
+            <View style={[styles.row, styles.labels]}>
                 <Label title={dateTimeUtils.formatDate(date)} iconType={IconType.Calendar} />
                 <Label title={time} iconType={IconType.Clock} />
             </View>
@@ -78,6 +78,9 @@ const EventArticleComponent: React.FC<Props> = ({
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
+    },
+    labels: {
+        marginBottom: 12,
     },
     roundedButton: {
         borderRadius: 3,

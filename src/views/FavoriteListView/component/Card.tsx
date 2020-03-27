@@ -1,9 +1,11 @@
 import React, { useContext, ReactNode } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors, opacity } from '@styles';
-import { Icon, IconType } from '@components';
+import { Text, View, StyleSheet } from 'react-native';
+import { colors, typography } from '@styles';
+import { IconType } from '@components';
 import { GroupOfFavourites, Favourite, FavouriteEvent } from '@domain/favourites/types';
 import { LocalizationContext } from '@localization/LocalizationContext';
+import ListEntry from './ListEntry';
+import { Label } from '@components/typography/Label';
 
 interface CardProps {
     group: GroupOfFavourites;
@@ -14,75 +16,49 @@ interface CardProps {
 export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) => {
     const { translations } = useContext(LocalizationContext);
 
-    const renderEventInformation = (fav: Favourite): ReactNode => {
-        if (fav.group !== 'EVENTS') {
-            return <></>;
-        }
-        const event = fav as FavouriteEvent;
-        return (
-            <Text>
-                {event.date} {event.time}
-            </Text>
-        );
+    const renderEventInformation = (event: FavouriteEvent): ReactNode => {
+        return event.group === 'EVENTS' ? (
+            <View style={styles.labelContainer}>
+                <Label iconType={IconType.Calendar} title={event.date} />
+                <Label iconType={IconType.Clock} title={event.time} />
+            </View>
+        ) : null;
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {translations.getString(group.key)}</Text>
-            {group.items.map(item => (
-                <View key={item.id} style={styles.itemContainer}>
-                    <TouchableOpacity
-                        style={styles.favoriteIcon}
-                        onPress={() => onFavourite(item)}
-                        activeOpacity={opacity.opacity8}
+            {group.items.map((item: Favourite) => {
+                return (
+                    <ListEntry
+                        key={item.id}
+                        item={item}
+                        onFavourite={() => onFavourite(item)}
+                        onNavigate={() => onNavigate(item)}
                     >
-                        <Icon size={26} type={IconType.HeartFilled} fill={colors.orange} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={{ flex: 1, flexDirection: 'row' }}
-                        activeOpacity={opacity.opacity8}
-                        onPress={() => onNavigate(item)}
-                    >
-                        <Text style={styles.itemText}>{item.title}</Text>
-                        {renderEventInformation(item)}
-                    </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={opacity.opacity8} onPress={() => onNavigate(item)}>
-                        <View style={{ flex: 1, justifyContent: 'center' }}>
-                            <Icon size={26} type={IconType.ChevronRight} fill={colors.darkGrey1A} />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            ))}
+                        {renderEventInformation(item as FavouriteEvent)}
+                    </ListEntry>
+                );
+            })}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
-        backgroundColor: colors.white,
-    },
-    itemContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingTop: 16,
-    },
-    favoriteIcon: {
-        paddingRight: 14,
-        alignItems: 'flex-start',
+        marginBottom: 20,
     },
     title: {
         color: colors.mediumGrey4D,
+        fontFamily: typography.medium,
         fontSize: 14,
-        paddingTop: 24,
-        paddingBottom: 12,
+        paddingTop: 4,
+        marginBottom: 12,
         lineHeight: 18,
-        fontWeight: '700',
     },
-    itemText: {
-        color: colors.darkGrey1A,
-        fontSize: 16,
-        lineHeight: 21,
+    labelContainer: {
+        flexDirection: 'row',
+        marginTop: 9,
+        marginLeft: 24 + 12,
     },
 });
