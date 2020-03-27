@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 import { Card } from './Card';
 import { useSettings } from '@domain/settings';
@@ -8,7 +8,7 @@ import { useLanguageSettings } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { Language } from '@localization/types';
 import { LanguageCard } from './LanguageCard';
-import { SimpleHeader } from '@components';
+import SimpleLayout from '@components/layouts/SimpleLayout';
 const userTypes: UserType[] = ['participant', 'parent', 'visitor'];
 const language: Language[] = ['lv', 'en'];
 
@@ -17,11 +17,13 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
     const { translations, appLanguage, setAppLanguage } = useLanguageSettings();
 
     return (
-        <View style={userSettingStyles.container}>
-            <View style={userSettingStyles.header}>
-                <StatusBar />
-                <SimpleHeader title={translations.getString('USER_SETTINGS')} onBack={() => navigation.goBack()} />
-            </View>
+        <SimpleLayout
+            title={translations.getString('USER_SETTINGS')}
+            goBack={() => navigation.goBack}
+            containerStyles={userSettingStyles.container}
+            headerStyles={userSettingStyles.header}
+            textTransform="none"
+        >
 
             <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
             <View style={{ marginBottom: 16 }}>
@@ -41,7 +43,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
                     />
                 ))}
             </View>
-        </View>
+        </SimpleLayout>
     );
 };
 export const userSettingStyles = StyleSheet.create({
