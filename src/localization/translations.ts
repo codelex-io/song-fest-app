@@ -44,6 +44,9 @@ const translations = new LocalizedStrings({
         ADDED_TO_FAVOURITES: 'Pievienots favorītiem',
         NOTHING_FOUND: 'Diemžēl, pēc Jūsu ievadītā vārda nekas netika atrasts.',
         BUY_TICKET: 'pirkt biļeti',
+        LOCATION_PERMISSIONS_TITLE: 'Nav iespējams noteikt atrašanās vietu',
+        LOCATION_PERMISSIONS_DETAILS:
+            'Lūdzu pārbaudiet vai ir ieslēgts GPS un lietotnei ir atļauta atrašanās vietas piekļuve.',
     },
     en: {
         EVENTS: 'Events',
@@ -88,6 +91,9 @@ const translations = new LocalizedStrings({
         ADDED_TO_FAVOURITES: 'Added to favourites',
         NOTHING_FOUND: 'Unfortunately nothing was found by the name You were looking for.',
         BUY_TICKET: 'buy ticket',
+        LOCATION_PERMISSIONS_TITLE: 'Could not get your location',
+        LOCATION_PERMISSIONS_DETAILS:
+            'Please check that GPS is turned on and application has permission to access your location.',
     },
 });
 

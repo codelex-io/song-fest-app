@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useLayoutEffect, useContext, Fragment } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, Alert, LayoutChangeEvent } from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, LayoutChangeEvent } from 'react-native';
 import MapView from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
 import { MyLocation } from './MyLocation';
@@ -104,7 +104,10 @@ const EventMapComponent: React.FC<Props> = ({
     const transformStyle = animationHeight === undefined ? { top: '100%' } : { top: animationHeight };
 
     const animateToUserLocation = () => {
-        getCurrentPosition(msg => showLocationErrorAlert(msg)).then(coordinates => {
+        getCurrentPosition({
+            title: translations.getString('LOCATION_PERMISSIONS_TITLE'),
+            details: translations.getString('LOCATION_PERMISSIONS_DETAILS'),
+        }).then(coordinates => {
             mapViewRef.current?.animateToRegion(
                 {
                     latitude: coordinates.latitude,
@@ -317,14 +320,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-
-const showLocationErrorAlert = (message: string) => {
-    Alert.alert(
-        'Nav iespējams noteikt atrašanās vietu',
-        'Lūdzu pārbaudiet vai ir ieslēgts GPS un lietotnei ir atļauta atrašanās vietas piekļuve. ' + message,
-        [{ text: 'OK' }],
-        { cancelable: false },
-    );
-};
 
 export default EventMapComponent;
