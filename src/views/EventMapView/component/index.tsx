@@ -183,96 +183,96 @@ const EventMapComponent: React.FC<Props> = ({
                         <Empty />
                     </View>
                 ) : (
-                        <Fragment>
-                            <MapView
-                                onLayout={() => {
-                                    if (items[0]) {
-                                        animateToItemLocation(items[0]);
-                                    }
-                                    setIsMapLoaded(true);
-                                }}
-                                initialRegion={{
-                                    latitude: 56.951637,
-                                    longitude: 24.113347,
-                                    latitudeDelta: 0.009,
-                                    longitudeDelta: 0.009,
-                                }}
-                                showsUserLocation={true}
-                                style={styles.map}
-                                ref={mapViewRef}
-                                mapPadding={{
-                                    top: 0,
-                                    right: 0,
-                                    bottom:
-                                        isScrollOpen && parentViewHeight && sliderHeight && buttonsHeight
-                                            ? Math.floor((parentViewHeight - sliderHeight) / 2)
-                                            : 0,
-                                    left: 0,
-                                }}
-                            >
-                                {items.map((item, index) => (
-                                    <EventMarker
-                                        key={item.id}
-                                        onPress={() => onMapMarkerClick(item, index)}
-                                        isSelected={selectedId === item.id}
-                                        coordinates={item.location}
-                                    />
-                                ))}
-                            </MapView>
+                    <Fragment>
+                        <MapView
+                            onLayout={() => {
+                                if (items[0]) {
+                                    animateToItemLocation(items[0]);
+                                }
+                                setIsMapLoaded(true);
+                            }}
+                            initialRegion={{
+                                latitude: 56.951637,
+                                longitude: 24.113347,
+                                latitudeDelta: 0.009,
+                                longitudeDelta: 0.009,
+                            }}
+                            showsUserLocation={true}
+                            style={styles.map}
+                            ref={mapViewRef}
+                            mapPadding={{
+                                top: 0,
+                                right: 0,
+                                bottom:
+                                    isScrollOpen && parentViewHeight && sliderHeight && buttonsHeight
+                                        ? Math.floor((parentViewHeight - sliderHeight) / 2)
+                                        : 0,
+                                left: 0,
+                            }}
+                        >
+                            {items.map((item, index) => (
+                                <EventMarker
+                                    key={item.id}
+                                    onPress={() => onMapMarkerClick(item, index)}
+                                    isSelected={selectedId === item.id}
+                                    coordinates={item.location}
+                                />
+                            ))}
+                        </MapView>
 
-                            <Animated.View
-                                style={[styles.belowMap, transformStyle]}
-                                onLayout={(event: LayoutChangeEvent) => {
-                                    setSliderHeight(Math.ceil(event.nativeEvent.layout.height));
-                                }}
-                            >
-                                <Animated.View style={[styles.eventsContainer]}>
-                                    <View
-                                        style={styles.buttonsContainer}
-                                        onLayout={event => {
-                                            setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
+                        <Animated.View
+                            style={[styles.belowMap, transformStyle]}
+                            onLayout={(event: LayoutChangeEvent) => {
+                                setSliderHeight(Math.ceil(event.nativeEvent.layout.height));
+                            }}
+                        >
+                            <Animated.View style={[styles.eventsContainer]}>
+                                <View
+                                    style={styles.buttonsContainer}
+                                    onLayout={event => {
+                                        setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
+                                    }}
+                                >
+                                    <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>
+                                        <MyLocation />
+                                    </TouchableOpacity>
+
+                                    <ArrowButton
+                                        open={isScrollOpen}
+                                        onPress={() => {
+                                            setScrollOpen(!isScrollOpen);
+                                            startAnimation();
                                         }}
-                                    >
-                                        <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>
-                                            <MyLocation />
-                                        </TouchableOpacity>
-
-                                        <ArrowButton
-                                            open={isScrollOpen}
-                                            onPress={() => {
-                                                setScrollOpen(!isScrollOpen);
-                                                startAnimation();
-                                            }}
-                                            style={styles.helperButton}
-                                        />
-                                    </View>
-
-                                    <Carousel
-                                        ref={(c: AnyType) => (carousel = c)}
-                                        data={items}
-                                        renderItem={({ item, index }) => (
-                                            <EventCard
-                                                item={item}
-                                                onFavourite={() => onFavourite(item)}
-                                                onNavigate={() => onNavigate(item)}
-                                                navigateToArticle={() => navigateToArticle(item)}
-                                                itemIndex={index + 1}
-                                                totalItems={items.length}
-                                                backgroundColor={colors.findColorByIndex(index)}
-                                            />
-                                        )}
-                                        onSnapToItem={cardIndex => onCarouselItemChange(cardIndex)}
-                                        sliderWidth={WIDTH}
-                                        itemWidth={WIDTH - 22}
-                                        removeClippedSubviews={false}
-                                        containerCustomStyle={{ flex: 1 }}
-                                        inactiveSlideScale={1}
-                                        inactiveSlideOpacity={1}
+                                        style={styles.helperButton}
                                     />
-                                </Animated.View>
+                                </View>
+
+                                <Carousel
+                                    ref={(c: AnyType) => (carousel = c)}
+                                    data={items}
+                                    renderItem={({ item, index }) => (
+                                        <EventCard
+                                            item={item}
+                                            onFavourite={() => onFavourite(item)}
+                                            onNavigate={() => onNavigate(item)}
+                                            navigateToArticle={() => navigateToArticle(item)}
+                                            itemIndex={index + 1}
+                                            totalItems={items.length}
+                                            backgroundColor={colors.findColorByIndex(index)}
+                                        />
+                                    )}
+                                    onSnapToItem={cardIndex => onCarouselItemChange(cardIndex)}
+                                    sliderWidth={WIDTH}
+                                    itemWidth={WIDTH - 22}
+                                    removeClippedSubviews={false}
+                                    containerCustomStyle={{ flex: 1 }}
+                                    inactiveSlideScale={1}
+                                    inactiveSlideOpacity={1}
+                                />
                             </Animated.View>
-                        </Fragment>
-                    )}
+                        </Animated.View>
+                    </Fragment>
+                )}
             </View>
         </View>
     );
