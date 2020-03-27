@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 import { RadioButton } from '../../components/buttons/RadioButton';
 import { useSettings } from '@domain/settings';
 import { UserType } from '@domain/settings';
 import { useLanguageSettings } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
-import { SimpleHeader } from '@components';
+import SimpleLayout from '@components/layouts/SimpleLayout';
 
 interface User {
     type: UserType;
@@ -35,26 +35,25 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
     };
 
     return (
-        <View style={userSettingStyles.container}>
-            <View style={userSettingStyles.header}>
-                <StatusBar />
-                <SimpleHeader title={translations.getString('USER_SETTINGS')} onBack={() => navigation.goBack()} />
-            </View>
-
+        <SimpleLayout
+            title={translations.getString('USER_SETTINGS')}
+            goBack={() => navigation.goBack}
+            containerStyles={userSettingStyles.container}
+            headerStyles={userSettingStyles.header}
+            textTransform="none"
+        >
             <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
 
-            {userTypes.map(({ type, title }: User) => {
-                return (
-                    <RadioButton
-                        key={type}
-                        active={userType === type}
-                        label={title}
-                        onPress={() => handleChoice(type)}
-                        propStyles={{ marginBottom: 16 }}
-                    />
-                );
-            })}
-        </View>
+            {userTypes.map(({ type, title }: User) => (
+                <RadioButton
+                    key={type}
+                    active={userType === type}
+                    label={title}
+                    onPress={() => handleChoice(type)}
+                    propStyles={{ marginBottom: 16 }}
+                />
+            ))}
+        </SimpleLayout>
     );
 };
 export const userSettingStyles = StyleSheet.create({

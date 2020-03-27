@@ -6,6 +6,9 @@ export const addNotification = async (fav: Favourite) => {
     if (!notification) {
         return;
     }
+    if (!notification.title || !notification.fireDate) {
+        return;
+    }
     if (fav.group === 'EVENTS') {
         const notificationId = await scheduleNotification({
             content: notification.title,

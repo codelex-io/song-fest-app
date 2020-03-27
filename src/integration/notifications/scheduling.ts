@@ -12,6 +12,9 @@ interface Notification {
 }
 
 export const scheduleNotification = async (source: Notification): Promise<string | undefined> => {
+    if (source.fireDate.isBefore(moment())) {
+        return;
+    }
     const notificationId = randomString();
     const title = Platform.OS === 'android' ? 'Nāc Gavilēt' : '';
     const notification = new firebase.notifications.Notification()
