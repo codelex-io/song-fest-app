@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactNode } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, opacity } from '@styles';
 import { Icon, IconType } from '@components';
-import { GroupOfFavourites, Favourite } from '@domain/favourites/types';
+import { GroupOfFavourites, Favourite, FavouriteEvent } from '@domain/favourites/types';
 import { LocalizationContext } from '@localization/LocalizationContext';
 
 interface CardProps {
@@ -13,6 +13,19 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) => {
     const { translations } = useContext(LocalizationContext);
+
+    const renderEventInformation = (fav: Favourite): ReactNode => {
+        if (fav.group !== 'EVENTS') {
+            return <></>;
+        }
+        const event = fav as FavouriteEvent;
+        return (
+            <Text>
+                {event.date} {event.time}
+            </Text>
+        );
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {translations.getString(group.key)}</Text>
@@ -32,6 +45,7 @@ export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) =>
                         onPress={() => onNavigate(item)}
                     >
                         <Text style={styles.itemText}>{item.title}</Text>
+                        {renderEventInformation(item)}
                     </TouchableOpacity>
                     <TouchableOpacity activeOpacity={opacity.opacity8} onPress={() => onNavigate(item)}>
                         <View style={{ flex: 1, justifyContent: 'center' }}>
