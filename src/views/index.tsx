@@ -14,6 +14,7 @@ import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
 import UserSettings from './UserSettings';
 import Article from './ArticleView';
+import FeedView from './FeedView'
 
 export {
     FavoriteListView,
@@ -32,4 +33,5 @@ export {
     SearchView,
     UserSettings,
     Article,
+    FeedView,
 };

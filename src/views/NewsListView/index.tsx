@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { default as NewsListViewComponent } from './component/index';
 import { FETCH_NEWS_ITEMS } from './graphql/queries';
-import { Data, NewsItem as GraphQLNewsItem, Variables } from './graphql/types';
+import { Data, NewsItem as GraphQLNewsItem } from './graphql/types';
 import { NewsItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite } from '@domain/favourites/types';

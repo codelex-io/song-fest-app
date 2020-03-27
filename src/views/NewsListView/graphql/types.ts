@@ -12,7 +12,7 @@ export interface NewsItem {
     link: string;
 }
 
-export interface Variables {
+export interface SearchVariables {
     searchBy: string;
     first: number;
 }

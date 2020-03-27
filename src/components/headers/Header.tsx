@@ -9,10 +9,17 @@ interface HeaderProps {
     title: string;
     onLongPressTitle?: () => void;
     containerStyle?: { [key: string]: string | number };
-    navigation: AnyType;
+    onButton1: () => void;
+    onButton2: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ title, onLongPressTitle, containerStyle, navigation }) => {
+export const Header: React.FC<HeaderProps> = ({
+    title,
+    onLongPressTitle,
+    containerStyle,
+    onButton1,
+    onButton2
+}) => {
     return (
         <View style={{ ...containerStyle }}>
             <View style={styles.container}>
@@ -22,7 +29,7 @@ export const Header: React.FC<HeaderProps> = ({ title, onLongPressTitle, contain
                 <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity
                         style={styles.containerBox1}
-                        onPress={() => navigation.navigate('UserSettings')}
+                        onPress={onButton1}
                         activeOpacity={opacity.opacity8}
                     >
                         <Icon type={IconType.Face} fill={colors.white} />
@@ -30,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ title, onLongPressTitle, contain
 
                     <TouchableOpacity
                         style={styles.containerBox}
-                        onPress={() => navigation.navigate('Favorites')}
+                        onPress={onButton2}
                         activeOpacity={opacity.opacity8}
                     >
                         <Icon type={IconType.HeartFilled} fill={colors.white} />
