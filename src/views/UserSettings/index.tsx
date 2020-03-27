@@ -24,7 +24,6 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
             headerStyles={userSettingStyles.header}
             textTransform="none"
         >
-
             <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
             <View style={{ marginBottom: 16 }}>
                 {userTypes.map((user: UserType) => (

@@ -16,8 +16,8 @@ const FavoriteListView: React.FC<SharedStackNavList<'Favorites'>> = ({ navigatio
             goBack={() => navigation.goBack()}
         />
     ) : (
-            <NoFavorites goBack={() => navigation.goBack()} />
-        )
+        <NoFavorites goBack={() => navigation.goBack()} />
+    );
 };
 
 export default FavoriteListView;

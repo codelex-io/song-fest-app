@@ -8,7 +8,7 @@ import { TextTransform } from '@styles/typography';
 interface HeaderProps {
     title: string;
     onBack: () => void;
-    textTransform?: TextTransform
+    textTransform?: TextTransform;
 }
 
 export const SimpleHeader: React.FC<HeaderProps> = ({ title, onBack, textTransform = 'uppercase' }) => (
@@ -20,12 +20,7 @@ export const SimpleHeader: React.FC<HeaderProps> = ({ title, onBack, textTransfo
             bgColor={colors.white}
             onPress={onBack}
         />
-        <Text style={[
-            styles.simpleText,
-            { textTransform }
-        ]}>
-            {title}
-        </Text>
+        <Text style={[styles.simpleText, { textTransform }]}>{title}</Text>
     </View>
 );
 
