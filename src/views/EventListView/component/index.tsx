@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FlatList, View, RefreshControl } from 'react-native';
+import { FlatList, View, RefreshControl, StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { colors } from '@styles';
 import { TimeSelector } from '@domain';
@@ -88,7 +88,7 @@ const EventListComponent: React.FC<Props> = ({
         >
             {(_resetHeader, headerHeight, animatedScrollOffset) => (
                 <AnimatedFlatlist<EventItem>
-                    style={{ paddingTop: headerHeight }}
+                    style={[styles.flatlist, { paddingTop: headerHeight }]}
                     alwaysBounce={false}
                     alwaysBounceVertical={false}
                     bounces={false}
@@ -138,4 +138,10 @@ const EventListComponent: React.FC<Props> = ({
     );
 };
 
+const styles = StyleSheet.create({
+    flatlist: {
+        flex: 1,
+        width: '100%',
+    },
+});
 export default EventListComponent;
