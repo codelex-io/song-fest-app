@@ -22,10 +22,15 @@ const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean
 };
 
 const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
-    const [currentSearch, setCurrentSearch] = useState<SearchInterface>({ payload: '', isActive: false });
+    const [currentSearch, setCurrentSearch] = useState<SearchInterface>({
+        payload: '',
+        isActive: false,
+    });
+
     const { loading, data, refetch } = useQuery<Data, Variables>(FETCH_EVENT_ITEMS, {
         variables: { searchBy: currentSearch.payload },
     });
+
     const { toggleFavourite, isFavourite } = useFavourites();
     const items = loading || !data ? [] : data.items.map(it => toItem(it, isFavourite));
 
@@ -47,6 +52,14 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
         );
     }
 
+    const navigateToArticle = (item: EventItem) => {
+        navigation.navigate('Article', {
+            itemId: item.id,
+            group: 'EVENTS',
+            hasHistory: true,
+        });
+    };
+
     return (
         <EventMapComponent
             loading={loading}
@@ -59,7 +72,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
                 setCurrentSearch({ payload: '', isActive: false });
                 refetch();
             }}
-            onReadMore={(item: EventItem) => navigation.navigate('Article', { itemId: item.id, group: 'EVENTS' })}
+            navigateToArticle={(item: EventItem) => navigateToArticle(item)}
             navigation={navigation}
         />
     );

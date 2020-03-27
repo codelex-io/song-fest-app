@@ -25,11 +25,11 @@ const toItem = (
 };
 
 const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
-    const { itemId, group } = route.params;
+    const { itemId, group, hasHistory } = route.params;
 
     const rootNavigation = useNavigation();
 
-    const { loading, data } = useQuery<Data<EventItem>, Variables>(FETCH_TARGET_EVENTS_ITEM, {
+    const { loading, data, error } = useQuery<Data<EventItem>, Variables>(FETCH_TARGET_EVENTS_ITEM, {
         variables: { id: itemId },
     });
 
@@ -44,7 +44,11 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
     };
 
     const onBack = () => {
-        navigation.goBack();
+        if (!hasHistory) {
+            navigation.navigate('Feed');
+        } else {
+            navigation.goBack();
+        }
     };
 
     const goToMap = () => {
@@ -55,6 +59,10 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
         // TODO: implement ticket buying
         open(item.link);
     };
+
+    if (!data && error) {
+        navigation.navigate('Feed');
+    }
 
     const item: EventArticleItem =
         !data || loading

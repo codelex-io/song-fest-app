@@ -15,7 +15,7 @@ interface EventDescriptionProps {
     itemIndex: number;
     totalItems: number;
     backgroundColor: string;
-    onReadMore: () => void;
+    navigateToArticle: () => void;
 }
 
 export const EventCard = ({
@@ -25,12 +25,12 @@ export const EventCard = ({
     onFavourite,
     itemIndex,
     totalItems,
-    onReadMore,
+    navigateToArticle,
 }: EventDescriptionProps) => {
     return (
         <View style={[styles.slide]}>
             <View style={[styles.slideInnerContainer, { backgroundColor }]}>
-                <TouchableOpacity onPress={onReadMore}>
+                <TouchableOpacity onPress={navigateToArticle}>
                     <CardTitle styleProps={{ marginBottom: 12 }} numberOfLines={3} ellipsizeMode="tail">
                         {item.title}
                     </CardTitle>

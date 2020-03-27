@@ -27,7 +27,9 @@ export const scheduleNotification = async (source: Notification): Promise<string
         .android.setChannelId(ANDROID_CHANNEL)
         .android.setAutoCancel(true);
     const schedule = {
-        fireDate: source.fireDate.valueOf(),
+        fireDate: moment()
+            .add(3, 'seconds')
+            .valueOf(),
         exact: true,
     };
     return firebase

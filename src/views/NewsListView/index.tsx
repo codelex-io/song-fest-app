@@ -39,6 +39,14 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ route,
         refetch();
     }, [currentSearch.payload]);
 
+    const navigateToArticle = (item: NewsItem) => {
+        navigation.navigate('Article', {
+            itemId: item.id,
+            group: 'NEWS',
+            hasHistory: true,
+        });
+    };
+
     const { translations } = useContext(LocalizationContext);
 
     return (
@@ -70,7 +78,7 @@ export const NewsListViewIndex: React.FC<SharedStackNavList<'Feed'>> = ({ route,
                 <NewsListViewComponent
                     loading={loading}
                     items={items}
-                    onNavigate={item => navigation.navigate('Article', { itemId: item.id, group: 'NEWS' })}
+                    onNavigate={item => navigateToArticle(item)}
                     onFavourite={item => toggleFavourite({ id: item.id, title: item.title, group: 'NEWS' })}
                     onShare={item => open(item.link)}
                     onRefresh={() => {

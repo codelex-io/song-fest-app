@@ -16,10 +16,12 @@ import { AppTabsNavParams } from '..';
 import { NewsListViewIndex } from '@views/NewsListView';
 import { AnyType } from '@domain/AnyType';
 
+export type ArticleRouteProp = { itemId: string; group: FavouriteGroupKey; hasHistory: boolean };
+
 export type SharedStackParamsList = {
     Feed: { payload: string };
     Favorites: undefined;
-    Article: { itemId: string; group: FavouriteGroupKey };
+    Article: ArticleRouteProp;
     Search: { color: string };
     UserSettings: undefined;
 };
@@ -31,12 +33,16 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
     const Stack = createStackNavigator<SharedStackParamsList>();
+
+    const notificationProp: ArticleRouteProp = {
+        ...(route.params as ArticleRouteProp),
+    };
+
     let feedComponent: React.FC<AnyType> = EmptyView;
 
     if (route.name === 'NEWS') {
         feedComponent = NewsListViewIndex;
-    }
-    if (route.name === 'EVENTS') {
+    } else if (route.name === 'EVENTS') {
         feedComponent = EventListView;
     } else if (route.name === 'VIDEO') {
         feedComponent = VideoView;
@@ -47,11 +53,12 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
     if (!route.name) {
         return null;
     }
+
     return (
-        <Stack.Navigator initialRouteName={'Feed'} headerMode="none">
+        <Stack.Navigator initialRouteName={notificationProp.itemId ? 'Article' : 'Feed'} headerMode="none">
             <Stack.Screen name="Feed" component={feedComponent} />
             <Stack.Screen name="Favorites" component={FavoriteListView} />
-            <Stack.Screen name="Article" component={Article} />
+            <Stack.Screen initialParams={notificationProp} name="Article" component={Article} />
             <Stack.Screen name="Search" component={SearchView} />
             <Stack.Screen name="UserSettings" component={UserSettings} />
         </Stack.Navigator>

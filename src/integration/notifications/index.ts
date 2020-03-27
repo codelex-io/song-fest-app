@@ -5,7 +5,7 @@ import { Platform } from 'react-native';
 import { ANDROID_CHANNEL, FCM_TOKEN } from './constants';
 import { scheduleNotification, cancelNotification } from './scheduling';
 import { NotificationOpen, Notification } from 'react-native-firebase/notifications';
-import { fromNotificationData } from '@navigation';
+import { fromNotificationData, setInitialLocation, navigate } from '@navigation';
 
 const handleToken = async (): Promise<void> => {
     let fcmToken = await AsyncStorage.getItem(FCM_TOKEN);
@@ -34,17 +34,14 @@ const requestPermission = async () => {
     }
 };
 
-const onOpen = (notification: Notification) => {
+const getLocation = (notification: Notification) => {
     if (!notification) {
         return;
     }
-    const location = fromNotificationData(notification.data);
-    if (!location) {
-        return;
-    }
+    return fromNotificationData(notification.data);
 };
 
-const createNotificationListeners = async () => {
+const createNotificationListeners = (): Promise<void> => {
     firebase.notifications().onNotification(async notification => {
         notification.setSound('default');
         if (Platform.OS === 'android') {
@@ -57,19 +54,31 @@ const createNotificationListeners = async () => {
         }
     });
     firebase.notifications().onNotificationOpened((notificationOpen: NotificationOpen) => {
-        onOpen(notificationOpen.notification);
+        const location = getLocation(notificationOpen.notification);
+        if (!location) {
+            return;
+        }
+        navigate(location);
     });
-    firebase
-        .notifications()
-        .getInitialNotification()
-        .then((notificationOpen: NotificationOpen) => {
-            if (notificationOpen) {
-                onOpen(notificationOpen.notification);
-            }
-        });
+    return new Promise(resolve => {
+        firebase
+            .notifications()
+            .getInitialNotification()
+            .then((notificationOpen: NotificationOpen) => {
+                if (!notificationOpen) {
+                    return;
+                }
+                const location = getLocation(notificationOpen.notification);
+                if (!location) {
+                    return;
+                }
+                setInitialLocation(location);
+            })
+            .then(resolve);
+    });
 };
 
-const postLaunch = (isRealDevice: boolean) => {
+const initNotifications = async (isRealDevice: boolean) => {
     if (Platform.OS === 'ios' && !isRealDevice) {
         return;
     }
@@ -81,7 +90,11 @@ const postLaunch = (isRealDevice: boolean) => {
         ).setDescription('Used for all notifications');
         firebase.notifications().android.createChannel(channel);
     }
+    return createNotificationListeners();
+};
+
+const postLaunch = () => {
     new Promise(resolve => setTimeout(resolve, 3000)).then(checkPermission).catch(errors.onError);
 };
 
-export { postLaunch, scheduleNotification, cancelNotification };
+export { initNotifications, postLaunch, scheduleNotification, cancelNotification };

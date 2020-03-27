@@ -27,9 +27,9 @@ const toItem = (
 };
 
 const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
-    const { itemId, group } = route.params;
+    const { itemId, group, hasHistory } = route.params;
 
-    const { loading, data } = useQuery<Data<NewsItem>, Variables>(FETCH_TARGET_NEWS_ITEM, {
+    const { loading, data, error } = useQuery<Data<NewsItem>, Variables>(FETCH_TARGET_NEWS_ITEM, {
         variables: { id: itemId },
     });
     const { toggleFavourite, isFavourite } = useFavourites();
@@ -43,13 +43,21 @@ const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigatio
     };
 
     const onBack = () => {
-        navigation.goBack();
+        if (!hasHistory) {
+            navigation.navigate('Feed');
+        } else {
+            navigation.goBack();
+        }
     };
 
     const buyTicket = () => {
         // TODO: implement ticket buying
         open(item.link);
     };
+
+    if (!data && error) {
+        navigation.navigate('Feed');
+    }
 
     const item =
         !data || loading

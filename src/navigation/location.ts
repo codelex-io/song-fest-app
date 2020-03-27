@@ -1,21 +1,24 @@
 import { errors } from '@utils';
+import { AnyType } from '@domain/AnyType';
 
-type Tab = 'NEWS' | 'EVENTS';
+export type Tab = 'NEWS' | 'EVENTS';
 
 export interface Location {
     tab: Tab;
     itemId?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fromNotificationData = (data: any): Location | undefined => {
+export const fromNotificationData = (data: AnyType): Location | undefined => {
     try {
         if (!data) {
             return;
         }
-        const tab = (data.tab as string)?.toUpperCase().trim();
-        const { itemId } = data;
+        const { tab, itemId } = data;
         if (!tab || (tab !== 'NEWS' && tab !== 'EVENTS')) {
+            return;
+        }
+        const normalizedTab = (tab as string).toUpperCase().trim();
+        if (normalizedTab !== 'NEWS' && normalizedTab !== 'EVENTS') {
             return;
         }
         return {
