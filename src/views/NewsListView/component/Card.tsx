@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavour
     return (
         <TouchableOpacity style={[styles.container, propStyles]} onPress={onNavigate} activeOpacity={opacity.opacity8}>
             {item.image?.url && (
-                <View style={styles.pictureContainer}>
+                <View>
                     <Image height={180} source={{ uri: item.image?.url }} style={styles.image} />
                 </View>
             )}
@@ -41,9 +41,6 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         marginHorizontal: 16,
         backgroundColor: colors.white,
-    },
-    pictureContainer: {
-        backgroundColor: 'grey',
     },
     image: {
         height: 180,
