@@ -30,9 +30,9 @@ export const Card: React.FC<CardProps> = ({
 }) => {
     return (
         <TouchableOpacity style={[styles.container, propStyles]} onPress={onReadMore} activeOpacity={opacity.opacity8}>
-            {item.image && item.image.url && (
+            {item.image?.url && (
                 <View>
-                    <Image height={180} source={{ uri: item.image.url }} style={styles.image} />
+                    <Image height={180} source={{ uri: item.image?.url }} style={styles.image} />
                 </View>
             )}
             <View style={[styles.bottomContainer, { backgroundColor }]}>
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     image: {
-        width: '100%',
         height: 180,
     },
     bottomContainer: {
