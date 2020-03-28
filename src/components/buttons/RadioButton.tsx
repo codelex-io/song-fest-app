@@ -19,8 +19,8 @@ export const RadioButton: React.FC<CardProps> = ({ label, active, onPress, propS
                 {active ? (
                     <Icon size={24} type={IconType.RadioBoxMarked} fill={colors.darkGrey1A} />
                 ) : (
-                        <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
-                    )}
+                    <Icon size={24} type={IconType.RadioBoxBlank} fill={colors.darkGrey1A} />
+                )}
             </View>
             <Text style={styles.cardText}>{label}</Text>
         </TouchableOpacity>

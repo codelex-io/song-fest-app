@@ -43,12 +43,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
             <Text style={styles.title}>{translations.getString('USER_TYPE')}</Text>
 
             {userTypes.map(({ type, title }: User) => (
-                <RadioButton
-                    key={type}
-                    active={userType === type}
-                    label={title}
-                    onPress={() => handleChoice(type)}
-                />
+                <RadioButton key={type} active={userType === type} label={title} onPress={() => handleChoice(type)} />
             ))}
         </SimpleLayout>
     );

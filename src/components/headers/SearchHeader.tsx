@@ -34,7 +34,11 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigatio
         <View style={styles.insetsContainer}>
             <ScrollView keyboardDismissMode="interactive">
                 <View style={[styles.header, { backgroundColor: bgColor }]}>
-                    <TouchableOpacity activeOpacity={opacity8} style={styles.iconBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity
+                        activeOpacity={opacity8}
+                        style={styles.iconBox}
+                        onPress={() => navigation.goBack()}
+                    >
                         <Icon type={IconType.ChevronLeft} fill={colors.white} />
                     </TouchableOpacity>
 

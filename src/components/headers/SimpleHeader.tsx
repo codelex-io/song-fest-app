@@ -9,7 +9,7 @@ interface HeaderProps {
     title: string;
     onBack: () => void;
     textTransform?: TextTransform;
-    propStyles?: ViewStyle
+    propStyles?: ViewStyle;
 }
 
 export const SimpleHeader: React.FC<HeaderProps> = ({ title, onBack, textTransform = 'uppercase', propStyles }) => (

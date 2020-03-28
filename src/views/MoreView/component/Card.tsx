@@ -41,47 +41,47 @@ const styles = StyleSheet.create({
     icon:
         screenWidth > MEDIA_BREAK
             ? {
-                padding: 10,
-            }
+                  padding: 10,
+              }
             : {
-                padding: 10,
-                marginRight: 16,
-            },
+                  padding: 10,
+                  marginRight: 16,
+              },
     card:
         screenWidth > MEDIA_BREAK
             ? {
-                width: cardWidth,
-                marginHorizontal: 8,
-                alignItems: 'center',
-                marginVertical: 12,
-            }
+                  width: cardWidth,
+                  marginHorizontal: 8,
+                  alignItems: 'center',
+                  marginVertical: 12,
+              }
             : {
-                marginBottom: 12,
-                flexDirection: 'row',
-            },
+                  marginBottom: 12,
+                  flexDirection: 'row',
+              },
     button:
         screenWidth > MEDIA_BREAK
             ? {
-                alignItems: 'center',
-            }
+                  alignItems: 'center',
+              }
             : {
-                flexDirection: 'row',
-                alignItems: 'center',
-            },
+                  flexDirection: 'row',
+                  alignItems: 'center',
+              },
     text:
         screenWidth > MEDIA_BREAK
             ? {
-                textAlign: 'center',
-                letterSpacing: 0.1,
-                paddingTop: 8,
-                fontSize: 14,
-                fontFamily: typography.bold,
-            }
+                  textAlign: 'center',
+                  letterSpacing: 0.1,
+                  paddingTop: 8,
+                  fontSize: 14,
+                  fontFamily: typography.bold,
+              }
             : {
-                textAlign: 'center',
-                letterSpacing: 0.1,
-                fontSize: 14,
-                fontFamily: typography.bold,
-                textTransform: 'uppercase',
-            },
+                  textAlign: 'center',
+                  letterSpacing: 0.1,
+                  fontSize: 14,
+                  fontFamily: typography.bold,
+                  textTransform: 'uppercase',
+              },
 });

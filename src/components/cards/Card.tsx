@@ -27,11 +27,7 @@ const Card: React.FC<CardProps> = ({
     goToArticle,
 }) => {
     return (
-        <TouchableOpacity
-            style={[styles.container, propStyles]}
-            onPress={goToArticle}
-            activeOpacity={opacity.opacity8}
-        >
+        <TouchableOpacity style={[styles.container, propStyles]} onPress={goToArticle} activeOpacity={opacity.opacity8}>
             {image && image.url && (
                 <View>
                     <Image height={180} source={{ uri: image?.url }} style={styles.image} />
@@ -41,9 +37,7 @@ const Card: React.FC<CardProps> = ({
             <View style={[styles.lowerContainer, { backgroundColor }]}>
                 {dateBeforeTitle && <Text style={styles.dateText}>{dateBeforeTitle}</Text>}
 
-                {title &&
-                    <CardTitle styleProps={{ marginBottom: 12 }}>{title}</CardTitle>
-                }
+                {title && <CardTitle styleProps={{ marginBottom: 12 }}>{title}</CardTitle>}
 
                 {secondaryTitle && (
                     <CardTitle fonts="regular" fontSize={14} styleProps={styles.secondaryTitle}>
