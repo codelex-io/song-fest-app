@@ -20,9 +20,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({
 }) => {
     return (
         <View style={[styles.container, containerStyles]}>
-            <View style={[headerStyles]}>
-                <SimpleHeader title={title} onBack={goBack} textTransform={textTransform} />
-            </View>
+            <SimpleHeader title={title} onBack={goBack} textTransform={textTransform} propStyles={headerStyles} />
             {children}
         </View>
     );
@@ -31,6 +29,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%'
     },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ViewStyle } from 'react-native';
 import { colors, typography } from '@styles';
 import { IconType } from '../Icon';
 import { IconBtn44 } from '@components/buttons';
@@ -9,10 +9,11 @@ interface HeaderProps {
     title: string;
     onBack: () => void;
     textTransform?: TextTransform;
+    propStyles?: ViewStyle
 }
 
-export const SimpleHeader: React.FC<HeaderProps> = ({ title, onBack, textTransform = 'uppercase' }) => (
-    <View style={styles.header}>
+export const SimpleHeader: React.FC<HeaderProps> = ({ title, onBack, textTransform = 'uppercase', propStyles }) => (
+    <View style={[styles.header, propStyles]}>
         <IconBtn44
             style={styles.iconBox}
             icon={IconType.ChevronLeft}
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     simpleText: {
         fontFamily: typography.medium,
         fontSize: 20,
-        height: 26,
+        lineHeight: 26,
         letterSpacing: 0.0015,
         color: colors.darkGrey1A,
     },
