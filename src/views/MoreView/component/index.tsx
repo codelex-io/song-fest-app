@@ -66,8 +66,8 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
     );
 };
 
-const screenWidth = Math.floor(Dimensions.get('window').width);
-const MEDIA_BREAK = 360;
+const screenWidth = Math.floor(Dimensions.get('screen').width);
+const MEDIA_BREAK = 260;
 
 export const moreViewStyles = StyleSheet.create({
     container: {

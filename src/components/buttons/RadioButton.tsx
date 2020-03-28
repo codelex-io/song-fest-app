@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, ViewStyle } from 'react-native';
 import { Icon, IconType } from '@components';
 import { colors, typography } from '@styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { opacity8 } from '@styles/opacity';
 
 interface CardProps {
     label: string;
@@ -13,7 +14,7 @@ interface CardProps {
 
 export const RadioButton: React.FC<CardProps> = ({ label, active, onPress, propStyles }) => {
     return (
-        <TouchableOpacity style={[styles.cardContainer, propStyles]} onPress={onPress}>
+        <TouchableOpacity activeOpacity={opacity8} style={[styles.cardContainer, propStyles]} onPress={onPress}>
             <View style={styles.cardIcon}>
                 {active ? (
                     <Icon size={24} type={IconType.RadioBoxMarked} fill={colors.darkGrey1A} />

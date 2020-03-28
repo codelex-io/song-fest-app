@@ -17,6 +17,7 @@ import { AnyType } from '@domain/AnyType';
 import { SearchInterface } from '@components/headers/SearchHeader';
 import { ArrowButton } from './ArrowButton';
 import share from '@integration/share';
+import { opacity8 } from '@styles/opacity';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -238,7 +239,11 @@ const EventMapComponent: React.FC<Props> = ({
                                         setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
                                     }}
                                 >
-                                    <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity8}
+                                        style={styles.helperButton}
+                                        onPress={animateToUserLocation}
+                                    >
                                         <MyLocation />
                                     </TouchableOpacity>
 

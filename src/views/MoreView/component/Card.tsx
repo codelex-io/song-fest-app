@@ -4,10 +4,6 @@ import { IconType, Icon } from '@components';
 import { colors, opacity, typography } from '@styles';
 import { LocalizationContext } from '@localization/LocalizationContext';
 
-const screenWidth = Math.floor(Dimensions.get('window').width);
-const MEDIA_BREAK = 360;
-const cardWidth = (screenWidth - 64) / 3;
-
 interface CardProps {
     title: string;
     icon: IconType;
@@ -36,6 +32,10 @@ export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen
         </View>
     );
 };
+
+const screenWidth = Math.floor(Dimensions.get('screen').width);
+const MEDIA_BREAK = 260;
+const cardWidth = (screenWidth - 64) / 3;
 
 const styles = StyleSheet.create({
     icon:

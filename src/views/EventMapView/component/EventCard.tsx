@@ -7,6 +7,7 @@ import { dateTimeUtils } from '@utils';
 import { colors, typography } from '@styles';
 import { AnyType } from '@domain/AnyType';
 import CardTitle from '@components/typography/CardTitle';
+import { opacity8 } from '@styles/opacity';
 
 interface EventDescriptionProps {
     item: EventItem;
@@ -32,7 +33,7 @@ export const EventCard = ({
     return (
         <View style={[styles.slide]}>
             <View style={[styles.slideInnerContainer, { backgroundColor }]}>
-                <TouchableOpacity onPress={navigateToArticle}>
+                <TouchableOpacity activeOpacity={opacity8} onPress={navigateToArticle}>
                     <CardTitle styleProps={{ marginBottom: 12 }} numberOfLines={3} ellipsizeMode="tail">
                         {item.title}
                     </CardTitle>

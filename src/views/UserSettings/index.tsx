@@ -37,30 +37,18 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
         <SimpleLayout
             title={translations.getString('USER_SETTINGS')}
             goBack={() => navigation.goBack()}
-            containerStyles={userSettingStyles.container}
-            headerStyles={userSettingStyles.header}
+            headerStyles={styles.header}
             textTransform="none"
         >
-            <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
+            <Text style={styles.title}>{translations.getString('USER_TYPE')}</Text>
 
             {userTypes.map(({ type, title }: User) => (
-                <RadioButton
-                    key={type}
-                    active={userType === type}
-                    label={title}
-                    onPress={() => handleChoice(type)}
-                    propStyles={{ marginBottom: 16 }}
-                />
+                <RadioButton key={type} active={userType === type} label={title} onPress={() => handleChoice(type)} />
             ))}
         </SimpleLayout>
     );
 };
-export const userSettingStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: colors.white,
-    },
+export const styles = StyleSheet.create({
     header: {
         marginBottom: 16,
     },
@@ -71,10 +59,6 @@ export const userSettingStyles = StyleSheet.create({
         marginBottom: 11,
         lineHeight: 18,
         marginHorizontal: 16,
-    },
-    bottomBtnsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
     },
 });
 export default UserSettings;
