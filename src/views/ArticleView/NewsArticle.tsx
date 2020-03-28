@@ -5,16 +5,12 @@ import { FETCH_TARGET_NEWS_ITEM } from './graphql/queries';
 import { Data, NewsItem, Variables } from './graphql/types';
 import { NewsArticleItem } from './types';
 import { useFavourites } from '@domain/favourites';
+import { buyTicket } from '@domain/tickets';
 import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
-import { open } from '@domain/share';
+import share from '@integration/share';
 import { SharedStackNavList, FeedRootName } from 'src/navigation/stacks/SharedStack';
 
-const toItem = (
-    item: NewsItem,
-    isFavourite: (fav: Favourite) => boolean,
-    group: FeedRootName,
-    buyTicket: () => void,
-): NewsArticleItem => {
+const toItem = (item: NewsItem, isFavourite: (fav: Favourite) => boolean, group: FeedRootName): NewsArticleItem => {
     let favoritesGroup = group as FavouriteGroupKey;
     if (group === 'MAP') {
         favoritesGroup = 'EVENTS';
@@ -26,7 +22,6 @@ const toItem = (
             title: item.title,
             group: favoritesGroup,
         }),
-        buyTicket,
     };
 };
 
@@ -42,10 +37,6 @@ const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigatio
         toggleFavourite({ id: item.id, group: 'NEWS', title: item.title });
     };
 
-    const onShare = () => {
-        open(item.link);
-    };
-
     const onBack = () => {
         if (!hasHistory) {
             navigation.navigate('Feed');
@@ -54,18 +45,14 @@ const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigatio
         }
     };
 
-    const buyTicket = () => {
-        // TODO: implement ticket buying
-        open(item.link);
-    };
-
     if (!data && error) {
         navigation.navigate('Feed');
+        return <></>;
     }
 
     const item =
         !data || loading
-            ? {
+            ? ({
                   id: '',
                   title: '',
                   content: '',
@@ -75,11 +62,15 @@ const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigatio
                   isFavourite: false,
                   link: '',
                   date: '',
-                  buyTicket,
-              }
-            : toItem(data.item, isFavourite, group, buyTicket);
+              } as NewsArticleItem)
+            : toItem(data.item, isFavourite, group);
 
-    return <NewsArticleComponent {...{ onBack, item, onFavourite, onShare, buyTicket }} loading={loading || !data} />;
+    return (
+        <NewsArticleComponent
+            {...{ onBack, item, onFavourite, onShare: () => share(item.link), buyTicket: () => buyTicket(item.link) }}
+            loading={loading || !data}
+        />
+    );
 };
 
 export default NewsArticle;

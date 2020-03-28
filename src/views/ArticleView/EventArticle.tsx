@@ -5,18 +5,14 @@ import { Data, EventItem, Variables } from './graphql/types';
 import { EventArticleItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
-import { open } from '@domain/share';
+import share from '@integration/share';
 import { SharedStackNavList, FeedRootName } from 'src/navigation/stacks/SharedStack';
 import EventArticleComponent from './component/EventArticleComponent';
 import { useNavigation } from '@react-navigation/native';
 import { toFavourite } from '@domain/events';
+import { buyTicket } from '@domain/tickets';
 
-const toItem = (
-    item: EventItem,
-    isFavourite: (fav: Favourite) => boolean,
-    group: FeedRootName,
-    buyTicket: () => void,
-): EventArticleItem => {
+const toItem = (item: EventItem, isFavourite: (fav: Favourite) => boolean, group: FeedRootName): EventArticleItem => {
     let favoritesGroup = group as FavouriteGroupKey;
     if (group === 'MAP') {
         favoritesGroup = 'EVENTS';
@@ -28,7 +24,6 @@ const toItem = (
             title: item.title,
             group: favoritesGroup,
         }),
-        buyTicket,
     };
 };
 
@@ -47,10 +42,6 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
         toggleFavourite(toFavourite(item));
     };
 
-    const onShare = () => {
-        open(item.link);
-    };
-
     const onBack = () => {
         if (!hasHistory) {
             navigation.navigate('Feed');
@@ -63,13 +54,9 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
         rootNavigation.navigate('MAP', { item: item });
     };
 
-    const buyTicket = () => {
-        // TODO: implement ticket buying
-        open(item.link);
-    };
-
     if (!data && error) {
         navigation.navigate('Feed');
+        return <></>;
     }
 
     const item: EventArticleItem =
@@ -90,13 +77,19 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
                   },
                   time: '',
                   date: '',
-                  buyTicket,
               }
-            : toItem(data.item, isFavourite, group, buyTicket);
+            : toItem(data.item, isFavourite, group);
 
     return (
         <EventArticleComponent
-            {...{ onBack, item, onFavourite, onShare, goToMap, buyTicket }}
+            {...{
+                onBack,
+                item,
+                onFavourite,
+                onShare: () => share(item.link),
+                goToMap,
+                buyTicket: () => buyTicket(item.link),
+            }}
             loading={loading || !data}
         />
     );
