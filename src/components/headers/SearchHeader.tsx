@@ -5,6 +5,7 @@ import { Icon, IconType } from '@components';
 import { colors } from '@styles';
 import { styles } from './styles';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import { opacity8 } from '@styles/opacity';
 
 export interface SearchInterface {
     payload: string;
@@ -33,7 +34,7 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigatio
         <View style={styles.insetsContainer}>
             <ScrollView keyboardDismissMode="interactive">
                 <View style={[styles.header, { backgroundColor: bgColor }]}>
-                    <TouchableOpacity style={styles.iconBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity activeOpacity={opacity8} style={styles.iconBox} onPress={() => navigation.goBack()}>
                         <Icon type={IconType.ChevronLeft} fill={colors.white} />
                     </TouchableOpacity>
 

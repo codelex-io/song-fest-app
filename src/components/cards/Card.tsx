@@ -8,7 +8,7 @@ import CardTitle from '@components/typography/CardTitle';
 interface CardProps {
     image?: { url: string };
     dateBeforeTitle?: string;
-    title: string;
+    title?: string;
     secondaryTitle?: string;
     children?: ReactNode;
     backgroundColor: string;
@@ -27,16 +27,23 @@ const Card: React.FC<CardProps> = ({
     goToArticle,
 }) => {
     return (
-        <TouchableOpacity style={[styles.container, propStyles]} onPress={goToArticle} activeOpacity={opacity.opacity8}>
-            {image?.url && (
+        <TouchableOpacity
+            style={[styles.container, propStyles]}
+            onPress={goToArticle}
+            activeOpacity={opacity.opacity8}
+        >
+            {image && image.url && (
                 <View>
                     <Image height={180} source={{ uri: image?.url }} style={styles.image} />
                 </View>
             )}
+
             <View style={[styles.lowerContainer, { backgroundColor }]}>
                 {dateBeforeTitle && <Text style={styles.dateText}>{dateBeforeTitle}</Text>}
 
-                <CardTitle styleProps={{ marginBottom: 12 }}>{title}</CardTitle>
+                {title &&
+                    <CardTitle styleProps={{ marginBottom: 12 }}>{title}</CardTitle>
+                }
 
                 {secondaryTitle && (
                     <CardTitle fonts="regular" fontSize={14} styleProps={styles.secondaryTitle}>

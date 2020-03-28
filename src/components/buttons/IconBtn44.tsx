@@ -13,6 +13,7 @@ interface Props {
 const IconBtn44: React.FC<Props> = ({ onPress, style, icon, color, bgColor }) => {
     return (
         <TouchableOpacity
+            activeOpacity={opacity.opacity8}
             onPress={onPress}
             style={[
                 {
@@ -21,7 +22,6 @@ const IconBtn44: React.FC<Props> = ({ onPress, style, icon, color, bgColor }) =>
                 },
                 style,
             ]}
-            activeOpacity={opacity.opacity8}
         >
             <Icon type={icon} fill={color} />
         </TouchableOpacity>
