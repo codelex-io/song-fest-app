@@ -12,6 +12,7 @@ interface EventDescriptionProps {
     item: EventItem;
     onFavourite: () => void;
     onNavigate: () => void;
+    onShare: () => void;
     itemIndex: number;
     totalItems: number;
     backgroundColor: string;
@@ -23,6 +24,7 @@ export const EventCard = ({
     onNavigate,
     backgroundColor,
     onFavourite,
+    onShare,
     itemIndex,
     totalItems,
     navigateToArticle,
@@ -50,7 +52,7 @@ export const EventCard = ({
 
                     <View style={styles.row}>
                         <IconButtons
-                            onShare={() => null}
+                            onShare={onShare}
                             isFavourite={item.isFavourite}
                             onFavourite={onFavourite}
                             onNavigate={onNavigate}

@@ -14,6 +14,7 @@ export interface EventItem extends Event {
     time: string;
     locationTitle: string;
     eventType?: string;
+    link: string;
     location: {
         latitude: number;
         longitude: number;

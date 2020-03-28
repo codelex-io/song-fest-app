@@ -16,6 +16,7 @@ import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import { AnyType } from '@domain/AnyType';
 import { SearchInterface } from '@components/headers/SearchHeader';
 import { ArrowButton } from './ArrowButton';
+import share from '@integration/share';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -259,6 +260,7 @@ const EventMapComponent: React.FC<Props> = ({
                                             item={item}
                                             onFavourite={() => onFavourite(item)}
                                             onNavigate={() => onNavigate(item)}
+                                            onShare={() => share(item.link)}
                                             navigateToArticle={() => navigateToArticle(item)}
                                             itemIndex={index + 1}
                                             totalItems={items.length}

@@ -10,6 +10,7 @@ export const FETCH_EVENT_ITEMS = gql`
             time
             locationTitle
             eventType
+            link
             location {
                 latitude
                 longitude

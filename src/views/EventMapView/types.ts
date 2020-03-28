@@ -13,4 +13,5 @@ export interface EventItem extends Event {
     currentItem?: number;
     totalItems?: number;
     isFavourite: boolean;
+    link: string;
 }
