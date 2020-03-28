@@ -9,7 +9,7 @@ import { LocalizationContext } from '@localization/LocalizationContext';
 import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
 import { Item } from './types';
 import Component from './component';
-import { open } from '@domain/share';
+import share from '@integration/share';
 import { useNavigation } from '@react-navigation/native';
 
 const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
@@ -56,10 +56,6 @@ const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) =
         toggleFavourite({ id: item.id, title: item.title, group: favGroup });
     };
 
-    const onShare = (item: Item) => {
-        open(item.link);
-    };
-
     const rootNavigation = useNavigation();
     const goToMap = (item: Item) => {
         rootNavigation.navigate('MAP', { item });
@@ -101,7 +97,7 @@ const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) =
                 onResetSearch,
                 goToArticle,
                 onFavorite,
-                onShare,
+                onShare: item => share(item.link),
                 refresh,
                 goToMap,
             }}
