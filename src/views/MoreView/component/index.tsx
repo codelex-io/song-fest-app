@@ -66,8 +66,8 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
     );
 };
 
-const screenWidth = Math.floor(Dimensions.get('window').width);
-const MEDIA_BREAK = 360;
+const screenWidth = Math.floor(Dimensions.get('screen').width);
+const MEDIA_BREAK = 260;
 
 export const moreViewStyles = StyleSheet.create({
     container: {
@@ -78,15 +78,15 @@ export const moreViewStyles = StyleSheet.create({
     inner:
         screenWidth > MEDIA_BREAK
             ? {
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  paddingTop: 4,
-                  paddingHorizontal: 8,
-              }
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                paddingTop: 4,
+                paddingHorizontal: 8,
+            }
             : {
-                  paddingTop: 16,
-                  paddingHorizontal: 16,
-              },
+                paddingTop: 16,
+                paddingHorizontal: 16,
+            },
 });
 
 export default MoreView;

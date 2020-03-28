@@ -4,10 +4,6 @@ import { IconType, Icon } from '@components';
 import { colors, opacity, typography } from '@styles';
 import { LocalizationContext } from '@localization/LocalizationContext';
 
-const screenWidth = Math.floor(Dimensions.get('window').width);
-const MEDIA_BREAK = 360;
-const cardWidth = (screenWidth - 64) / 3;
-
 interface CardProps {
     title: string;
     icon: IconType;
@@ -37,51 +33,55 @@ export const Card: React.FC<CardProps> = ({ title, icon, backgroundColor, onOpen
     );
 };
 
+const screenWidth = Math.floor(Dimensions.get('screen').width);
+const MEDIA_BREAK = 260;
+const cardWidth = (screenWidth - 64) / 3;
+
 const styles = StyleSheet.create({
     icon:
         screenWidth > MEDIA_BREAK
             ? {
-                  padding: 10,
-              }
+                padding: 10,
+            }
             : {
-                  padding: 10,
-                  marginRight: 16,
-              },
+                padding: 10,
+                marginRight: 16,
+            },
     card:
         screenWidth > MEDIA_BREAK
             ? {
-                  width: cardWidth,
-                  marginHorizontal: 8,
-                  alignItems: 'center',
-                  marginVertical: 12,
-              }
+                width: cardWidth,
+                marginHorizontal: 8,
+                alignItems: 'center',
+                marginVertical: 12,
+            }
             : {
-                  marginBottom: 12,
-                  flexDirection: 'row',
-              },
+                marginBottom: 12,
+                flexDirection: 'row',
+            },
     button:
         screenWidth > MEDIA_BREAK
             ? {
-                  alignItems: 'center',
-              }
+                alignItems: 'center',
+            }
             : {
-                  flexDirection: 'row',
-                  alignItems: 'center',
-              },
+                flexDirection: 'row',
+                alignItems: 'center',
+            },
     text:
         screenWidth > MEDIA_BREAK
             ? {
-                  textAlign: 'center',
-                  letterSpacing: 0.1,
-                  paddingTop: 8,
-                  fontSize: 14,
-                  fontFamily: typography.bold,
-              }
+                textAlign: 'center',
+                letterSpacing: 0.1,
+                paddingTop: 8,
+                fontSize: 14,
+                fontFamily: typography.bold,
+            }
             : {
-                  textAlign: 'center',
-                  letterSpacing: 0.1,
-                  fontSize: 14,
-                  fontFamily: typography.bold,
-                  textTransform: 'uppercase',
-              },
+                textAlign: 'center',
+                letterSpacing: 0.1,
+                fontSize: 14,
+                fontFamily: typography.bold,
+                textTransform: 'uppercase',
+            },
 });
