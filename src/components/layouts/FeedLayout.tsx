@@ -14,7 +14,7 @@ export const FEED_HEADER_HEIGHT: FeedHeaderHeight = {
         headerHeight: 124,
     },
     EVENTS: {
-        headerHeight: 181.6666717529297,
+        headerHeight: 182,
     },
     VIDEO: {
         headerHeight: 124,
