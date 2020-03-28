@@ -36,7 +36,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
 
     useEffect(() => {
         if (route.params) {
-            setCurrentSearch({ payload: route.params.payload, isActive: true });
+            setCurrentSearch({ payload: route.params.searchPayload.payload, isActive: true });
         }
     }, [route]);
 
@@ -66,7 +66,7 @@ const EventMapView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation 
             items={items}
             onFavourite={item => toggleFavourite(toFavourite(item))}
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
-            onSearch={(color: string) => navigation.navigate('Search', { color: color })}
+            onSearch={(color: string) => navigation.navigate('Search', { color: color, route: 'MAP' })}
             searchInput={currentSearch}
             onResetSearch={() => {
                 setCurrentSearch({ payload: '', isActive: false });

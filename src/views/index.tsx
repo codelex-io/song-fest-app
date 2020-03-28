@@ -1,9 +1,6 @@
-import NewsListView from './NewsListView/component';
 import FavoriteListView from './FavoriteListView';
 import MoreView from './MoreView';
 import FilterView from './FilterView';
-import EventFilterView from './EventFilterView';
-import EventListView from './EventListView';
 import { UserCategoryView } from './UserCategoryView';
 import AllIcons from './AllIcons';
 import UserSettingsView from './UserSettings';
@@ -14,15 +11,13 @@ import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
 import UserSettings from './UserSettings';
 import Article from './ArticleView';
+import FeedView from './FeedView';
 
 export {
     FavoriteListView,
-    NewsListView,
-    EventListView,
     EventMapView,
     MoreView,
     FilterView,
-    EventFilterView,
     UserCategoryView,
     AllIcons,
     UserSettingsView,
@@ -32,4 +27,5 @@ export {
     SearchView,
     UserSettings,
     Article,
+    FeedView,
 };

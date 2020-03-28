@@ -3,26 +3,35 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import {
     FavoriteListView,
     SearchView,
-    EventListView,
     VideoView,
     EmptyView,
     EventMapView,
     UserSettings,
     Article,
+    FeedView,
 } from '@views';
-import { FavouriteGroupKey } from '@domain/favourites/types';
 import { RouteProp } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
-import { NewsListViewIndex } from '@views/NewsListView';
 import { AnyType } from '@domain/AnyType';
+import { SearchInterface } from '@components/headers/SearchHeader';
 
-export type ArticleRouteProp = { itemId: string; group: FavouriteGroupKey; hasHistory: boolean };
+export type FeedRootName = 'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP';
+export type ArticleRouteProp = {
+    itemId: string;
+    group: FeedRootName;
+    hasHistory: boolean;
+};
+
+export interface FeedRouteProp {
+    searchPayload: SearchInterface;
+    rootName: FeedRootName;
+}
 
 export type SharedStackParamsList = {
-    Feed: { payload: string };
+    Feed: FeedRouteProp;
     Favorites: undefined;
     Article: ArticleRouteProp;
-    Search: { color: string };
+    Search: { color: string; route: FeedRootName };
     UserSettings: undefined;
 };
 
@@ -39,11 +48,18 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
     };
 
     let feedComponent: React.FC<AnyType> = EmptyView;
+    const feedParams: FeedRouteProp = {
+        searchPayload: {
+            payload: '',
+            isActive: false,
+        },
+        rootName: route.name,
+    };
 
     if (route.name === 'NEWS') {
-        feedComponent = NewsListViewIndex;
+        feedComponent = FeedView;
     } else if (route.name === 'EVENTS') {
-        feedComponent = EventListView;
+        feedComponent = FeedView;
     } else if (route.name === 'VIDEO') {
         feedComponent = VideoView;
     } else if (route.name === 'MAP') {
@@ -56,7 +72,7 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
 
     return (
         <Stack.Navigator initialRouteName={notificationProp.itemId ? 'Article' : 'Feed'} headerMode="none">
-            <Stack.Screen name="Feed" component={feedComponent} />
+            <Stack.Screen initialParams={feedParams} name="Feed" component={feedComponent} />
             <Stack.Screen name="Favorites" component={FavoriteListView} />
             <Stack.Screen initialParams={notificationProp} name="Article" component={Article} />
             <Stack.Screen name="Search" component={SearchView} />

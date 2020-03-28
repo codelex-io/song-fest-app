@@ -33,7 +33,8 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
                 <StatusBar />
                 <Header
                     title={translations.getString('MORE')}
-                    navigation={navigation}
+                    onButton1={() => navigation.navigate('UserSettings')}
+                    onButton2={() => navigation.navigate('Favorites')}
                     onLongPressTitle={() => {
                         if (devPressCount < 2) {
                             setDevPressCount(devPressCount + 1);

@@ -22,7 +22,7 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
     const [currentSearch, setCurrentSearch] = useState<string>('');
     useEffect(() => {
         if (route.params) {
-            setCurrentSearch(route.params.payload);
+            setCurrentSearch(route.params.searchPayload.payload);
         }
     }, [route]);
 
@@ -33,12 +33,17 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
     }, []);
     return (
         <FeedLayout
+            rootName="VIDEO"
             header={() => (
                 <View>
-                    <Header title={translations.getString('VIDEO')} navigation={navigation} />
+                    <Header
+                        title={translations.getString('VIDEO')}
+                        onButton1={() => navigation.navigate('UserSettings')}
+                        onButton2={() => navigation.navigate('Favorites')}
+                    />
                     <LongSearch
                         backgroundColor={colors.orange}
-                        onPress={() => navigation.navigate('Search', { color: colors.orange })}
+                        onPress={() => navigation.navigate('Search', { color: colors.orange, route: 'VIDEO' })}
                         searchInput={currentSearch}
                         onResetSearch={() => setCurrentSearch('')}
                     />
