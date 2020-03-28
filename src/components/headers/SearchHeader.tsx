@@ -15,10 +15,17 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigatio
     const [input, setInput] = useState('');
 
     const bgColor = route.params ? route.params.color : colors.blue;
+    const rootName = route.params.route;
 
     const handleSubmit = () => {
         setInput('');
-        navigation.navigate('Feed', { payload: input });
+        navigation.navigate('Feed', {
+            searchPayload: {
+                payload: input,
+                isActive: true,
+            },
+            rootName,
+        });
     };
 
     const inputAccessoryViewID = 'searchHeaderInput';

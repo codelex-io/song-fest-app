@@ -7,12 +7,13 @@ interface LabelProps {
     title: string;
     iconType: IconType;
     propStyles?: ViewStyle;
+    color?: string;
 }
 
-export const Label: React.FC<LabelProps> = ({ title, iconType, propStyles }) => (
+export const Label: React.FC<LabelProps> = ({ title, iconType, propStyles, color = colors.darkGrey1A }) => (
     <View style={[styles.container, propStyles]}>
-        <Icon size={24} type={iconType} fill={colors.darkGrey1A} />
-        <Text style={styles.title}>{title}</Text>
+        <Icon size={24} type={iconType} fill={color} />
+        <Text style={[styles.title, { color }]}>{title}</Text>
     </View>
 );
 

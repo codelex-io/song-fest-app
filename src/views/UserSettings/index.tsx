@@ -24,7 +24,6 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
     const { translations } = useLanguageSettings();
     const { userType, setUserType } = useSettings();
     const { setAppLanguage } = useLanguageSettings();
-
     const handleChoice = (userType: UserType) => {
         if (userType === 'visitor-en') {
             setAppLanguage('en');
@@ -37,7 +36,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
     return (
         <SimpleLayout
             title={translations.getString('USER_SETTINGS')}
-            goBack={() => navigation.goBack}
+            goBack={() => navigation.goBack()}
             containerStyles={userSettingStyles.container}
             headerStyles={userSettingStyles.header}
             textTransform="none"

@@ -1,34 +1,50 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, opacity, typography } from '@styles';
-import { dateTimeUtils } from '@utils';
 import { Image } from '@components';
-import { NewsItem } from '../types';
-import { IconButtons } from './IconButtons';
 import { StyleType } from '@domain/AnyType';
 import CardTitle from '@components/typography/CardTitle';
 
 interface CardProps {
-    item: NewsItem;
+    image?: { url: string };
+    dateBeforeTitle?: string;
+    title: string;
+    secondaryTitle?: string;
+    children?: ReactNode;
     backgroundColor: string;
-    onNavigate: () => void;
-    onFavourite: () => void;
-    onShare: () => void;
     propStyles?: StyleType;
+    goToArticle: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ item, backgroundColor, onNavigate, onFavourite, onShare, propStyles }) => {
+const Card: React.FC<CardProps> = ({
+    image,
+    dateBeforeTitle,
+    title,
+    secondaryTitle,
+    children,
+    backgroundColor,
+    propStyles,
+    goToArticle,
+}) => {
     return (
-        <TouchableOpacity style={[styles.container, propStyles]} onPress={onNavigate} activeOpacity={opacity.opacity8}>
-            {item.image?.url && (
+        <TouchableOpacity style={[styles.container, propStyles]} onPress={goToArticle} activeOpacity={opacity.opacity8}>
+            {image?.url && (
                 <View>
-                    <Image height={180} source={{ uri: item.image?.url }} style={styles.image} />
+                    <Image height={180} source={{ uri: image?.url }} style={styles.image} />
                 </View>
             )}
             <View style={[styles.lowerContainer, { backgroundColor }]}>
-                <Text style={styles.dateText}>{dateTimeUtils.formatDate(item.date)}</Text>
-                <CardTitle styleProps={{ marginBottom: 16 }}>{item.title}</CardTitle>
-                <IconButtons onShare={onShare} isFavourite={item.isFavourite} onFavourite={onFavourite} />
+                {dateBeforeTitle && <Text style={styles.dateText}>{dateBeforeTitle}</Text>}
+
+                <CardTitle styleProps={{ marginBottom: 12 }}>{title}</CardTitle>
+
+                {secondaryTitle && (
+                    <CardTitle fonts="regular" fontSize={14} styleProps={styles.secondaryTitle}>
+                        {secondaryTitle}
+                    </CardTitle>
+                )}
+
+                {children}
             </View>
         </TouchableOpacity>
     );
@@ -62,5 +78,8 @@ const styles = StyleSheet.create({
         fontFamily: typography.medium,
         fontSize: 14,
         marginBottom: 8,
+    },
+    secondaryTitle: {
+        marginBottom: 16,
     },
 });

@@ -162,7 +162,11 @@ const EventMapComponent: React.FC<Props> = ({
             <View style={styles.container}>
                 <View style={styles.header}>
                     <StatusBar />
-                    <Header title={translations.getString('MAP')} navigation={navigation} />
+                    <Header
+                        title={translations.getString('MAP')}
+                        onButton1={() => navigation.navigate('UserSettings')}
+                        onButton2={() => navigation.navigate('Favorites')}
+                    />
                     <LongSearch
                         backgroundColor={colors.green}
                         onPress={() => {

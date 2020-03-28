@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { typography, colors, opacity } from '@styles';
 import Icon, { IconType } from '../Icon';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { AnyType } from '@domain/AnyType';
 
 interface HeaderProps {
     title: string;
@@ -13,13 +12,7 @@ interface HeaderProps {
     onButton2: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-    title,
-    onLongPressTitle,
-    containerStyle,
-    onButton1,
-    onButton2
-}) => {
+export const Header: React.FC<HeaderProps> = ({ title, onLongPressTitle, containerStyle, onButton1, onButton2 }) => {
     return (
         <View style={{ ...containerStyle }}>
             <View style={styles.container}>
@@ -27,19 +20,11 @@ export const Header: React.FC<HeaderProps> = ({
                     <Text style={styles.text}>{title}</Text>
                 </TouchableWithoutFeedback>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity
-                        style={styles.containerBox1}
-                        onPress={onButton1}
-                        activeOpacity={opacity.opacity8}
-                    >
+                    <TouchableOpacity style={styles.containerBox1} onPress={onButton1} activeOpacity={opacity.opacity8}>
                         <Icon type={IconType.Face} fill={colors.white} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity
-                        style={styles.containerBox}
-                        onPress={onButton2}
-                        activeOpacity={opacity.opacity8}
-                    >
+                    <TouchableOpacity style={styles.containerBox} onPress={onButton2} activeOpacity={opacity.opacity8}>
                         <Icon type={IconType.HeartFilled} fill={colors.white} />
                     </TouchableOpacity>
                 </View>

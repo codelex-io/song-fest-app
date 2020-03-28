@@ -7,20 +7,24 @@ import { NewsArticleItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
 import { open } from '@domain/share';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
+import { SharedStackNavList, FeedRootName } from 'src/navigation/stacks/SharedStack';
 
 const toItem = (
     item: NewsItem,
     isFavourite: (fav: Favourite) => boolean,
-    group: FavouriteGroupKey,
+    group: FeedRootName,
     buyTicket: () => void,
 ): NewsArticleItem => {
+    let favoritesGroup = group as FavouriteGroupKey;
+    if (group === 'MAP') {
+        favoritesGroup = 'EVENTS';
+    }
     return {
         ...item,
         isFavourite: isFavourite({
             id: item.id,
             title: item.title,
-            group: group,
+            group: favoritesGroup,
         }),
         buyTicket,
     };

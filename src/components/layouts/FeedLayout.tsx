@@ -4,6 +4,23 @@ import Animated from 'react-native-reanimated';
 import { Loading, Empty } from '@components';
 import { colors } from '@styles';
 
+interface FeedHeaderHeight {
+    [key: string]: {
+        headerHeight: number;
+    };
+}
+export const FEED_HEADER_HEIGHT: FeedHeaderHeight = {
+    NEWS: {
+        headerHeight: 124,
+    },
+    EVENTS: {
+        headerHeight: 181.6666717529297,
+    },
+    VIDEO: {
+        headerHeight: 124,
+    },
+};
+
 interface FeedLayerProps {
     header: (resetHeader: () => void) => JSX.Element | null;
     children: (
@@ -13,10 +30,12 @@ interface FeedLayerProps {
     ) => JSX.Element | null;
     loading: boolean;
     empty?: boolean;
+    rootName: string;
 }
 
-const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, empty }) => {
-    const [headerHeight, setHeaderHeight] = useState<number>(0);
+const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, empty, rootName }) => {
+    const [headerHeight, setHeaderHeight] = useState(FEED_HEADER_HEIGHT[rootName].headerHeight);
+
     const [animatedScrollOffset] = useState(new Animated.Value(0));
 
     const resetHeader = () => {
@@ -89,4 +108,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    loading: {},
 });
