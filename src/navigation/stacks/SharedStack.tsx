@@ -36,9 +36,7 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO'>> = ({ route }) => {
     useFocusEffect(
         useCallback(() => {
-            if (route.name !== 'MAP') {
-                StatusBar.setBackgroundColor(colors.white);
-            }
+            StatusBar.setBackgroundColor(colors.white);
         }, []),
     );
     const Stack = createStackNavigator<SharedStackParamsList>();
