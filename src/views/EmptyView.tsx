@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { colors } from '@styles';
 import { LongSearch, Empty } from '@components';
 import { TextToggleBtn } from '@components/buttons';
-import { TimeSelector } from '@domain';
+import { TimeSelector } from '@domain/filters';
 
 interface Props {
     loading: boolean;

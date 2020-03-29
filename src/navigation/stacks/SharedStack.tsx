@@ -1,15 +1,6 @@
 import React, { useCallback } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import {
-    FavoriteListView,
-    SearchView,
-    VideoView,
-    EmptyView,
-    EventMapView,
-    UserSettings,
-    Article,
-    FeedView,
-} from '@views';
+import { FavoriteListView, SearchView, VideoView, EmptyView, UserSettings, Article, FeedView } from '@views';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { AnyType } from '@domain/AnyType';
@@ -42,7 +33,7 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
     route: RouteProp<SharedStackParamsList, T>;
 };
 
-const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
+const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO'>> = ({ route }) => {
     useFocusEffect(
         useCallback(() => {
             if (route.name !== 'MAP') {
@@ -50,7 +41,6 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
             }
         }, []),
     );
-
     const Stack = createStackNavigator<SharedStackParamsList>();
 
     const notificationProp: ArticleRouteProp = {
@@ -72,8 +62,6 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
         feedComponent = FeedView;
     } else if (route.name === 'VIDEO') {
         feedComponent = VideoView;
-    } else if (route.name === 'MAP') {
-        feedComponent = EventMapView;
     }
 
     if (!route.name) {

@@ -18,6 +18,7 @@ import { ArrowButton } from './ArrowButton';
 import share from '@integration/share';
 import { useFocusEffect } from '@react-navigation/native';
 import { statusBarHeight } from '@utils';
+import { opacity8 } from '@styles/opacity';
 
 const WIDTH = Dimensions.get('window').width;
 const HEADER_TRANSPARENCY = 0.7;
@@ -245,7 +246,11 @@ const EventMapComponent: React.FC<Props> = ({
                                         setButtonsHeight(Math.ceil(event.nativeEvent.layout.height) + 16);
                                     }}
                                 >
-                                    <TouchableOpacity style={styles.helperButton} onPress={animateToUserLocation}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity8}
+                                        style={styles.helperButton}
+                                        onPress={animateToUserLocation}
+                                    >
                                         <MyLocation />
                                     </TouchableOpacity>
 

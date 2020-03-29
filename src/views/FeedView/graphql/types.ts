@@ -1,3 +1,5 @@
+import { Moment } from 'moment';
+
 export interface Data {
     items: NewsItem[] | EventsItem[];
 }
@@ -5,7 +7,7 @@ export interface Data {
 export interface NewsItem {
     id: string;
     title: string;
-    date: string;
+    date: Moment;
     link: string;
     image: {
         id: string;
@@ -16,7 +18,7 @@ export interface NewsItem {
 export interface EventsItem {
     id: string;
     title: string;
-    date: string;
+    date: Moment;
     time: string;
     link: string;
     locationTitle: string;

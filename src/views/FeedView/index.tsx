@@ -11,6 +11,8 @@ import { Item } from './types';
 import Component from './component';
 import share from '@integration/share';
 import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
+import { MapFeedProps } from '@navigation/stacks/MapStack';
 
 const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
     const { searchPayload, rootName } = route.params;
@@ -58,7 +60,18 @@ const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) =
 
     const rootNavigation = useNavigation();
     const goToMap = (item: Item) => {
-        rootNavigation.navigate('MAP', { item });
+        const params: MapFeedProps = {
+            item: item.id,
+            rootName: 'MAP',
+            searchPayload: {
+                payload: '',
+                isActive: false,
+            },
+        };
+        rootNavigation.navigate('MAP', {
+            screen: 'Feed',
+            params: params,
+        });
     };
 
     const refresh = () => {
@@ -129,6 +142,7 @@ const mapItems = ({ data, isFavourite, rootName }: MapItemsInterface): Item[] =>
             image: item.image,
             link: item.link,
             isFavourite: isFavourite({ id: item.id, title: item.title, group: favGroup }),
+            date: moment(item.date),
         }));
     } else if (rootName === 'EVENTS' || rootName === 'MAP') {
         const items = data.items as EventsItem[];
@@ -143,6 +157,7 @@ const mapItems = ({ data, isFavourite, rootName }: MapItemsInterface): Item[] =>
             link: item.link,
             location: item.location,
             isFavourite: isFavourite({ id: item.id, title: item.title, group: favGroup }),
+            date: moment(item.date),
         }));
     }
     return [];
