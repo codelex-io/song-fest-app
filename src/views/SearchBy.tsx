@@ -14,7 +14,6 @@ const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation 
             <View>
                 <SearchHeader navigation={navigation} route={route} />
             </View>
-
             <View style={styles.contentContainer}>
                 <Text style={styles.text}>{translations.getString('SEARCH')}</Text>
             </View>

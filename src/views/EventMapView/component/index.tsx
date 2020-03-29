@@ -1,5 +1,14 @@
 import React, { useState, useRef, useEffect, useLayoutEffect, useContext, Fragment, useCallback } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, LayoutChangeEvent, StatusBar } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Dimensions,
+    TouchableOpacity,
+    Animated,
+    LayoutChangeEvent,
+    StatusBar,
+    Platform,
+} from 'react-native';
 import MapView from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
 import { MyLocation } from './MyLocation';
@@ -315,7 +324,8 @@ const styles = StyleSheet.create({
         left: 0,
         zIndex: 1,
         backgroundColor: `rgba(255, 255, 255, ${HEADER_TRANSPARENCY})`,
-        marginTop: statusBarHeight(),
+        marginTop: Platform.OS === 'android' ? statusBarHeight() : 0,
+        paddingTop: Platform.OS === 'ios' ? statusBarHeight() : 0,
     },
     belowMap: {
         position: 'absolute',
