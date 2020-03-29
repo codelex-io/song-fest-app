@@ -8,13 +8,15 @@ import { Item } from '../types';
 import FlatListComponent from './FlatListComponent';
 import { FeedRootName } from '@navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
-import { TimeSelector } from '@domain';
+import { TimeSelector, filterByDate } from '@domain/filters';
+import { ResultsState } from '@components/Empty';
+import { isFiltering } from '@domain/filters/isFiltering';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
-    { key: 'today', title: 'TODAY' },
-    { key: 'tomorrow', title: 'TOMORROW' },
-    { key: 'this-week', title: 'THIS_WEEK' },
-    { key: 'all', title: 'OTHERS' },
+    { key: 'today', title: 'TODAY', default: false },
+    { key: 'tomorrow', title: 'TOMORROW', default: false },
+    { key: 'this-week', title: 'THIS_WEEK', default: false },
+    { key: 'all', title: 'OTHERS', default: true },
 ];
 
 interface NewsComponentProps {
@@ -51,6 +53,17 @@ const Component: React.FC<NewsComponentProps> = ({
 }) => {
     const [activeKey, setActiveKey] = useState<TimeSelector>('all');
 
+    if (rootName === 'EVENTS') {
+        items = filterByDate(items, activeKey);
+    }
+
+    let resultsState: ResultsState = 'SUCCESS';
+    if (searchState.payload && searchState.isActive && items.length === 0) {
+        resultsState = 'NOTHING_FOUND';
+    } else if (isFiltering(FILTER_OPTIONS, activeKey) && items.length === 0) {
+        resultsState = 'NOTHING_FILTERED';
+    }
+
     return (
         <FeedLayout
             rootName={rootName}
@@ -79,7 +92,7 @@ const Component: React.FC<NewsComponentProps> = ({
                 </View>
             )}
             loading={loading}
-            empty={items.length === 0 && searchState.isActive}
+            resultsState={resultsState}
         >
             {(resetHeader, headerHeight, animatedScrollOffset) => (
                 <FlatListComponent

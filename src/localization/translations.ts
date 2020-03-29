@@ -43,6 +43,7 @@ const translations = new LocalizedStrings({
         EN: 'ENGLISH',
         ADDED_TO_FAVOURITES: 'Pievienots favorītiem',
         NOTHING_FOUND: 'Diemžēl, pēc Jūsu ievadītā vārda nekas netika atrasts.',
+        NOTHING_FILTERED: 'Diemžēl nekas netika atrasts',
         BUY_TICKET: 'pirkt biļeti',
         LOCATION_PERMISSIONS_TITLE: 'Nav iespējams noteikt atrašanās vietu',
         LOCATION_PERMISSIONS_DETAILS:
@@ -90,6 +91,7 @@ const translations = new LocalizedStrings({
         EN: 'ENGLISH',
         ADDED_TO_FAVOURITES: 'Added to favourites',
         NOTHING_FOUND: 'Unfortunately nothing was found by the name You were looking for.',
+        NOTHING_FILTERED: 'Unfortunately nothing was found',
         BUY_TICKET: 'buy ticket',
         LOCATION_PERMISSIONS_TITLE: 'Could not get your location',
         LOCATION_PERMISSIONS_DETAILS:

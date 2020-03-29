@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { EventItem } from './types';
-import EventMapComponent from './component';
+import { View } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { FETCH_EVENT_ITEMS } from './graphql/queries';
+import { EventItem } from './types';
+import EventMapComponent from './component';
 import { Data, Variables, EventItem as GraphQLEventItem } from './graphql/types';
 import { Favourite } from '@domain/favourites/types';
 import { useFavourites } from '@domain/favourites';
 import { openMap } from '@domain/maps';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
-import { View } from 'react-native';
 import { colors } from '@styles';
 import Loading from '@components/Loading';
 import { SearchInterface } from '@components/headers/SearchHeader';

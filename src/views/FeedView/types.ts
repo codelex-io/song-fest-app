@@ -1,12 +1,13 @@
 import { FeedRootName } from '@navigation/stacks/SharedStack';
+import { Moment } from 'moment';
 
 export interface Item {
     id: string;
     group: FeedRootName;
-    dateBeforeTitle?: string;
+    dateBeforeTitle?: Moment;
     title: string;
     secondaryTitle?: string;
-    dateLabel?: string;
+    dateLabel?: Moment;
     timeLabel?: string;
     image?: {
         url: string;
@@ -17,4 +18,5 @@ export interface Item {
         latitude: string;
         longitude: string;
     };
+    date: Moment;
 }

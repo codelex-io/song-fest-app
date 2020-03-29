@@ -3,6 +3,7 @@ import { StyleSheet, StatusBar, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Loading, Empty } from '@components';
 import { colors } from '@styles';
+import { ResultsState } from '@components/Empty';
 
 interface FeedHeaderHeight {
     [key: string]: {
@@ -29,11 +30,11 @@ interface FeedLayerProps {
         animatedScrollOffset: Animated.Value<number>,
     ) => JSX.Element | null;
     loading: boolean;
-    empty?: boolean;
+    resultsState: ResultsState;
     rootName: string;
 }
 
-const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, empty, rootName }) => {
+const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, resultsState, rootName }) => {
     const [headerHeight, setHeaderHeight] = useState(FEED_HEADER_HEIGHT[rootName].headerHeight);
 
     const [animatedScrollOffset] = useState(new Animated.Value(0));
@@ -63,10 +64,10 @@ const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, empty
         );
     }
 
-    if (!loading && empty) {
+    if (!loading && resultsState !== 'SUCCESS') {
         viewState = (
             <View style={[styles.content, { paddingTop: headerHeight }]}>
-                <Empty />
+                <Empty resultsState={resultsState} />
             </View>
         );
     }
