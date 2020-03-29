@@ -4,6 +4,7 @@ import { SimpleHeader, Loading } from '@components';
 import { colors, typography } from '@styles';
 import Markdown from 'react-native-markdown-display';
 import BackButton from './BackButton';
+import { statusBarHeight } from '@utils';
 
 interface ArticleLayoutProps {
     onBack: () => void;
@@ -110,6 +111,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: statusBarHeight(),
     },
     parentContainer: {
         flex: 1,
@@ -141,12 +143,12 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 180,
     },
-
     date: {
         fontSize: 14,
         color: colors.mediumGrey4D,
     },
 });
+
 const markdownstyles = StyleSheet.create({
     text: {
         fontFamily: typography.medium,
@@ -154,4 +156,5 @@ const markdownstyles = StyleSheet.create({
         lineHeight: 18,
     },
 });
+
 export default ArticleLayout;

@@ -7,6 +7,7 @@ import { UserType } from '@domain/settings';
 import { useLanguageSettings } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import SimpleLayout from '@components/layouts/SimpleLayout';
+import { statusBarHeight } from '@utils';
 
 interface User {
     type: UserType;
@@ -38,6 +39,7 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
             title={translations.getString('USER_SETTINGS')}
             goBack={() => navigation.goBack()}
             headerStyles={styles.header}
+            containerStyles={styles.container}
             textTransform="none"
         >
             <Text style={styles.title}>{translations.getString('USER_TYPE')}</Text>
@@ -49,6 +51,12 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
     );
 };
 export const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: colors.white,
+        paddingTop: statusBarHeight(),
+    },
     header: {
         marginBottom: 16,
     },

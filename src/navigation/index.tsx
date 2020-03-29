@@ -85,7 +85,9 @@ const Navigation: React.FC = () => {
                 <Tab.Screen
                     initialParams={notificationItem}
                     options={({ route }) => {
-                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                        return {
+                            tabBarVisible: hideOnUserCategoryView(route),
+                        };
                     }}
                     name="NEWS"
                     component={SharedStack}

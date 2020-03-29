@@ -4,29 +4,37 @@ import { Icon, IconType } from '@components';
 import { colors } from '@styles';
 import SimpleLayout from '@components/layouts/SimpleLayout';
 import { LocalizationContext } from '@localization/LocalizationContext';
+import { statusBarHeight } from '@utils';
 
 interface NoFavoritesProps {
     goBack: () => void;
 }
+
 const NoFavorites: React.FC<NoFavoritesProps> = ({ goBack }) => {
     const { translations } = useContext(LocalizationContext);
     return (
-        <SimpleLayout
-            title={translations.getString('FAVORITE')}
-            goBack={goBack}
-            containerStyles={styles.containerStyles}
-            headerStyles={styles.headerStyles}
-        >
-            <View style={styles.contentContainer}>
-                <Icon style={styles.icon} size={44} type={IconType.HeartFilled} fill={colors.orange} />
-                <Text style={styles.title}>{translations.getString('FAVORITES_HERE')}</Text>
-                <Text style={styles.title2}>{translations.getString('FAVORITE_INFO')}</Text>
-            </View>
-        </SimpleLayout>
+        <View style={styles.container}>
+            <SimpleLayout
+                title={translations.getString('FAVORITE')}
+                goBack={goBack}
+                containerStyles={styles.containerStyles}
+                headerStyles={styles.headerStyles}
+            >
+                <View style={styles.contentContainer}>
+                    <Icon style={styles.icon} size={44} type={IconType.HeartFilled} fill={colors.orange} />
+                    <Text style={styles.title}>{translations.getString('FAVORITES_HERE')}</Text>
+                    <Text style={styles.title2}>{translations.getString('FAVORITE_INFO')}</Text>
+                </View>
+            </SimpleLayout>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: statusBarHeight(),
+    },
     containerStyles: {
         flex: 1,
     },

@@ -7,7 +7,6 @@ import { Favourite } from '@domain/favourites/types';
 
 const FavoriteListView: React.FC<SharedStackNavList<'Favorites'>> = ({ navigation }) => {
     const { favourites, hasAnyItems, toggleFavourite } = useFavourites();
-
     const navigateToArticle = (item: Favourite) => {
         navigation.navigate('Article', {
             itemId: item.id,
@@ -15,15 +14,16 @@ const FavoriteListView: React.FC<SharedStackNavList<'Favorites'>> = ({ navigatio
             hasHistory: true,
         });
     };
-    return hasAnyItems() ? (
+    if (!hasAnyItems()) {
+        return <NoFavorites goBack={() => navigation.goBack()} />;
+    }
+    return (
         <FavoriteListViewComponent
             favourites={favourites}
             onNavigate={(item: Favourite) => navigateToArticle(item)}
             onFavourite={(item: Favourite) => toggleFavourite(item)}
             goBack={() => navigation.goBack()}
         />
-    ) : (
-        <NoFavorites goBack={() => navigation.goBack()} />
     );
 };
 
