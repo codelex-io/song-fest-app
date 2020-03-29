@@ -12,6 +12,7 @@ import Component from './component';
 import share from '@integration/share';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
+import { MapFeedProps } from '@navigation/stacks/MapStack';
 
 const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
     const { searchPayload, rootName } = route.params;
@@ -59,7 +60,18 @@ const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) =
 
     const rootNavigation = useNavigation();
     const goToMap = (item: Item) => {
-        rootNavigation.navigate('MAP', { item });
+        const params: MapFeedProps = {
+            item: item.id,
+            rootName: 'MAP',
+            searchPayload: {
+                payload: '',
+                isActive: false,
+            },
+        };
+        rootNavigation.navigate('MAP', {
+            screen: 'Feed',
+            params: params,
+        });
     };
 
     const refresh = () => {

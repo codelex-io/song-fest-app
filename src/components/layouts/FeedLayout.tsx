@@ -20,6 +20,9 @@ export const FEED_HEADER_HEIGHT: FeedHeaderHeight = {
     VIDEO: {
         headerHeight: 124,
     },
+    MAP: {
+        headerHeight: 182,
+    },
 };
 
 interface FeedLayerProps {

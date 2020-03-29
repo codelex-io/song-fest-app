@@ -36,7 +36,7 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigatio
                 <IconBtn24
                     icon={IconType.ChevronLeft}
                     color={colors.white}
-                    bgColor={colors.blue}
+                    bgColor={bgColor}
                     onPress={() => navigation.goBack()}
                     style={styles.btn}
                 />
