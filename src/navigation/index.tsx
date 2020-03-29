@@ -87,6 +87,7 @@ const Navigation: React.FC = () => {
                     options={({ route }) => {
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),
+                            unmountOnBlur: true,
                         };
                     }}
                     name="NEWS"
@@ -95,14 +96,20 @@ const Navigation: React.FC = () => {
                 <Tab.Screen
                     initialParams={notificationItem}
                     options={({ route }) => {
-                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                        return {
+                            tabBarVisible: hideOnUserCategoryView(route),
+                            unmountOnBlur: true,
+                        };
                     }}
                     name="EVENTS"
                     component={SharedStack}
                 />
                 <Tab.Screen
                     options={({ route }) => {
-                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                        return {
+                            tabBarVisible: hideOnUserCategoryView(route),
+                            unmountOnBlur: true,
+                        };
                     }}
                     name="MAP"
                     component={MapStack}
@@ -112,6 +119,7 @@ const Navigation: React.FC = () => {
                     options={({ route }) => {
                         return {
                             tabBarVisible: hideOnUserCategoryView(route),
+                            unmountOnBlur: true,
                         };
                     }}
                     name="VIDEO"
@@ -119,7 +127,10 @@ const Navigation: React.FC = () => {
                 />
                 <Tab.Screen
                     options={({ route }) => {
-                        return { tabBarVisible: hideOnUserCategoryView(route) };
+                        return {
+                            tabBarVisible: hideOnUserCategoryView(route),
+                            unmountOnBlur: true,
+                        };
                     }}
                     name="MORE"
                     component={MoreStack}
