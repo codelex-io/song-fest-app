@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { getClient, initApollo } from './src/api';
 import { initFavourites, FavouritesContextProvider } from './src/domain/favourites';
@@ -10,7 +11,8 @@ import { useStoryBook, StoryBookContextProvider } from './src/domain/storybook';
 import { initNotifications, postLaunch } from './src/integration/notifications';
 import Navigation from './src/navigation';
 import Storybook from './storybook';
-import { StatusBarWrapper } from './src/components';
+import { colors } from './src/styles';
+import { statusBarHeight } from './src/utils';
 import { hideSplashScreen } from './src/splash';
 
 const bootstrap = async (isRealDevice: boolean) =>
@@ -62,8 +64,23 @@ const App: React.FC<Props> = ({ isRealDevice }) => {
 
 export default ({ isRealDevice }: Props) => (
     <StoryBookContextProvider>
-        <StatusBarWrapper>
-            <App isRealDevice={isRealDevice} />
-        </StatusBarWrapper>
+        <View style={{ height: 0 }}>
+            <StatusBar translucent barStyle="dark-content" backgroundColor={'transparent'} />
+        </View>
+        <View style={styles.container}>
+            <View style={styles.content}>
+                <App isRealDevice={isRealDevice} />
+            </View>
+        </View>
     </StoryBookContextProvider>
 );
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    content: {
+        flex: 1,
+        backgroundColor: colors.white,
+    },
+});

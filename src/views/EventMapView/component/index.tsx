@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, useLayoutEffect, useContext, Fragment } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, LayoutChangeEvent } from 'react-native';
+import React, { useState, useRef, useEffect, useLayoutEffect, useContext, Fragment, useCallback } from 'react';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, LayoutChangeEvent, StatusBar } from 'react-native';
 import MapView from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
 import { MyLocation } from './MyLocation';
@@ -10,15 +10,17 @@ import { LongSearch, Header, Empty } from '@components';
 import { EventCard } from './EventCard';
 import { getCurrentPosition } from '@domain/location';
 import { LocalizationContext } from '@localization/LocalizationContext';
-import StatusBar from '@components/headers/StatusBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import { AnyType } from '@domain/AnyType';
 import { SearchInterface } from '@components/headers/SearchHeader';
 import { ArrowButton } from './ArrowButton';
 import share from '@integration/share';
+import { useFocusEffect } from '@react-navigation/native';
+import { statusBarHeight } from '@utils';
 
 const WIDTH = Dimensions.get('window').width;
+const HEADER_TRANSPARENCY = 0.7;
 
 interface Props {
     loading: boolean;
@@ -102,6 +104,12 @@ const EventMapComponent: React.FC<Props> = ({
         startAnimation();
     }, [isScrollOpen]);
 
+    useFocusEffect(
+        useCallback(() => {
+            StatusBar.setBackgroundColor(styles.header.backgroundColor);
+        }, []),
+    );
+
     const transformStyle = animationHeight === undefined ? { top: '100%' } : { top: animationHeight };
 
     const animateToUserLocation = () => {
@@ -168,7 +176,6 @@ const EventMapComponent: React.FC<Props> = ({
         >
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <StatusBar />
                     <Header
                         title={translations.getString('MAP')}
                         onButton1={() => navigation.navigate('UserSettings')}
@@ -202,7 +209,7 @@ const EventMapComponent: React.FC<Props> = ({
                                 latitudeDelta: 0.009,
                                 longitudeDelta: 0.009,
                             }}
-                            showsUserLocation={true}
+                            showsUserLocation={false}
                             style={styles.map}
                             ref={mapViewRef}
                             mapPadding={{
@@ -302,7 +309,8 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         zIndex: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        backgroundColor: `rgba(255, 255, 255, ${HEADER_TRANSPARENCY})`,
+        marginTop: statusBarHeight(),
     },
     belowMap: {
         position: 'absolute',

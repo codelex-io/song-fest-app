@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, StatusBar, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Loading, Empty } from '@components';
 import { colors } from '@styles';
+import { statusBarHeight } from '@utils';
 
 interface FeedHeaderHeight {
     [key: string]: {
@@ -73,10 +74,7 @@ const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, empty
 
     return (
         <View style={styles.container}>
-            <StatusBar />
-
             {viewState}
-
             <Animated.View
                 onLayout={event => setHeaderHeight(event.nativeEvent.layout.height)}
                 style={[styles.header, animatedHeaderStyles]}
@@ -101,6 +99,7 @@ const styles = StyleSheet.create({
         right: 0,
         zIndex: 1,
         backgroundColor: colors.white,
+        paddingTop: statusBarHeight(),
     },
     content: {
         flex: 1,

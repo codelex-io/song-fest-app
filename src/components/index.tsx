@@ -6,19 +6,6 @@ import { SimpleHeader } from './headers/SimpleHeader';
 import { LongSearch } from './LongSearch';
 import Loading from './Loading';
 import Empty from './Empty';
-import { StatusBarWrapper } from './StatusBarWrapper';
 import { Image } from './Image';
 
-export {
-    Header,
-    Icon,
-    IconType,
-    TabBarIcon,
-    FilterButtonIcon,
-    SimpleHeader,
-    LongSearch,
-    Loading,
-    Empty,
-    StatusBarWrapper,
-    Image,
-};
+export { Header, Icon, IconType, TabBarIcon, FilterButtonIcon, SimpleHeader, LongSearch, Loading, Empty, Image };

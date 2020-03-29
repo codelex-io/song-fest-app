@@ -7,6 +7,7 @@ import { UserType } from '@domain/settings';
 import { useLanguageSettings } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import SimpleLayout from '@components/layouts/SimpleLayout';
+import { statusBarHeight } from '@utils';
 
 interface User {
     type: UserType;
@@ -37,11 +38,11 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
         <SimpleLayout
             title={translations.getString('USER_SETTINGS')}
             goBack={() => navigation.goBack()}
-            containerStyles={userSettingStyles.container}
-            headerStyles={userSettingStyles.header}
+            containerStyles={styles.container}
+            headerStyles={styles.header}
             textTransform="none"
         >
-            <Text style={userSettingStyles.title}>{translations.getString('USER_TYPE')}</Text>
+            <Text style={styles.title}>{translations.getString('USER_TYPE')}</Text>
 
             {userTypes.map(({ type, title }: User) => (
                 <RadioButton
@@ -55,11 +56,12 @@ const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation
         </SimpleLayout>
     );
 };
-export const userSettingStyles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: colors.white,
+        paddingTop: statusBarHeight(),
     },
     header: {
         marginBottom: 16,

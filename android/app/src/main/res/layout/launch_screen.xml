@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@color/splashscreen_bg">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_white"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <pl.droidsonroids.gif.GifImageView
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/gifImageView_loading_image"
             android:layout_width="250dp"
             android:layout_height="250dp"
@@ -15,51 +19,53 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-    <TextView
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/textView_app_developers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="12sp"
             android:fontFamily="Roboto"
-            android:textColor="#4D4D4D"
             android:text="Mobilo aplikāciju veidoja"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="#4D4D4D"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout_bottom_container"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout_bottom_container"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
+        <LinearLayout
             android:id="@+id/linearLayout_bottom_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="12dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_accurat_svg"/>
+                android:src="@drawable/ic_accurat_svg" />
 
-        <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
+                android:text="&amp;"
                 android:textColor="#4D4D4D"
-                android:textSize="12sp"
-                android:text="&amp;"/>
+                android:textSize="12sp" />
 
-        <ImageView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_codelex_svg"/>
+                android:src="@drawable/ic_codelex_svg" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

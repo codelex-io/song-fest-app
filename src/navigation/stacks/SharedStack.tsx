@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import {
     FavoriteListView,
@@ -10,10 +10,12 @@ import {
     Article,
     FeedView,
 } from '@views';
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { AppTabsNavParams } from '..';
 import { AnyType } from '@domain/AnyType';
 import { SearchInterface } from '@components/headers/SearchHeader';
+import { StatusBar } from 'react-native';
+import { colors } from '@styles';
 
 export type FeedRootName = 'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP';
 export type ArticleRouteProp = {
@@ -41,6 +43,14 @@ export type SharedStackNavList<T extends keyof SharedStackParamsList> = {
 };
 
 const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'>> = ({ route }) => {
+    useFocusEffect(
+        useCallback(() => {
+            if (route.name !== 'MAP') {
+                StatusBar.setBackgroundColor(colors.white);
+            }
+        }, []),
+    );
+
     const Stack = createStackNavigator<SharedStackParamsList>();
 
     const notificationProp: ArticleRouteProp = {
@@ -67,7 +77,7 @@ const SharedStack: React.FC<AppTabsNavParams<'NEWS' | 'EVENTS' | 'VIDEO' | 'MAP'
     }
 
     if (!route.name) {
-        return null;
+        return <></>;
     }
 
     return (
