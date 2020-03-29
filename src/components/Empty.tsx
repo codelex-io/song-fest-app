@@ -3,11 +3,18 @@ import { View, Text, StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 import { useLanguageSettings } from '@localization/LocalizationContext';
 
-const Empty = () => {
+export type ResultsState = 'NOTHING_FOUND' | 'NOTHING_FILTERED' | 'SUCCESS';
+
+interface EmptyProps {
+    resultsState?: ResultsState;
+}
+
+const Empty: React.FC<EmptyProps> = ({ resultsState = 'NOTHING_FOUND' }) => {
     const { translations } = useLanguageSettings();
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{translations.getString('NOTHING_FOUND')}</Text>
+            <Text style={styles.text}>{translations.getString(resultsState as string)}</Text>
         </View>
     );
 };

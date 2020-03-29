@@ -13,7 +13,9 @@ interface FilterProps {
 export interface ViewsHeaderFilterOption {
     key: string;
     title: string;
+    default: boolean;
 }
+
 const ViewsHeaderFilter: React.FC<FilterProps> = ({ activeKey, onPress, options }) => {
     const { translations } = useContext(LocalizationContext);
     return (

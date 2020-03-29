@@ -11,6 +11,7 @@ import EventArticleComponent from './component/EventArticleComponent';
 import { useNavigation } from '@react-navigation/native';
 import { toFavourite } from '@domain/events';
 import { buyTicket } from '@domain/tickets';
+import { MapFeedProps } from '@navigation/stacks/MapStack';
 
 const toItem = (item: EventItem, isFavourite: (fav: Favourite) => boolean, group: FeedRootName): EventArticleItem => {
     let favoritesGroup = group as FavouriteGroupKey;
@@ -51,7 +52,18 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
     };
 
     const goToMap = () => {
-        rootNavigation.navigate('MAP', { item: item });
+        const params: MapFeedProps = {
+            item: item.id,
+            rootName: 'MAP',
+            searchPayload: {
+                payload: '',
+                isActive: false,
+            },
+        };
+        rootNavigation.navigate('MAP', {
+            screen: 'Feed',
+            params: params,
+        });
     };
 
     if (!data && error) {

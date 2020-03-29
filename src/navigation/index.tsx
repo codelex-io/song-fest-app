@@ -11,6 +11,7 @@ import MoreStack from './stacks/MoreStack';
 import { AnyType } from '@domain/AnyType';
 import { fromNotificationData, Location, Tab as TabType } from './location';
 import { UserCategoryView } from '@views';
+import MapStack from './stacks/MapStack';
 
 const Tab = createBottomTabNavigator<AppTabsParamList>();
 
@@ -37,7 +38,7 @@ export type NotificationProp = {
 type AppTabsParamList = {
     NEWS: NotificationProp;
     EVENTS: NotificationProp;
-    MAP: { item: AnyType };
+    MAP: { item: string };
     VIDEO: NotificationProp;
     MORE: undefined;
 };
@@ -102,7 +103,7 @@ const Navigation: React.FC = () => {
                         return { tabBarVisible: hideOnUserCategoryView(route) };
                     }}
                     name="MAP"
-                    component={SharedStack}
+                    component={MapStack}
                 />
                 <Tab.Screen
                     initialParams={notificationItem}

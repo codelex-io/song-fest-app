@@ -23,6 +23,7 @@ const translations = new LocalizedStrings({
         OTHERS: 'Cits',
         ONLINE: 'Tiešsaitē',
         SEARCH: 'Meklējiet pēc nosaukuma, vietas uc.',
+        SEARCH_SHORT: 'Meklējiet pēc nosaukuma...',
         RESULTS: 'Rezultāti',
         SPONSORS: 'Sponsoru Piedāvājums',
         IMPORTANT_TO_KNOW: 'Svarīgi zināt',
@@ -43,6 +44,7 @@ const translations = new LocalizedStrings({
         EN: 'ENGLISH',
         ADDED_TO_FAVOURITES: 'Pievienots favorītiem',
         NOTHING_FOUND: 'Diemžēl, pēc Jūsu ievadītā vārda nekas netika atrasts.',
+        NOTHING_FILTERED: 'Diemžēl nekas netika atrasts',
         BUY_TICKET: 'pirkt biļeti',
         LOCATION_PERMISSIONS_TITLE: 'Nav iespējams noteikt atrašanās vietu',
         LOCATION_PERMISSIONS_DETAILS:
@@ -69,6 +71,7 @@ const translations = new LocalizedStrings({
         THIS_WEEK: 'This week',
         OTHERS: 'Others',
         SEARCH: 'Search by name, place, etc.',
+        SEARCH_SHORT: 'Search by name...',
         RESULTS: 'Results',
         SPONSORS: 'Sponsors offer',
         IMPORTANT_TO_KNOW: 'Important to know',
@@ -90,6 +93,7 @@ const translations = new LocalizedStrings({
         EN: 'ENGLISH',
         ADDED_TO_FAVOURITES: 'Added to favourites',
         NOTHING_FOUND: 'Unfortunately nothing was found by the name You were looking for.',
+        NOTHING_FILTERED: 'Unfortunately nothing was found',
         BUY_TICKET: 'buy ticket',
         LOCATION_PERMISSIONS_TITLE: 'Could not get your location',
         LOCATION_PERMISSIONS_DETAILS:

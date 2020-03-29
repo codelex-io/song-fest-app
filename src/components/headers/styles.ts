@@ -2,19 +2,6 @@ import { StyleSheet } from 'react-native';
 import { colors, typography } from '@styles';
 
 export const styles = StyleSheet.create({
-    insetsContainer: {
-        backgroundColor: colors.white,
-    },
-    header: {
-        marginVertical: 8,
-        marginHorizontal: 16,
-        textAlign: 'left',
-        letterSpacing: 0.15,
-        fontSize: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: colors.white,
-    },
     simpleHeader: {
         paddingHorizontal: 16,
         textAlign: 'left',

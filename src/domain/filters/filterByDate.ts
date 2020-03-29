@@ -1,7 +1,7 @@
-import { Moment } from 'moment';
+import moment from 'moment';
 import { TimeSelector, DateAware } from './';
 
-const filterEvents = <T extends DateAware>(today: Moment, items: T[], selector: TimeSelector): T[] => {
+const filterEvents = <T extends DateAware>(items: T[], selector: TimeSelector, today = moment()): T[] => {
     const currentWeek = today.week();
 
     return items.filter(it => {

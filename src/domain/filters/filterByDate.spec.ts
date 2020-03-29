@@ -28,27 +28,27 @@ describe('Filter Events', () => {
     ];
 
     it('should return all when all selected', () => {
-        const results = filterEvents(moment(), items, 'all');
+        const results = filterEvents(items, 'all', moment());
 
         expect(results.length).toBe(items.length);
     });
 
     it('should return same day events', () => {
-        const results = filterEvents(moment('2020-01-01'), items, 'today');
+        const results = filterEvents(items, 'today', moment('2020-01-01'));
 
         expect(results.length).toBe(1);
         expect(results[0].date.isSame(items[0].date)).toBeTruthy();
     });
 
     it('should return tomorrow events', () => {
-        const results = filterEvents(moment('2020-01-01'), items, 'tomorrow');
+        const results = filterEvents(items, 'tomorrow', moment('2020-01-01'));
 
         expect(results.length).toBe(1);
         expect(results[0].date.isSame(items[1].date)).toBeTruthy();
     });
 
     it('should return this week events', () => {
-        const results = filterEvents(moment('2020-01-05'), items, 'this-week');
+        const results = filterEvents(items, 'this-week', moment('2020-01-05'));
 
         expect(results.length).toBe(2);
         expect(results[0].date.isSame(items[3].date)).toBeTruthy();

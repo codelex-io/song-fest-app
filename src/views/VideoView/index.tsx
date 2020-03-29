@@ -5,14 +5,14 @@ import { Header, LongSearch } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
-import { VideoSelector } from '@domain';
+import { VideoSelector } from '@domain/filters';
 import FeedLayout from '@components/layouts/FeedLayout';
 import Animated from 'react-native-reanimated';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
-    { key: 'latest', title: 'LATEST' },
-    { key: 'popular', title: 'POPULAR' },
-    { key: 'online', title: 'ONLINE' },
+    { key: 'latest', title: 'LATEST', default: true },
+    { key: 'popular', title: 'POPULAR', default: false },
+    { key: 'online', title: 'ONLINE', default: false },
 ];
 
 export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
@@ -55,7 +55,7 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
                 </View>
             )}
             loading={false}
-            empty={true}
+            resultsState={'SUCCESS'}
         >
             {() => null}
         </FeedLayout>

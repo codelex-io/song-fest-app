@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { colors, typography } from '@styles';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import StatusBar from '@components/headers/StatusBar';
@@ -10,7 +10,7 @@ const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation 
     const { translations } = useContext(LocalizationContext);
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'} style={styles.container}>
             <View>
                 <StatusBar />
                 <SearchHeader navigation={navigation} route={route} />
@@ -19,7 +19,7 @@ const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation 
             <View style={styles.contentContainer}>
                 <Text style={styles.text}>{translations.getString('SEARCH')}</Text>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 

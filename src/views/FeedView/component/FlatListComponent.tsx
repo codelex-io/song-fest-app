@@ -35,10 +35,9 @@ const FlatListComponent: React.FC<Props> = ({
     return (
         <AnimatedFlatlist<Item>
             style={{ paddingTop: headerHeight }}
-            alwaysBounce={false}
-            alwaysBounceVertical={false}
-            bounces={false}
             scrollEventThrottle={16}
+            bouncing="false"
+            horizontal={false}
             onScroll={Animated.event(
                 [
                     {
@@ -53,6 +52,7 @@ const FlatListComponent: React.FC<Props> = ({
             )}
             refreshControl={
                 <RefreshControl
+                    enabled
                     onRefresh={onRefresh}
                     refreshing={loading}
                     colors={[colors.randomColor()]}
