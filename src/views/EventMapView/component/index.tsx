@@ -1,14 +1,5 @@
 import React, { useState, useRef, useEffect, useLayoutEffect, useContext, Fragment, useCallback } from 'react';
-import {
-    View,
-    StyleSheet,
-    Dimensions,
-    TouchableOpacity,
-    Animated,
-    LayoutChangeEvent,
-    StatusBar,
-    Platform,
-} from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Animated, LayoutChangeEvent, Platform } from 'react-native';
 import MapView from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
 import { MyLocation } from './MyLocation';
@@ -24,7 +15,7 @@ import { SearchInterface } from '@components/headers/SearchHeader';
 import { ArrowButton } from './ArrowButton';
 import share from '@integration/share';
 import { useFocusEffect } from '@react-navigation/native';
-import { statusBarHeight } from '@utils';
+import { statusBarHeight, setStatusBarBackgroundColor } from '@utils';
 import { opacity8 } from '@styles/opacity';
 
 const WIDTH = Dimensions.get('window').width;
@@ -114,11 +105,7 @@ const EventMapComponent: React.FC<Props> = ({
         startAnimation();
     }, [isScrollOpen]);
 
-    useFocusEffect(
-        useCallback(() => {
-            StatusBar.setBackgroundColor(styles.header.backgroundColor);
-        }, []),
-    );
+    useFocusEffect(useCallback(() => setStatusBarBackgroundColor(styles.header.backgroundColor), []));
 
     const transformStyle = animationHeight === undefined ? { top: '100%' } : { top: animationHeight };
 

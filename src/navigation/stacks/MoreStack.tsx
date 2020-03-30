@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { MoreView } from '@views';
-import { StatusBar } from 'react-native';
 import { colors } from '@styles';
+import { setStatusBarBackgroundColor } from '@utils';
 
 export type MoreViewStackParamsList = {
     Feed: undefined;
@@ -17,11 +17,7 @@ export type MoreViewStackNavProps<T extends keyof MoreViewStackParamsList> = {
 const Stack = createStackNavigator();
 
 const MoreStack: React.FC = () => {
-    useFocusEffect(
-        useCallback(() => {
-            StatusBar.setBackgroundColor(colors.white);
-        }, []),
-    );
+    useFocusEffect(useCallback(() => setStatusBarBackgroundColor(colors.white), []));
 
     return (
         <Stack.Navigator initialRouteName="Feed" headerMode="none">
