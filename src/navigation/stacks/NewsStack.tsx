@@ -3,9 +3,9 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { SearchView } from '@views';
 import { SearchInterface } from '@components/headers/SearchHeader';
-import { StatusBar } from 'react-native';
 import { colors } from '@styles';
 import { NewsFeed } from '@views';
+import { setStatusBarBackgroundColor } from '@utils';
 
 interface NewsScreenRouteParams {
     searchPayload: SearchInterface;
@@ -24,11 +24,7 @@ export type NewsStackNavProps<T extends keyof NewsStack> = {
 const Stack = createStackNavigator<NewsStack>();
 
 const NewsStack: React.FC = () => {
-    useFocusEffect(
-        useCallback(() => {
-            StatusBar.setBackgroundColor(colors.white);
-        }, []),
-    );
+    useFocusEffect(useCallback(() => setStatusBarBackgroundColor(colors.white), []));
 
     const feedInitialParams: NewsScreenRouteParams = {
         searchPayload: {

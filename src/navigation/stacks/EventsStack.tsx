@@ -3,9 +3,9 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { SearchView } from '@views';
 import { SearchInterface } from '@components/headers/SearchHeader';
-import { StatusBar } from 'react-native';
 import { colors } from '@styles';
 import { EventsFeed } from '@views';
+import { setStatusBarBackgroundColor } from '@utils';
 
 const Stack = createStackNavigator<EventsStack>();
 
@@ -24,11 +24,7 @@ export type EventsStackNavProps<T extends keyof EventsStack> = {
 };
 
 const EventsStack: React.FC = () => {
-    useFocusEffect(
-        useCallback(() => {
-            StatusBar.setBackgroundColor(colors.white);
-        }, []),
-    );
+    useFocusEffect(useCallback(() => setStatusBarBackgroundColor(colors.white), []));
 
     const feedInitialParams: EventsScreenRouteParams = {
         searchPayload: {

@@ -3,8 +3,8 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { SearchView, VideoView } from '@views';
 import { SearchInterface } from '@components/headers/SearchHeader';
-import { StatusBar } from 'react-native';
 import { colors } from '@styles';
+import { setStatusBarBackgroundColor } from '@utils';
 
 const Stack = createStackNavigator<VideoStack>();
 
@@ -23,11 +23,7 @@ export type VideoStackNavProps<T extends keyof VideoStack> = {
 };
 
 const VideoStack: React.FC = () => {
-    useFocusEffect(
-        useCallback(() => {
-            StatusBar.setBackgroundColor(colors.white);
-        }, []),
-    );
+    useFocusEffect(useCallback(() => setStatusBarBackgroundColor(colors.white), []));
 
     const feedInitialParams: VideoScreenRouteParams = {
         searchPayload: {
