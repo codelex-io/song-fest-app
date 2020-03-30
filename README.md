@@ -10,6 +10,10 @@
 
 Locate _apk_ at `android/app/build/outputs/debug` and install it on your device.
 
+## Secrets on Android
+
+Obtain `secrets.xml` file and place it in the `android/app/src/main/res/values` directory.
+
 ## Build & Release iPhone App
 
 Build an application: `bundle exec fastlane build`
