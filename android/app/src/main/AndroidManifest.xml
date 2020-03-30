@@ -46,7 +46,7 @@
             android:value="AIzaSyANE3lWFt0rLOiz_98h8Swf025txGuUJHY" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_stat_ic_notification" />
+            android:resource="@mipmap/ic_notification" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/primary_white" />
