@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Loading, Empty } from '@components';
 import { colors } from '@styles';
@@ -13,13 +13,13 @@ interface FeedHeaderHeight {
 }
 export const FEED_HEADER_HEIGHT: FeedHeaderHeight = {
     NEWS: {
-        headerHeight: 149,
+        headerHeight: 148,
     },
     EVENTS: {
         headerHeight: 206,
     },
     VIDEO: {
-        headerHeight: 149,
+        headerHeight: 206,
     },
     MAP: {
         headerHeight: 206,
@@ -35,14 +35,11 @@ interface FeedLayerProps {
     ) => JSX.Element | null;
     loading: boolean;
     resultsState: ResultsState;
-    rootName: string;
+    routeName: string;
 }
 
-const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, resultsState, rootName }) => {
-    const [headerHeight, setHeaderHeight] = useState(FEED_HEADER_HEIGHT[rootName].headerHeight);
-
-    console.log('headerHeight', headerHeight)
-
+const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, resultsState, routeName }) => {
+    const [headerHeight, setHeaderHeight] = useState(FEED_HEADER_HEIGHT[routeName].headerHeight);
     const [animatedScrollOffset] = useState(new Animated.Value(0));
 
     const resetHeader = () => {

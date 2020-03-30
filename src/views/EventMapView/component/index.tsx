@@ -19,8 +19,6 @@ import { LongSearch, Header, Empty } from '@components';
 import { EventCard } from './EventCard';
 import { getCurrentPosition } from '@domain/location';
 import { LocalizationContext } from '@localization/LocalizationContext';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { SharedStackParamsList } from 'src/navigation/stacks/SharedStack';
 import { AnyType } from '@domain/AnyType';
 import { SearchInterface } from '@components/headers/SearchHeader';
 import { ArrowButton } from './ArrowButton';
@@ -40,8 +38,9 @@ interface Props {
     onSearch: (color: string) => void;
     searchInput: SearchInterface;
     onResetSearch: () => void;
-    navigateToArticle: (item: EventItem) => void;
-    navigation: StackNavigationProp<SharedStackParamsList, 'Feed'>;
+    goToArticle: (item: EventItem) => void;
+    goToUserSettings: () => void;
+    goToFavorites: () => void;
 }
 
 const EventMapComponent: React.FC<Props> = ({
@@ -51,8 +50,9 @@ const EventMapComponent: React.FC<Props> = ({
     onSearch,
     searchInput,
     onResetSearch,
-    navigateToArticle,
-    navigation,
+    goToArticle,
+    goToUserSettings,
+    goToFavorites,
 }) => {
     const mapViewRef = useRef<MapView>(null);
     let carousel: AnyType;
@@ -188,8 +188,8 @@ const EventMapComponent: React.FC<Props> = ({
                 <View style={styles.header}>
                     <Header
                         title={translations.getString('MAP')}
-                        onButton1={() => navigation.navigate('UserSettings')}
-                        onButton2={() => navigation.navigate('Favorites')}
+                        onButton1={goToUserSettings}
+                        onButton2={goToFavorites}
                     />
                     <LongSearch
                         backgroundColor={colors.green}
@@ -282,7 +282,7 @@ const EventMapComponent: React.FC<Props> = ({
                                             onFavourite={() => onFavourite(item)}
                                             onNavigate={() => onNavigate(item)}
                                             onShare={() => share(item.link)}
-                                            navigateToArticle={() => navigateToArticle(item)}
+                                            navigateToArticle={() => goToArticle(item)}
                                             itemIndex={index + 1}
                                             totalItems={items.length}
                                             backgroundColor={colors.findColorByIndex(index)}

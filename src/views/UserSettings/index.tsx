@@ -5,9 +5,9 @@ import { RadioButton } from '../../components/buttons/RadioButton';
 import { useSettings } from '@domain/settings';
 import { UserType } from '@domain/settings';
 import { useLanguageSettings } from '@localization/LocalizationContext';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import SimpleLayout from '@components/layouts/SimpleLayout';
 import { statusBarHeight } from '@utils';
+import { RootNavProps } from '@navigation';
 
 interface User {
     type: UserType;
@@ -21,7 +21,7 @@ const userTypes: User[] = [
     { type: 'visitor-en', title: 'Visitor - English' },
 ];
 
-const UserSettings: React.FC<SharedStackNavList<'UserSettings'>> = ({ navigation }) => {
+const UserSettings: React.FC<RootNavProps<'UserSettings'>> = ({ navigation }) => {
     const { translations } = useLanguageSettings();
     const { userType, setUserType } = useSettings();
     const { setAppLanguage } = useLanguageSettings();

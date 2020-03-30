@@ -17,8 +17,6 @@ export const Card: React.FC<CardProps> = ({ group, onNavigate, onFavourite }) =>
     const { translations } = useContext(LocalizationContext);
 
     const renderEventInformation = (event: FavouriteEvent): ReactNode => {
-        console.log('event date', event.date)
-        console.log('event time', event.time)
         return event.group === 'EVENTS' ? (
             <View style={styles.labelContainer}>
                 <Label iconType={IconType.Calendar} title={event.date} />

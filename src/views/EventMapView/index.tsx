@@ -13,6 +13,7 @@ import Loading from '@components/Loading';
 import { SearchInterface } from '@components/headers/SearchHeader';
 import { toFavourite } from '@domain/events';
 import { MapStackNavProps } from '@navigation/stacks/MapStack';
+import { useNavigation } from '@react-navigation/native';
 
 const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean): EventItem => {
     return {
@@ -22,6 +23,7 @@ const toItem = (item: GraphQLEventItem, isFavourite: (fav: Favourite) => boolean
 };
 
 const EventMapView: React.FC<MapStackNavProps<'Feed'>> = ({ route, navigation }) => {
+    const rootNavigation = useNavigation();
     let initialItem = route.params ? route.params.item : undefined;
 
     const [currentSearch, setCurrentSearch] = useState<SearchInterface>({
@@ -74,27 +76,35 @@ const EventMapView: React.FC<MapStackNavProps<'Feed'>> = ({ route, navigation })
         );
     }
 
-    const navigateToArticle = (item: EventItem) => {
-        navigation.navigate('Article', {
+    const goToArticle = (item: EventItem) => {
+        rootNavigation.navigate('Article', {
             itemId: item.id,
             group: 'EVENTS',
             hasHistory: true,
         });
     };
 
+    const goToFavorites = () => {
+        rootNavigation.navigate('Favorites');
+    };
+
+    const goToUserSettings = () => {
+        rootNavigation.navigate('UserSettings');
+    };
+
+    const onSearch = (color: string) => {
+        initialItem = undefined;
+        navigation.navigate('Search', {
+            color: color,
+        });
+    };
     return (
         <EventMapComponent
             loading={loading}
             items={items}
             onFavourite={item => toggleFavourite(toFavourite(item))}
             onNavigate={item => openMap(item.location.latitude, item.location.longitude)}
-            onSearch={(color: string) => {
-                initialItem = undefined;
-                navigation.navigate('Search', {
-                    color: color,
-                    route: 'MAP',
-                });
-            }}
+            onSearch={onSearch}
             searchInput={currentSearch}
             onResetSearch={() => {
                 setCurrentSearch({ payload: '', isActive: false });
@@ -102,8 +112,9 @@ const EventMapView: React.FC<MapStackNavProps<'Feed'>> = ({ route, navigation })
                 initialItem = undefined;
                 refetch();
             }}
-            navigateToArticle={(item: EventItem) => navigateToArticle(item)}
-            navigation={navigation}
+            goToArticle={(item: EventItem) => goToArticle(item)}
+            goToFavorites={goToFavorites}
+            goToUserSettings={goToUserSettings}
         />
     );
 };

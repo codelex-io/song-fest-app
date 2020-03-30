@@ -1,28 +1,46 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { colors, typography } from '@styles';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import SearchHeader from '@components/headers/SearchHeader';
 import { statusBarHeight } from '@utils';
 import { NewsStackNavProps } from '@navigation/stacks/NewsStack';
-import { useIsFocused } from '@react-navigation/native';
 
 const SearchView: React.FC<NewsStackNavProps<'Search'>> = ({ route, navigation }) => {
+    const { color: bgColor } = route.params;
 
-    const isFocused = useIsFocused()
+    const popToTop = () => {
+        navigation.popToTop();
+    };
+    navigation.addListener('blur', event => {
+        popToTop();
+    });
 
-    useEffect(() => {
-        if (!isFocused && navigation.canGoBack()) {
-            navigation.popToTop()
-        }
-    }, [isFocused])
+    const onSubmit = (input: string) => {
+        navigation.removeListener('blur', () => {
+            popToTop();
+        });
+        navigation.navigate('Feed', {
+            searchPayload: {
+                payload: input,
+                isActive: true,
+            },
+        });
+    };
+
+    const goBack = () => {
+        navigation.removeListener('blur', () => {
+            popToTop();
+        });
+        navigation.goBack();
+    };
 
     const { translations } = useContext(LocalizationContext);
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'} style={styles.container}>
             <View>
-                <SearchHeader navigation={navigation} route={route} />
+                <SearchHeader {...{ onSubmit, bgColor, goBack }} />
             </View>
             <View style={styles.contentContainer}>
                 <Text style={styles.text}>{translations.getString('SEARCH')}</Text>

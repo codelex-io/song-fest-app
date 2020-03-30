@@ -6,12 +6,10 @@ import AllIcons from './AllIcons';
 import UserSettingsView from './UserSettings';
 import { VideoView } from './VideoView';
 import EventMapView from './EventMapView';
-import LoadingView from './LoadingView';
-import EmptyView from './EmptyView';
 import SearchView from './SearchBy';
 import UserSettings from './UserSettings';
 import Article from './ArticleView';
-import FeedView from './FeedView';
+import { EventsFeed, NewsFeed } from './FeedView';
 
 export {
     FavoriteListView,
@@ -22,10 +20,9 @@ export {
     AllIcons,
     UserSettingsView,
     VideoView,
-    LoadingView,
-    EmptyView,
     SearchView,
     UserSettings,
     Article,
-    FeedView,
+    NewsFeed,
+    EventsFeed,
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl, Platform } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { colors } from '@styles';
 import { StyleType } from '@domain/AnyType';
@@ -52,7 +52,7 @@ const FlatListComponent: React.FC<Props> = ({
             )}
             refreshControl={
                 <RefreshControl
-                    enabled
+                    enabled={Platform.OS === 'android' ? true : false}
                     onRefresh={onRefresh}
                     refreshing={loading}
                     colors={[colors.randomColor()]}

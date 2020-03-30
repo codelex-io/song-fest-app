@@ -3,17 +3,15 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import { RouteProp } from '@react-navigation/native';
 import { EventMapView, SearchView } from '@views';
 import { SearchInterface } from '@components/headers/SearchHeader';
-import { BottomTabRoutes } from '@navigation/BottomTabs';
 
 export interface MapFeedProps {
     item: string;
     searchPayload: SearchInterface;
-    rootName: BottomTabRoutes;
 }
 
 export type MapViewStackParamsList = {
     Feed: MapFeedProps;
-    Search: { color: string; route: BottomTabRoutes };
+    Search: { color: string };
 };
 
 export type MapStackNavProps<T extends keyof MapViewStackParamsList> = {

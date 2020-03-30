@@ -1,60 +1,48 @@
 import React, { useCallback } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
-import { SearchView, FeedView } from '@views';
+import { SearchView } from '@views';
 import { SearchInterface } from '@components/headers/SearchHeader';
-import { BottomTabRoutes } from '@navigation/BottomTabs';
 import { StatusBar } from 'react-native';
 import { colors } from '@styles';
+import { EventsFeed } from '@views';
 
 const Stack = createStackNavigator<EventsStack>();
 
 interface EventsScreenRouteParams {
-   searchPayload: SearchInterface,
-   rootName: BottomTabRoutes
+    searchPayload: SearchInterface;
 }
 
 export type EventsStack = {
-   Feed: EventsScreenRouteParams;
-   Search: { color: string };
+    Feed: EventsScreenRouteParams;
+    Search: { color: string };
 };
 
 export type EventsStackNavProps<T extends keyof EventsStack> = {
-   navigation: StackNavigationProp<EventsStack, T>;
-   route: RouteProp<EventsStack, T>;
+    navigation: StackNavigationProp<EventsStack, T>;
+    route: RouteProp<EventsStack, T>;
 };
 
 const EventsStack: React.FC = () => {
-   useFocusEffect(
-      useCallback(() => {
-         StatusBar.setBackgroundColor(colors.white);
-      }, []),
-   );
+    useFocusEffect(
+        useCallback(() => {
+            StatusBar.setBackgroundColor(colors.white);
+        }, []),
+    );
 
-   const feedInitialParams: EventsScreenRouteParams = {
-      searchPayload: {
-         payload: '',
-         isActive: false,
-      },
-      rootName: 'EVENTS'
-   }
+    const feedInitialParams: EventsScreenRouteParams = {
+        searchPayload: {
+            payload: '',
+            isActive: false,
+        },
+    };
 
-   return (
-      <Stack.Navigator
-         initialRouteName="Feed"
-         headerMode="none"
-      >
-         <Stack.Screen
-            initialParams={feedInitialParams}
-            name="Feed"
-            component={FeedView}
-         />
-         <Stack.Screen
-            name="Search"
-            component={SearchView}
-         />
-      </Stack.Navigator>
-   );
+    return (
+        <Stack.Navigator initialRouteName="Feed" headerMode="none">
+            <Stack.Screen initialParams={feedInitialParams} name="Feed" component={EventsFeed} />
+            <Stack.Screen name="Search" component={SearchView} />
+        </Stack.Navigator>
+    );
 };
 
 export default EventsStack;

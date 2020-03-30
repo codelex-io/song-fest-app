@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { IconType } from '@components';
 import { colors, typography } from '@styles';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import IconBtn24 from '@components/buttons/IconBtn24';
 import { useLanguageSettings } from '@localization/LocalizationContext';
 
@@ -12,24 +11,24 @@ export interface SearchInterface {
     isActive: boolean;
 }
 
-const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation }) => {
-    const [input, setInput] = useState('');
+interface Props {
+    bgColor: string;
+    onSubmit: (input: string) => void;
+    goBack: () => void;
+}
 
-    const bgColor = route.params ? route.params.color : colors.blue;
-    const rootName = route.params.route;
+const SearchHeader: React.FC<Props> = ({ onSubmit, bgColor, goBack }) => {
+    const [input, setInput] = useState<string>('');
+
     const { translations } = useLanguageSettings();
+
     const handleSubmit = () => {
         setInput('');
-        navigation.navigate('Feed', {
-            searchPayload: {
-                payload: input,
-                isActive: true,
-            },
-            rootName,
-        });
+        onSubmit(input);
     };
 
     const inputAccessoryViewID = 'searchHeaderInput';
+
     return (
         <View style={styles.container}>
             <View style={[styles.header, { backgroundColor: bgColor }]}>
@@ -37,7 +36,7 @@ const SearchHeader: React.FC<SharedStackNavList<'Search'>> = ({ route, navigatio
                     icon={IconType.ChevronLeft}
                     color={colors.white}
                     bgColor={bgColor}
-                    onPress={() => navigation.goBack()}
+                    onPress={goBack}
                     style={styles.btn}
                 />
 
@@ -76,12 +75,12 @@ const styles = StyleSheet.create({
         marginRight: 7,
     },
     text: {
+        height: 44,
         flexDirection: 'row',
         flex: 1,
         fontFamily: typography.bold,
         fontSize: 14,
         color: colors.white,
-        textTransform: 'uppercase',
     },
 });
 export default SearchHeader;
