@@ -16,7 +16,7 @@ interface Props {
     onShare: () => void;
     onBack: () => void;
     loading: boolean;
-    goToMap: () => void;
+    goToMap: (item: EventArticleItem) => void;
     buyTicket: () => void;
 }
 
@@ -58,7 +58,7 @@ const EventArticleComponent: React.FC<Props> = ({
                 />
 
                 <IconBtn44
-                    onPress={goToMap}
+                    onPress={() => goToMap(item)}
                     style={styles.roundedButton}
                     icon={IconType.Navigation}
                     color={colors.white}

@@ -1,9 +1,9 @@
-import { FeedRootName } from '@navigation/stacks/SharedStack';
 import { Moment } from 'moment';
+import { BottomTabRoutes } from '@navigation/BottomTabs';
 
 export interface Item {
     id: string;
-    group: FeedRootName;
+    group: BottomTabRoutes;
     dateBeforeTitle?: Moment;
     title: string;
     secondaryTitle?: string;

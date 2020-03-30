@@ -8,9 +8,9 @@ import { useFavourites } from '@domain/favourites';
 import { buyTicket } from '@domain/tickets';
 import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
 import share from '@integration/share';
-import { SharedStackNavList, FeedRootName } from 'src/navigation/stacks/SharedStack';
+import { BottomTabRoutes } from '@navigation/BottomTabs';
 
-const toItem = (item: NewsItem, isFavourite: (fav: Favourite) => boolean, group: FeedRootName): NewsArticleItem => {
+const toItem = (item: NewsItem, isFavourite: (fav: Favourite) => boolean, group: BottomTabRoutes): NewsArticleItem => {
     let favoritesGroup = group as FavouriteGroupKey;
     if (group === 'MAP') {
         favoritesGroup = 'EVENTS';
@@ -25,9 +25,13 @@ const toItem = (item: NewsItem, isFavourite: (fav: Favourite) => boolean, group:
     };
 };
 
-const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
-    const { itemId, group, hasHistory } = route.params;
-
+interface Props {
+    onBack: () => void;
+    itemId: string;
+    group: BottomTabRoutes;
+    goToFeed: () => void;
+}
+const NewsArticle: React.FC<Props> = ({ onBack, itemId, group, goToFeed }) => {
     const { loading, data, error } = useQuery<Data<NewsItem>, Variables>(FETCH_TARGET_NEWS_ITEM, {
         variables: { id: itemId },
     });
@@ -37,16 +41,8 @@ const NewsArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigatio
         toggleFavourite({ id: item.id, group: 'NEWS', title: item.title });
     };
 
-    const onBack = () => {
-        if (!hasHistory) {
-            navigation.navigate('Feed');
-        } else {
-            navigation.goBack();
-        }
-    };
-
     if (!data && error) {
-        navigation.navigate('Feed');
+        goToFeed();
         return <></>;
     }
 

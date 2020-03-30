@@ -6,14 +6,16 @@ import { EventArticleItem } from './types';
 import { useFavourites } from '@domain/favourites';
 import { Favourite, FavouriteGroupKey } from '@domain/favourites/types';
 import share from '@integration/share';
-import { SharedStackNavList, FeedRootName } from 'src/navigation/stacks/SharedStack';
 import EventArticleComponent from './component/EventArticleComponent';
-import { useNavigation } from '@react-navigation/native';
 import { toFavourite } from '@domain/events';
 import { buyTicket } from '@domain/tickets';
-import { MapFeedProps } from '@navigation/stacks/MapStack';
+import { BottomTabRoutes } from '@navigation/BottomTabs';
 
-const toItem = (item: EventItem, isFavourite: (fav: Favourite) => boolean, group: FeedRootName): EventArticleItem => {
+const toItem = (
+    item: EventItem,
+    isFavourite: (fav: Favourite) => boolean,
+    group: BottomTabRoutes,
+): EventArticleItem => {
     let favoritesGroup = group as FavouriteGroupKey;
     if (group === 'MAP') {
         favoritesGroup = 'EVENTS';
@@ -28,11 +30,15 @@ const toItem = (item: EventItem, isFavourite: (fav: Favourite) => boolean, group
     };
 };
 
-const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigation }) => {
-    const { itemId, group, hasHistory } = route.params;
+interface Props {
+    onBack: () => void;
+    itemId: string;
+    group: BottomTabRoutes;
+    goToFeed: () => void;
+    goToMap: (item: EventArticleItem) => void;
+}
 
-    const rootNavigation = useNavigation();
-
+const EventArticle: React.FC<Props> = ({ onBack, itemId, group, goToFeed, goToMap }) => {
     const { loading, data, error } = useQuery<Data<EventItem>, Variables>(FETCH_TARGET_EVENTS_ITEM, {
         variables: { id: itemId },
     });
@@ -43,31 +49,8 @@ const EventArticle: React.FC<SharedStackNavList<'Article'>> = ({ route, navigati
         toggleFavourite(toFavourite(item));
     };
 
-    const onBack = () => {
-        if (!hasHistory) {
-            navigation.navigate('Feed');
-        } else {
-            navigation.goBack();
-        }
-    };
-
-    const goToMap = () => {
-        const params: MapFeedProps = {
-            item: item.id,
-            rootName: 'MAP',
-            searchPayload: {
-                payload: '',
-                isActive: false,
-            },
-        };
-        rootNavigation.navigate('MAP', {
-            screen: 'Feed',
-            params: params,
-        });
-    };
-
     if (!data && error) {
-        navigation.navigate('Feed');
+        goToFeed();
         return <></>;
     }
 

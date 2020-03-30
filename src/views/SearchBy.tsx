@@ -3,16 +3,44 @@ import { View, Text, StyleSheet, KeyboardAvoidingView, Platform } from 'react-na
 import { colors, typography } from '@styles';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import SearchHeader from '@components/headers/SearchHeader';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { statusBarHeight } from '@utils';
+import { NewsStackNavProps } from '@navigation/stacks/NewsStack';
 
-const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation }) => {
+const SearchView: React.FC<NewsStackNavProps<'Search'>> = ({ route, navigation }) => {
+    const { color: bgColor } = route.params;
+
+    const popToTop = () => {
+        navigation.popToTop();
+    };
+    navigation.addListener('blur', event => {
+        popToTop();
+    });
+
+    const onSubmit = (input: string) => {
+        navigation.removeListener('blur', () => {
+            popToTop();
+        });
+        navigation.navigate('Feed', {
+            searchPayload: {
+                payload: input,
+                isActive: true,
+            },
+        });
+    };
+
+    const goBack = () => {
+        navigation.removeListener('blur', () => {
+            popToTop();
+        });
+        navigation.goBack();
+    };
+
     const { translations } = useContext(LocalizationContext);
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'} style={styles.container}>
             <View>
-                <SearchHeader navigation={navigation} route={route} />
+                <SearchHeader {...{ onSubmit, bgColor, goBack }} />
             </View>
             <View style={styles.contentContainer}>
                 <Text style={styles.text}>{translations.getString('SEARCH')}</Text>

@@ -13,16 +13,16 @@ interface FeedHeaderHeight {
 }
 export const FEED_HEADER_HEIGHT: FeedHeaderHeight = {
     NEWS: {
-        headerHeight: 124,
+        headerHeight: 148,
     },
     EVENTS: {
-        headerHeight: 182,
+        headerHeight: 206,
     },
     VIDEO: {
-        headerHeight: 124,
+        headerHeight: 206,
     },
     MAP: {
-        headerHeight: 182,
+        headerHeight: 206,
     },
 };
 
@@ -35,12 +35,11 @@ interface FeedLayerProps {
     ) => JSX.Element | null;
     loading: boolean;
     resultsState: ResultsState;
-    rootName: string;
+    routeName: string;
 }
 
-const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, resultsState, rootName }) => {
-    const [headerHeight, setHeaderHeight] = useState(FEED_HEADER_HEIGHT[rootName].headerHeight);
-
+const FeedLayout: React.FC<FeedLayerProps> = ({ header, children, loading, resultsState, routeName }) => {
+    const [headerHeight, setHeaderHeight] = useState(FEED_HEADER_HEIGHT[routeName].headerHeight);
     const [animatedScrollOffset] = useState(new Animated.Value(0));
 
     const resetHeader = () => {

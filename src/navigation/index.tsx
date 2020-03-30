@@ -1,19 +1,14 @@
 import React from 'react';
 import { useSettings } from '@domain/settings';
-import { NavigationContainer, DefaultTheme, RouteProp, NavigationContainerRef } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, NavigationContainerRef, RouteProp } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TabBarIcon } from '@components';
 import { colors } from '@styles';
-import { StackNavigationProp } from '@react-navigation/stack';
-import SharedStack from './stacks/SharedStack';
-import MoreStack from './stacks/MoreStack';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import { Location, fromNotificationData } from './location';
+import { UserCategoryView, FavoriteListView, UserSettings, Article } from '@views';
+import BottomTabs, { BottomTabRoutes } from './BottomTabs';
+import { FavouriteGroupKey } from '@domain/favourites/types';
 import { AnyType } from '@domain/AnyType';
-import { fromNotificationData, Location, Tab as TabType } from './location';
-import { UserCategoryView } from '@views';
-import MapStack from './stacks/MapStack';
-
-const Tab = createBottomTabNavigator<AppTabsParamList>();
 
 let initialLocation: Location | null = null;
 
@@ -29,25 +24,6 @@ const navigate = (location: Location) => {
     });
 };
 
-export type NotificationProp = {
-    group: TabType;
-    itemId: string | undefined;
-    hasHistory: boolean;
-};
-
-type AppTabsParamList = {
-    NEWS: NotificationProp;
-    EVENTS: NotificationProp;
-    MAP: { item: string };
-    VIDEO: NotificationProp;
-    MORE: undefined;
-};
-
-export type AppTabsNavParams<T extends keyof AppTabsParamList> = {
-    navigation: StackNavigationProp<AppTabsParamList, T>;
-    route: RouteProp<AppTabsParamList, T>;
-};
-
 const NavigationTheme: Theme = {
     ...DefaultTheme,
     colors: {
@@ -56,13 +32,36 @@ const NavigationTheme: Theme = {
     },
 };
 
+export type RootNavigationRoutes = 'Tabs' | 'Favorites' | 'UserSettings' | 'Article';
+
+type RootNavigation = {
+    Tabs: {
+        screen: BottomTabRoutes;
+        params: AnyType;
+    };
+    Favorites: undefined;
+    UserSettings: undefined;
+    Article: {
+        group: FavouriteGroupKey;
+        itemId: string;
+        hasHistory: boolean;
+    };
+};
+
+export type RootNavProps<T extends keyof RootNavigation> = {
+    navigation: StackNavigationProp<RootNavigation, T>;
+    route: RouteProp<RootNavigation, T>;
+};
+
 const Navigation: React.FC = () => {
+    const Stack = createStackNavigator<RootNavigation>();
+
     const { userType } = useSettings();
     if (userType === null) {
         return <UserCategoryView />;
     }
 
-    const initialRouteName = initialLocation?.tab;
+    const initialRouteName = initialLocation ? 'Article' : 'Tabs';
 
     const notificationItem = {
         group: initialLocation?.tab,
@@ -72,69 +71,14 @@ const Navigation: React.FC = () => {
 
     return (
         <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
-            <Tab.Navigator
-                {...{ initialRouteName }}
-                screenOptions={({ route }) => ({
-                    tabBarIcon: ({ focused }) => {
-                        const { name } = route;
-                        return <TabBarIcon route={name} focused={focused} />;
-                    },
-                    tabBarLabel: () => false,
-                })}
-            >
-                <Tab.Screen
-                    initialParams={notificationItem}
-                    options={({ route }) => {
-                        return {
-                            tabBarVisible: hideOnUserCategoryView(route),
-                        };
-                    }}
-                    name="NEWS"
-                    component={SharedStack}
-                />
-                <Tab.Screen
-                    initialParams={notificationItem}
-                    options={({ route }) => {
-                        return { tabBarVisible: hideOnUserCategoryView(route) };
-                    }}
-                    name="EVENTS"
-                    component={SharedStack}
-                />
-                <Tab.Screen
-                    options={({ route }) => {
-                        return { tabBarVisible: hideOnUserCategoryView(route) };
-                    }}
-                    name="MAP"
-                    component={MapStack}
-                />
-                <Tab.Screen
-                    initialParams={notificationItem}
-                    options={({ route }) => {
-                        return {
-                            tabBarVisible: hideOnUserCategoryView(route),
-                        };
-                    }}
-                    name="VIDEO"
-                    component={SharedStack}
-                />
-                <Tab.Screen
-                    options={({ route }) => {
-                        return { tabBarVisible: hideOnUserCategoryView(route) };
-                    }}
-                    name="MORE"
-                    component={MoreStack}
-                />
-            </Tab.Navigator>
+            <Stack.Navigator initialRouteName={initialRouteName} headerMode="none">
+                <Stack.Screen name="Tabs" component={BottomTabs} />
+                <Stack.Screen name="Favorites" component={FavoriteListView} />
+                <Stack.Screen name="UserSettings" component={UserSettings} />
+                <Stack.Screen initialParams={notificationItem} name="Article" component={Article} />
+            </Stack.Navigator>
         </NavigationContainer>
     );
-};
-
-const hideOnUserCategoryView = (route: AnyType): boolean => {
-    let lastRoute = '';
-    if (route.state) {
-        lastRoute = route.state.routes[route.state.routes.length - 1].name;
-    }
-    return lastRoute !== 'UserSettings' && lastRoute !== 'Article';
 };
 
 export { fromNotificationData, setInitialLocation, navigate };

@@ -6,11 +6,11 @@ import { SearchInterface } from '@components/headers/SearchHeader';
 import { colors } from '@styles';
 import { Item } from '../types';
 import FlatListComponent from './FlatListComponent';
-import { FeedRootName } from '@navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { TimeSelector, filterByDate } from '@domain/filters';
 import { ResultsState } from '@components/Empty';
 import { isFiltering } from '@domain/filters/isFiltering';
+import { BottomTabRoutes } from '@navigation/BottomTabs';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
     { key: 'today', title: 'TODAY', default: false },
@@ -20,7 +20,7 @@ const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
 ];
 
 interface NewsComponentProps {
-    rootName: FeedRootName;
+    routeName: BottomTabRoutes;
     items: Item[];
     headerTitle: string;
     goToUserSettings: () => void;
@@ -36,7 +36,7 @@ interface NewsComponentProps {
     goToMap: (item: Item) => void;
 }
 const Component: React.FC<NewsComponentProps> = ({
-    rootName,
+    routeName,
     items,
     headerTitle,
     goToUserSettings,
@@ -53,7 +53,7 @@ const Component: React.FC<NewsComponentProps> = ({
 }) => {
     const [activeKey, setActiveKey] = useState<TimeSelector>('all');
 
-    if (rootName === 'EVENTS') {
+    if (routeName === 'EVENTS') {
         items = filterByDate(items, activeKey);
     }
 
@@ -66,7 +66,7 @@ const Component: React.FC<NewsComponentProps> = ({
 
     return (
         <FeedLayout
-            rootName={rootName}
+            routeName={routeName}
             header={resetHeader => (
                 <View>
                     <Header title={headerTitle} onButton1={goToUserSettings} onButton2={goToFavorites} />
@@ -79,7 +79,7 @@ const Component: React.FC<NewsComponentProps> = ({
                         searchInput={searchState.payload}
                         onResetSearch={onResetSearch}
                     />
-                    {rootName === 'EVENTS' && (
+                    {routeName === 'EVENTS' && (
                         <ViewsHeaderFilter
                             activeKey={activeKey}
                             onPress={key => {

@@ -3,11 +3,12 @@ import { View } from 'react-native';
 import { colors } from '@styles';
 import { Header, LongSearch } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import ViewsHeaderFilter, { ViewsHeaderFilterOption } from '@components/filters/Filters';
 import { VideoSelector } from '@domain/filters';
 import FeedLayout from '@components/layouts/FeedLayout';
 import Animated from 'react-native-reanimated';
+import { VideoStackNavProps } from '@navigation/stacks/VideoStack';
+import { useNavigation } from '@react-navigation/native';
 
 const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
     { key: 'latest', title: 'LATEST', default: true },
@@ -15,7 +16,8 @@ const FILTER_OPTIONS: ViewsHeaderFilterOption[] = [
     { key: 'online', title: 'ONLINE', default: false },
 ];
 
-export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
+export const VideoView: React.FC<VideoStackNavProps<'Feed'>> = ({ route, navigation }) => {
+    const rootNavigation = useNavigation();
     const { translations } = useContext(LocalizationContext);
     const [activeKey, setActiveKey] = useState<VideoSelector>('latest');
 
@@ -31,19 +33,20 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
     useEffect(() => {
         animatedScrollOffset.setValue(0);
     }, []);
+
     return (
         <FeedLayout
-            rootName="VIDEO"
+            routeName="VIDEO"
             header={() => (
                 <View>
                     <Header
                         title={translations.getString('VIDEO')}
-                        onButton1={() => navigation.navigate('UserSettings')}
-                        onButton2={() => navigation.navigate('Favorites')}
+                        onButton1={() => rootNavigation.navigate('UserSettings')}
+                        onButton2={() => rootNavigation.navigate('Favorites')}
                     />
                     <LongSearch
                         backgroundColor={colors.orange}
-                        onPress={() => navigation.navigate('Search', { color: colors.orange, route: 'VIDEO' })}
+                        onPress={() => navigation.navigate('Search', { color: colors.orange })}
                         searchInput={currentSearch}
                         onResetSearch={() => setCurrentSearch('')}
                     />
@@ -55,9 +58,9 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
                 </View>
             )}
             loading={false}
-            resultsState={'SUCCESS'}
+            resultsState={'NOTHING_FILTERED'}
         >
-            {() => null}
+            {() => <></>}
         </FeedLayout>
     );
 };

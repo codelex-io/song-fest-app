@@ -5,16 +5,12 @@ import { colors } from '@styles';
 import { items, ItemType } from '../content';
 import { Header } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { MoreViewStackParamsList } from 'src/navigation/stacks/MoreStack';
 import { useStoryBook } from '@domain/storybook';
 import { statusBarHeight } from '@utils';
+import { useNavigation } from '@react-navigation/native';
 
-interface Props {
-    navigation: StackNavigationProp<MoreViewStackParamsList, 'Feed' | 'Favorites' | 'Language' | 'UserSettings'>;
-}
-
-const MoreView: React.FC<Props> = ({ navigation }) => {
+const MoreView: React.FC = () => {
+    const rootNavigation = useNavigation();
     const [scrollEnabled, setScrollEnabled] = useState<boolean>(false);
     const [innerHeight, setInnerHeight] = useState<number | undefined>(undefined);
     const [viewHeight, setViewHeight] = useState<number | undefined>(undefined);
@@ -32,8 +28,8 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
         <View style={styles.container}>
             <Header
                 title={translations.getString('MORE')}
-                onButton1={() => navigation.navigate('UserSettings')}
-                onButton2={() => navigation.navigate('Favorites')}
+                onButton1={() => rootNavigation.navigate('UserSettings')}
+                onButton2={() => rootNavigation.navigate('Favorites')}
                 onLongPressTitle={() => {
                     if (devPressCount < 2) {
                         setDevPressCount(devPressCount + 1);
@@ -54,7 +50,7 @@ const MoreView: React.FC<Props> = ({ navigation }) => {
                             title={item.title}
                             icon={item.icon}
                             backgroundColor={item.backgroundColor}
-                            onOpen={() => item.onOpen(navigation.navigate)}
+                            onOpen={() => item.onOpen(rootNavigation.navigate)}
                             disabled={item.disabled}
                         />
                     ))}
