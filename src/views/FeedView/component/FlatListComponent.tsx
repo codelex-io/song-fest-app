@@ -34,7 +34,7 @@ const FlatListComponent: React.FC<Props> = ({
 }) => {
     return (
         <AnimatedFlatlist<Item>
-            style={{ paddingTop: headerHeight }}
+            style={{ width: '100%', paddingTop: headerHeight }}
             scrollEventThrottle={16}
             bouncing="false"
             horizontal={false}
