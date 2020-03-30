@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { SharedStackNavList, FeedRootName } from '@navigation/stacks/SharedStack';
 import { SearchInterface } from '@components/headers/SearchHeader';
 import { FETCH_NEWS_ITEMS, FETCH_EVENT_ITEMS } from './graphql/queries';
 import { useQuery } from '@apollo/react-hooks';
@@ -12,10 +11,13 @@ import Component from './component';
 import share from '@integration/share';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
-import { MapFeedProps } from '@navigation/stacks/MapStack';
+import { NewsStackNavProps } from '@navigation/stacks/NewsStack';
+import { MapRouteParams, BottomTabRoutes } from '@navigation/BottomTabs';
+import { toFavourite } from '@domain/events';
 
-const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) => {
+const FeedView: React.FC<NewsStackNavProps<'Feed'>> = ({ route, navigation }) => {
     const { searchPayload, rootName } = route.params;
+    const tabNavigation = useNavigation()
 
     const [searchState, setSearchState] = useState<SearchInterface>(searchPayload);
 
@@ -43,7 +45,7 @@ const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) =
     const items = loading || !data ? [] : mapItems({ data, isFavourite, rootName });
 
     const goToArticle = (item: Item) => {
-        navigation.navigate('Article', {
+        tabNavigation.navigate('Article', {
             itemId: item.id,
             group: rootName,
             hasHistory: true,
@@ -52,26 +54,28 @@ const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) =
 
     const onFavorite = (item: Item) => {
         let favGroup: FavouriteGroupKey = rootName as FavouriteGroupKey;
-        if (rootName === 'MAP') {
-            favGroup = 'EVENTS';
+        if (favGroup === 'EVENTS') {
+            toggleFavourite(toFavourite({
+                id: item.id,
+                title: item.title,
+                date: item.date,
+                time: item.timeLabel ? item.timeLabel : '',
+
+            }));
+        } else {
+            toggleFavourite({ id: item.id, title: item.title, group: favGroup });
         }
-        toggleFavourite({ id: item.id, title: item.title, group: favGroup });
     };
 
-    const rootNavigation = useNavigation();
     const goToMap = (item: Item) => {
-        const params: MapFeedProps = {
+        const params: MapRouteParams = {
             item: item.id,
-            rootName: 'MAP',
             searchPayload: {
                 payload: '',
                 isActive: false,
             },
         };
-        rootNavigation.navigate('MAP', {
-            screen: 'Feed',
-            params: params,
-        });
+        tabNavigation.navigate('MAP', params);
     };
 
     const refresh = () => {
@@ -80,13 +84,13 @@ const FeedView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigation }) =
     };
 
     const goToUserSettings = () => {
-        navigation.navigate('UserSettings');
+        tabNavigation.navigate('UserSettings');
     };
     const goToFavorites = () => {
-        navigation.navigate('Favorites');
+        tabNavigation.navigate('Favorites');
     };
     const onPressSearch = (color: string) => {
-        navigation.navigate('Search', { color, route: rootName });
+        tabNavigation.navigate('Search', { color, route: rootName });
     };
     const onResetSearch = () => {
         setSearchState({
@@ -124,7 +128,7 @@ export default FeedView;
 interface MapItemsInterface {
     data: Data;
     isFavourite: (fav: Favourite) => boolean;
-    rootName: FeedRootName;
+    rootName: BottomTabRoutes;
 }
 
 const mapItems = ({ data, isFavourite, rootName }: MapItemsInterface): Item[] => {

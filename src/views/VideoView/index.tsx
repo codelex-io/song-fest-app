@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { colors } from '@styles';
 import { Header, LongSearch } from '@components';
 import { LocalizationContext } from '@localization/LocalizationContext';
@@ -55,9 +55,9 @@ export const VideoView: React.FC<SharedStackNavList<'Feed'>> = ({ route, navigat
                 </View>
             )}
             loading={false}
-            resultsState={'SUCCESS'}
+            resultsState={'NOTHING_FILTERED'}
         >
-            {() => null}
+            {() => <></>}
         </FeedLayout>
     );
 };

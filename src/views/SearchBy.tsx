@@ -1,12 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { colors, typography } from '@styles';
 import { LocalizationContext } from '@localization/LocalizationContext';
 import SearchHeader from '@components/headers/SearchHeader';
-import { SharedStackNavList } from 'src/navigation/stacks/SharedStack';
 import { statusBarHeight } from '@utils';
+import { NewsStackNavProps } from '@navigation/stacks/NewsStack';
+import { useIsFocused } from '@react-navigation/native';
 
-const SearchView: React.FC<SharedStackNavList<'Search'>> = ({ route, navigation }) => {
+const SearchView: React.FC<NewsStackNavProps<'Search'>> = ({ route, navigation }) => {
+
+    const isFocused = useIsFocused()
+
+    useEffect(() => {
+        if (!isFocused && navigation.canGoBack()) {
+            navigation.popToTop()
+        }
+    }, [isFocused])
+
     const { translations } = useContext(LocalizationContext);
 
     return (
